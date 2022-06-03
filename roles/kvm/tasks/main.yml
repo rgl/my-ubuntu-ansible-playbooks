@@ -1,0 +1,38 @@
+- name: Install kvm
+  apt:
+    # TODO see why the qemu-kvm virtual package stopped installing.
+    name: qemu-system-x86
+
+- name: Install libvirt
+  apt:
+    name: libvirt-daemon-system
+
+# configure the security_driver to prevent errors alike (when using terraform):
+#   Could not open '/var/lib/libvirt/images/terraform_example_root.img': Permission denied'
+# this is equivalent to:
+#   sed -i -E 's,#?(security_driver)\s*=.*,\1 = "none",g' /etc/libvirt/qemu.conf
+- name: Disable libvirt qemu security driver
+  lineinfile:
+    path: /etc/libvirt/qemu.conf
+    regexp: '^#?(security_driver)\s*=.*$'
+    line: '\1 = "none"'
+    backrefs: yes
+  notify:
+    - restart libvirtd
+
+- name: Allow user to use kvm
+  user:
+    name: "{{ item }}"
+    groups: kvm
+    append: yes
+  loop:
+    - '{{ ansible_user }}'
+
+# see /usr/share/polkit-1/rules.d/60-libvirt.rules
+- name: Allow user to use libvirt
+  user:
+    name: "{{ item }}"
+    groups: libvirt
+    append: yes
+  loop:
+    - '{{ ansible_user }}'

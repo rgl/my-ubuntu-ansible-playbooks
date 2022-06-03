@@ -1,0 +1,21 @@
+# see https://github.com/containers/skopeo/blob/main/install.md
+
+- name: Install skopeo
+  apt:
+    name: skopeo
+
+- name: Install localhost-5000.conf
+  copy:
+    src: libcontainers-localhost-5000.conf
+    dest: /etc/containers/registries.conf.d/localhost-5000.conf
+
+- name: Install skopeo bash completion
+  block:
+    - name: Get skopeo bash completion
+      shell: skopeo completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install skopeo bash completion
+      copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/skopeo

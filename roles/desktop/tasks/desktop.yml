@@ -1,0 +1,30 @@
+- name: Install minimal desktop
+  apt:
+    name: ubuntu-desktop-minimal
+    install_recommends: true
+  # TODO reboot on changed.
+
+- name: Install community.general.dconf module dependencies
+  apt:
+    name: python3-psutil
+
+- name: Install gnome-shell-extension-manager
+  apt:
+    name: gnome-shell-extension-manager
+# NB you can get the current value with:
+#       dconf read /org/gnome/shell/extensions/ding/show-trash
+# see /usr/share/glib-2.0/schemas/org.gnome.shell.extensions.ding.gschema.xml
+- name: Show the trash icon in the desktop
+  become: false
+  community.general.dconf:
+    key: /org/gnome/shell/extensions/ding/show-trash
+    value: 'true'
+
+# NB you can get the current value with:
+#       dconf read /org/gnome/shell/extensions/dash-to-dock/click-action
+# See /usr/share/glib-2.0/schemas/org.gnome.shell.extensions.dash-to-dock.gschema.xml
+- name: Enable click to minimize
+  become: false
+  community.general.dconf:
+    key: /org/gnome/shell/extensions/dash-to-dock/click-action
+    value: "'minimize'"

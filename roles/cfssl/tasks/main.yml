@@ -1,0 +1,8 @@
+- name: Install cfssl
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install-cfssl.sh') }}"
+  environment:
+    CFSSL_VERSION: "{{ cfssl_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"

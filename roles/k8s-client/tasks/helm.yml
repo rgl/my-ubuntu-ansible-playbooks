@@ -1,0 +1,39 @@
+- name: Install helm
+  args:
+    executable: /bin/bash
+  shell: |
+    set -euo pipefail
+
+    # see https://github.com/helm/helm/releases
+    helm_version='v{{ helm_version }}'
+
+    # bail when already installed.
+    if [ -f /usr/local/bin/helm ]; then
+      # e.g. v3.8.0+gd141386
+      actual_version="$(/usr/local/bin/helm version --short | perl -ne '/^(v.+)\+.+/ && print $1')"
+      if [ "$actual_version" == "$helm_version" ]; then
+        echo 'ANSIBLE CHANGED NO'
+        exit 0
+      fi
+    fi
+
+    # download and install.
+    helm_url="https://get.helm.sh/helm-$helm_version-linux-amd64.tar.gz"
+    pushd /tmp
+    wget -qO- "$helm_url" | tar xzf - --strip-components=1 linux-amd64/helm
+    install helm /usr/local/bin/
+    rm helm
+    popd
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install helm bash completion
+  block:
+    - name: Get helm bash completion
+      shell: helm completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install helm bash completion
+      copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/helm

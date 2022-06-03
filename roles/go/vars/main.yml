@@ -1,0 +1,3 @@
+# see https://go.dev/dl/
+# see https://go.dev/doc/install
+go_version: '1.18.3'

@@ -1,0 +1,21 @@
+# see https://github.com/hashicorp/vagrant/tags
+vagrant_version: '2.2.19'
+
+# see https://rubygems.org/gems/vagrant-libvirt
+# see https://github.com/vagrant-libvirt/vagrant-libvirt
+vagrant_libvirt_plugin_version: '0.9.0'
+
+# see https://rubygems.org/gems/vagrant-reload
+# see https://github.com/aidanns/vagrant-reload
+vagrant_reload_plugin_version: '0.0.1'
+
+# see https://rubygems.org/gems/vagrant-scp
+# see https://github.com/invernizzi/vagrant-scp
+vagrant_scp_plugin_version: '0.5.9'
+
+# see https://rubygems.org/gems/vagrant-windows-sysprep
+# see https://github.com/rgl/vagrant-windows-sysprep
+vagrant_windows_sysprep_plugin_version: '0.0.10'
+
+provision_username: '{{ ansible_user }}'
+provision_password: '{{ ansible_password }}'

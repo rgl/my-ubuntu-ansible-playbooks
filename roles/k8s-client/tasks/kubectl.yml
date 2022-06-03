@@ -1,0 +1,25 @@
+- name: Add the kubernetes-archive-keyring apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+
+# see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
+- name: Add the kubernetes repository
+  apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+
+# NB execute apt-cache madison kubectl to known the available versions.
+- name: Install kubectl
+  apt:
+    name: kubectl={{ kubectl_version }}-*
+
+- name: Install kubectl bash completion
+  block:
+    - name: Get kubectl bash completion
+      shell: kubectl completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install kubectl bash completion
+      copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/kubectl

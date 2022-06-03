@@ -1,0 +1,6 @@
+- name: restart libvirtd
+  systemd:
+    name: libvirtd
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

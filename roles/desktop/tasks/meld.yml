@@ -1,0 +1,11 @@
+- name: Install meld
+  block:
+    - name: Install meld
+      apt:
+        name: meld
+        install_recommends: no
+    # NB you must also edit the base role files/gitconfig file to include this one.
+    - name: Configure git to use meld
+      copy:
+        src: meld.gitconfig
+        dest: /etc/gitconfig.d/meld.gitconfig

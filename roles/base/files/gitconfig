@@ -1,0 +1,9 @@
+[user]
+name = Rui Lopes
+email = rgl@ruilopes.com
+
+[push]
+default = simple
+
+[core]
+autocrlf = false

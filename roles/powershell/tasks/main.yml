@@ -1,0 +1,29 @@
+# opt-out of telemetry.
+# see https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_telemetry?view=powershell-7.2
+- name: Opt-out of telemetry
+  ansible.builtin.copy:
+    content: |
+      export POWERSHELL_TELEMETRY_OPTOUT=1
+    dest: /etc/profile.d/opt-out-powershell-telemetry.sh
+
+- name: Check PowerShell
+  args:
+    executable: /bin/bash
+  shell: |
+    set -euo pipefail
+    powershell_version='{{ powershell_version }}'
+    if [ -f /usr/bin/pwsh ]; then
+      actual_version="$(/usr/bin/pwsh --version | perl -ne '/^PowerShell (.+)/ && print $1')"
+      if [ "$actual_version" == "$powershell_version" ]; then
+        echo 'ANSIBLE CHANGED NO'
+      fi
+    fi
+  register: powershell
+  changed_when: "'ANSIBLE CHANGED NO' not in powershell.stdout_lines"
+
+# see https://github.com/PowerShell/PowerShell/releases
+# see https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2#installation-via-direct-download
+- name: Install PowerShell
+  apt:
+    deb: https://github.com/PowerShell/PowerShell/releases/download/v{{ powershell_version }}/powershell_{{ powershell_version }}-1.deb_amd64.deb
+  when: powershell.changed

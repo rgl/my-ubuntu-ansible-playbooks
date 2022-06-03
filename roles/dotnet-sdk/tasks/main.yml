@@ -1,0 +1,20 @@
+- name: Opt-out of telemetry
+  ansible.builtin.copy:
+    content: |
+      export DOTNET_CLI_TELEMETRY_OPTOUT=1
+    dest: /etc/profile.d/opt-out-dotnet-cli-telemetry.sh
+
+- name: Install Microsoft APT repository
+  apt:
+    deb: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb
+  register: repository
+
+- name: Update APT cache
+  when: repository.changed
+  apt:
+    update_cache: yes
+
+- name: Install dotnet-sdk
+  apt:
+    name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}={{ dotnet_sdk_version }}-1 # e.g. dotnet-sdk-6.0=6.0.202-1
+    state: present

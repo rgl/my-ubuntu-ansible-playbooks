@@ -1,0 +1,21 @@
+- hosts:
+    - all
+  gather_facts: true
+  become: true
+  roles:
+    - base
+    - cfssl
+    - lms
+    - role: kvm
+      when: "'kvm' in ansible_virtualization_tech_host"
+    - docker
+    - k8s-client
+    - azure-client
+    - packer
+    - terraform
+    - vagrant
+    - go
+    - dotnet-sdk
+    - cue
+    - dagger
+    - desktop

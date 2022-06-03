@@ -1,0 +1,13 @@
+[diff]
+guitool = meld
+
+[difftool "meld"]
+path = meld
+cmd = meld \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+tool = meld
+
+[mergetool "meld"]
+path = meld
+cmd = meld --diff \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\"

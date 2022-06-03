@@ -1,0 +1,20 @@
+# make it use the python3 binary instead of just python.
+# fix the following error/warning:
+#   /etc/ansible/terraform.py:390: DeprecationWarning: 'encoding' is ignored and deprecated. It will be removed in Python 3.9   return json.loads(out_cmd, encoding=encoding)
+--- terraform.py.orig	2022-03-07 12:37:00.327601004 +0000
++++ terraform.py	2022-03-07 12:37:44.747937558 +0000
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python3
+ 
+ '''
+ Terraform Inventory Script
+@@ -387,7 +387,7 @@
+             sys.stderr.write(str(err_cmd)+'\n')
+             sys.exit(1)
+         else:
+-            return json.loads(out_cmd, encoding=encoding)
++            return json.loads(out_cmd)
+ 
+ 
+ def _main():

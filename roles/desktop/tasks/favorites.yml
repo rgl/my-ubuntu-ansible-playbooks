@@ -1,0 +1,7 @@
+# NB you can get the current value with:
+#       dconf read /org/gnome/shell/favorite-apps
+- name: Set favorites
+  become: false
+  community.general.dconf:
+    key: /org/gnome/shell/favorite-apps
+    value: "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'virt-manager.desktop']"

@@ -1,0 +1,15 @@
+- name: Install go
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install-go.sh') }}"
+  environment:
+    GO_VERSION: "{{ go_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Add go to PATH
+  copy:
+    dest: /etc/profile.d/go.sh
+    content: |
+      export PATH="$PATH:/opt/go/bin"
+      export PATH="$PATH:$HOME/go/bin"

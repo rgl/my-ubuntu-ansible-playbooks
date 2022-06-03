@@ -1,0 +1,27 @@
+# see https://github.com/invernizzi/vagrant-scp/pull/48
+From fb5da0ad1dcd2c8ad0a25e66ecc2c262d0f94ed5 Mon Sep 17 00:00:00 2001
+From: Rui Lopes <rgl@ruilopes.com>
+Date: Thu, 3 Mar 2022 14:50:54 +0000
+Subject: [PATCH] split the path in exactly two parts so it works on windows
+ too
+
+on windows, the following now works:
+
+vagrant scp ':d:/temp/filename-*.7z' .
+---
+ lib/vagrant/scp/commands/scp.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/vagrant/scp/commands/scp.rb b/lib/vagrant/scp/commands/scp.rb
+index f2dc972..19075aa 100644
+--- a/lib/vagrant/scp/commands/scp.rb
++++ b/lib/vagrant/scp/commands/scp.rb
+@@ -88,7 +88,7 @@ def target_files
+ 
+         def format_file_path(filepath)
+           if filepath.include?(':')
+-            filepath.split(':').last.gsub("~", "/home/#{@ssh_info[:username]}")
++            filepath.split(':', 2).last.gsub("~", "/home/#{@ssh_info[:username]}")
+           else
+             filepath
+           end

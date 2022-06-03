@@ -1,0 +1,19 @@
+- name: Install dagger
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install.sh') }}"
+  environment:
+    DAGGER_VERSION: "{{ dagger_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install dagger bash completion
+  block:
+    - name: Get dagger bash completion
+      shell: dagger completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install dagger bash completion
+      copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/dagger

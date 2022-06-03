@@ -1,0 +1,5 @@
+- name: Install Remote Desktop Client
+  apt:
+    name:
+      - remmina
+      - remmina-plugin-vnc

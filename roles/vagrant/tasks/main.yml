@@ -1,0 +1,149 @@
+- name: Ensure apt-get can use https repositories
+  apt:
+    name:
+      - apt-transport-https
+      - gnupg
+
+- name: Add the hashicorp apt key
+  apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+
+# see https://www.vagrantup.com/downloads
+- name: Add the hashicorp repository
+  apt_repository:
+    repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+
+# pin the hashicorp repository above the distro ones.
+# see apt-cache policy
+# see apt-cache policy vagrant
+# see apt-cache showpkg vagrant
+# see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
+- name: Pin the hashicorp apt repository
+  copy:
+    dest: /etc/apt/preferences.d/apt.releases.hashicorp.com.pref
+    content: |
+      Package: *
+      Pin: origin "apt.releases.hashicorp.com"
+      Pin-Priority: 999
+
+# see https://www.vagrantup.com/downloads
+# see https://github.com/hashicorp/vagrant/releases
+# NB execute apt-cache madison vagrant to known the available versions.
+- name: Install vagrant
+  apt:
+    name: vagrant={{ vagrant_version }}
+
+- name: Use the system ca certificates
+  file:
+    src: /etc/ssl/certs/ca-certificates.crt
+    dest: /opt/vagrant/embedded/cacert.pem
+    force: yes
+    state: link
+
+- name: Install vagrant bash completion
+  file:
+    src: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}/contrib/bash/completion.sh
+    dest: /etc/bash_completion.d/vagrant
+    force: yes
+    state: link
+
+- name: Add support for NFS shared folders
+  block:
+    - name: Install NFS server
+      apt:
+        name: nfs-kernel-server
+    # see https://www.vagrantup.com/docs/synced-folders/nfs#root-privilege-requirement
+    - name: Enable password-less configuration of the NFS server exports
+      copy:
+        src: vagrant-nfs-synced-folders
+        dest: /etc/sudoers.d/vagrant-nfs-synced-folders
+
+# see https://github.com/hashicorp/vagrant/pull/9948
+- name: Add support for SMB shared folders
+  block:
+    - name: Patch vagrant to support SMB shared folders
+      ansible.posix.patch:
+        src: vagrant-smb-9948.patch
+        basedir: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}
+        strip: 1
+    - name: Install Samba
+      apt:
+        name:
+          - samba
+          - smbclient
+    - name: Set the provision user password
+      args:
+        executable: /bin/bash
+      shell: |
+        smbpasswd -a -s '{{ provision_username }}' <<'EOF'
+        {{ provision_password }}
+        {{ provision_password }}
+        EOF
+      changed_when: false
+    - name: Allow user to manage samba shares
+      user:
+        name: "{{ item }}"
+        groups: sambashare
+        append: yes
+      loop:
+        - '{{ provision_username }}'
+
+- name: Install vagrant plugins
+  block:
+    - name: Install vagrant plugins dependencies
+      apt:
+        name:
+          - build-essential
+          - liblzma-dev
+          - patch
+          - ruby-dev
+          - zlib1g-dev
+
+    # NB plugins are local to the user.
+    #    see https://github.com/hashicorp/vagrant/issues/12016
+    - name: Install vagrant plugin
+      args:
+        executable: /bin/bash
+      shell: "{{ lookup('file', 'install-vagrant-plugin.sh') }}"
+      environment:
+        VAGRANT_PLUGIN_NAME: "{{ item }}"
+        VAGRANT_PLUGIN_VERSION: "{{ lookup('vars', (item | replace('-', '_')) + '_plugin_version') }}"
+      become_user: '{{ provision_username }}'
+      become: true
+      register: result
+      changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+      loop:
+        - vagrant-reload
+        - vagrant-scp
+        - vagrant-windows-sysprep
+
+    - name: Install the vagrant-libvirt plugin
+      block:
+        - name: Install the vagrant-libvirt plugin dependencies
+          apt:
+            name:
+              - libvirt-dev
+              - gcc
+              - make
+        - name: Install the vagrant-libvirt plugin
+          args:
+            executable: /bin/bash
+          shell: "{{ lookup('file', 'install-vagrant-plugin.sh') }}"
+          environment:
+            VAGRANT_PLUGIN_NAME: vagrant-libvirt
+            VAGRANT_PLUGIN_VERSION: "{{ vagrant_libvirt_plugin_version }}"
+            CONFIGURE_ARGS: with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib
+          become_user: '{{ provision_username }}'
+          become: true
+          register: result
+          changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+      when: "'kvm' in ansible_virtualization_tech_host"
+
+    - name: Patch vagrant-scp plugin
+      ansible.posix.patch:
+        src: vagrant-scp-48.patch
+        # TODO replace 2.7.4 with the vagrant ruby version.
+        basedir: ~/.vagrant.d/gems/2.7.4/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}
+        strip: 1
+      become_user: '{{ provision_username }}'
+      become: true

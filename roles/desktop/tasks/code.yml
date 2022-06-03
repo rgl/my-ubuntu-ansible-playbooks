@@ -1,0 +1,45 @@
+# see https://code.visualstudio.com/docs/setup/linux
+
+- name: Add the Visual Studio Code repository
+  apt_repository:
+    repo: deb https://packages.microsoft.com/repos/code stable main
+    state: present
+
+- name: Install Visual Studio Code
+  apt:
+    name: code
+
+- name: Install code plugin
+  become_user: '{{ ansible_user }}'
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install-code-plugin.sh') }}"
+  environment:
+    CODE_PLUGIN_NAME: "{{ item }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  loop:
+    - dotjoshjohnson.xml
+    - golang.go
+    - hashicorp.terraform
+    - ms-azuretools.vscode-docker
+    - ms-dotnettools.csharp
+    - ms-python.python
+    - ms-vscode-remote.remote-ssh
+    - ms-vscode.powershell
+
+- name: Set Visual Studio Code as the text/plain default editor
+  become_user: '{{ ansible_user }}'
+  args:
+    executable: /bin/bash
+  shell: |
+    set -euo pipefail
+    expected='code.desktop'
+    actual="$(xdg-mime query default text/plain)"
+    if [ "$actual" == "$expected" ]; then
+      echo 'ANSIBLE CHANGED NO'
+    else
+      xdg-mime default "$expected" text/plain
+    fi
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"

@@ -1,0 +1,95 @@
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 10800 # 3h
+  changed_when: false
+
+- name: Add support for the pt_PT locale
+  community.general.locale_gen:
+    name: pt_PT.UTF-8
+
+# see localectl status
+- name: Set the system locale
+  args:
+    executable: /bin/bash
+  shell: |
+    set -euo pipefail
+    before="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
+    # TODO this is not fully correct as this prompt shows in portuguese:
+    #         apt-get dist-upgrade
+    #         Do you want to continue? [S/n]
+    localectl set-locale \
+      LANG=pt_PT.UTF-8 \
+      LANGUAGE=en_US.UTF-8
+    after="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
+    if [ "$before" == "$after" ]; then
+      echo 'ANSIBLE CHANGED NO'
+    fi
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+# see timedatectl status
+- name: Set the timezone
+  community.general.timezone:
+    name: "{{ timezone }}"
+  notify:
+    - restart cron
+
+- name: Install vim
+  block:
+    - name: Install vim
+      apt:
+        name: vim
+        install_recommends: no
+    - name: Install vimrc
+      copy:
+        src: vimrc.local
+        dest: /etc/vim/vimrc.local
+
+- name: Install git
+  block:
+    - name: Install git
+      apt:
+        name: git
+        install_recommends: no
+    - name: Install gitconfig
+      copy:
+        src: gitconfig
+        dest: /etc/gitconfig
+    - name: Create gitconfig.d directory
+      file:
+        name: /etc/gitconfig.d
+        state: directory
+
+- name: Install login profile
+  copy:
+    src: login.sh
+    dest: /etc/profile.d/login.sh
+
+- name: Install libreadline inputrc
+  copy:
+    src: inputrc
+    dest: /etc/inputrc
+
+- name: Install useful tools
+  apt:
+    name:
+      - tcpdump
+      - unzip
+      - httpie
+      - jq
+      - python3-tabulate
+      - bash-completion
+      - p7zip-full
+      - patch
+      # iso creation tool.
+      # NB xorriso is compatible with genisoimage and mkisofs and is also available in msys2 (windows).
+      - xorriso
+      # iso-info tool.
+      # NB iso-info is also available in msys2 (windows) as provided by the mingw-w64-x86_64-libcdio package.
+      - libcdio-utils
+      # etherwake lets us power-on a machine by sending a Wake-on-LAN (WOL)
+      # magic packet to its ethernet card.
+      # e.g. etherwake -i eth1 00:e0:4c:01:93:a8
+      - etherwake
+    install_recommends: no

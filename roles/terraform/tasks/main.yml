@@ -1,0 +1,21 @@
+- name: Ensure apt-get can use https repositories
+  apt:
+    name:
+      - apt-transport-https
+      - gnupg
+
+- name: Add the hashicorp apt key
+  apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+
+# see https://www.terraform.io/downloads
+- name: Add the hashicorp repository
+  apt_repository:
+    repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+
+# see https://www.terraform.io/downloads
+# see https://github.com/hashicorp/terraform/releases
+# NB execute apt-cache madison terraform to known the available versions.
+- name: Install terraform
+  apt:
+    name: terraform={{ terraform_version }}

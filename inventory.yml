@@ -1,0 +1,10 @@
+all:
+  hosts:
+    dm1:
+      ansible_host: 192.168.1.77
+  vars:
+    # connection configuration.
+    # see https://docs.ansible.com/ansible-core/2.12/collections/ansible/builtin/ssh_connection.html
+    ansible_user: vagrant
+    ansible_password: vagrant
+    ansible_sudo_pass: '{{ ansible_password }}'

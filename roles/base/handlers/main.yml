@@ -1,0 +1,4 @@
+- name: restart cron
+  systemd:
+    name: cron
+    state: restarted
