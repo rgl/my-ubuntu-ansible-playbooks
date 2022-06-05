@@ -9,6 +9,7 @@
     - role: kvm
       when: "'kvm' in ansible_virtualization_tech_host"
     - docker
+    - powershell
     - k8s-client
     - azure-client
     - packer
