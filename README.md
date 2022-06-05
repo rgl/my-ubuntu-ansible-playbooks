@@ -22,6 +22,12 @@ See the facts about the `dm1` machine:
 ./ansible.sh dm1 -m ansible.builtin.setup
 ```
 
+Run an ad-hoc command in the `dm1` machine:
+
+```bash
+./ansible.sh dm1 -a 'id'
+```
+
 Run the [`development.yml` playbook](development.yml) against the `dm1` machine:
 
 ```bash
