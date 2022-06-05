@@ -8,4 +8,5 @@
 - include_tasks: vlc.yml
 - include_tasks: gimp.yml
 - include_tasks: inkscape.yml
+- include_tasks: obs-studio.yml
 - include_tasks: favorites.yml
