@@ -4,6 +4,12 @@
     install_recommends: true
   notify: reboot
 
+- name: Disable Gnome Initial Setup
+  # see https://gitlab.gnome.org/GNOME/gnome-initial-setup
+  apt:
+    name: gnome-initial-setup
+    state: absent
+
 - name: Install community.general.dconf module dependencies
   apt:
     name: python3-psutil
