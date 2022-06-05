@@ -7,4 +7,5 @@
 - include_tasks: remmina.yml
 - include_tasks: vlc.yml
 - include_tasks: gimp.yml
+- include_tasks: inkscape.yml
 - include_tasks: favorites.yml
