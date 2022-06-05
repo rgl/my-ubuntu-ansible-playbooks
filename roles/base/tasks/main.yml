@@ -15,12 +15,17 @@
   shell: |
     set -euo pipefail
     before="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
-    # TODO this is not fully correct as this prompt shows in portuguese:
-    #         apt-get dist-upgrade
-    #         Do you want to continue? [S/n]
     localectl set-locale \
-      LANG=pt_PT.UTF-8 \
-      LANGUAGE=en_US.UTF-8
+      LANG=en_US.UTF-8 \
+      LC_NUMERIC=pt_PT.UTF-8 \
+      LC_TIME=pt_PT.UTF-8 \
+      LC_MONETARY=pt_PT.UTF-8 \
+      LC_PAPER=pt_PT.UTF-8 \
+      LC_NAME=pt_PT.UTF-8 \
+      LC_ADDRESS=pt_PT.UTF-8 \
+      LC_TELEPHONE=pt_PT.UTF-8 \
+      LC_MEASUREMENT=pt_PT.UTF-8 \
+      LC_IDENTIFICATION=pt_PT.UTF-8
     after="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
     if [ "$before" == "$after" ]; then
       echo 'ANSIBLE CHANGED NO'
