@@ -2,7 +2,7 @@
   apt:
     name: ubuntu-desktop-minimal
     install_recommends: true
-  # TODO reboot on changed.
+  notify: reboot
 
 - name: Install community.general.dconf module dependencies
   apt:
@@ -11,6 +11,7 @@
 - name: Install gnome-shell-extension-manager
   apt:
     name: gnome-shell-extension-manager
+
 # NB you can get the current value with:
 #       dconf read /org/gnome/shell/extensions/ding/show-trash
 # see /usr/share/glib-2.0/schemas/org.gnome.shell.extensions.ding.gschema.xml
