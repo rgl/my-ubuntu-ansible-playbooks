@@ -20,6 +20,10 @@
   notify:
     - restart libvirtd
 
+- name: Install virtinst
+  apt:
+    name: virtinst
+
 - name: Allow user to use kvm
   user:
     name: "{{ item }}"
