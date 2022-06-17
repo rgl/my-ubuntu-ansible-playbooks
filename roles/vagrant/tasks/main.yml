@@ -71,6 +71,20 @@
         name:
           - samba
           - smbclient
+    - name: Disable Samba NETBIOS
+      block:
+        - name: Disable Samba NETBIOS
+          community.general.ini_file:
+            path: /etc/samba/smb.conf
+            section: global
+            option: disable netbios
+            value: 'yes'
+          notify: reload samba
+        - name: Disable the NETBIOS service
+          systemd:
+            name: nmbd
+            enabled: false
+            state: stopped
     - name: Set the provision user password
       args:
         executable: /bin/bash

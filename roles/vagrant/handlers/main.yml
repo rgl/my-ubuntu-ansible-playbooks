@@ -1,0 +1,4 @@
+- name: reload samba
+  systemd:
+    name: smbd
+    state: reloaded
