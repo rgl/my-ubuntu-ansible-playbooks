@@ -99,3 +99,12 @@
   community.general.dconf:
     key: /org/gnome/shell/extensions/dash-to-dock/click-action
     value: "'minimize'"
+
+# NB you can get the current value with:
+#       dconf read /org/gnome/desktop/interface/color-scheme
+# See /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
+- name: Use the dark color scheme
+  become: false
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/color-scheme
+    value: "'prefer-dark'"
