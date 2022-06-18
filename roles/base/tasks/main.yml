@@ -106,3 +106,16 @@
       # e.g. etherwake -i eth1 00:e0:4c:01:93:a8
       - etherwake
     install_recommends: no
+
+- name: Install lm-sensors
+  block:
+    - name: Load the drivetemp kernel module on boot
+      copy:
+        dest: /etc/modules-load.d/drivetemp.conf
+        content: drivetemp
+    - name: Load the drivetemp kernel module
+      community.general.modprobe:
+        name: drivetemp
+    - name: Install lm-sensors
+      apt:
+        name: lm-sensors
