@@ -1,0 +1,20 @@
+# NB policies are used to configure and install addons/extensions.
+#    see https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
+#    see https://github.com/gorhill/uBlock
+# see https://github.com/mozilla/policy-templates#policiesjson
+# see about:support
+# see about:profiles
+- name: Install Policies
+  block:
+    - name: Create policies directory
+      file:
+        name: /etc/firefox/policies
+        state: directory
+    - name: Install Policies
+      copy:
+        src: firefox/policies.json
+        dest: /etc/firefox/policies/policies.json
+
+- name: Install Firefox
+  apt:
+    name: firefox
