@@ -19,6 +19,12 @@
 # see https://github.com/Azure/azure-cli/releases
 # NB execute apt-cache madison azure-cli to known the available versions.
 - name: Install azure-cli
-  apt:
-    name: azure-cli={{ azure_cli_version }}-*
-    state: present
+  block:
+    - name: Pin azure-cli
+      dpkg_selections:
+        name: azure-cli
+        selection: hold
+    - name: Install azure-cli
+      apt:
+        name: azure-cli={{ azure_cli_version }}-*
+        state: present

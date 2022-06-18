@@ -17,5 +17,11 @@
 # see https://github.com/hashicorp/packer/releases
 # NB execute apt-cache madison packer to known the available versions.
 - name: Install packer
-  apt:
-    name: packer={{ packer_version }}
+  block:
+    - name: Pin packer
+      dpkg_selections:
+        name: packer
+        selection: hold
+    - name: Install packer
+      apt:
+        name: packer={{ packer_version }}

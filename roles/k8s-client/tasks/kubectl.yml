@@ -10,8 +10,14 @@
 
 # NB execute apt-cache madison kubectl to known the available versions.
 - name: Install kubectl
-  apt:
-    name: kubectl={{ kubectl_version }}-*
+  block:
+    - name: Pin kubectl
+      dpkg_selections:
+        name: kubectl
+        selection: hold
+    - name: Install kubectl
+      apt:
+        name: kubectl={{ kubectl_version }}-*
 
 - name: Install kubectl bash completion
   block:

@@ -15,6 +15,12 @@
     update_cache: yes
 
 - name: Install dotnet-sdk
-  apt:
-    name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}={{ dotnet_sdk_version }}-1 # e.g. dotnet-sdk-6.0=6.0.202-1
-    state: present
+  block:
+    - name: Pin donet-sdk
+      dpkg_selections:
+        name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}
+        selection: hold
+    - name: Install dontet-sdk
+      apt:
+        name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}={{ dotnet_sdk_version }}-1 # e.g. dotnet-sdk-6.0=6.0.202-1
+        state: present

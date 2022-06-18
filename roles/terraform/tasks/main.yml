@@ -17,8 +17,14 @@
 # see https://github.com/hashicorp/terraform/releases
 # NB execute apt-cache madison terraform to known the available versions.
 - name: Install terraform
-  apt:
-    name: terraform={{ terraform_version }}
+  block:
+    - name: Pin terraform
+      dpkg_selections:
+        name: terraform
+        selection: hold
+    - name: Install terraform
+      apt:
+        name: terraform={{ terraform_version }}
 
 # see https://github.com/nbering/terraform-inventory
 - name: Install terraform inventory

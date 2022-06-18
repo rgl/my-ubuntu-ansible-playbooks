@@ -30,8 +30,14 @@
 # see https://github.com/hashicorp/vagrant/releases
 # NB execute apt-cache madison vagrant to known the available versions.
 - name: Install vagrant
-  apt:
-    name: vagrant={{ vagrant_version }}
+  block:
+    - name: Pin vagrant
+      dpkg_selections:
+        name: vagrant
+        selection: hold
+    - name: Install vagrant
+      apt:
+        name: vagrant={{ vagrant_version }}
 
 - name: Use the system ca certificates
   file:
