@@ -4,6 +4,14 @@
     cache_valid_time: 10800 # 3h
   changed_when: false
 
+- name: Disable motd-news
+  # NB this is sourced from /etc/update-motd.d/50-motd-news
+  lineinfile:
+    path: /etc/default/motd-news
+    regexp: '^#?\s*(ENABLED)=.*$'
+    line: '\1=0'
+    backrefs: yes
+
 - name: Add support for the pt_PT locale
   community.general.locale_gen:
     name: pt_PT.UTF-8
