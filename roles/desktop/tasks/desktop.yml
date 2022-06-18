@@ -27,6 +27,9 @@
 #    the sessions will see a black screen. to logout a stuck session, you can
 #    try with:
 #       gnome-session-quit --logout --no-prompt
+# NB see the logs at:
+#       ~/.xorgxrdp.*.log
+#       ~/.xsession-errors
 - name: Install xrdp
   block:
     - apt:
@@ -52,6 +55,17 @@
       copy:
         src: 45-colord.pkla
         dest: /etc/polkit-1/localauthority/50-local.d/45-colord.pkla
+    - name: Configure Session Variables
+      # see Fixing Theme and Extensions at http://c-nergy.be/blog/?p=12043
+      copy:
+        dest: /etc/X11/Xsession.d/00xrdp
+        content: |
+          if [ -z "$XRDP_SESSION" ]; then
+            return 0
+          fi
+          export GNOME_SHELL_SESSION_MODE=ubuntu
+          export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+          export XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
   notify: restart xrdp
 
 - name: Disable Gnome Initial Setup
