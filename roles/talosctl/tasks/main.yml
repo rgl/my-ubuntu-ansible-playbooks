@@ -1,0 +1,19 @@
+- name: Install talosctl
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install.sh') }}"
+  environment:
+    TALOSCTL_VERSION: "{{ talosctl_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install talosctl bash completion
+  block:
+    - name: Get talosctl bash completion
+      shell: talosctl completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install talosctl bash completion
+      copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/talosctl
