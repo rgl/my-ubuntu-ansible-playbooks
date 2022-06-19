@@ -71,7 +71,7 @@
     docker_compose_version='v{{ docker_compose_version }}'
 
     # bail when already installed.
-    if [ -f /usr/local/lib/docker/cli-plugins/docker-compose ]; then
+    if [ -x /usr/local/lib/docker/cli-plugins/docker-compose ]; then
       actual_version="$(docker compose version | perl -ne '/^Docker Compose version (v.+)/ && print $1')"
       if [ "$actual_version" == "$docker_compose_version" ]; then
         echo 'ANSIBLE CHANGED NO'

@@ -1,7 +1,7 @@
 set -euo pipefail
 
 # bail when already installed.
-if [ -f /opt/go/bin/go ]; then
+if [ -x /opt/go/bin/go ]; then
     # e.g. go version go1.18.1 linux/amd64
     actual_version="$(/opt/go/bin/go version | perl -ne '/^go version go(.+?) / && print $1')"
     if [ "$actual_version" == "$GO_VERSION" ]; then

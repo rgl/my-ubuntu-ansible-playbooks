@@ -12,7 +12,7 @@
   shell: |
     set -euo pipefail
     powershell_version='{{ powershell_version }}'
-    if [ -f /usr/bin/pwsh ]; then
+    if [ -x /usr/bin/pwsh ]; then
       actual_version="$(/usr/bin/pwsh --version | perl -ne '/^PowerShell (.+)/ && print $1')"
       if [ "$actual_version" == "$powershell_version" ]; then
         echo 'ANSIBLE CHANGED NO'
