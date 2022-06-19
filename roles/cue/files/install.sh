@@ -12,8 +12,7 @@ fi
 
 # download and install.
 cue_url="https://github.com/cue-lang/cue/releases/download/v${CUE_VERSION}/cue_v${CUE_VERSION}_linux_amd64.tar.gz"
-pushd /tmp
-wget -qO- "$cue_url" | tar xzf - cue
-install cue /usr/local/bin/
-rm cue
-popd
+t="$(mktemp -q -d --suffix=.cue)"
+wget -qO- "$cue_url" | tar xzf - -C "$t" cue
+install "$t/cue" /usr/local/bin/
+rm -rf "$t"

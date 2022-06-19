@@ -19,11 +19,10 @@
 
     # download and install.
     helm_url="https://get.helm.sh/helm-$helm_version-linux-amd64.tar.gz"
-    pushd /tmp
-    wget -qO- "$helm_url" | tar xzf - --strip-components=1 linux-amd64/helm
-    install helm /usr/local/bin/
-    rm helm
-    popd
+    t="$(mktemp -q -d --suffix=.helm)"
+    wget -qO- "$helm_url" | tar xzf - -C "$t" --strip-components=1 linux-amd64/helm
+    install "$t/helm" /usr/local/bin/
+    rm -rf "$t"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 

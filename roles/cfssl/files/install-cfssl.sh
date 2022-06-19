@@ -19,11 +19,10 @@ for name in cfssl cfssljson; do
 
     # download and install.
     cfssl_url="https://github.com/cloudflare/cfssl/releases/download/v${CFSSL_VERSION}/${name}_${CFSSL_VERSION}_linux_amd64"
-    pushd /tmp
-    wget -qO $name "$cfssl_url"
-    install -m 755 $name /usr/local/bin/
-    rm $name
-    popd
+    t="$(mktemp -q --suffix=.$name)"
+    wget -qO "$t" "$cfssl_url"
+    install -m 755 "$t" "/usr/local/bin/$name"
+    rm "$t"
 done
 
 if [ "$changed" == 'false' ]; then

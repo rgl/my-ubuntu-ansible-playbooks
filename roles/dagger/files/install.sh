@@ -12,8 +12,7 @@ fi
 
 # download and install.
 dagger_url="https://github.com/dagger/dagger/releases/download/v${DAGGER_VERSION}/dagger_v${DAGGER_VERSION}_linux_amd64.tar.gz"
-pushd /tmp
-wget -qO- "$dagger_url" | tar xzf - dagger
-install dagger /usr/local/bin/
-rm dagger
-popd
+t="$(mktemp -q -d --suffix=.dagger)"
+wget -qO- "$dagger_url" | tar xzf - -C "$t" dagger
+install "$t/dagger" /usr/local/bin/
+rm -rf "$t"
