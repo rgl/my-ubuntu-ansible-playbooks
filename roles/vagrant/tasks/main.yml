@@ -160,10 +160,16 @@
       when: "'kvm' in ansible_virtualization_tech_host"
 
     - name: Patch vagrant-scp plugin
-      ansible.posix.patch:
-        src: vagrant-scp-48.patch
-        # TODO replace 2.7.4 with the vagrant ruby version.
-        basedir: ~/.vagrant.d/gems/2.7.4/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}
-        strip: 1
+      block:
+        - name: Find vagrant-scp plugin directories
+          shell: echo ~/.vagrant.d/gems/*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}
+          changed_when: false
+          register: vagrant_scp_plugin_directories
+        - name: Patch vagrant-scp plugin
+          ansible.posix.patch:
+            src: vagrant-scp-48.patch
+            basedir: '{{ item }}'
+            strip: 1
+          loop: '{{ vagrant_scp_plugin_directories.stdout_lines }}'
       become_user: '{{ provision_username }}'
       become: true
