@@ -16,3 +16,8 @@
 - name: Reboot when required
   reboot:
   when: reboot_required.stat.exists
+
+- name: Remove unneeded packages
+  apt:
+    autoremove: true
+    autoclean: true
