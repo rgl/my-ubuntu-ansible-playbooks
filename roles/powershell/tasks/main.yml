@@ -6,6 +6,11 @@
       export POWERSHELL_TELEMETRY_OPTOUT=1
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
 
+- name: Pin powershell
+  dpkg_selections:
+    name: powershell
+    selection: hold
+
 - name: Check PowerShell
   args:
     executable: /bin/bash
