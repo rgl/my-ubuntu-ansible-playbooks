@@ -18,3 +18,25 @@
         name: '{{ cluster_name }} Kubernetes Ingress CA'
         remote_src: ~/.kube/{{ cluster_name }}-ingress-ca-crt.pem
         trust: C,,
+
+- name: Save the admin user token to ~/.kube/{{ cluster_name }}-admin-token.txt
+  block:
+    - name: Get the admin user ServiceAccount
+      kubernetes.core.k8s_info:
+        namespace: kube-dashboard
+        api_version: v1
+        kind: ServiceAccount
+        name: admin
+      register: admin_sa
+    - name: Get the admin user token
+      kubernetes.core.k8s_info:
+        namespace: kube-dashboard
+        api_version: v1
+        kind: Secret
+        name: '{{ admin_sa.resources[0].secrets[0].name }}'
+      register: admin_token
+    - name: Save the admin user token to ~/.kube/{{ cluster_name }}-admin-token.txt
+      copy:
+        mode: 0400
+        dest: ~/.kube/{{ cluster_name }}-admin-token.txt
+        content: '{{ admin_token.resources[0].data.token | b64decode }}'
