@@ -1,0 +1,29 @@
+- name: Add traefik repository
+  kubernetes.core.helm_repository:
+    name: traefik
+    repo_url: https://helm.traefik.io/traefik
+
+- name: Install traefik
+  # see https://artifacthub.io/packages/helm/traefik/traefik
+  # see https://github.com/traefik/traefik-helm-chart
+  # see https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+  kubernetes.core.helm:
+    name: kube-traefik
+    chart_ref: traefik/traefik
+    chart_version: '10.21.1' # app version: 2.7.1
+    release_namespace: kube-traefik
+    create_namespace: true
+    values:
+      service:
+        type: NodePort
+      ports:
+        websecure:
+          nodePort: 32443
+          tls:
+            enabled: true
+      # disable pilot.
+      pilot:
+        enabled: false
+        dashboard: false
+      # disable the telemetry (this is done by setting globalArguments)
+      globalArguments: []
