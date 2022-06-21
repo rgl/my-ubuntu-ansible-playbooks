@@ -1,0 +1,5 @@
+cluster_name: talos
+cluster_domain: test
+
+provision_username: '{{ ansible_user }}'
+provision_password: '{{ ansible_password }}'

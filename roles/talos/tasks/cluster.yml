@@ -1,0 +1,13 @@
+- name: Create cluster
+  talos_cluster_docker:
+    name: talos
+    exposed_ports:
+      - 32443:32443/tcp
+
+- name: Let workloads run in the control plane
+  kubernetes.core.k8s_taint:
+    state: absent
+    name: '{{ cluster_name }}-master-1'
+    taints:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master

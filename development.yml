@@ -21,4 +21,5 @@
     - dotnet-sdk
     - cue
     - dagger
+    - talos
     - desktop
