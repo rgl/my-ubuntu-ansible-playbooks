@@ -6,29 +6,25 @@
       export POWERSHELL_TELEMETRY_OPTOUT=1
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
 
-- name: Pin powershell
-  dpkg_selections:
-    name: powershell
-    selection: hold
+- name: Install Microsoft APT repository
+  apt:
+    deb: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb
+  register: repository
 
-- name: Check PowerShell
-  args:
-    executable: /bin/bash
-  shell: |
-    set -euo pipefail
-    powershell_version='{{ powershell_version }}'
-    if [ -x /usr/bin/pwsh ]; then
-      actual_version="$(/usr/bin/pwsh --version | perl -ne '/^PowerShell (.+)/ && print $1')"
-      if [ "$actual_version" == "$powershell_version" ]; then
-        echo 'ANSIBLE CHANGED NO'
-      fi
-    fi
-  register: powershell
-  changed_when: "'ANSIBLE CHANGED NO' not in powershell.stdout_lines"
+- name: Update APT cache
+  when: repository.changed
+  apt:
+    update_cache: yes
 
 # see https://github.com/PowerShell/PowerShell/releases
-# see https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2#installation-via-direct-download
+# see https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2#installation-via-package-repository
 - name: Install PowerShell
-  apt:
-    deb: https://github.com/PowerShell/PowerShell/releases/download/v{{ powershell_version }}/powershell_{{ powershell_version }}-1.deb_amd64.deb
-  when: powershell.changed
+  block:
+    - name: Install powershell
+      apt:
+        name: powershell={{ powershell_version }}-*
+        allow_change_held_packages: true
+    - name: Pin powershell
+      dpkg_selections:
+        name: powershell
+        selection: hold
