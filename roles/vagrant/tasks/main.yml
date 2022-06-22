@@ -31,13 +31,14 @@
 # NB execute apt-cache madison vagrant to known the available versions.
 - name: Install vagrant
   block:
+    - name: Install vagrant
+      apt:
+        name: vagrant={{ vagrant_version }}
+        allow_change_held_packages: true
     - name: Pin vagrant
       dpkg_selections:
         name: vagrant
         selection: hold
-    - name: Install vagrant
-      apt:
-        name: vagrant={{ vagrant_version }}
 
 - name: Use the system ca certificates
   file:

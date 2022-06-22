@@ -20,11 +20,12 @@
 # NB execute apt-cache madison azure-cli to known the available versions.
 - name: Install azure-cli
   block:
+    - name: Install azure-cli
+      apt:
+        name: azure-cli={{ azure_cli_version }}-*
+        allow_change_held_packages: true
+        state: present
     - name: Pin azure-cli
       dpkg_selections:
         name: azure-cli
         selection: hold
-    - name: Install azure-cli
-      apt:
-        name: azure-cli={{ azure_cli_version }}-*
-        state: present

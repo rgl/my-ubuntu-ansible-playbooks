@@ -18,13 +18,14 @@
 # NB execute apt-cache madison terraform to known the available versions.
 - name: Install terraform
   block:
+    - name: Install terraform
+      apt:
+        name: terraform={{ terraform_version }}
+        allow_change_held_packages: true
     - name: Pin terraform
       dpkg_selections:
         name: terraform
         selection: hold
-    - name: Install terraform
-      apt:
-        name: terraform={{ terraform_version }}
 
 # see https://github.com/nbering/terraform-inventory
 - name: Install terraform inventory
