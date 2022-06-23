@@ -65,6 +65,19 @@
       metadata:
         name: admin
 
+# see https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets
+- name: Create the admin user Secret
+  kubernetes.core.k8s:
+    namespace: kube-dashboard
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: admin
+        annotations:
+          kubernetes.io/service-account.name: admin
+      type: kubernetes.io/service-account-token
+
 - name: Bind the admin user to the cluster-admin role
   kubernetes.core.k8s:
     namespace: kube-dashboard

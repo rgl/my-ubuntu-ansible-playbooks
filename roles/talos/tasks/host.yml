@@ -21,19 +21,12 @@
 
 - name: Save the admin user token to ~/.kube/{{ cluster_name }}-admin-token.txt
   block:
-    - name: Get the admin user ServiceAccount
-      kubernetes.core.k8s_info:
-        namespace: kube-dashboard
-        api_version: v1
-        kind: ServiceAccount
-        name: admin
-      register: admin_sa
-    - name: Get the admin user token
+    - name: Get the admin user Secret
       kubernetes.core.k8s_info:
         namespace: kube-dashboard
         api_version: v1
         kind: Secret
-        name: '{{ admin_sa.resources[0].secrets[0].name }}'
+        name: admin
       register: admin_token
     - name: Save the admin user token to ~/.kube/{{ cluster_name }}-admin-token.txt
       copy:
