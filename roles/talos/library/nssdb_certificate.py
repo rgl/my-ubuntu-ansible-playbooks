@@ -79,29 +79,31 @@ class NssdbCertificate(AnsibleModule):
     return changed
 
   def _trust_certificate(self, nssdb_path, name, remote_src, trust):
-    # return False when it already exists.
-    try:
-      result = self._run('certutil', '-L', '-d', f'sql:{nssdb_path}')
-      for line in result.stdout.splitlines():
-        parts = line.strip().rsplit(' ', maxsplit=1)
-        if len(parts) != 2:
+    # ensure there is at most one certificate with the same name.
+    changed = False
+    exists = False
+    for certificate_trust in self._list_certificates(nssdb_path, name):
+      if certificate_trust == trust:
+        result = self._run(
+          'certutil',
+          '-L',
+          '-d', f'sql:{nssdb_path}',
+          '-n', name,
+          '-a')
+        actual = result.stdout.strip()
+        with open(remote_src) as f:
+          expected = f.read().strip()
+        if actual == expected:
+          exists = True
           continue
-        certificate_name = parts[0].strip()
-        certificate_trust = parts[1].strip()
-        if certificate_name == name and certificate_trust == trust:
-          result = self._run(
-            'certutil',
-            '-L',
-            '-d', f'sql:{nssdb_path}',
-            '-n', name,
-            '-a')
-          actual = result.stdout.strip()
-          with open(remote_src) as f:
-            expected = f.read().strip()
-          if actual == expected:
-            return False
-    except:
-      pass
+      result = self._run(
+        'certutil',
+        '-D',
+        '-d', f'sql:{nssdb_path}',
+        '-n', name)
+      changed = True
+    if exists:
+      return changed
     # add the certificate.
     if not os.path.exists(nssdb_path):
       os.makedirs(nssdb_path, mode=0o700)
@@ -113,6 +115,19 @@ class NssdbCertificate(AnsibleModule):
       '-i', remote_src,
       '-t', trust)
     return True
+
+  def _list_certificates(self, nssdb_path, name):
+    if not os.path.exists(nssdb_path):
+      return
+    result = self._run('certutil', '-L', '-d', f'sql:{nssdb_path}')
+    for line in result.stdout.splitlines():
+      parts = line.strip().rsplit(' ', maxsplit=1)
+      if len(parts) != 2:
+        continue
+      certificate_name = parts[0].strip()
+      certificate_trust = parts[1].strip()
+      if certificate_name == name:
+        yield certificate_trust
 
   def _run(self, *args):
     # TODO with check=True and when there is a non-zero exit code, the raised
