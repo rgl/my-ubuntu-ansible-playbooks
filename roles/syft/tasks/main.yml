@@ -1,0 +1,8 @@
+- name: Install syft
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install-syft.sh') }}"
+  environment:
+    SYFT_VERSION: "{{ syft_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
