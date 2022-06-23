@@ -20,9 +20,10 @@ options:
     elements: str
 notes:
   - When there is an error creating/starting the cluster, there is no attempt to recover/destroy it.
-  - This will also modify your ~/.kube/config file by managing the admin@<name> cluster entry.
+  - This modifies your ~/.talos/config and ~/.kube/config files.
   - This requires the talosctl binary installed in the target host.
-  - This requires the docker and kubernetes python libraries installed in the target host.
+  - This requires the kubectl binary installed in the target host.
+  - This requires the docker, kubernetes and yaml python libraries installed in the target host.
 author:
   - Rui Lopes (ruilopes.com)
 '''
@@ -41,9 +42,18 @@ RETURN = '''
 
 from ansible.module_utils.basic import AnsibleModule
 import docker
+import io
 import kubernetes
+import os.path
 import subprocess
 import time
+import yaml
+
+
+# see https://github.com/yaml/pyyaml/issues/234#issuecomment-765894586
+class Dumper(yaml.Dumper):
+  def increase_indent(self, flow=False, *args, **kwargs):
+    return super().increase_indent(flow=flow, indentless=False)
 
 
 class TalosClusterDocker(AnsibleModule):
@@ -58,16 +68,13 @@ class TalosClusterDocker(AnsibleModule):
   def main(self):
     name = self.params['name']
     container_name = f'{name}-master-1'
-
     containers = self.docker_client.containers.list(all=True, filters={'name':container_name})
-
     if len(containers) > 1:
       raise Exception(f'found more than one container named {container_name}')
     elif len(containers) == 1:
       changed = self._start_cluster(containers[0])
     else:
       changed = self._create_cluster()
-
     self.exit_json(changed=changed, content=dict())
 
   def _start_cluster(self, container):
@@ -81,6 +88,12 @@ class TalosClusterDocker(AnsibleModule):
   def _create_cluster(self):
     name = self.params['name']
     exposed_ports = self.params['exposed_ports']
+    # delete the cluster from config.
+    # NB when it exists, talosctl will create a new context called, e.g.,
+    #    admin@<name>-<index>, which goes against our expectation of
+    #    admin@<name>.
+    self._delete_cluster_from_config()
+    # create the cluster.
     args = [
       'talosctl',
       'cluster',
@@ -97,6 +110,53 @@ class TalosClusterDocker(AnsibleModule):
     subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     self._wait_for_kubernetes(25*60)
     return True
+
+  def _delete_cluster_from_config(self):
+    changed = False
+    cluster_name = self.params['name'] # used in ~/.talos/config
+    context_name = f"admin@{cluster_name}" # used in ~/.kube/config
+    # delete context from ~/.talos/config
+    # NB there is no talosctl config delete-context command.
+    config_path = os.path.expanduser('~/.talos/config')
+    if os.path.exists(config_path):
+      config_orig = open(config_path, 'r', encoding='utf-8').read()
+      document = yaml.load(config_orig, Loader=yaml.FullLoader)
+      context = document['contexts'].get(cluster_name)
+      if context:
+        del document['contexts'][cluster_name]
+        config_stream = io.StringIO()
+        yaml.dump(document, config_stream, Dumper=Dumper, default_flow_style=False, indent=4)
+        config = config_stream.getvalue()
+        open(config_path, 'w', encoding='utf-8').write(config)
+        changed = True
+    # delete the cluster, user and context from ~/.kube/config
+    config_path = os.path.expanduser('~/.kube/config')
+    if os.path.exists(config_path):
+      contexts, active_context = kubernetes.config.list_kube_config_contexts()
+      for context in contexts:
+        name = context['name']
+        if name == context_name:
+          subprocess.run(
+            ['kubectl', 'config', 'delete-cluster', cluster_name],
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
+          subprocess.run(
+            ['kubectl', 'config', 'delete-user', name],
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
+          subprocess.run(
+            ['kubectl', 'config', 'delete-context', name],
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
+          changed = True
+          break
+    return changed
 
   def _create_kubernetes_client(self):
     context_name = f"admin@{self.params['name']}"
