@@ -13,6 +13,7 @@
     chart_version: '{{ kubernetes_dashboard_chart_version }}'
     release_namespace: kube-dashboard
     create_namespace: true
+    update_repo_cache: true
     values:
       ingress:
         enabled: true

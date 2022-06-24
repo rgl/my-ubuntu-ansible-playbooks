@@ -18,6 +18,7 @@
     chart_version: '{{ cert_manager_chart_version }}'
     release_namespace: cert-manager
     create_namespace: true
+    update_repo_cache: true
     values:
       # NB installCRDs is generally not recommended, BUT since this
       #    is a development cluster we YOLO it.
