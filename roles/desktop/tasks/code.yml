@@ -22,7 +22,10 @@
           --prettyPrint \
           --indent 4 \
           e \
-            '."telemetry.telemetryLevel" = "off"'
+            '
+              ."telemetry.telemetryLevel" = "off"
+            | ."redhat.telemetry.enabled" = false
+            '
       register: settings
       changed_when: false
     - name: Write Settings
