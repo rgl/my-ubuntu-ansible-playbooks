@@ -10,7 +10,7 @@
   kubernetes.core.helm:
     name: kube-dashboard
     chart_ref: kubernetes-dashboard/kubernetes-dashboard
-    chart_version: 5.7.0 # app version: 2.6.0
+    chart_version: '{{ kubernetes_dashboard_chart_version }}'
     release_namespace: kube-dashboard
     create_namespace: true
     values:

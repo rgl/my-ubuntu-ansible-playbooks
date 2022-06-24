@@ -10,7 +10,7 @@
   kubernetes.core.helm:
     name: kube-traefik
     chart_ref: traefik/traefik
-    chart_version: '10.21.1' # app version: 2.7.1
+    chart_version: '{{ traefik_chart_version }}'
     release_namespace: kube-traefik
     create_namespace: true
     values:
