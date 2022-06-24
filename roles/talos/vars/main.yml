@@ -7,7 +7,7 @@ provision_password: '{{ ansible_password }}'
 helm_diff_version: '3.5.0'
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
-cert_manager_chart_version: '1.8.1' # app version: 1.8.1
+cert_manager_chart_version: '1.8.2' # app version: 1.8.2
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 traefik_chart_version: '10.21.1' # app version: 2.7.1
