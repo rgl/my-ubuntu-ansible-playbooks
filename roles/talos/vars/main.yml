@@ -10,7 +10,7 @@ helm_diff_version: '3.5.0'
 cert_manager_chart_version: '1.8.2' # app version: 1.8.2
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
-traefik_chart_version: '10.21.1' # app version: 2.7.1
+traefik_chart_version: '10.22.0' # app version: 2.7.1
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 kubernetes_dashboard_chart_version: '5.7.0' # app version: 2.6.0
