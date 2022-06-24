@@ -9,6 +9,27 @@
   apt:
     name: code
 
+- name: Configure Visual Studio Code
+  become_user: '{{ ansible_user }}'
+  block:
+    - name: Read Settings
+      args:
+        executable: /bin/bash
+      shell: |
+        f=~/.config/Code/User/settings.json
+        ([ -f "$f" ] && cat "$f" || echo '{}') | yq \
+          --output-format json \
+          --prettyPrint \
+          --indent 4 \
+          e \
+            '."telemetry.telemetryLevel" = "off"'
+      register: settings
+      changed_when: false
+    - name: Write Settings
+      copy:
+        dest: ~/.config/Code/User/settings.json
+        content: '{{ settings.stdout }}'
+
 - name: Install code plugin
   become_user: '{{ ansible_user }}'
   args:
