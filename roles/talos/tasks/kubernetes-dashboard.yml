@@ -73,11 +73,11 @@
     definition:
       apiVersion: v1
       kind: Secret
+      type: kubernetes.io/service-account-token
       metadata:
         name: admin
         annotations:
           kubernetes.io/service-account.name: admin
-      type: kubernetes.io/service-account-token
 
 - name: Bind the admin user to the cluster-admin role
   kubernetes.core.k8s:
