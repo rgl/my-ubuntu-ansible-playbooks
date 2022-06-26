@@ -10,3 +10,4 @@
     - include_tasks: host.yml
   become: true
   become_user: '{{ provision_username }}'
+- include_tasks: dns.yml
