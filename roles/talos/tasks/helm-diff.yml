@@ -1,0 +1,7 @@
+# NB this is used by the kubernetes.core.helm module.
+# NB plugin is installed in ~/.local/share/helm/plugins/helm-diff
+# NB plugins cannot be installed globally. see https://github.com/helm/helm/issues/9500
+- name: Install helm-diff plugin
+  kubernetes.core.helm_plugin:
+    plugin_path: https://github.com/databus23/helm-diff
+    plugin_version: '{{ helm_diff_version }}'
