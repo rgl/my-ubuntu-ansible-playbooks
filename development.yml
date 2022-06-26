@@ -25,5 +25,5 @@
     - dagger
     - syft
     - kind
-    - talos
+    #- talos # TODO understand why the LoadBalancer is not working.
     - desktop
