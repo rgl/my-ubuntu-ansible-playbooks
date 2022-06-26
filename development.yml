@@ -24,5 +24,6 @@
     - cue
     - dagger
     - syft
+    - kind
     - talos
     - desktop

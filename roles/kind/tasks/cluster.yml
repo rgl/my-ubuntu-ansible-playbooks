@@ -1,0 +1,14 @@
+- name: Create cluster
+  kind:
+    name: '{{ cluster_name }}'
+  register: cluster
+
+# NB because we do not need more than one in this development cluster.
+- name: Ensure that only a single coredns instance is running
+  kubernetes.core.k8s_scale:
+    namespace: kube-system
+    api_version: v1
+    kind: Deployment
+    name: coredns
+    replicas: 1
+    wait: false

@@ -1,0 +1,14 @@
+- include_tasks: kind.yml
+- include_tasks: dependencies.yml
+- block:
+    - include_tasks: helm-diff.yml
+    - include_tasks: cluster.yml
+    - include_tasks: metallb.yml
+    - include_tasks: cert-manager.yml
+    - include_tasks: traefik.yml
+    - include_tasks: external-dns.yml
+    - include_tasks: kubernetes-dashboard.yml
+    - include_tasks: host.yml
+  become: true
+  become_user: '{{ provision_username }}'
+- include_tasks: dns.yml

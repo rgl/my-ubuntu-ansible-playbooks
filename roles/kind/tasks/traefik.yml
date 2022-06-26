@@ -1,0 +1,35 @@
+- name: Add traefik repository
+  kubernetes.core.helm_repository:
+    name: traefik
+    repo_url: https://helm.traefik.io/traefik
+
+- name: Install traefik
+  # see https://artifacthub.io/packages/helm/traefik/traefik
+  # see https://github.com/traefik/traefik-helm-chart
+  # see https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+  kubernetes.core.helm:
+    name: kube-traefik
+    chart_ref: traefik/traefik
+    chart_version: '{{ traefik_chart_version }}'
+    release_namespace: kube-traefik
+    create_namespace: true
+    update_repo_cache: true
+    values:
+      service:
+        type: LoadBalancer
+      ports:
+        websecure:
+          tls:
+            enabled: true
+      # publish the traefik service IP address in the Ingress
+      # resources.
+      providers:
+        kubernetesIngress:
+          publishedService:
+            enabled: true
+      # disable pilot.
+      pilot:
+        enabled: false
+        dashboard: false
+      # disable the telemetry (this is done by setting globalArguments)
+      globalArguments: []
