@@ -1,0 +1,171 @@
+- name: Install pdns
+  block:
+    - name: Set the pdns_image fact value
+      set_fact:
+        # e.g. powerdns/pdns-auth-46:4.6.2
+        pdns_image: powerdns/pdns-auth-{{ ''.join(pdns_version.split('.')[0:2]) }}:{{ pdns_version }}
+    - name: Create the kube-external-dns Namespace
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: kube-external-dns
+    - name: Create the pdns-api Secret
+      kubernetes.core.k8s:
+        namespace: kube-external-dns
+        definition:
+          apiVersion: v1
+          kind: Secret
+          type: Opaque
+          metadata:
+            name: pdns-api
+          stringData:
+            pdns_api_key: abracadabra # TODO create a random and rotateable secret.
+    - name: Install pdns
+      # see https://github.com/PowerDNS/pdns/blob/master/Docker-README.md
+      # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
+      # see https://hub.docker.com/r/powerdns/pdns-auth-46
+      kubernetes.core.k8s:
+        namespace: kube-external-dns
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: pdns
+          spec:
+            strategy:
+              type: Recreate
+            selector:
+              matchLabels:
+                app: pdns
+            template:
+              metadata:
+                labels:
+                  app: pdns
+              spec:
+                # TODO add reservations and limits.
+                initContainers:
+                  # NB in the future it might be possible to initialize pdns without an init container.
+                  #    see https://github.com/PowerDNS/pdns/issues/10065
+                  - name: init
+                    image: '{{ pdns_image }}'
+                    command:
+                      - bash
+                      - -c
+                      - |
+                        set -euxo pipefail
+                        # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
+                        if [ ! -f /var/lib/powerdns/pdns.sqlite3 ]; then
+                          sqlite3 /var/lib/powerdns/pdns.sqlite3 </usr/local/share/doc/pdns/schema.sqlite3.sql
+                        fi
+                        t="$(mktemp)"
+                        cat >"$t" <<'EOF'
+                        $TTL 1m
+                        $ORIGIN {{ cluster_name }}.{{ cluster_domain }}. ; base domain-name
+                        @               IN      SOA     a.ns    hostmaster (
+                            2019090800 ; serial number (this number should be increased each time this zone file is changed)
+                            1m         ; refresh (the polling interval that slave DNS server will query the master for zone changes)
+                                       ; NB the slave will use this value insted of \$TTL when deciding if the zone it outdated
+                            1m         ; update retry (the slave will retry a zone transfer after a transfer failure)
+                            3w         ; expire (the slave will ignore this zone if the transfer keeps failing for this long)
+                            1m         ; minimum (the slave stores negative results for this long)
+                        )
+                        IN NS a.ns
+                        EOF
+                        pdnsutil load-zone {{ cluster_name }}.{{ cluster_domain }} "$t"
+                        pdnsutil list-all-zones
+                    volumeMounts:
+                      - name: data
+                        mountPath: /var/lib/powerdns
+                containers:
+                  - name: pdns
+                    image: '{{ pdns_image }}'
+                    args:
+                      - --local-port=5353
+                    env:
+                      - name: PDNS_AUTH_API_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: pdns-api
+                            key: pdns_api_key
+                    volumeMounts:
+                      - name: data
+                        mountPath: /var/lib/powerdns
+                volumes:
+                  - name: config
+                    configMap:
+                      name: pdns
+                  - name: data
+                    emptyDir: {}
+    - name: Install pdns-api service
+      kubernetes.core.k8s:
+        namespace: kube-external-dns
+        definition:
+          # see https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#service-v1-core
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#serviceport-v1-core
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: pdns-api
+          spec:
+            type: ClusterIP
+            selector:
+              app: pdns
+            ports:
+              - name: api
+                port: 8081
+                protocol: TCP
+                targetPort: 8081
+    - name: Install pdns-dns service
+      kubernetes.core.k8s:
+        namespace: kube-external-dns
+        definition:
+          # see https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#service-v1-core
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#serviceport-v1-core
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: pdns-dns
+          spec:
+            type: NodePort
+            selector:
+              app: pdns
+            ports:
+              - name: dns-udp
+                port: 30053
+                nodePort: 30053
+                protocol: UDP
+                targetPort: 5353
+              - name: dns-tcp
+                port: 30053
+                nodePort: 30053
+                protocol: TCP
+                targetPort: 5353
+
+- name: Install external-dns
+  # see https://artifacthub.io/packages/helm/bitnami/external-dns
+  # see https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/pdns.md
+  # see https://github.com/kubernetes-sigs/external-dns/blob/master/docs/initial-design.md
+  kubernetes.core.helm:
+    name: kube-external-dns
+    chart_ref: bitnami/external-dns
+    chart_version: '{{ external_dns_chart_version }}'
+    release_namespace: kube-external-dns
+    create_namespace: true
+    update_repo_cache: true
+    values:
+      logLevel: debug
+      interval: 30s
+      sources:
+        - ingress
+      txtOwnerId: k8s
+      domainFilters:
+        - '{{ cluster_name }}.{{ cluster_domain }}'
+      provider: pdns
+      pdns:
+        apiUrl: http://pdns-api
+        apiPort: 8081
+        secretName: pdns-api

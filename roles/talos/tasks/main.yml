@@ -5,6 +5,7 @@
     - include_tasks: metallb.yml
     - include_tasks: cert-manager.yml
     - include_tasks: traefik.yml
+    - include_tasks: external-dns.yml
     - include_tasks: kubernetes-dashboard.yml
     - include_tasks: host.yml
   become: true
