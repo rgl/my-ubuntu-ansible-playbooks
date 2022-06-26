@@ -10,6 +10,7 @@ apt-get update
 apt-get install -y --no-install-recommends \
     python3-argcomplete \
     python3-pip \
+    python3-netaddr \
     python3-cryptography \
     python3-openssl \
     python3-yaml \

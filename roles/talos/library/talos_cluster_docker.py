@@ -37,6 +37,11 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
+network_cidr:
+  description:
+    - The network CIDR.
+  returned: success
+  type: str
 '''
 
 
@@ -75,7 +80,8 @@ class TalosClusterDocker(AnsibleModule):
       changed = self._start_cluster(containers[0])
     else:
       changed = self._create_cluster()
-    self.exit_json(changed=changed, content=dict())
+    network_cidr = self.docker_client.networks.get(name).attrs['IPAM']['Config'][0]['Subnet']
+    self.exit_json(changed=changed, network_cidr=network_cidr)
 
   def _start_cluster(self, container):
     if container.status == 'running':
@@ -87,7 +93,7 @@ class TalosClusterDocker(AnsibleModule):
 
   def _create_cluster(self):
     name = self.params['name']
-    exposed_ports = self.params['exposed_ports']
+    exposed_ports = self.params['exposed_ports'] or []
     # delete the cluster from config.
     # NB when it exists, talosctl will create a new context called, e.g.,
     #    admin@<name>-<index>, which goes against our expectation of

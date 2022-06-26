@@ -2,6 +2,7 @@
 - block:
     - include_tasks: helm-diff.yml
     - include_tasks: cluster.yml
+    - include_tasks: metallb.yml
     - include_tasks: cert-manager.yml
     - include_tasks: traefik.yml
     - include_tasks: kubernetes-dashboard.yml

@@ -2,6 +2,9 @@ collections:
   # see https://galaxy.ansible.com/ansible/posix
   - name: ansible.posix
     version: 1.4.0
+  # see https://galaxy.ansible.com/ansible/utils
+  - name: ansible.utils
+    version: 2.6.1
   # see https://galaxy.ansible.com/community/general
   - name: community.general
     version: 5.2.0

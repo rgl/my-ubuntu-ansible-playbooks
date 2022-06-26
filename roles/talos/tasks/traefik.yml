@@ -16,11 +16,16 @@
     update_repo_cache: true
     values:
       service:
-        type: NodePort
+        type: LoadBalancer
       ports:
         websecure:
-          nodePort: 32443
           tls:
+            enabled: true
+      # publish the traefik service IP address in the Ingress
+      # resources.
+      providers:
+        kubernetesIngress:
+          publishedService:
             enabled: true
       # disable pilot.
       pilot:

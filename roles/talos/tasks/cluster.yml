@@ -1,8 +1,7 @@
 - name: Create cluster
   talos_cluster_docker:
-    name: talos
-    exposed_ports:
-      - 32443:32443/tcp
+    name: '{{ cluster_name }}'
+  register: cluster
 
 - name: Let workloads run in the control plane
   kubernetes.core.k8s_taint:
