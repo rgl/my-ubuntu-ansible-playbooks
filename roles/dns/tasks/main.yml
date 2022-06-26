@@ -1,0 +1,28 @@
+- name: Install dnsmasq
+  apt:
+    name: dnsmasq
+
+- name: Disable the systemd-resolved host dns resolver
+  systemd:
+    name: systemd-resolved
+    masked: true
+    enabled: false
+    state: stopped
+
+- name: Configure dnsmasq as the host dns resolver
+  block:
+    - name: Configure dnsmasq
+      template:
+        src: dnsmasq.conf.j2
+        dest: /etc/dnsmasq.d/local.conf
+      register: configure
+    - name: Restart dnsmasq
+      when: configure.changed
+      systemd:
+        name: dnsmasq
+        state: restarted
+    - name: Configure resolv.conf
+      copy:
+        content: |
+          nameserver 127.0.0.1
+        dest: /etc/resolv.conf

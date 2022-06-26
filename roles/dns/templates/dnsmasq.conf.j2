@@ -1,0 +1,9 @@
+no-resolv
+bind-interfaces
+#interface=lo
+#listen-address=127.0.0.1
+# exclude all the public interfaces.
+except-interface=eth0
+{% for ip_address in dns_servers %}
+server={{ ip_address }}
+{% endfor %}

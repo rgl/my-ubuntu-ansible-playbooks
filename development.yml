@@ -4,6 +4,7 @@
   become: true
   roles:
     - upgrade
+    - dns
     - base
     - cfssl
     - lms
