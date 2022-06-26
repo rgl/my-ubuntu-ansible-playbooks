@@ -14,5 +14,5 @@ fi
 yq_url="https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64"
 t="$(mktemp -q --suffix=.yq)"
 wget -qO "$t" "$yq_url"
-install -m 755 "$t" "/usr/local/bin/yq"
+install -m 755 "$t" /usr/local/bin/yq
 rm "$t"
