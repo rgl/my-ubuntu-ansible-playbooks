@@ -1,0 +1,2 @@
+# see https://github.com/anchore/grype/releases
+grype_version: '0.40.1'

@@ -24,6 +24,7 @@
     - cue
     - dagger
     - syft
+    - grype
     - kind
     #- talos # TODO understand why the LoadBalancer is not working.
     - desktop

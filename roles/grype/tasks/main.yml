@@ -1,0 +1,8 @@
+- name: Install grype
+  args:
+    executable: /bin/bash
+  shell: "{{ lookup('file', 'install-grype.sh') }}"
+  environment:
+    GRYPE_VERSION: "{{ grype_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
