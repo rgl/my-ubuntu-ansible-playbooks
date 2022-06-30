@@ -1,5 +1,5 @@
 # see https://github.com/hashicorp/terraform/releases
-terraform_version: '1.2.3'
+terraform_version: '1.2.4'
 
 # see https://github.com/nbering/terraform-inventory/releases
 terraform_inventory_version: '2.2.0'
