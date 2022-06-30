@@ -2,7 +2,7 @@ set -euo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/syft ]; then
-    # e.g. syft 0.48.1
+    # e.g. syft 0.49.0
     actual_version="$(/usr/local/bin/syft --version | perl -ne '/^syft (.+)$/ && print $1')"
     if [ "$actual_version" == "$SYFT_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
