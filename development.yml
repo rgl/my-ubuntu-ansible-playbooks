@@ -4,10 +4,10 @@
   become: true
   roles:
     - upgrade
+    - lms
     - dns
     - base
     - cfssl
-    - lms
     - role: kvm
       when: "'kvm' in ansible_virtualization_tech_host"
     - docker
