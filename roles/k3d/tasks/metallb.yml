@@ -1,0 +1,29 @@
+# see https://artifacthub.io/packages/helm/bitnami/metallb
+# see https://metallb.universe.tf/configuration/#layer-2-configuration
+# see https://github.com/bitnami/charts/tree/master/bitnami/metallb
+# see https://kind.sigs.k8s.io/docs/user/loadbalancer/
+
+- name: Add bitnami repository
+  kubernetes.core.helm_repository:
+    name: bitnami
+    repo_url: https://charts.bitnami.com/bitnami
+
+- name: Install metallb
+  kubernetes.core.helm:
+    name: kube-metallb
+    chart_ref: bitnami/metallb
+    chart_version: '{{ metallb_chart_version }}'
+    release_namespace: kube-metallb
+    create_namespace: true
+    update_repo_cache: true
+    values:
+      speaker:
+        secretValue: abracadabra # TODO use a proper secret.
+      configInline:
+        address-pools:
+          - name: default
+            protocol: layer2
+            addresses:
+              # use the last 54 addresses from the assigned network. e.g. with
+              # a network of 172.18/16 use 172.18.255.200-172.18.255.254.
+              - '{{ cluster.network_cidr | ansible.utils.nthhost(-(54+2)) }}-{{ cluster.network_cidr | ansible.utils.nthhost(-2) }}'

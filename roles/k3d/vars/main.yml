@@ -1,0 +1,29 @@
+cluster_name: k3d
+cluster_domain: test
+provision_username: '{{ ansible_user }}'
+provision_password: '{{ ansible_password }}'
+
+# see https://github.com/k3d-io/k3d/releases
+k3d_version: '5.4.3'
+
+# see https://github.com/databus23/helm-diff/releases
+helm_diff_version: '3.5.0'
+
+# see https://artifacthub.io/packages/helm/bitnami/metallb
+metallb_chart_version: '3.0.9' # app version: 0.12.1
+
+# see https://artifacthub.io/packages/helm/cert-manager/cert-manager
+cert_manager_chart_version: '1.8.2' # app version: 1.8.2
+
+# see https://artifacthub.io/packages/helm/traefik/traefik
+traefik_chart_version: '10.24.0' # app version: 2.8.0
+
+# see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
+kubernetes_dashboard_chart_version: '5.7.0' # app version: 2.6.0
+
+# see https://artifacthub.io/packages/helm/bitnami/external-dns
+external_dns_chart_version: '6.5.6' # app version: 0.12.0
+
+# see https://hub.docker.com/search?q=pdns-auth-
+# see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
+pdns_version: '4.6.2' # app version: 4.6.2

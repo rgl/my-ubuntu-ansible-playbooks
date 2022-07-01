@@ -1,0 +1,97 @@
+# see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
+# see https://github.com/kubernetes/dashboard/blob/master/aio/deploy/helm-chart/kubernetes-dashboard/values.yaml
+
+- name: Add kubernetes-dashboard repository
+  kubernetes.core.helm_repository:
+    name: kubernetes-dashboard
+    repo_url: https://kubernetes.github.io/dashboard
+
+- name: Install kubernetes-dashboard
+  kubernetes.core.helm:
+    name: kube-dashboard
+    chart_ref: kubernetes-dashboard/kubernetes-dashboard
+    chart_version: '{{ kubernetes_dashboard_chart_version }}'
+    release_namespace: kube-dashboard
+    create_namespace: true
+    update_repo_cache: true
+    values:
+      ingress:
+        enabled: true
+        hosts:
+          - kubernetes-dashboard.{{ cluster_name }}.{{ cluster_domain }}
+        tls:
+          - secretName: kubernetes-dashboard-tls
+      service:
+        externalPort: 80
+      protocolHttp: true
+      extraArgs:
+        - --enable-insecure-login
+
+- name: Create Kubernetes Dashboard Certificate
+  kubernetes.core.k8s:
+    namespace: kube-dashboard
+    definition:
+      # see https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.Certificate
+      apiVersion: cert-manager.io/v1
+      kind: Certificate
+      metadata:
+        name: kubernetes-dashboard
+      spec:
+        subject:
+          organizations:
+            - '{{ cluster_name }}.{{ cluster_domain }}'
+          organizationalUnits:
+            - Kubernetes
+        commonName: Kubernetes Dashboard
+        dnsNames:
+          - kubernetes-dashboard.{{ cluster_name }}.{{ cluster_domain }}
+        duration: 1h # NB this is so low for testing purposes.
+        privateKey:
+          algorithm: ECDSA # NB Ed25519 is not yet supported by chrome 93 or firefox 91.
+          size: 256
+        secretName: kubernetes-dashboard-tls
+        issuerRef:
+          kind: ClusterIssuer
+          name: ingress
+
+# create the admin user for use in the kubernetes-dashboard.
+# see https://github.com/kubernetes/dashboard/wiki/Creating-sample-user
+# see https://github.com/kubernetes/dashboard/wiki/Access-control
+- name: Create the admin user ServiceAccount
+  kubernetes.core.k8s:
+    namespace: kube-dashboard
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: admin
+
+# see https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets
+- name: Create the admin user Secret
+  kubernetes.core.k8s:
+    namespace: kube-dashboard
+    definition:
+      apiVersion: v1
+      kind: Secret
+      type: kubernetes.io/service-account-token
+      metadata:
+        name: admin
+        annotations:
+          kubernetes.io/service-account.name: admin
+
+- name: Bind the admin user to the cluster-admin role
+  kubernetes.core.k8s:
+    namespace: kube-dashboard
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: admin
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: admin
+          namespace: kube-dashboard

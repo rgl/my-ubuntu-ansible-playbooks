@@ -1,0 +1,6 @@
+- name: Install dependencies
+  apt:
+    name:
+      - python3-kubernetes
+      - python3-docker
+      - libnss3-tools

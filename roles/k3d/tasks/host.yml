@@ -1,0 +1,35 @@
+- name: Trust the Kubernetes Ingress CA
+  block:
+    - name: Get Kubernetes Ingress CA
+      kubernetes.core.k8s_info:
+        namespace: cert-manager
+        api_version: v1
+        kind: Secret
+        name: ingress-tls
+      register: ingress_tls
+    - name: Save Kubernetes Ingress CA Certificate to ~/.kube/{{ cluster_name }}-ingress-ca-crt.pem
+      # see openssl x509 -text -noout -in ~/.kube/talos-ca-crt.pem
+      copy:
+        mode: 0444
+        dest: ~/.kube/{{ cluster_name }}-ingress-ca-crt.pem
+        content: '{{ ingress_tls.resources[0].data["tls.crt"] | b64decode }}'
+    - name: Trust the Kubernetes Ingress CA
+      nssdb_certificate:
+        name: '{{ cluster_name }} Kubernetes Ingress CA'
+        remote_src: ~/.kube/{{ cluster_name }}-ingress-ca-crt.pem
+        trust: C,,
+
+- name: Save the admin user token to ~/.kube/{{ cluster_name }}-admin-token.txt
+  block:
+    - name: Get the admin user Secret
+      kubernetes.core.k8s_info:
+        namespace: kube-dashboard
+        api_version: v1
+        kind: Secret
+        name: admin
+      register: admin_token
+    - name: Save the admin user token to ~/.kube/{{ cluster_name }}-admin-token.txt
+      copy:
+        mode: 0400
+        dest: ~/.kube/{{ cluster_name }}-admin-token.txt
+        content: '{{ admin_token.resources[0].data.token | b64decode }}'
