@@ -1,5 +1,7 @@
 # About
 
+[![Build status](https://github.com/rgl/my-ubuntu-ansible-playbooks/workflows/build/badge.svg)](https://github.com/rgl/my-ubuntu-ansible-playbooks/actions?query=workflow%3Abuild)
+
 This is My Ubuntu Ansible Playbooks Playground.
 
 This targets Ubuntu 22.04 (Jammy Jellyfish).

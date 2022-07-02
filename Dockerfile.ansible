@@ -16,7 +16,8 @@ apt-get install -y --no-install-recommends \
     python3-yaml \
     pylint \
     openssh-client \
-    sshpass
+    sshpass \
+    git
 rm -rf /var/lib/apt/lists/*
 install -d /etc/bash_completion.d
 activate-global-python-argcomplete3
