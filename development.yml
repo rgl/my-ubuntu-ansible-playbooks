@@ -26,6 +26,6 @@
     - syft
     - grype
     - kind
-    #- k3d   # TODO understand why we cannot access a metallb LoadBalancer IP from the host.
-    #- talos # TODO understand why we cannot access a metallb LoadBalancer IP from the host.
+    # - k3d   # TODO understand why we cannot access a metallb LoadBalancer IP from the host.
+    # - talos # TODO understand why we cannot access a metallb LoadBalancer IP from the host.
     - desktop
