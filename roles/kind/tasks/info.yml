@@ -7,3 +7,13 @@
     - name: Show Helm Releases
       debug:
         var: helm_releases.stdout
+
+- name: Show Kubernetes Ingresses
+  block:
+    - name: Get Kubernetes Ingresses
+      shell: kubectl get -A ingress
+      register: kubernetes_ingresses
+      changed_when: false
+    - name: Show Kubernetes Ingresses
+      debug:
+        var: kubernetes_ingresses.stdout
