@@ -27,3 +27,6 @@ external_dns_chart_version: '6.5.6' # app version: 0.12.0
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
 pdns_version: '4.6.2' # app version: 4.6.2
+
+# see https://artifacthub.io/packages/helm/yugabyte/yugabyte
+yugabytedb_chart_version: '2.12.7' # app version: 2.12.7.0-b27
