@@ -1,0 +1,9 @@
+- name: Show Helm Releases
+  block:
+    - name: Get Helm Releases
+      shell: helm ls -A
+      register: helm_releases
+      changed_when: false
+    - name: Show Helm Releases
+      debug:
+        var: helm_releases.stdout
