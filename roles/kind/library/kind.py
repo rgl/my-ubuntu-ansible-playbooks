@@ -13,7 +13,7 @@ options:
       - Name of the cluster.
     type: str
 notes:
-  - You can manually destroy the custer as: docker rm -f kind-control-plane; docker network rm kind.
+  - You can manually destroy the custer as: kind delete cluster --name=kind; docker network rm kind.
   - When there is an error creating/starting the cluster, there is no attempt to recover/destroy it.
   - This modifies your ~/.kube/config file.
   - This requires the kind binary installed in the target host.
