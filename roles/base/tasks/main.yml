@@ -119,3 +119,4 @@
     - name: Install lm-sensors
       apt:
         name: lm-sensors
+  when: ansible_virtualization_role == 'host'
