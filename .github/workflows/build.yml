@@ -10,4 +10,4 @@ jobs:
       - name: Build the ansible execution environment
         run: ./ansible-lint.sh --version
       - name: Lint the development.yml playbook
-        run: ./ansible-lint.sh development.yml
+        run: ./ansible-lint.sh --offline --parseable development.yml
