@@ -1,6 +1,6 @@
 - name: Update cache
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 10800 # 3h
   changed_when: false
 

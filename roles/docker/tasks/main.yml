@@ -58,7 +58,7 @@
   ansible.builtin.user:
     name: "{{ item }}"
     groups: docker
-    append: yes
+    append: true
   loop:
     - '{{ ansible_user }}'
 

@@ -4,7 +4,7 @@
     path: /etc/default/motd-news
     regexp: '^#?\s*(ENABLED)=.*$'
     line: '\1=0'
-    backrefs: yes
+    backrefs: true
 
 - name: Add support for the pt_PT locale
   community.general.locale_gen:
@@ -47,7 +47,7 @@
     - name: Install vim
       ansible.builtin.apt:
         name: vim
-        install_recommends: no
+        install_recommends: false
     - name: Install vimrc
       ansible.builtin.copy:
         src: vimrc.local
@@ -58,7 +58,7 @@
     - name: Install git
       ansible.builtin.apt:
         name: git
-        install_recommends: no
+        install_recommends: false
     - name: Install gitconfig
       ansible.builtin.copy:
         src: gitconfig
@@ -99,7 +99,7 @@
       # magic packet to its ethernet card.
       # e.g. etherwake -i eth1 00:e0:4c:01:93:a8
       - etherwake
-    install_recommends: no
+    install_recommends: false
 
 - name: Install lm-sensors
   block:

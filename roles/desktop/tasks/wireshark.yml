@@ -10,11 +10,11 @@
     - name: Install Wireshark
       ansible.builtin.apt:
         name: wireshark
-        install_recommends: no
+        install_recommends: false
     - name: Allow user to capture packets
       ansible.builtin.user:
         name: "{{ item }}"
         groups: wireshark
-        append: yes
+        append: true
       loop:
         - '{{ ansible_user }}'

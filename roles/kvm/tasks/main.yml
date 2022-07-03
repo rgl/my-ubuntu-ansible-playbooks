@@ -16,7 +16,7 @@
     path: /etc/libvirt/qemu.conf
     regexp: '^#?(security_driver)\s*=.*$'
     line: '\1 = "none"'
-    backrefs: yes
+    backrefs: true
   notify:
     - restart libvirtd
 
@@ -28,7 +28,7 @@
   ansible.builtin.user:
     name: "{{ item }}"
     groups: kvm
-    append: yes
+    append: true
   loop:
     - '{{ ansible_user }}'
 
@@ -37,6 +37,6 @@
   ansible.builtin.user:
     name: "{{ item }}"
     groups: libvirt
-    append: yes
+    append: true
   loop:
     - '{{ ansible_user }}'

@@ -2,5 +2,5 @@
   ansible.builtin.systemd:
     name: libvirtd
     state: restarted
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true

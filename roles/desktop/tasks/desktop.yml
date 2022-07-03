@@ -38,7 +38,7 @@
       ansible.builtin.user:
         name: xrdp
         groups: ssl-cert
-        append: yes
+        append: true
     - name: Do not allow root login
       community.general.ini_file:
         path: /etc/xrdp/sesman.ini

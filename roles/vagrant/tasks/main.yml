@@ -44,14 +44,14 @@
   ansible.builtin.file:
     src: /etc/ssl/certs/ca-certificates.crt
     dest: /opt/vagrant/embedded/cacert.pem
-    force: yes
+    force: true
     state: link
 
 - name: Install vagrant bash completion
   ansible.builtin.file:
     src: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}/contrib/bash/completion.sh
     dest: /etc/bash_completion.d/vagrant
-    force: yes
+    force: true
     state: link
 
 - name: Add support for NFS shared folders
@@ -105,7 +105,7 @@
       ansible.builtin.user:
         name: "{{ item }}"
         groups: sambashare
-        append: yes
+        append: true
       loop:
         - '{{ provision_username }}'
 
