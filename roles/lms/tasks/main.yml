@@ -1,3 +1,3 @@
 - name: Install lms
-  apt:
+  ansible.builtin.apt:
     deb: https://github.com/rgl/lms-binaries/releases/download/{{ (lms_version | split("/"))[0] }}/lms-{{ (lms_version | split("/"))[1] }}-ubuntu-{{ ansible_distribution_version }}.deb

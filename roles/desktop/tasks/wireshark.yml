@@ -2,17 +2,17 @@
   block:
     # see debconf-get-selections | grep -E '^wireshark-common\s+' | sort
     - name: Preconfigure Wireshark to allow non-superusers to capture packets
-      debconf:
+      ansible.builtin.debconf:
         name: wireshark-common
         question: wireshark-common/install-setuid
         value: true
         vtype: boolean
     - name: Install Wireshark
-      apt:
+      ansible.builtin.apt:
         name: wireshark
         install_recommends: no
     - name: Allow user to capture packets
-      user:
+      ansible.builtin.user:
         name: "{{ item }}"
         groups: wireshark
         append: yes

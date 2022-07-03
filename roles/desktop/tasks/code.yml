@@ -1,12 +1,12 @@
 # see https://code.visualstudio.com/docs/setup/linux
 
 - name: Add the Visual Studio Code repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb https://packages.microsoft.com/repos/code stable main
     state: present
 
 - name: Install Visual Studio Code
-  apt:
+  ansible.builtin.apt:
     name: code
 
 - name: Configure Visual Studio Code
@@ -15,7 +15,7 @@
     - name: Read Settings
       args:
         executable: /bin/bash
-      shell: |
+      ansible.builtin.shell: |
         f=~/.config/Code/User/settings.json
         ([ -f "$f" ] && cat "$f" || echo '{}') | yq \
           --output-format json \
@@ -29,7 +29,7 @@
       register: settings
       changed_when: false
     - name: Write Settings
-      copy:
+      ansible.builtin.copy:
         dest: ~/.config/Code/User/settings.json
         content: '{{ settings.stdout }}'
 
@@ -37,7 +37,7 @@
   become_user: '{{ ansible_user }}'
   args:
     executable: /bin/bash
-  shell: "{{ lookup('file', 'install-code-plugin.sh') }}"
+  ansible.builtin.shell: "{{ lookup('file', 'install-code-plugin.sh') }}"
   environment:
     CODE_PLUGIN_NAME: "{{ item }}"
   register: result
@@ -56,7 +56,7 @@
   become_user: '{{ ansible_user }}'
   args:
     executable: /bin/bash
-  shell: |
+  ansible.builtin.shell: |
     set -euo pipefail
     expected='code.desktop'
     actual="$(xdg-mime query default text/plain)"

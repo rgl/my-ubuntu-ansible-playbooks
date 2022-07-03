@@ -7,14 +7,14 @@
 - name: Install Policies
   block:
     - name: Create policies directory
-      file:
+      ansible.builtin.file:
         name: /etc/firefox/policies
         state: directory
     - name: Install Policies
-      copy:
+      ansible.builtin.copy:
         src: firefox/policies.json
         dest: /etc/firefox/policies/policies.json
 
 - name: Install Firefox
-  apt:
+  ansible.builtin.apt:
     name: firefox

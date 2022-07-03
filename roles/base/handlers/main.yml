@@ -1,4 +1,4 @@
 - name: restart cron
-  systemd:
+  ansible.builtin.systemd:
     name: cron
     state: restarted

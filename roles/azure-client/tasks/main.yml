@@ -1,18 +1,18 @@
 - name: Ensure apt-get can use https repositories
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg
     state: present
 
 - name: Add the microsoft apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://packages.microsoft.com/keys/microsoft.asc
     state: present
 
 # see https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
 - name: Add the azure-cli repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main
     state: present
 
@@ -21,11 +21,11 @@
 - name: Install azure-cli
   block:
     - name: Install azure-cli
-      apt:
+      ansible.builtin.apt:
         name: azure-cli={{ azure_cli_version }}-*
         allow_change_held_packages: true
         state: present
     - name: Pin azure-cli
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: azure-cli
         selection: hold

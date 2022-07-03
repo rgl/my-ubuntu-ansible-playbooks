@@ -1,7 +1,7 @@
 - name: Install k9s
   args:
     executable: /bin/bash
-  shell: |
+  ansible.builtin.shell: |
     set -euo pipefail
 
     # see https://github.com/derailed/k9s/releases

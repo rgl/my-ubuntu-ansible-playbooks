@@ -1,5 +1,5 @@
 - name: restart libvirtd
-  systemd:
+  ansible.builtin.systemd:
     name: libvirtd
     state: restarted
     enabled: yes

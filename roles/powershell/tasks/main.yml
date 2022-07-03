@@ -7,13 +7,13 @@
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
 
 - name: Install Microsoft APT repository
-  apt:
+  ansible.builtin.apt:
     deb: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb
   register: repository
 
 - name: Update APT cache
   when: repository.changed
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
 
 # see https://github.com/PowerShell/PowerShell/releases
@@ -21,10 +21,10 @@
 - name: Install PowerShell
   block:
     - name: Install powershell
-      apt:
+      ansible.builtin.apt:
         name: powershell={{ powershell_version }}-*
         allow_change_held_packages: true
     - name: Pin powershell
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: powershell
         selection: hold

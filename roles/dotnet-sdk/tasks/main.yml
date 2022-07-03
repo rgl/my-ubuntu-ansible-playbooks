@@ -5,23 +5,23 @@
     dest: /etc/profile.d/opt-out-dotnet-cli-telemetry.sh
 
 - name: Install Microsoft APT repository
-  apt:
+  ansible.builtin.apt:
     deb: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb
   register: repository
 
 - name: Update APT cache
   when: repository.changed
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
 
 - name: Install dotnet-sdk
   block:
     - name: Install dotnet-sdk
-      apt:
+      ansible.builtin.apt:
         name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}={{ dotnet_sdk_version }}-1 # e.g. dotnet-sdk-6.0=6.0.202-1
         allow_change_held_packages: true
         state: present
     - name: Pin dotnet-sdk
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}
         selection: hold

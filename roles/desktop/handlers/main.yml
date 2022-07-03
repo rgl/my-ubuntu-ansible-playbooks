@@ -1,8 +1,8 @@
 - name: reboot
-  reboot:
+  ansible.builtin.reboot:
 
 - name: restart xrdp
-  systemd:
+  ansible.builtin.systemd:
     name: '{{ item }}'
     state: restarted
   loop:

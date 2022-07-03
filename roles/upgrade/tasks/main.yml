@@ -1,23 +1,23 @@
 - name: Update cache
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: 10800 # 3h
   changed_when: false
 
 - name: Upgrade the system
-  apt:
+  ansible.builtin.apt:
     upgrade: dist
 
 - name: Check reboot required
-  stat:
+  ansible.builtin.stat:
     path: /var/run/reboot-required
   register: reboot_required
 
 - name: Reboot when required
-  reboot:
+  ansible.builtin.reboot:
   when: reboot_required.stat.exists
 
 - name: Remove unneeded packages
-  apt:
+  ansible.builtin.apt:
     autoremove: true
     autoclean: true

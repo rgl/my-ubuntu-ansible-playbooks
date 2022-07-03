@@ -1,16 +1,16 @@
 - name: Ensure apt-get can use https repositories
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg
 
 - name: Add the hashicorp apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
 
 # see https://www.packer.io/downloads
 - name: Add the hashicorp repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
 
 # see https://www.packer.io/downloads
@@ -19,10 +19,10 @@
 - name: Install packer
   block:
     - name: Install packer
-      apt:
+      ansible.builtin.apt:
         name: packer={{ packer_version }}
         allow_change_held_packages: true
     - name: Pin packer
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: packer
         selection: hold

@@ -1,18 +1,18 @@
 - name: Ensure apt-get can use https repositories
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg
     state: present
 
 - name: Add the docker apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
 # see https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
 - name: Add the docker repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     state: present
 
@@ -21,14 +21,14 @@
 - name: Install docker
   block:
     - name: Install docker
-      apt:
+      ansible.builtin.apt:
         name:
           - docker-ce=5:{{ docker_version }}~*
           - docker-ce-cli=5:{{ docker_version }}~*
         allow_change_held_packages: true
         state: present
     - name: Pin docker
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: '{{ item }}'
         selection: hold
       loop:
@@ -36,26 +36,26 @@
         - docker-ce-cli
 
 - name: Install daemon.json
-  copy:
+  ansible.builtin.copy:
     src: daemon.json
     dest: /etc/docker/daemon.json
   notify:
     - restart docker
 
 - name: Install docker.service.d directory
-  file:
+  ansible.builtin.file:
     name: /etc/systemd/system/docker.service.d
     state: directory
 
 - name: Install daemon service override
-  copy:
+  ansible.builtin.copy:
     src: override.conf
     dest: /etc/systemd/system/docker.service.d/override.conf
   notify:
     - restart docker
 
 - name: Allow user to use docker
-  user:
+  ansible.builtin.user:
     name: "{{ item }}"
     groups: docker
     append: yes
@@ -65,7 +65,7 @@
 - name: Install docker-compose
   args:
     executable: /bin/bash
-  shell: |
+  ansible.builtin.shell: |
     set -euo pipefail
 
     # see https://github.com/docker/compose/releases

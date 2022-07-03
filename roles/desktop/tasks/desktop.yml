@@ -1,5 +1,5 @@
 - name: Install minimal desktop
-  apt:
+  ansible.builtin.apt:
     name: ubuntu-desktop-minimal
     install_recommends: true
   notify: reboot
@@ -32,10 +32,10 @@
 #       ~/.xsession-errors
 - name: Install xrdp
   block:
-    - apt:
+    - ansible.builtin.apt:
         name: xrdp
     - name: Allow the xrdp user to read the machine ssl certificate keys
-      user:
+      ansible.builtin.user:
         name: xrdp
         groups: ssl-cert
         append: yes
@@ -52,12 +52,12 @@
       # see xRDP How to Fix the Infamous system crash popups at http://c-nergy.be/blog/?p=12043
       # see xRDP Easy install xRDP on Ubuntu at https://c-nergy.be/blog/?p=15733
       # see xRDP installer script at https://c-nergy.be/products.html
-      copy:
+      ansible.builtin.copy:
         src: 45-colord.pkla
         dest: /etc/polkit-1/localauthority/50-local.d/45-colord.pkla
     - name: Configure Session Variables
       # see Fixing Theme and Extensions at http://c-nergy.be/blog/?p=12043
-      copy:
+      ansible.builtin.copy:
         dest: /etc/X11/Xsession.d/00xrdp
         content: |
           if [ -z "$XRDP_SESSION" ]; then
@@ -70,16 +70,16 @@
 
 - name: Disable Gnome Initial Setup
   # see https://gitlab.gnome.org/GNOME/gnome-initial-setup
-  apt:
+  ansible.builtin.apt:
     name: gnome-initial-setup
     state: absent
 
 - name: Install community.general.dconf module dependencies
-  apt:
+  ansible.builtin.apt:
     name: python3-psutil
 
 - name: Install gnome-shell-extension-manager
-  apt:
+  ansible.builtin.apt:
     name: gnome-shell-extension-manager
 
 # NB you can get the current value with:

@@ -1,4 +1,4 @@
 - name: Install virt-manager
-  apt:
+  ansible.builtin.apt:
     name: virt-manager
   when: "'kvm' in ansible_virtualization_tech_host"

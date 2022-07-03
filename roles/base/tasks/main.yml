@@ -1,6 +1,6 @@
 - name: Disable motd-news
   # NB this is sourced from /etc/update-motd.d/50-motd-news
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/motd-news
     regexp: '^#?\s*(ENABLED)=.*$'
     line: '\1=0'
@@ -14,7 +14,7 @@
 - name: Set the system locale
   args:
     executable: /bin/bash
-  shell: |
+  ansible.builtin.shell: |
     set -euo pipefail
     before="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
     localectl set-locale \
@@ -45,41 +45,41 @@
 - name: Install vim
   block:
     - name: Install vim
-      apt:
+      ansible.builtin.apt:
         name: vim
         install_recommends: no
     - name: Install vimrc
-      copy:
+      ansible.builtin.copy:
         src: vimrc.local
         dest: /etc/vim/vimrc.local
 
 - name: Install git
   block:
     - name: Install git
-      apt:
+      ansible.builtin.apt:
         name: git
         install_recommends: no
     - name: Install gitconfig
-      copy:
+      ansible.builtin.copy:
         src: gitconfig
         dest: /etc/gitconfig
     - name: Create gitconfig.d directory
-      file:
+      ansible.builtin.file:
         name: /etc/gitconfig.d
         state: directory
 
 - name: Install login profile
-  copy:
+  ansible.builtin.copy:
     src: login.sh
     dest: /etc/profile.d/login.sh
 
 - name: Install libreadline inputrc
-  copy:
+  ansible.builtin.copy:
     src: inputrc
     dest: /etc/inputrc
 
 - name: Install useful tools
-  apt:
+  ansible.builtin.apt:
     name:
       - tcpdump
       - unzip
@@ -104,13 +104,13 @@
 - name: Install lm-sensors
   block:
     - name: Load the drivetemp kernel module on boot
-      copy:
+      ansible.builtin.copy:
         dest: /etc/modules-load.d/drivetemp.conf
         content: drivetemp
     - name: Load the drivetemp kernel module
       community.general.modprobe:
         name: drivetemp
     - name: Install lm-sensors
-      apt:
+      ansible.builtin.apt:
         name: lm-sensors
   when: ansible_virtualization_role == 'host'

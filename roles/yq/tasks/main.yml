@@ -1,7 +1,7 @@
 - name: Install yq
   args:
     executable: /bin/bash
-  shell: "{{ lookup('file', 'install-yq.sh') }}"
+  ansible.builtin.shell: "{{ lookup('file', 'install-yq.sh') }}"
   environment:
     YQ_VERSION: "{{ yq_version }}"
   register: result

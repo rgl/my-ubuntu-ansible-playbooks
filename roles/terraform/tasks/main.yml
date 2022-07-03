@@ -1,16 +1,16 @@
 - name: Ensure apt-get can use https repositories
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg
 
 - name: Add the hashicorp apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
 
 # see https://www.terraform.io/downloads
 - name: Add the hashicorp repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
 
 # see https://www.terraform.io/downloads
@@ -19,11 +19,11 @@
 - name: Install terraform
   block:
     - name: Install terraform
-      apt:
+      ansible.builtin.apt:
         name: terraform={{ terraform_version }}
         allow_change_held_packages: true
     - name: Pin terraform
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: terraform
         selection: hold
 
@@ -31,11 +31,11 @@
 - name: Install terraform inventory
   block:
     - name: Create the /etc/ansible directory
-      file:
+      ansible.builtin.file:
         name: /etc/ansible
         state: directory
     - name: Check terraform inventory version
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/ansible/terraform.py
         line: '# version={{ terraform_inventory_version }}'
         create: true
@@ -45,7 +45,7 @@
     - name: Install terraform inventory
       block:
         - name: Install terraform inventory
-          get_url:
+          ansible.builtin.get_url:
             url: "https://github.com/nbering/terraform-inventory/releases/download/v{{ terraform_inventory_version }}/terraform.py"
             dest: /etc/ansible/terraform.py
             mode: 0755
@@ -55,7 +55,7 @@
             src: terraform-inventory.patch
             basedir: /etc/ansible
         - name: Add terraform inventory version
-          lineinfile:
+          ansible.builtin.lineinfile:
             path: /etc/ansible/terraform.py
             insertafter: '^#!'
             line: '# version={{ terraform_inventory_version }}'

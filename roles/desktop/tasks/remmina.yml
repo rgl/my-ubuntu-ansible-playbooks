@@ -1,5 +1,5 @@
 - name: Install Remote Desktop Client
-  apt:
+  ansible.builtin.apt:
     name:
       - remmina
       - remmina-plugin-vnc

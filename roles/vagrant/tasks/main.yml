@@ -1,16 +1,16 @@
 - name: Ensure apt-get can use https repositories
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg
 
 - name: Add the hashicorp apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
 
 # see https://www.vagrantup.com/downloads
 - name: Add the hashicorp repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
 
 # pin the hashicorp repository above the distro ones.
@@ -19,7 +19,7 @@
 # see apt-cache showpkg vagrant
 # see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
 - name: Pin the hashicorp apt repository
-  copy:
+  ansible.builtin.copy:
     dest: /etc/apt/preferences.d/apt.releases.hashicorp.com.pref
     content: |
       Package: *
@@ -32,23 +32,23 @@
 - name: Install vagrant
   block:
     - name: Install vagrant
-      apt:
+      ansible.builtin.apt:
         name: vagrant={{ vagrant_version }}
         allow_change_held_packages: true
     - name: Pin vagrant
-      dpkg_selections:
+      ansible.builtin.dpkg_selections:
         name: vagrant
         selection: hold
 
 - name: Use the system ca certificates
-  file:
+  ansible.builtin.file:
     src: /etc/ssl/certs/ca-certificates.crt
     dest: /opt/vagrant/embedded/cacert.pem
     force: yes
     state: link
 
 - name: Install vagrant bash completion
-  file:
+  ansible.builtin.file:
     src: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}/contrib/bash/completion.sh
     dest: /etc/bash_completion.d/vagrant
     force: yes
@@ -57,11 +57,11 @@
 - name: Add support for NFS shared folders
   block:
     - name: Install NFS server
-      apt:
+      ansible.builtin.apt:
         name: nfs-kernel-server
     # see https://www.vagrantup.com/docs/synced-folders/nfs#root-privilege-requirement
     - name: Enable password-less configuration of the NFS server exports
-      copy:
+      ansible.builtin.copy:
         src: vagrant-nfs-synced-folders
         dest: /etc/sudoers.d/vagrant-nfs-synced-folders
 
@@ -74,7 +74,7 @@
         basedir: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}
         strip: 1
     - name: Install Samba
-      apt:
+      ansible.builtin.apt:
         name:
           - samba
           - smbclient
@@ -88,21 +88,21 @@
             value: 'yes'
           notify: reload samba
         - name: Disable the NETBIOS service
-          systemd:
+          ansible.builtin.systemd:
             name: nmbd
             enabled: false
             state: stopped
     - name: Set the provision user password
       args:
         executable: /bin/bash
-      shell: |
+      ansible.builtin.shell: |
         smbpasswd -a -s '{{ provision_username }}' <<'EOF'
         {{ provision_password }}
         {{ provision_password }}
         EOF
       changed_when: false
     - name: Allow user to manage samba shares
-      user:
+      ansible.builtin.user:
         name: "{{ item }}"
         groups: sambashare
         append: yes
@@ -112,7 +112,7 @@
 - name: Install vagrant plugins
   block:
     - name: Install vagrant plugins dependencies
-      apt:
+      ansible.builtin.apt:
         name:
           - build-essential
           - liblzma-dev
@@ -125,7 +125,7 @@
     - name: Install vagrant plugin
       args:
         executable: /bin/bash
-      shell: "{{ lookup('file', 'install-vagrant-plugin.sh') }}"
+      ansible.builtin.shell: "{{ lookup('file', 'install-vagrant-plugin.sh') }}"
       environment:
         VAGRANT_PLUGIN_NAME: "{{ item }}"
         VAGRANT_PLUGIN_VERSION: "{{ lookup('vars', (item | replace('-', '_')) + '_plugin_version') }}"
@@ -141,7 +141,7 @@
     - name: Install the vagrant-libvirt plugin
       block:
         - name: Install the vagrant-libvirt plugin dependencies
-          apt:
+          ansible.builtin.apt:
             name:
               - libvirt-dev
               - gcc
@@ -149,7 +149,7 @@
         - name: Install the vagrant-libvirt plugin
           args:
             executable: /bin/bash
-          shell: "{{ lookup('file', 'install-vagrant-plugin.sh') }}"
+          ansible.builtin.shell: "{{ lookup('file', 'install-vagrant-plugin.sh') }}"
           environment:
             VAGRANT_PLUGIN_NAME: vagrant-libvirt
             VAGRANT_PLUGIN_VERSION: "{{ vagrant_libvirt_plugin_version }}"
@@ -163,7 +163,7 @@
     - name: Patch vagrant-scp plugin
       block:
         - name: Find vagrant-scp plugin directories
-          shell: echo ~/.vagrant.d/gems/*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}
+          ansible.builtin.shell: echo ~/.vagrant.d/gems/*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}
           changed_when: false
           register: vagrant_scp_plugin_directories
         - name: Patch vagrant-scp plugin
