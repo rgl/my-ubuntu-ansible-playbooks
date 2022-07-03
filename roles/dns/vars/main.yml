@@ -5,5 +5,5 @@ dns_servers:
   - 1.0.0.1
   # delegate to the Google Public DNS IP addresses.
   # see https://8.8.8.8
-  #- 8.8.8.8
-  #- 8.8.4.4
+  # - 8.8.8.8
+  # - 8.8.4.4
