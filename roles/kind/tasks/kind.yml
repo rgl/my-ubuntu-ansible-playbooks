@@ -10,7 +10,7 @@
 - name: Install kind bash completion
   block:
     - name: Get kind bash completion
-      ansible.builtin.shell: kind completion bash
+      ansible.builtin.command: kind completion bash
       register: bash_completion
       changed_when: false
     - name: Install kind bash completion

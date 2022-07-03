@@ -10,7 +10,7 @@
 - name: Install cue bash completion
   block:
     - name: Get cue bash completion
-      ansible.builtin.shell: cue completion bash
+      ansible.builtin.command: cue completion bash
       register: bash_completion
       changed_when: false
     - name: Install cue bash completion

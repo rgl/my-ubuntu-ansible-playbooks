@@ -13,7 +13,7 @@
 - name: Install skopeo bash completion
   block:
     - name: Get skopeo bash completion
-      ansible.builtin.shell: skopeo completion bash
+      ansible.builtin.command: skopeo completion bash
       register: bash_completion
       changed_when: false
     - name: Install skopeo bash completion

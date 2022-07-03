@@ -10,7 +10,7 @@
 - name: Install dagger bash completion
   block:
     - name: Get dagger bash completion
-      ansible.builtin.shell: dagger completion bash
+      ansible.builtin.command: dagger completion bash
       register: bash_completion
       changed_when: false
     - name: Install dagger bash completion

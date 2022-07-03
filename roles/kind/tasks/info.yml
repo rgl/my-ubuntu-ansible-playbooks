@@ -1,7 +1,7 @@
 - name: Show Helm Releases
   block:
     - name: Get Helm Releases
-      ansible.builtin.shell: helm ls -A
+      ansible.builtin.command: helm ls -A
       register: helm_releases
       changed_when: false
     - name: Show Helm Releases
@@ -11,7 +11,7 @@
 - name: Show Kubernetes Ingresses
   block:
     - name: Get Kubernetes Ingresses
-      ansible.builtin.shell: kubectl get -A ingress
+      ansible.builtin.command: kubectl get -A ingress
       register: kubernetes_ingresses
       changed_when: false
     - name: Show Kubernetes Ingresses

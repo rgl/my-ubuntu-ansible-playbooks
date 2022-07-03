@@ -29,7 +29,7 @@
 - name: Install helm bash completion
   block:
     - name: Get helm bash completion
-      ansible.builtin.shell: helm completion bash
+      ansible.builtin.command: helm completion bash
       register: bash_completion
       changed_when: false
     - name: Install helm bash completion
