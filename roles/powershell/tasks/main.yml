@@ -13,7 +13,7 @@
   register: repository
 
 - name: Update APT cache
-  when: repository.changed
+  when: repository.changed # noqa no-handler
   ansible.builtin.apt:
     update_cache: true
 
