@@ -13,3 +13,4 @@
     content: |
       export PATH="$PATH:/opt/go/bin"
       export PATH="$PATH:$HOME/go/bin"
+    mode: 0444

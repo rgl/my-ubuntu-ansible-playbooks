@@ -30,3 +30,4 @@
       ansible.builtin.copy:
         content: "{{ bash_completion.stdout }}"
         dest: /usr/share/bash-completion/completions/kubectl
+        mode: 0444

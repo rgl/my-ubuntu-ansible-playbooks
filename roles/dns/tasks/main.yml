@@ -15,6 +15,7 @@
       ansible.builtin.template:
         src: dnsmasq.conf.j2
         dest: /etc/dnsmasq.d/local.conf
+        mode: 0444
       register: configure
     - name: Restart dnsmasq
       when: configure.changed
@@ -26,3 +27,4 @@
         content: |
           nameserver 127.0.0.1
         dest: /etc/resolv.conf
+        mode: 0444

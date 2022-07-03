@@ -9,3 +9,4 @@
       ansible.builtin.copy:
         src: meld.gitconfig
         dest: /etc/gitconfig.d/meld.gitconfig
+        mode: 0444

@@ -32,6 +32,7 @@
       ansible.builtin.copy:
         dest: ~/.config/Code/User/settings.json
         content: '{{ settings.stdout }}'
+        mode: 0644
 
 - name: Install code plugin
   become_user: '{{ ansible_user }}'

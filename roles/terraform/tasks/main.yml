@@ -34,11 +34,13 @@
       ansible.builtin.file:
         name: /etc/ansible
         state: directory
+        mode: 0755
     - name: Check terraform inventory version
       ansible.builtin.lineinfile:
         path: /etc/ansible/terraform.py
         line: '# version={{ terraform_inventory_version }}'
         create: true
+        mode: 0555
       diff: false
       check_mode: true
       register: check
@@ -59,4 +61,5 @@
             path: /etc/ansible/terraform.py
             insertafter: '^#!'
             line: '# version={{ terraform_inventory_version }}'
+            mode: 0555
       when: check.changed

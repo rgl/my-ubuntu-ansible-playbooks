@@ -5,6 +5,7 @@
     content: |
       export POWERSHELL_TELEMETRY_OPTOUT=1
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
+    mode: 0444
 
 - name: Install Microsoft APT repository
   ansible.builtin.apt:

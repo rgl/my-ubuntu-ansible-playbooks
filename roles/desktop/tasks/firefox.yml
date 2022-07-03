@@ -10,10 +10,12 @@
       ansible.builtin.file:
         name: /etc/firefox/policies
         state: directory
+        mode: 0755
     - name: Install Policies
       ansible.builtin.copy:
         src: firefox/policies.json
         dest: /etc/firefox/policies/policies.json
+        mode: 0444
 
 - name: Install Firefox
   ansible.builtin.apt:

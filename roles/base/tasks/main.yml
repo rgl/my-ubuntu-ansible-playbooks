@@ -52,6 +52,7 @@
       ansible.builtin.copy:
         src: vimrc.local
         dest: /etc/vim/vimrc.local
+        mode: 0444
 
 - name: Install git
   block:
@@ -63,20 +64,24 @@
       ansible.builtin.copy:
         src: gitconfig
         dest: /etc/gitconfig
+        mode: 0444
     - name: Create gitconfig.d directory
       ansible.builtin.file:
         name: /etc/gitconfig.d
         state: directory
+        mode: 0755
 
 - name: Install login profile
   ansible.builtin.copy:
     src: login.sh
     dest: /etc/profile.d/login.sh
+    mode: 0444
 
 - name: Install libreadline inputrc
   ansible.builtin.copy:
     src: inputrc
     dest: /etc/inputrc
+    mode: 0444
 
 - name: Install useful tools
   ansible.builtin.apt:
@@ -107,6 +112,7 @@
       ansible.builtin.copy:
         dest: /etc/modules-load.d/drivetemp.conf
         content: drivetemp
+        mode: 0444
     - name: Load the drivetemp kernel module
       community.general.modprobe:
         name: drivetemp

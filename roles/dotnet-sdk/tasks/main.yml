@@ -3,6 +3,7 @@
     content: |
       export DOTNET_CLI_TELEMETRY_OPTOUT=1
     dest: /etc/profile.d/opt-out-dotnet-cli-telemetry.sh
+    mode: 0444
 
 - name: Install Microsoft APT repository
   ansible.builtin.apt:
