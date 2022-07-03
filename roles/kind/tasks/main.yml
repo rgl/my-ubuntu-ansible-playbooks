@@ -1,7 +1,8 @@
 # install kubernetes.
 - include_tasks: kind.yml
 - include_tasks: dependencies.yml
-- block:
+- name: Install Kubernetes
+  block:
     - include_tasks: helm-diff.yml
     - include_tasks: cluster.yml
     - include_tasks: metallb.yml
@@ -15,7 +16,8 @@
 - include_tasks: dns.yml
 
 # install applications.
-- block:
+- name: Install Applications
+  block:
     - include_tasks: yugabytedb.yml
     - include_tasks: info.yml
   become: true

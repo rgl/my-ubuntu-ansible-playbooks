@@ -32,7 +32,8 @@
 #       ~/.xsession-errors
 - name: Install xrdp
   block:
-    - ansible.builtin.apt:
+    - name: Install xrdp
+      ansible.builtin.apt:
         name: xrdp
     - name: Allow the xrdp user to read the machine ssl certificate keys
       ansible.builtin.user:
