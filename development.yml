@@ -16,6 +16,7 @@
     - talosctl
     - k8s-client
     - azure-client
+    - vmware-client
     - packer
     - terraform
     - vagrant

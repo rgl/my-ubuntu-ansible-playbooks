@@ -1,0 +1,9 @@
+# see https://github.com/vmware/govmomi/releases
+govc_version: '0.28.0'
+
+# see https://github.com/rgl/ovftool-binaries
+ovftool_version: '4.4.3-18663434'
+
+# see https://www.powershellgallery.com/packages/VMware.PowerCLI
+# see https://developer.vmware.com/web/tool/12.6/vmware-powercli
+powercli_version: '12.6.0.19610541'

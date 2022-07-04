@@ -1,0 +1,30 @@
+- name: Install govc
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: |
+    set -euo pipefail
+
+    # see https://github.com/docker/compose/releases
+    govc_version='{{ govc_version }}'
+
+    # bail when already installed.
+    if [ -f /usr/local/bin/govc ]; then
+      actual_version="$(/usr/local/bin/govc version | perl -ne '/^govc (.+)/ && print $1')"
+      if [ "$actual_version" == "$govc_version" ]; then
+        echo 'ANSIBLE CHANGED NO'
+        exit 0
+      fi
+    fi
+
+    # download.
+    govc_url="https://github.com/vmware/govmomi/releases/download/v$govc_version/govc_Linux_x86_64.tar.gz"
+    govc_archive="$(basename "$govc_url")"
+    cd /tmp
+    wget -q "$govc_url"
+
+    # install.
+    tar xf "$govc_archive" govc
+    install -m 755 govc /usr/local/bin
+    rm -f govc "$govc_archive"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"

@@ -1,0 +1,38 @@
+- name: Install powercli
+  args:
+    executable: /bin/pwsh
+  # noqa risky-shell-pipe
+  ansible.builtin.shell: |
+    Set-StrictMode -Version Latest
+    $ProgressPreference = 'SilentlyContinue'
+    $ErrorActionPreference = 'Stop'
+    trap {
+      Write-Output "ERROR: $_"
+      Write-Output (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
+      Write-Output (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
+      Exit 1
+    }
+
+    # see https://www.powershellgallery.com/packages/VMware.PowerCLI
+    # see https://developer.vmware.com/web/tool/12.6/vmware-powercli
+    $powercliVersion = '{{ powercli_version }}'
+
+    # bail when already installed.
+    $module = Get-InstalledModule -ErrorAction SilentlyContinue VMware.PowerCLI
+    if ($module -and $module.Version -eq $powercliVersion) {
+      Write-Output 'ANSIBLE CHANGED NO'
+      Exit 0
+    }
+
+    Write-Output 'Installing the VMware.PowerCLI module...'
+    Install-Module -Force -Scope AllUsers `
+      -Name VMware.PowerCLI `
+      -RequiredVersion $powercliVersion
+
+    Write-Output 'Configuring the VMware.PowerCLI module...'
+    Set-PowerCLIConfiguration -Scope AllUsers `
+      -ParticipateInCEIP $false `
+      -Confirm:$false `
+      | Out-Null
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
