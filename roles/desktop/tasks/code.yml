@@ -12,6 +12,11 @@
 - name: Configure Visual Studio Code
   become_user: '{{ ansible_user }}'
   block:
+    - name: Create the Settings Directory
+      ansible.builtin.file:
+        name: ~/.config/Code/User
+        state: directory
+        mode: 0755
     - name: Read Settings
       args:
         executable: /bin/bash
