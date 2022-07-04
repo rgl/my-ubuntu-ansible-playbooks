@@ -57,6 +57,11 @@
     - ms-python.python
     - ms-vscode-remote.remote-ssh
     - ms-vscode.powershell
+    # Jinja Template Highlighting.
+    # see https://github.com/samuelcolvin/jinjahtml-vscode
+    # see https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml
+    # NB be aware of https://github.com/microsoft/vscode/issues/49210
+    - samuelcolvin.jinjahtml
 
 - name: Set Visual Studio Code as the text/plain default editor
   become_user: '{{ ansible_user }}'
