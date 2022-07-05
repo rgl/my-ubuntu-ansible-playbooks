@@ -57,6 +57,9 @@
     - ms-python.python
     - ms-vscode-remote.remote-ssh
     - ms-vscode.powershell
+    # Makefile Tools.
+    # see https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools
+    - ms-vscode.makefile-tools
     # Jinja Template Highlighting.
     # see https://github.com/samuelcolvin/jinjahtml-vscode
     # see https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml
