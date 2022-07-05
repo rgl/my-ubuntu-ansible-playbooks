@@ -1,3 +1,9 @@
+# dns server listening address.
+# NB this address will be assigned to the created dns0 bridge.
+# NB this address should be used by the local virtual machines and
+#    containers.
+local_dns_server: 10.53.53.53
+
 dns_servers:
   # delegate to the Cloudflare/APNIC Public DNS IP addresses.
   # see https://1.1.1.1

@@ -1,3 +1,29 @@
+- name: Create the dns0 bridge
+  block:
+    - name: Create the dns0 bridge device
+      ansible.builtin.copy:
+        content: |
+          [NetDev]
+          Name=dns0
+          Kind=bridge
+        dest: /etc/systemd/network/dns0.netdev
+        mode: 0444
+    - name: Assign the dns0 bridge device IP address
+      ansible.builtin.copy:
+        content: |
+          [Match]
+          Name=dns0
+          [Network]
+          Address={{ local_dns_server }}/24
+        dest: /etc/systemd/network/dns0.network
+        mode: 0444
+      register: assign_address
+    - name: Restart systemd-networkd
+      when: assign_address.changed
+      ansible.builtin.systemd:
+        name: systemd-networkd
+        state: restarted
+
 - name: Install dnsmasq
   ansible.builtin.apt:
     name: dnsmasq
@@ -25,6 +51,6 @@
     - name: Configure resolv.conf
       ansible.builtin.copy:
         content: |
-          nameserver 127.0.0.1
+          nameserver {{ local_dns_server }}
         dest: /etc/resolv.conf
         mode: 0444
