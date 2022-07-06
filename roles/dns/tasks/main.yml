@@ -1,3 +1,32 @@
+- name: Configure the system-networkd log level
+  block:
+    - name: Create the systemd-networkd.service.d directory
+      ansible.builtin.file:
+        name: /etc/systemd/system/systemd-networkd.service.d
+        state: directory
+        mode: 0755
+    - name: Set the system-networkd log level
+      ansible.builtin.copy:
+        content: |
+          [Service]
+          Environment=SYSTEMD_LOG_LEVEL={{ system_networkd_log_level }}
+        dest: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
+        mode: 0444
+      when: system_networkd_log_level
+      register: state_set
+    - name: Unset the system-networkd log level
+      ansible.builtin.file:
+        path: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
+        state: absent
+      when: not system_networkd_log_level
+      register: state_unset
+    - name: Restart systemd-networkd
+      ansible.builtin.systemd:
+        name: systemd-networkd
+        state: restarted
+        daemon_reload: true
+      when: state_set.changed or state_unset.changed
+
 - name: Create the dns0 bridge
   block:
     - name: Create the dns0 bridge device

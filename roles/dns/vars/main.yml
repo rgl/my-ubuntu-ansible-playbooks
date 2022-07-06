@@ -13,3 +13,11 @@ dns_servers:
   # see https://8.8.8.8
   # - 8.8.8.8
   # - 8.8.4.4
+
+# system-networkd log level.
+# NB set to debug to troubleshoot.
+# NB set to null to unset the log level.
+# NB to see the status execute: networkctl status dns0 #--json=short
+# see https://wiki.ubuntu.com/DebuggingSystemd
+# see https://wiki.archlinux.org/title/systemd-networkd
+system_networkd_log_level: null
