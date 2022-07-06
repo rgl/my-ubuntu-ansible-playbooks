@@ -15,6 +15,7 @@
           Name=dns0
           [Network]
           Address={{ local_dns_server }}/24
+          ConfigureWithoutCarrier=true
         dest: /etc/systemd/network/dns0.network
         mode: 0444
       register: assign_address
