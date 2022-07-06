@@ -13,6 +13,10 @@ vagrant_reload_plugin_version: '0.0.1'
 # see https://github.com/invernizzi/vagrant-scp
 vagrant_scp_plugin_version: '0.5.9'
 
+# see https://rubygems.org/gems/vagrant-vsphere
+# see https://github.com/nsidc/vagrant-vsphere
+vagrant_vsphere_plugin_version: '1.13.5'
+
 # see https://rubygems.org/gems/vagrant-windows-sysprep
 # see https://github.com/rgl/vagrant-windows-sysprep
 vagrant_windows_sysprep_plugin_version: '0.0.10'

@@ -139,6 +139,7 @@
       loop:
         - vagrant-reload
         - vagrant-scp
+        - vagrant-vsphere
         - vagrant-windows-sysprep
 
     - name: Install the vagrant-libvirt plugin
