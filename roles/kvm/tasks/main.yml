@@ -24,6 +24,10 @@
   ansible.builtin.apt:
     name: virtinst
 
+- name: Install libguestfs-tools
+  ansible.builtin.apt:
+    name: libguestfs-tools
+
 - name: Allow user to use kvm
   ansible.builtin.user:
     name: "{{ item }}"
