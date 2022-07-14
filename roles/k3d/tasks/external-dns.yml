@@ -2,7 +2,7 @@
   block:
     - name: Set the pdns_image fact value
       set_fact:
-        # e.g. powerdns/pdns-auth-46:4.6.2
+        # e.g. powerdns/pdns-auth-46:4.6.3
         pdns_image: powerdns/pdns-auth-{{ ''.join(pdns_version.split('.')[0:2]) }}:{{ pdns_version }}
     - name: Create the kube-external-dns Namespace
       kubernetes.core.k8s:
