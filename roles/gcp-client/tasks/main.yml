@@ -1,0 +1,30 @@
+- name: Ensure apt-get can use https repositories
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - gnupg
+    state: present
+
+- name: Add the gcp apt key
+  ansible.builtin.apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+# see https://cloud.google.com/sdk/docs/install#deb
+- name: Add the gcp repository
+  ansible.builtin.apt_repository:
+    repo: deb https://packages.cloud.google.com/apt cloud-sdk main
+    state: present
+
+# NB execute apt-cache madison google-cloud-cli to known the available versions.
+- name: Install google-cloud-cli
+  block:
+    - name: Install google-cloud-cli
+      ansible.builtin.apt:
+        name: google-cloud-cli={{ gcloud_cli_version }}-*
+        allow_change_held_packages: true
+        state: present
+    - name: Pin google-cloud-cli
+      ansible.builtin.dpkg_selections:
+        name: google-cloud-cli
+        selection: hold
