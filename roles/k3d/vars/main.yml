@@ -4,7 +4,7 @@ provision_username: '{{ ansible_user }}'
 provision_password: '{{ ansible_password }}'
 
 # see https://github.com/k3d-io/k3d/releases
-k3d_version: '5.4.3'
+k3d_version: '5.4.4'
 
 # see https://github.com/databus23/helm-diff/releases
 helm_diff_version: '3.5.0'

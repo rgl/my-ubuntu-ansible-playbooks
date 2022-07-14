@@ -2,7 +2,7 @@ set -euo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/k3d ]; then
-    # e.g. k3d version v5.4.3
+    # e.g. k3d version v5.4.4
     actual_version="$(/usr/local/bin/k3d version | perl -ne '/^k3d version v(.+?)$/ && print $1')"
     if [ "$actual_version" == "$K3D_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
