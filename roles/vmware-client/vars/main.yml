@@ -6,4 +6,4 @@ ovftool_version: '4.4.3-18663434'
 
 # see https://www.powershellgallery.com/packages/VMware.PowerCLI
 # see https://developer.vmware.com/web/tool/12.6/vmware-powercli
-powercli_version: '12.6.0.19610541'
+powercli_version: '12.7.0.20091289'
