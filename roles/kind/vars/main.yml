@@ -30,4 +30,4 @@ external_dns_chart_version: '6.7.0' # app version: 0.12.0
 pdns_version: '4.6.3' # app version: 4.6.3
 
 # see https://artifacthub.io/packages/helm/yugabyte/yugabyte
-yugabytedb_chart_version: '2.12.7' # app version: 2.12.7.0-b27
+yugabytedb_chart_version: '2.15.1' # app version: 2.15.1.0-b175
