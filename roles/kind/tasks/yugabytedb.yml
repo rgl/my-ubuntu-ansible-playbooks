@@ -112,3 +112,55 @@
                         name: http-ui
         tls:
           - secretName: yb-master-ui-tls
+
+- name: Create yb-tserver-ui Ingress Certificate
+  kubernetes.core.k8s:
+    namespace: yugabytedb
+    definition:
+      # see https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.Certificate
+      apiVersion: cert-manager.io/v1
+      kind: Certificate
+      metadata:
+        name: yb-tserver-ui
+      spec:
+        subject:
+          organizations:
+            - '{{ cluster_name }}.{{ cluster_domain }}'
+          organizationalUnits:
+            - Kubernetes
+        commonName: YugabyteDB TServer UI
+        dnsNames:
+          - yb-tserver-ui.{{ cluster_name }}.{{ cluster_domain }}
+        duration: 1h # NB this is so low for testing purposes.
+        privateKey:
+          algorithm: ECDSA # NB Ed25519 is not yet supported by chrome 93 or firefox 91.
+          size: 256
+        secretName: yb-tserver-ui-tls
+        issuerRef:
+          kind: ClusterIssuer
+          name: ingress
+
+- name: Create the yb-tserver-ui Ingress
+  kubernetes.core.k8s:
+    namespace: yugabytedb
+    definition:
+      # see https://kubernetes.io/docs/concepts/services-networking/ingress/
+      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#ingress-v1-networking-k8s-io
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: yb-tserver-ui
+      spec:
+        rules:
+          - host: yb-tserver-ui.{{ cluster_name }}.{{ cluster_domain }}
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: yb-tservers
+                      port:
+                        name: http-ui
+        tls:
+          - secretName: yb-tserver-ui-tls
