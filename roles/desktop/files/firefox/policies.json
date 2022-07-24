@@ -4,6 +4,10 @@
       "uBlock0@raymondhill.net": {
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      },
+      "{76b6ec7e-5411-4d36-9aa5-2bb08e31c27e}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/search-all-tabs/latest.xpi"
       }
     }
   }

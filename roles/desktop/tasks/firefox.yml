@@ -1,6 +1,12 @@
 # NB policies are used to configure and install addons/extensions.
+# NB this installs ublock-origin.
+#    NB the addon id is uBlock0@raymondhill.net
 #    see https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
 #    see https://github.com/gorhill/uBlock
+# NB this installs Search all Tabs.
+#    NB the addon id is {76b6ec7e-5411-4d36-9aa5-2bb08e31c27e}
+#    see https://addons.mozilla.org/en-US/firefox/addon/search-all-tabs/
+#    see https://github.com/lunu-bounir/search-all-tabs
 # see https://github.com/mozilla/policy-templates#policiesjson
 # see about:support
 # see about:profiles
