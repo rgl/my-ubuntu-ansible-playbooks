@@ -15,7 +15,7 @@ vagrant_scp_plugin_version: '0.5.9'
 
 # see https://rubygems.org/gems/vagrant-vsphere
 # see https://github.com/nsidc/vagrant-vsphere
-vagrant_vsphere_plugin_version: '1.13.5'
+vagrant_vsphere_plugin_version: '1.14.0'
 
 # see https://rubygems.org/gems/vagrant-windows-sysprep
 # see https://github.com/rgl/vagrant-windows-sysprep
