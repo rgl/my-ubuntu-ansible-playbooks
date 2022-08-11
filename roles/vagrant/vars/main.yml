@@ -1,5 +1,5 @@
 # see https://github.com/hashicorp/vagrant/tags
-vagrant_version: '2.2.19'
+vagrant_version: '2.3.0'
 
 # see https://rubygems.org/gems/vagrant-libvirt
 # see https://github.com/vagrant-libvirt/vagrant-libvirt
