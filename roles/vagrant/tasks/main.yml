@@ -167,7 +167,7 @@
     - name: Patch vagrant-scp plugin
       block:
         - name: Find vagrant-scp plugin directories
-          ansible.builtin.shell: echo ~/.vagrant.d/gems/*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}
+          ansible.builtin.shell: find ~/.vagrant.d/gems -type d -wholename '*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}'
           changed_when: false
           register: vagrant_scp_plugin_directories
         - name: Patch vagrant-scp plugin
