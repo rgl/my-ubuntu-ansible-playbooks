@@ -3,3 +3,7 @@
 - include_tasks: helm.yml
 - include_tasks: skopeo.yml
 - include_tasks: crane.yml
+- include_tasks: regclient.yml
+  loop:
+    - regctl
+    - regsync

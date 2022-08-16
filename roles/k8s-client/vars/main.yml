@@ -10,3 +10,6 @@ helm_version: '3.9.2'
 
 # see https://github.com/google/go-containerregistry/releases
 crane_version: '0.11.0'
+
+# see https://github.com/regclient/regclient/releases
+regclient_version: '0.4.4'
