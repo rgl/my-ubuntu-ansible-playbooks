@@ -36,10 +36,16 @@
       ansible.builtin.apt:
         name: vagrant={{ vagrant_version }}
         allow_change_held_packages: true
+      register: vagrant
     - name: Pin vagrant
       ansible.builtin.dpkg_selections:
         name: vagrant
         selection: hold
+    # NB after a vagrant upgrade its more reliable to just uninstall all
+    #    the plugins and install them again later.
+    - name: Uninstall all the plugins
+      when: vagrant.changed
+      ansible.builtin.command: vagrant plugin expunge --force
 
 - name: Use the system ca certificates
   ansible.builtin.file:
