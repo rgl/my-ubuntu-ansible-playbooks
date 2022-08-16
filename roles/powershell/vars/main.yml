@@ -1,3 +1,3 @@
 # see apt-cache madison powershell
 # see https://github.com/PowerShell/PowerShell/releases
-powershell_version: '7.2.5'
+powershell_version: '7.2.6'
