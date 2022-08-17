@@ -1,0 +1,15 @@
+- name: Install pulumi
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-pulumi.sh') }}"
+  environment:
+    PULUMI_VERSION: "{{ pulumi_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Add pulumi to PATH
+  ansible.builtin.copy:
+    dest: /etc/profile.d/pulumi.sh
+    content: |
+      export PATH="$PATH:/opt/pulumi"
+    mode: 0444

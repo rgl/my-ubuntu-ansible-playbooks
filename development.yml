@@ -24,6 +24,7 @@
     - go
     - dotnet-sdk
     - nodejs
+    - pulumi
     - cue
     - dagger
     - syft
