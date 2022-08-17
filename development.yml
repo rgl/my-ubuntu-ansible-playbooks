@@ -23,6 +23,7 @@
     - vagrant
     - go
     - dotnet-sdk
+    - nodejs
     - cue
     - dagger
     - syft

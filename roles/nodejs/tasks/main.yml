@@ -1,0 +1,23 @@
+- name: Add the nodesource apt key
+  ansible.builtin.apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: Add the nodesource apt repository
+  ansible.builtin.apt_repository:
+    repo: deb https://deb.nodesource.com/node_{{ nodejs_version.split('.')[0] }}.x {{ ansible_distribution_release }} main
+    state: present
+
+# see https://github.com/nodesource/distributions/blob/master/README.md#debmanual
+# NB execute apt-cache madison nodejs to known the available versions.
+- name: Install nodejs
+  block:
+    - name: Install nodejs
+      ansible.builtin.apt:
+        name: nodejs={{ nodejs_version }}-*
+        allow_change_held_packages: true
+        state: present
+    - name: Pin nodejs
+      ansible.builtin.dpkg_selections:
+        name: nodejs
+        selection: hold
