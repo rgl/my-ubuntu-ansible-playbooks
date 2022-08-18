@@ -1,6 +1,6 @@
 # see https://github.com/kubernetes/kubernetes/releases
 # see https://kubernetes.io/releases/
-kubectl_version: '1.24.3'
+kubectl_version: '1.24.4'
 
 # see https://github.com/derailed/k9s/releases
 k9s_version: '0.26.3'
