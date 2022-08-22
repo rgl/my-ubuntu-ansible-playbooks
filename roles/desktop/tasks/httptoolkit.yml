@@ -1,0 +1,3 @@
+- name: Install httptoolkit
+  ansible.builtin.apt:
+    deb: https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v{{ httptoolkit_version }}/HttpToolkit-{{ httptoolkit_version }}.deb

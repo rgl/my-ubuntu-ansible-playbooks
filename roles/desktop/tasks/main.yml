@@ -4,6 +4,7 @@
 - include_tasks: code.yml
 - include_tasks: meld.yml
 - include_tasks: wireshark.yml
+- include_tasks: httptoolkit.yml
 - include_tasks: virt-manager.yml
 - include_tasks: remmina.yml
 - include_tasks: vlc.yml
