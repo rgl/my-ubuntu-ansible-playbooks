@@ -7,7 +7,7 @@ collections:
     version: 2.6.1
   # see https://galaxy.ansible.com/community/general
   - name: community.general
-    version: 5.4.0
+    version: 5.5.0
   # see https://galaxy.ansible.com/kubernetes/core
   - name: kubernetes.core
     version: 2.3.2
