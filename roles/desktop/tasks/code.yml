@@ -51,6 +51,7 @@
   loop:
     - dotjoshjohnson.xml
     - golang.go
+    - hashicorp.hcl
     - hashicorp.terraform
     - ms-azuretools.vscode-docker
     - ms-dotnettools.csharp
