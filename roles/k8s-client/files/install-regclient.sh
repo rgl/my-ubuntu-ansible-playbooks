@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # see https://github.com/regclient/regclient/releases
-name="$REGCLIENT_NAME"
-version="$REGCLIENT_VERSION"
+name="${REGCLIENT_NAME:-regctl}"
+version="${REGCLIENT_VERSION:-0.4.4}"
 
 # bail when already installed.
 if [ -x "/usr/local/bin/$name" ]; then
