@@ -6,7 +6,7 @@ kubectl_version: '1.24.4'
 k9s_version: '0.26.3'
 
 # see https://github.com/helm/helm/releases
-helm_version: '3.9.3'
+helm_version: '3.9.4'
 
 # see https://github.com/google/go-containerregistry/releases
 crane_version: '0.11.0'
