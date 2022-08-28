@@ -1,0 +1,28 @@
+- name: Install Projects
+  become_user: '{{ ansible_user }}'
+  block:
+    - name: Create the Projects directory
+      ansible.builtin.file:
+        name: ~/Projects
+        state: directory
+        mode: 0755
+    - name: Clone ubuntu-vagrant
+      ansible.builtin.git:
+        repo: https://github.com/rgl/ubuntu-vagrant.git
+        dest: ~/Projects/ubuntu-vagrant
+        version: master
+    - name: Clone windows-vagrant
+      ansible.builtin.git:
+        repo: https://github.com/rgl/windows-vagrant.git
+        dest: ~/Projects/windows-vagrant
+        version: master
+    - name: Clone my-ubuntu-ansible-playbooks
+      ansible.builtin.git:
+        repo: https://github.com/rgl/my-ubuntu-ansible-playbooks.git
+        dest: ~/Projects/my-ubuntu-ansible-playbooks
+        version: main
+    - name: Clone my-ubuntu-windows-playbooks
+      ansible.builtin.git:
+        repo: https://github.com/rgl/my-windows-ansible-playbooks.git
+        dest: ~/Projects/my-windows-ansible-playbooks
+        version: main
