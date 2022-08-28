@@ -95,7 +95,7 @@
             option: disable netbios
             value: 'yes'
             mode: 0444
-          notify: reload samba
+          notify: Reload samba
         - name: Disable the NETBIOS service
           ansible.builtin.systemd:
             name: nmbd

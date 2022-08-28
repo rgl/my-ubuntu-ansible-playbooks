@@ -40,7 +40,7 @@
   community.general.timezone:
     name: "{{ timezone }}"
   notify:
-    - restart cron
+    - Restart cron
 
 - name: Install vim
   block:

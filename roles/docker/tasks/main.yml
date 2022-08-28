@@ -41,7 +41,7 @@
     dest: /etc/docker/daemon.json
     mode: 0444
   notify:
-    - restart docker
+    - Restart docker
 
 - name: Install docker.service.d directory
   ansible.builtin.file:
@@ -55,7 +55,7 @@
     dest: /etc/systemd/system/docker.service.d/override.conf
     mode: 0444
   notify:
-    - restart docker
+    - Restart docker
 
 - name: Allow user to use docker
   ansible.builtin.user:

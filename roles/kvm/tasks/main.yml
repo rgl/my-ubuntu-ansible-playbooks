@@ -18,7 +18,7 @@
     line: '\1 = "none"'
     backrefs: true
   notify:
-    - restart libvirtd
+    - Restart libvirtd
 
 - name: Install virtinst
   ansible.builtin.apt:

@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     name: ubuntu-desktop-minimal
     install_recommends: true
-  notify: reboot
+  notify: Reboot
 
 # use the xorg backend because not all apps (e.g. xrdp) are ready for wayland.
 - name: Use the Xorg backend
@@ -72,7 +72,7 @@
           export XDG_CURRENT_DESKTOP=ubuntu:GNOME
           export XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
         mode: 0444
-  notify: restart xrdp
+  notify: Restart xrdp
 
 - name: Disable Gnome Initial Setup
   # see https://gitlab.gnome.org/GNOME/gnome-initial-setup

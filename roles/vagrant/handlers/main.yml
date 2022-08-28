@@ -1,4 +1,4 @@
-- name: reload samba
+- name: Reload samba
   ansible.builtin.systemd:
     name: smbd
     state: reloaded
