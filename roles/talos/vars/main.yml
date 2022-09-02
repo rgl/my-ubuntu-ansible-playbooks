@@ -13,7 +13,7 @@ metallb_chart_version: '3.0.11' # app version: 0.12.1
 cert_manager_chart_version: '1.9.1' # app version: 1.9.1
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
-traefik_chart_version: '10.24.0' # app version: 2.8.0
+traefik_chart_version: '10.24.1' # app version: 2.8.0
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 kubernetes_dashboard_chart_version: '5.9.0' # app version: 2.6.1
