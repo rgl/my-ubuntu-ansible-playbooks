@@ -32,7 +32,7 @@ EXAMPLES = '''
 - name: Create cluster
   kind:
     name: kind
-    node_image_version: 1.24.4
+    node_image_version: 1.25.0
 '''
 
 RETURN = '''
