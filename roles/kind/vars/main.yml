@@ -4,7 +4,9 @@ provision_username: '{{ ansible_user }}'
 provision_password: '{{ ansible_password }}'
 
 # see https://github.com/kubernetes-sigs/kind/releases
+# see https://hub.docker.com/r/kindest/node/tags
 kind_version: '0.14.0'
+kind_node_image_version: '1.24.4'
 
 # see https://github.com/databus23/helm-diff/releases
 helm_diff_version: '3.5.0'

@@ -12,6 +12,11 @@ options:
     description:
       - Name of the cluster.
     type: str
+  node_image_version:
+    description:
+      - Version of the node image.
+      - Use a version of one of the tags listed at https://hub.docker.com/r/kindest/node/tags.
+    type: str
 notes:
   - You can manually destroy the custer as: kind delete cluster --name=kind; docker network rm kind.
   - When there is an error creating/starting the cluster, there is no attempt to recover/destroy it.
@@ -27,6 +32,7 @@ EXAMPLES = '''
 - name: Create cluster
   kind:
     name: kind
+    node_image_version: 1.24.4
 '''
 
 RETURN = '''
@@ -42,6 +48,7 @@ from ansible.module_utils.basic import AnsibleModule
 import docker
 import kubernetes
 import subprocess
+import textwrap
 import time
 import yaml
 
@@ -56,7 +63,8 @@ class Kind(AnsibleModule):
   def __init__(self):
     super(Kind, self).__init__(
       argument_spec=dict(
-        name=dict(type='str', required=True)),
+        name=dict(type='str', required=True),
+        node_image_version=dict(type='str', required=True)),
       supports_check_mode=False)
     self.docker_client = docker.from_env()
 
@@ -82,17 +90,28 @@ class Kind(AnsibleModule):
 
   def _create_cluster(self):
     name = self.params['name']
+    node_image_version = self.params['node_image_version']
+    # create the cluster configuration.
+    # see https://kind.sigs.k8s.io/docs/user/configuration/
+    config = textwrap.dedent(f'''\
+    apiVersion: kind.x-k8s.io/v1alpha4
+    kind: Cluster
+    nodes:
+      - role: control-plane
+        image: kindest/node:v{node_image_version}
+    ''')
     # create the cluster.
     args = [
       'kind',
       'create',
       'cluster',
-      f'--name={name}']
+      f'--name={name}',
+      '--config=-']
     # TODO with check=True and when there is a non-zero exit code, the raised
     #      subprocess.CalledProcessError exception does not include
     #      stdout/stderr, which makes this impossible to troubleshoot, so we
     #      need to include that in the exception/log.
-    subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.run(args, check=True, text=True, input=config, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     self._wait_for_kubernetes(25*60)
     return True
 
