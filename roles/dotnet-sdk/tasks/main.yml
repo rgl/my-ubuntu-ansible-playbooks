@@ -10,6 +10,20 @@
     deb: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb
   register: repository
 
+# pin the microsoft apt repository packages above the distro ones.
+# see apt-cache policy
+# see apt-cache policy dotnet-sdk-6.0
+# see apt-cache showpkg dotnet-sdk-6.0
+# see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
+- name: Pin the microsoft apt repository
+  ansible.builtin.copy:
+    dest: /etc/apt/preferences.d/packages.microsoft.com.pref
+    content: |
+      Package: *
+      Pin: origin "packages.microsoft.com"
+      Pin-Priority: 999
+    mode: 0444
+
 - name: Update APT cache
   when: repository.changed # noqa no-handler
   ansible.builtin.apt:
