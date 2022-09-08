@@ -96,9 +96,10 @@
       - patch
       - ncdu
       - screen
-      # iso creation tool.
+      # iso creation tools.
       # NB xorriso is compatible with genisoimage and mkisofs and is also available in msys2 (windows).
       - xorriso
+      - mkisofs
       # iso-info tool.
       # NB iso-info is also available in msys2 (windows) as provided by the mingw-w64-x86_64-libcdio package.
       - libcdio-utils
