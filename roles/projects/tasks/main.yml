@@ -36,3 +36,8 @@
         repo: https://github.com/rgl/terraform-libvirt-windows-example.git
         dest: ~/Projects/terraform-libvirt-windows-example
         version: master
+    - name: Clone dotnet-pulumi-libvirt-ubuntu-example
+      ansible.builtin.git:
+        repo: https://github.com/rgl/dotnet-pulumi-libvirt-ubuntu-example.git
+        dest: ~/Projects/dotnet-pulumi-libvirt-ubuntu-example
+        version: main
