@@ -10,7 +10,7 @@ k3d_version: '5.4.4'
 helm_diff_version: '3.5.0'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
-metallb_chart_version: '3.0.11' # app version: 0.12.1
+metallb_chart_version: '4.1.2' # app version: 0.13.5
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 cert_manager_chart_version: '1.9.1' # app version: 1.9.1
