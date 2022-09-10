@@ -13,3 +13,15 @@
     content: |
       export PATH="$PATH:/opt/pulumi"
     mode: 0444
+
+- name: Install pulumi bash completion
+  block:
+    - name: Get pulumi bash completion
+      ansible.builtin.command: /opt/pulumi/pulumi completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install pulumi bash completion
+      ansible.builtin.copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/pulumi
+        mode: 0444
