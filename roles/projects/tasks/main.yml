@@ -31,3 +31,8 @@
         repo: https://github.com/rgl/terraform-libvirt-ubuntu-example.git
         dest: ~/Projects/terraform-libvirt-ubuntu-example
         version: master
+    - name: Clone terraform-libvirt-windows-example
+      ansible.builtin.git:
+        repo: https://github.com/rgl/terraform-libvirt-windows-example.git
+        dest: ~/Projects/terraform-libvirt-windows-example
+        version: master
