@@ -26,3 +26,8 @@
         repo: https://github.com/rgl/my-windows-ansible-playbooks.git
         dest: ~/Projects/my-windows-ansible-playbooks
         version: main
+    - name: Clone terraform-libvirt-ubuntu-example
+      ansible.builtin.git:
+        repo: https://github.com/rgl/terraform-libvirt-ubuntu-example.git
+        dest: ~/Projects/terraform-libvirt-ubuntu-example
+        version: master
