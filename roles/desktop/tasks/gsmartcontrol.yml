@@ -1,0 +1,3 @@
+- name: Install gsmartcontrol
+  ansible.builtin.apt:
+    name: gsmartcontrol

@@ -1,5 +1,6 @@
 - include_tasks: desktop.yml
 - include_tasks: firefox.yml
+- include_tasks: gsmartcontrol.yml
 - include_tasks: keepassxc.yml
 - include_tasks: code.yml
 - include_tasks: meld.yml
