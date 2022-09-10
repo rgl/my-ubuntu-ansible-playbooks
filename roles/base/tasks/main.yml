@@ -107,6 +107,10 @@
       # magic packet to its ethernet card.
       # e.g. etherwake -i eth1 00:e0:4c:01:93:a8
       - etherwake
+      # xsltproc tool.
+      # NB this is required by the libvirt_domain terraform resource to apply
+      #    xslt transformations to the libvirt domain xml.
+      - xsltproc
     install_recommends: false
 
 - name: Install lm-sensors
