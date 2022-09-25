@@ -2,6 +2,8 @@
 - include_tasks: kind.yml
 - include_tasks: dependencies.yml
 - name: Install Kubernetes
+  become: true
+  become_user: '{{ provision_username }}'
   block:
     - include_tasks: helm-diff.yml
     - include_tasks: cluster.yml
@@ -11,14 +13,12 @@
     - include_tasks: external-dns.yml
     - include_tasks: kubernetes-dashboard.yml
     - include_tasks: host.yml
-  become: true
-  become_user: '{{ provision_username }}'
 - include_tasks: dns.yml
 
 # install applications.
 - name: Install Applications
+  become: true
+  become_user: '{{ provision_username }}'
   block:
     - include_tasks: yugabytedb.yml
     - include_tasks: info.yml
-  become: true
-  become_user: '{{ provision_username }}'

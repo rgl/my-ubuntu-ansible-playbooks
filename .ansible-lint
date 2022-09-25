@@ -1,2 +1,3 @@
 skip_list:
   - jinja[spacing]
+  - template-instead-of-copy

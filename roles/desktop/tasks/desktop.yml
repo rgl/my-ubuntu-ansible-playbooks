@@ -33,6 +33,7 @@
 #       ~/.xorgxrdp.*.log
 #       ~/.xsession-errors
 - name: Install xrdp
+  notify: Restart xrdp
   block:
     - name: Install xrdp
       ansible.builtin.apt:
@@ -72,7 +73,6 @@
           export XDG_CURRENT_DESKTOP=ubuntu:GNOME
           export XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
         mode: 0444
-  notify: Restart xrdp
 
 - name: Disable Gnome Initial Setup
   # see https://gitlab.gnome.org/GNOME/gnome-initial-setup

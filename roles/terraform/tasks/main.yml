@@ -45,6 +45,7 @@
       check_mode: true
       register: check
     - name: Install terraform inventory
+      when: check.changed
       block:
         - name: Install terraform inventory
           ansible.builtin.get_url:
@@ -62,4 +63,3 @@
             insertafter: '^#!'
             line: '# version={{ terraform_inventory_version }}'
             mode: 0555
-      when: check.changed

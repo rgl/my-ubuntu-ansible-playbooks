@@ -149,6 +149,7 @@
         - vagrant-windows-sysprep
 
     - name: Install the vagrant-libvirt plugin
+      when: "'kvm' in ansible_virtualization_tech_host"
       block:
         - name: Install the vagrant-libvirt plugin dependencies
           ansible.builtin.apt:
@@ -168,9 +169,10 @@
           become: true
           register: result
           changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
-      when: "'kvm' in ansible_virtualization_tech_host"
 
     - name: Patch vagrant-scp plugin
+      become: true
+      become_user: '{{ provision_username }}'
       block:
         - name: Find vagrant-scp plugin directories
           ansible.builtin.shell: find ~/.vagrant.d/gems -type d -wholename '*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}'
@@ -182,5 +184,3 @@
             basedir: '{{ item }}'
             strip: 1
           loop: '{{ vagrant_scp_plugin_directories.stdout_lines }}'
-      become_user: '{{ provision_username }}'
-      become: true

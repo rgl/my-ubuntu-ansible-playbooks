@@ -1,4 +1,4 @@
-- name: Delegate {{ cluster_name }}.{{ cluster_domain }} DNS to the cluster
+- name: Delegate the DNS domain {{ cluster_name + "." + cluster_domain }}
   ansible.builtin.copy:
     # set the dns server to be the cluster cidr .2 ip address.
     content: |
