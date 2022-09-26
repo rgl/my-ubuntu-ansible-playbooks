@@ -65,6 +65,11 @@
   loop:
     - '{{ ansible_user }}'
 
+- name: Reset Ansible connection
+  # NB unfortunately we have to always reset the connection due to:
+  #     [WARNING]: reset_connection task does not support when conditional
+  ansible.builtin.meta: reset_connection
+
 - name: Install docker-compose
   args:
     executable: /bin/bash
