@@ -33,3 +33,8 @@ pdns_version: '4.6.3' # app version: 4.6.3
 
 # see https://artifacthub.io/packages/helm/yugabyte/yugabyte
 yugabytedb_chart_version: '2.15.2' # app version: 2.15.2.0-b87
+
+# see https://artifacthub.io/packages/helm/runix/pgadmin4
+# see https://hub.docker.com/r/dpage/pgadmin4/tags
+pgadmin_chart_version: '1.12.2'
+pgadmin_chart_app_version: '6.14'

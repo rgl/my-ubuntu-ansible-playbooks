@@ -1,0 +1,77 @@
+# see https://artifacthub.io/packages/helm/runix/pgadmin4
+# see https://github.com/rowanruseler/helm-charts/blob/master/charts/pgadmin4/values.yaml
+# see https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
+# see https://hub.docker.com/r/dpage/pgadmin4
+# see https://github.com/postgres/pgadmin4
+
+- name: Add runix repository
+  kubernetes.core.helm_repository:
+    name: runix
+    repo_url: https://helm.runix.net
+
+- name: Install pgadmin
+  kubernetes.core.helm:
+    release_namespace: pgadmin
+    name: pgadmin
+    chart_ref: runix/pgadmin4
+    chart_version: '{{ pgadmin_chart_version }}'
+    create_namespace: true
+    update_repo_cache: true
+    values:
+      env:
+        email: admin@example.com
+        password: password
+        variables:
+          - name: PGADMIN_DISABLE_POSTFIX
+            value: '1'
+      persistentVolume:
+        size: 1Gi
+      serverDefinitions:
+        enabled: true
+        servers:
+          yugabytedb:
+            Name: YugabyteDB
+            Group: Servers
+            Host: yb-tservers.yugabytedb
+            Port: 5433
+            SSLMode: disable
+            MaintenanceDB: yugabyte
+            Username: yugabyte
+      ingress:
+        enabled: true
+        hosts:
+          - host: pgadmin.{{ cluster_name }}.{{ cluster_domain }}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: pgadmin-tls
+      image:
+        tag: '{{ pgadmin_chart_app_version }}'
+
+- name: Create pgadmin Ingress Certificate
+  kubernetes.core.k8s:
+    namespace: pgadmin
+    definition:
+      # see https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.Certificate
+      apiVersion: cert-manager.io/v1
+      kind: Certificate
+      metadata:
+        name: pgadmin
+      spec:
+        subject:
+          organizations:
+            - '{{ cluster_name }}.{{ cluster_domain }}'
+          organizationalUnits:
+            - Kubernetes
+        commonName: pgAdmin
+        dnsNames:
+          - pgadmin.{{ cluster_name }}.{{ cluster_domain }}
+        duration: 1h # NB this is so low for testing purposes.
+        privateKey:
+          algorithm: ECDSA # NB Ed25519 is not yet supported by chrome 93 or firefox 91.
+          size: 256
+        secretName: pgadmin-tls
+        issuerRef:
+          kind: ClusterIssuer
+          name: ingress
