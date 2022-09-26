@@ -1,7 +1,7 @@
 all:
   hosts:
     dm1:
-      ansible_host: 192.168.1.77
+      ansible_host: dm1.lan
   vars:
     # connection configuration.
     # see https://docs.ansible.com/ansible-core/2.13/collections/ansible/builtin/ssh_connection.html
