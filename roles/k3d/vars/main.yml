@@ -7,7 +7,7 @@ provision_password: '{{ ansible_password }}'
 k3d_version: '5.4.4'
 
 # see https://github.com/databus23/helm-diff/releases
-helm_diff_version: '3.5.0'
+helm_diff_version: '3.6.0'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
 metallb_chart_version: '4.1.2' # app version: 0.13.5
