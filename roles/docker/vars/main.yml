@@ -2,4 +2,4 @@
 docker_version: '20.10.18'
 
 # see https://github.com/docker/compose/releases
-docker_compose_version: '2.10.2'
+docker_compose_version: '2.11.1'
