@@ -1,3 +1,10 @@
+- name: Set hostname
+  # skip this task when ansible_host is an IP address.
+  when: not (ansible_host | ansible.utils.ipaddr)
+  ansible.builtin.hostname:
+    name: "{{ ansible_host }}"
+    use: systemd
+
 - name: Disable motd-news
   # NB this is sourced from /etc/update-motd.d/50-motd-news
   ansible.builtin.lineinfile:
