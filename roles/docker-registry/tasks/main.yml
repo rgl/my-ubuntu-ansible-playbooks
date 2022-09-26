@@ -1,0 +1,39 @@
+# see https://kind.sigs.k8s.io/docs/user/local-registry/
+# see https://github.com/rgl/k0s-vagrant/blob/main/provision-registry.sh
+# see https://docs.docker.com/registry/deploying/
+# see https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_module.html
+
+- name: Install the community.docker collection dependencies
+  ansible.builtin.apt:
+    name:
+      - python3-requests
+
+- name: Create the registry data directory
+  ansible.builtin.file:
+    name: /opt/registry/data
+    state: directory
+    mode: 0700
+
+- name: Create the registry configuration directory
+  ansible.builtin.file:
+    name: /opt/registry/etc
+    state: directory
+    mode: 0700
+
+- name: Create the registry configuration file
+  ansible.builtin.copy:
+    src: config.yml
+    dest: /opt/registry/etc/config.yml
+    mode: 0444
+  notify: Restart registry
+
+- name: Create the registry container
+  community.docker.docker_container:
+    name: registry
+    image: '{{ docker_registry_image }}'
+    restart_policy: unless-stopped
+    ports:
+      - 127.0.0.1:5000:5000/tcp
+    volumes:
+      - /opt/registry/data:/var/lib/registry
+      - /opt/registry/etc:/etc/docker/registry:ro

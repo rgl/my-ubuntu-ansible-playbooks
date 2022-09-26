@@ -1,0 +1,2 @@
+# see https://github.com/distribution/distribution/releases
+docker_registry_image: registry:2.8.1
