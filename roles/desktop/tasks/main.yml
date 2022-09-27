@@ -12,4 +12,5 @@
 - include_tasks: gimp.yml
 - include_tasks: inkscape.yml
 - include_tasks: obs-studio.yml
+- include_tasks: transmission.yml
 - include_tasks: favorites.yml
