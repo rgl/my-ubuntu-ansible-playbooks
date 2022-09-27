@@ -2,6 +2,7 @@
   kind:
     name: '{{ cluster_name }}'
     node_image_version: '{{ kind_node_image_version }}'
+    auto_start: false
   register: cluster
 
 # NB because we do not need more than one in this development cluster.
