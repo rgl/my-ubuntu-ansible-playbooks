@@ -17,6 +17,11 @@ options:
       - Version of the node image.
       - Use a version of one of the tags listed at https://hub.docker.com/r/kindest/node/tags.
     type: str
+  auto_start:
+    description:
+      - Automatically start the cluster when the host is started.
+    type: bool
+    default: true
 notes:
   - You can manually destroy the custer as: kind delete cluster --name=kind; docker network rm kind.
   - When there is an error creating/starting the cluster, there is no attempt to recover/destroy it.
@@ -33,6 +38,7 @@ EXAMPLES = '''
   kind:
     name: kind
     node_image_version: 1.25.2
+    auto_start: false
 '''
 
 RETURN = '''
@@ -64,20 +70,21 @@ class Kind(AnsibleModule):
     super(Kind, self).__init__(
       argument_spec=dict(
         name=dict(type='str', required=True),
-        node_image_version=dict(type='str', required=True)),
+        node_image_version=dict(type='str', required=True),
+        auto_start=dict(type='bool', default=True)),
       supports_check_mode=False)
     self.docker_client = docker.from_env()
 
   def main(self):
     name = self.params['name']
-    container_name = f'{name}-control-plane'
-    containers = self.docker_client.containers.list(all=True, filters={'name':container_name})
-    if len(containers) > 1:
-      raise Exception(f'found more than one container named {container_name}')
-    elif len(containers) == 1:
-      changed = self._start_cluster(containers[0])
+    container = self._get_container()
+    if container:
+      changed = self._start_cluster(container)
     else:
       changed = self._create_cluster()
+      container = self._get_container()
+    if self._set_auto_start(container):
+      changed = True
     network = self.docker_client.networks.get(name)
     network_cidr = network.attrs['IPAM']['Config'][0]['Subnet']
     # connect the registry container to the kind network.
@@ -91,6 +98,32 @@ class Kind(AnsibleModule):
       network.connect('registry')
       changed = True
     self.exit_json(changed=changed, network_cidr=network_cidr)
+
+  def _get_container(self):
+    name = self.params['name']
+    container_name = f'{name}-control-plane'
+    containers = self.docker_client.containers.list(all=True, filters={'name':container_name})
+    if len(containers) > 1:
+      raise Exception(f'found more than one container named {container_name}')
+    return containers[0] if len(containers) == 1 else None
+
+  def _set_auto_start(self, container):
+    # see https://github.com/kubernetes-sigs/kind/blob/v0.16.0/pkg/cluster/internal/providers/docker/provision.go#L142-L166
+    actual = container.attrs['HostConfig']['RestartPolicy']
+    if self.params['auto_start']:
+      expected = {
+        'Name': 'on-failure',
+        'MaximumRetryCount': 1
+      }
+    else:
+      expected = {
+        'Name': 'no',
+        'MaximumRetryCount': 0
+      }
+    if actual == expected:
+      return False
+    container.update(restart_policy=expected)
+    return True
 
   def _start_cluster(self, container):
     if container.status == 'running':
