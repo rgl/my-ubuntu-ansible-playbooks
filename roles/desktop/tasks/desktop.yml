@@ -128,3 +128,27 @@
       community.general.dconf:
         key: /org/gnome/desktop/interface/icon-theme
         value: "'Yaru-olive'"
+
+- name: Configure the desktop background
+  become: false
+  block:
+    - name: Set color-shading-type
+      community.general.dconf:
+        key: /org/gnome/desktop/background/color-shading-type
+        value: "'solid'"
+    - name: Set picture-options
+      community.general.dconf:
+        key: /org/gnome/desktop/background/picture-options
+        value: "'zoom'"
+    - name: Set picture-uri-dark
+      community.general.dconf:
+        key: /org/gnome/desktop/background/picture-uri-dark
+        value: "'file:///usr/share/backgrounds/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg'"
+    - name: Set primary-color
+      community.general.dconf:
+        key: /org/gnome/desktop/background/primary-color
+        value: "'#000000'"
+    - name: Set secondary-color
+      community.general.dconf:
+        key: /org/gnome/desktop/background/secondary-color
+        value: "'#000000'"
