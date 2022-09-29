@@ -152,3 +152,15 @@
       community.general.dconf:
         key: /org/gnome/desktop/background/secondary-color
         value: "'#000000'"
+
+- name: Configure the topbar
+  become: false
+  block:
+    - name: Show the date
+      community.general.dconf:
+        key: /org/gnome/desktop/interface/clock-show-date
+        value: 'true'
+    - name: Show the weekday
+      community.general.dconf:
+        key: /org/gnome/desktop/interface/clock-show-weekday
+        value: 'true'
