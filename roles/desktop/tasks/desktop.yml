@@ -106,6 +106,15 @@
     key: /org/gnome/shell/extensions/dash-to-dock/click-action
     value: "'minimize'"
 
+# NB you can get the current value with:
+#       dconf read /org/gnome/desktop/interface/enable-animations
+# See /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
+- name: Disable animations
+  become: false
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/enable-animations
+    value: 'false'
+
 # NB these settings were obtained in two steps:
 #       1. dconf dump / >dconf.orig.ini
 #       2. edit the appearance settings using the GUI
