@@ -106,11 +106,25 @@
     key: /org/gnome/shell/extensions/dash-to-dock/click-action
     value: "'minimize'"
 
-# NB you can get the current value with:
-#       dconf read /org/gnome/desktop/interface/color-scheme
+# NB these settings were obtained in two steps:
+#       1. dconf dump / >dconf.orig.ini
+#       2. edit the appearance settings using the GUI
+#          * apt-get install gnome-control-center gnome-tweaks dconf-editor
+#       3. dconf dump / >dconf.ini
+#       4. diff -u dconf.orig.ini dconf.ini
 # See /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
-- name: Use the dark color scheme
+- name: Configure the theme
   become: false
-  community.general.dconf:
-    key: /org/gnome/desktop/interface/color-scheme
-    value: "'prefer-dark'"
+  block:
+    - name: Use the dark color scheme
+      community.general.dconf:
+        key: /org/gnome/desktop/interface/color-scheme
+        value: "'prefer-dark'"
+    - name: Set the GTK theme
+      community.general.dconf:
+        key: /org/gnome/desktop/interface/gtk-theme
+        value: "'Yaru-olive-dark'"
+    - name: Set the icon theme
+      community.general.dconf:
+        key: /org/gnome/desktop/interface/icon-theme
+        value: "'Yaru-olive'"
