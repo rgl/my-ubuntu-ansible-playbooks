@@ -173,3 +173,29 @@
       community.general.dconf:
         key: /org/gnome/desktop/interface/clock-show-weekday
         value: 'true'
+
+- name: Set the user face picture
+  block:
+    # see /usr/share/pixmaps/faces
+    # see /var/lib/AccountsService/users/$user
+    # see /var/lib/AccountsService/icons/$user
+    # see ~/.face
+    # see https://help.gnome.org/admin/gdm/stable/overview.html.en#facebrowser
+    # NB this is aka the user face/icon/avatar/picture.
+    # NB because the gdm user must be able to read the face picture, and the
+    #    user home directory does not have the required permissions, we've
+    #    opted to set the image globally instead of in ~/.face.
+    # NB the optimal image size is 96x96.
+    - name: Set the user face picture
+      ansible.builtin.copy:
+        src: vagrant-face.png
+        dest: "/usr/share/pixmaps/faces/{{ ansible_user }}"
+        mode: 0444
+    - name: Configure the user face picture
+      community.general.ini_file:
+        path: "/var/lib/AccountsService/users/{{ ansible_user }}"
+        section: User
+        option: Icon
+        value: "/usr/share/pixmaps/faces/{{ ansible_user }}"
+        no_extra_spaces: true
+        mode: 0600
