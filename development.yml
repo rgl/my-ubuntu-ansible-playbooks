@@ -5,7 +5,8 @@
   become: true
   roles:
     - upgrade
-    - lms
+    - role: lms
+      when: ansible_virtualization_role == 'host'
     - dns
     - base
     - cfssl
