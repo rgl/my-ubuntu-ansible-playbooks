@@ -132,6 +132,20 @@
         key: /org/gnome/shell/extensions/dash-to-panel/group-apps-underline-unfocused
         value: 'false'
 
+- name: Install Sensory Perception
+  become: false
+  when: ansible_virtualization_role == 'host'
+  block:
+    - name: Install Sensory Perception
+      gnome_extension:
+        # see https://extensions.gnome.org/extension/1145/sensory-perception/
+        # see https://github.com/HarlemSquirrel/gnome-shell-extension-sensory-perception
+        name: sensory-perception@HarlemSquirrel.github.io
+    - name: Show the maximum temperature
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/sensory-perception/main-sensor
+        value: "'Maximum'"
+
 - name: Set the user face picture
   block:
     # see /usr/share/pixmaps/faces
