@@ -107,6 +107,31 @@
         key: /org/gnome/desktop/interface/clock-show-weekday
         value: 'true'
 
+- name: Install Dash to Panel
+  become: false
+  block:
+    - name: Install Dash to Panel
+      gnome_extension:
+        # see https://extensions.gnome.org/extension/1160/dash-to-panel/
+        # see https://github.com/home-sweet-gnome/dash-to-panel
+        name: dash-to-panel@jderose9.github.com
+    - name: Set Panel thickness
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/dash-to-panel/panel-sizes
+        value: "'{\"0\":32}'"
+    - name: Set App icon margin
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/dash-to-panel/appicon-margin
+        value: '0'
+    - name: Disable Ungroup applications
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/dash-to-panel/group-apps
+        value: 'false'
+    - name: Disable Display running indicators on unfocused applications
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/dash-to-panel/group-apps-underline-unfocused
+        value: 'false'
+
 - name: Set the user face picture
   block:
     # see /usr/share/pixmaps/faces
