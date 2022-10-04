@@ -46,4 +46,4 @@
   #    see https://github.com/metallb/metallb/issues/1597
   until: result is succeeded
   retries: 10
-  delay: 5
+  delay: 20
