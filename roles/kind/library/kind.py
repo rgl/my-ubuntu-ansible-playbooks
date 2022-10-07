@@ -42,6 +42,11 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
+ip_address:
+  description:
+    - The control plane IP address.
+  returned: success
+  type: str
 network_cidr:
   description:
     - The network CIDR.
@@ -85,19 +90,23 @@ class Kind(AnsibleModule):
       container = self._get_container()
     if self._set_auto_start(container):
       changed = True
+    ip_address = container.attrs['NetworkSettings']['Networks'][name]['IPAddress']
     network = self.docker_client.networks.get(name)
     network_cidr = network.attrs['IPAM']['Config'][0]['Subnet']
     # connect the registry container to the kind network.
     # NB this is equivalent to: docker network connect kind registry
     registry_connected_to_network = False
-    for container in network.containers:
-      if container.name == 'registry':
+    for c in network.containers:
+      if c.name == 'registry':
         registry_connected_to_network = True
         break
     if not registry_connected_to_network:
       network.connect('registry')
       changed = True
-    self.exit_json(changed=changed, network_cidr=network_cidr)
+    self.exit_json(
+      changed=changed,
+      ip_address=ip_address,
+      network_cidr=network_cidr)
 
   def _get_container(self):
     name = self.params['name']
