@@ -5,7 +5,7 @@ changed='false'
 for name in cfssl cfssljson; do
     # bail when already installed.
     if [ -x /usr/local/bin/$name ]; then
-        # e.g. Version: 1.6.2
+        # e.g. Version: 1.6.3
         if [ "$name" == 'cfssl' ]; then
             actual_version="$(/usr/local/bin/$name version | perl -ne '/^Version: (.+)$/ && print $1')"
         else
