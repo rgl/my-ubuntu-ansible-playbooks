@@ -1,25 +1,39 @@
 # install kubernetes.
-- include_tasks: kind.yml
-- include_tasks: dependencies.yml
+- name: Install kind
+  ansible.builtin.include_tasks: kind.yml
+- name: Install dependencies
+  ansible.builtin.include_tasks: dependencies.yml
 - name: Install Kubernetes
   become: true
   become_user: '{{ provision_username }}'
   block:
-    - include_tasks: helm-diff.yml
-    - include_tasks: cluster.yml
-    - include_tasks: metallb.yml
-    - include_tasks: cert-manager.yml
-    - include_tasks: traefik.yml
-    - include_tasks: external-dns.yml
-    - include_tasks: kubernetes-dashboard.yml
-    - include_tasks: host.yml
-- include_tasks: dns.yml
+    - name: Install helm-diff
+      ansible.builtin.include_tasks: helm-diff.yml
+    - name: Install the kind cluster
+      ansible.builtin.include_tasks: cluster.yml
+    - name: Install MetalLB
+      ansible.builtin.include_tasks: metallb.yml
+    - name: Install cert-manager
+      ansible.builtin.include_tasks: cert-manager.yml
+    - name: Install Traefik
+      ansible.builtin.include_tasks: traefik.yml
+    - name: Install external-dns
+      ansible.builtin.include_tasks: external-dns.yml
+    - name: Install kubernetes-dashboard
+      ansible.builtin.include_tasks: kubernetes-dashboard.yml
+    - name: Configure the host
+      ansible.builtin.include_tasks: host.yml
+- name: Configure the host DNS
+  ansible.builtin.include_tasks: dns.yml
 
 # install applications.
 - name: Install Applications
   become: true
   become_user: '{{ provision_username }}'
   block:
-    - include_tasks: yugabytedb.yml
-    - include_tasks: pgadmin.yml
-    - include_tasks: info.yml
+    - name: Install yugabytedb
+      ansible.builtin.include_tasks: yugabytedb.yml
+    - name: Install pgAdmin
+      ansible.builtin.include_tasks: pgadmin.yml
+    - name: Show information
+      ansible.builtin.include_tasks: info.yml

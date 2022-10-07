@@ -1,4 +1,5 @@
 - name: Create cluster
+  # noqa fqcn[action]
   kind:
     name: '{{ cluster_name }}'
     node_image_version: '{{ kind_node_image_version }}'

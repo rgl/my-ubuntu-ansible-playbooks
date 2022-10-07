@@ -1,28 +1,28 @@
 - name: Install helm
-  args:
+  ansible.builtin.shell:
     executable: /bin/bash
-  ansible.builtin.shell: |
-    set -euo pipefail
+    cmd: |
+      set -euo pipefail
 
-    # see https://github.com/helm/helm/releases
-    helm_version='v{{ helm_version }}'
+      # see https://github.com/helm/helm/releases
+      helm_version='v{{ helm_version }}'
 
-    # bail when already installed.
-    if [ -x /usr/local/bin/helm ]; then
-      # e.g. v3.8.0+gd141386
-      actual_version="$(/usr/local/bin/helm version --short | perl -ne '/^(v.+)\+.+/ && print $1')"
-      if [ "$actual_version" == "$helm_version" ]; then
-        echo 'ANSIBLE CHANGED NO'
-        exit 0
+      # bail when already installed.
+      if [ -x /usr/local/bin/helm ]; then
+        # e.g. v3.8.0+gd141386
+        actual_version="$(/usr/local/bin/helm version --short | perl -ne '/^(v.+)\+.+/ && print $1')"
+        if [ "$actual_version" == "$helm_version" ]; then
+          echo 'ANSIBLE CHANGED NO'
+          exit 0
+        fi
       fi
-    fi
 
-    # download and install.
-    helm_url="https://get.helm.sh/helm-$helm_version-linux-amd64.tar.gz"
-    t="$(mktemp -q -d --suffix=.helm)"
-    wget -qO- "$helm_url" | tar xzf - -C "$t" --strip-components=1 linux-amd64/helm
-    install "$t/helm" /usr/local/bin/
-    rm -rf "$t"
+      # download and install.
+      helm_url="https://get.helm.sh/helm-$helm_version-linux-amd64.tar.gz"
+      t="$(mktemp -q -d --suffix=.helm)"
+      wget -qO- "$helm_url" | tar xzf - -C "$t" --strip-components=1 linux-amd64/helm
+      install "$t/helm" /usr/local/bin/
+      rm -rf "$t"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 

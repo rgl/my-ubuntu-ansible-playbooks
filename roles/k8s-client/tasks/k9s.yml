@@ -1,26 +1,26 @@
 - name: Install k9s
-  args:
+  ansible.builtin.shell:
     executable: /bin/bash
-  ansible.builtin.shell: |
-    set -euo pipefail
+    cmd: |
+      set -euo pipefail
 
-    # see https://github.com/derailed/k9s/releases
-    k9s_version='v{{ k9s_version }}'
+      # see https://github.com/derailed/k9s/releases
+      k9s_version='v{{ k9s_version }}'
 
-    # bail when already installed.
-    if [ -x /usr/local/bin/k9s ]; then
-      actual_version="$(/usr/local/bin/k9s version -s | perl -ne '/^Version\s+(v.+)/ && print $1')"
-      if [ "$actual_version" == "$k9s_version" ]; then
-        echo 'ANSIBLE CHANGED NO'
-        exit 0
+      # bail when already installed.
+      if [ -x /usr/local/bin/k9s ]; then
+        actual_version="$(/usr/local/bin/k9s version -s | perl -ne '/^Version\s+(v.+)/ && print $1')"
+        if [ "$actual_version" == "$k9s_version" ]; then
+          echo 'ANSIBLE CHANGED NO'
+          exit 0
+        fi
       fi
-    fi
 
-    # download and install.
-    k9s_url="https://github.com/derailed/k9s/releases/download/$k9s_version/k9s_Linux_x86_64.tar.gz"
-    t="$(mktemp -q -d --suffix=.k9s)"
-    wget -qO- "$k9s_url" | tar xzf - -C "$t" k9s
-    install -m 755 "$t/k9s" /usr/local/bin/
-    rm -rf "$t"
+      # download and install.
+      k9s_url="https://github.com/derailed/k9s/releases/download/$k9s_version/k9s_Linux_x86_64.tar.gz"
+      t="$(mktemp -q -d --suffix=.k9s)"
+      wget -qO- "$k9s_url" | tar xzf - -C "$t" k9s
+      install -m 755 "$t/k9s" /usr/local/bin/
+      rm -rf "$t"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"

@@ -4,7 +4,8 @@
     install_recommends: true
   notify: Reboot
 
-- include_tasks: xrdp.yml
+- name: Install xrdp
+  ansible.builtin.include_tasks: xrdp.yml
 
 - name: Disable Gnome Initial Setup
   # see https://gitlab.gnome.org/GNOME/gnome-initial-setup
@@ -111,6 +112,7 @@
   become: false
   block:
     - name: Install Dash to Panel
+      # noqa fqcn[action]
       gnome_extension:
         # see https://extensions.gnome.org/extension/1160/dash-to-panel/
         # see https://github.com/home-sweet-gnome/dash-to-panel
@@ -137,6 +139,7 @@
   when: ansible_virtualization_role == 'host'
   block:
     - name: Install Sensory Perception
+      # noqa fqcn[action]
       gnome_extension:
         # see https://extensions.gnome.org/extension/1145/sensory-perception/
         # see https://github.com/HarlemSquirrel/gnome-shell-extension-sensory-perception

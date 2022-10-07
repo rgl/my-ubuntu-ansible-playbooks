@@ -1,16 +1,47 @@
-- include_tasks: desktop.yml
-- include_tasks: firefox.yml
-- include_tasks: gsmartcontrol.yml
-- include_tasks: keepassxc.yml
-- include_tasks: code.yml
-- include_tasks: meld.yml
-- include_tasks: wireshark.yml
-- include_tasks: httptoolkit.yml
-- include_tasks: virt-manager.yml
-- include_tasks: remmina.yml
-- include_tasks: vlc.yml
-- include_tasks: gimp.yml
-- include_tasks: inkscape.yml
-- include_tasks: obs-studio.yml
-- include_tasks: transmission.yml
-- include_tasks: favorites.yml
+- name: Install Desktop
+  ansible.builtin.include_tasks: desktop.yml
+
+- name: Install Firefox
+  ansible.builtin.include_tasks: firefox.yml
+
+- name: Install gsmartcontrol
+  ansible.builtin.include_tasks: gsmartcontrol.yml
+
+- name: Install KeePassXC
+  ansible.builtin.include_tasks: keepassxc.yml
+
+- name: Install Visual Studio Code
+  ansible.builtin.include_tasks: code.yml
+
+- name: Install Meld
+  ansible.builtin.include_tasks: meld.yml
+
+- name: Install Wireshark
+  ansible.builtin.include_tasks: wireshark.yml
+
+- name: Install httptoolkit
+  ansible.builtin.include_tasks: httptoolkit.yml
+
+- name: Install Virt Manager
+  ansible.builtin.include_tasks: virt-manager.yml
+
+- name: Install Remmina
+  ansible.builtin.include_tasks: remmina.yml
+
+- name: Install VLC
+  ansible.builtin.include_tasks: vlc.yml
+
+- name: Install GIMP
+  ansible.builtin.include_tasks: gimp.yml
+
+- name: Install Inkscape
+  ansible.builtin.include_tasks: inkscape.yml
+
+- name: Install OBS Studio
+  ansible.builtin.include_tasks: obs-studio.yml
+
+- name: Install Transmission
+  ansible.builtin.include_tasks: transmission.yml
+
+- name: Install favorites
+  ansible.builtin.include_tasks: favorites.yml

@@ -1,9 +1,20 @@
-- include_tasks: kubectl.yml
-- include_tasks: k9s.yml
-- include_tasks: helm.yml
-- include_tasks: skopeo.yml
-- include_tasks: crane.yml
-- include_tasks: regclient.yml
+- name: Install kubectl
+  ansible.builtin.include_tasks: kubectl.yml
+
+- name: Install k9s
+  ansible.builtin.include_tasks: k9s.yml
+
+- name: Install Helm
+  ansible.builtin.include_tasks: helm.yml
+
+- name: Install Skopeo
+  ansible.builtin.include_tasks: skopeo.yml
+
+- name: Install Crane
+  ansible.builtin.include_tasks: crane.yml
+
+- name: Install regclient
+  ansible.builtin.include_tasks: regclient.yml
   loop:
     - regctl
     - regsync

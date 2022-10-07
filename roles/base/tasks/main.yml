@@ -19,26 +19,26 @@
 
 # see localectl status
 - name: Set the system locale
-  args:
+  ansible.builtin.shell:
     executable: /bin/bash
-  ansible.builtin.shell: |
-    set -euo pipefail
-    before="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
-    localectl set-locale \
-      LANG=en_US.UTF-8 \
-      LC_NUMERIC=pt_PT.UTF-8 \
-      LC_TIME=pt_PT.UTF-8 \
-      LC_MONETARY=pt_PT.UTF-8 \
-      LC_PAPER=pt_PT.UTF-8 \
-      LC_NAME=pt_PT.UTF-8 \
-      LC_ADDRESS=pt_PT.UTF-8 \
-      LC_TELEPHONE=pt_PT.UTF-8 \
-      LC_MEASUREMENT=pt_PT.UTF-8 \
-      LC_IDENTIFICATION=pt_PT.UTF-8
-    after="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
-    if [ "$before" == "$after" ]; then
-      echo 'ANSIBLE CHANGED NO'
-    fi
+    cmd: |
+      set -euo pipefail
+      before="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
+      localectl set-locale \
+        LANG=en_US.UTF-8 \
+        LC_NUMERIC=pt_PT.UTF-8 \
+        LC_TIME=pt_PT.UTF-8 \
+        LC_MONETARY=pt_PT.UTF-8 \
+        LC_PAPER=pt_PT.UTF-8 \
+        LC_NAME=pt_PT.UTF-8 \
+        LC_ADDRESS=pt_PT.UTF-8 \
+        LC_TELEPHONE=pt_PT.UTF-8 \
+        LC_MEASUREMENT=pt_PT.UTF-8 \
+        LC_IDENTIFICATION=pt_PT.UTF-8
+      after="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
+      if [ "$before" == "$after" ]; then
+        echo 'ANSIBLE CHANGED NO'
+      fi
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 
