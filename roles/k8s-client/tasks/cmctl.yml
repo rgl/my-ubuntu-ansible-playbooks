@@ -1,0 +1,20 @@
+- name: Install cmctl
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-cmctl.sh') }}"
+  environment:
+    CMCTL_VERSION: "{{ cmctl_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install cmctl bash completion
+  block:
+    - name: Get cmctl bash completion
+      ansible.builtin.command: cmctl completion bash
+      register: bash_completion
+      changed_when: false
+    - name: Install cmctl bash completion
+      ansible.builtin.copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/cmctl
+        mode: 0444
