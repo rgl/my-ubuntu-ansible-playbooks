@@ -19,7 +19,7 @@ traefik_chart_version: '12.0.2' # app version: 2.9.1
 kubernetes_dashboard_chart_version: '5.11.0' # app version: 2.7.0
 
 # see https://artifacthub.io/packages/helm/bitnami/external-dns
-external_dns_chart_version: '6.10.1' # app version: 0.12.2
+external_dns_chart_version: '6.10.2' # app version: 0.12.2
 
 # see https://hub.docker.com/r/powerdns/pdns-auth-46
 # see https://hub.docker.com/search?q=pdns-auth-
