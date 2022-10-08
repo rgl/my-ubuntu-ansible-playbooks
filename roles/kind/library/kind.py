@@ -90,7 +90,7 @@ class Kind(AnsibleModule):
       container = self._get_container()
     if self._set_auto_start(container):
       changed = True
-    ip_address = container.attrs['NetworkSettings']['Networks'][name]['IPAddress']
+    ip_address = self._get_ip_address(container)
     network = self.docker_client.networks.get(name)
     network_cidr = network.attrs['IPAM']['Config'][0]['Subnet']
     # connect the registry container to the kind network.
@@ -115,6 +115,18 @@ class Kind(AnsibleModule):
     if len(containers) > 1:
       raise Exception(f'found more than one container named {container_name}')
     return containers[0] if len(containers) == 1 else None
+
+  def _get_ip_address(self, container, timeout=5*60):
+    name = self.params['name']
+    start = time.monotonic()
+    while True:
+      if time.monotonic() - start > timeout:
+        raise Exception('timeout while waiting for container to acquire a ip address')
+      ip_address = container.attrs['NetworkSettings']['Networks'][name]['IPAddress']
+      if ip_address:
+        return ip_address
+      time.sleep(1)
+      container = self._get_container()
 
   def _set_auto_start(self, container):
     # see https://github.com/kubernetes-sigs/kind/blob/v0.16.0/pkg/cluster/internal/providers/docker/provision.go#L142-L166
