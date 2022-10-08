@@ -15,9 +15,13 @@
     create_namespace: true
     update_repo_cache: true
     values:
+      # configure the service.
       service:
         type: LoadBalancer
+      # configure the ports.
       ports:
+        web:
+          redirectTo: websecure
         websecure:
           tls:
             enabled: true
