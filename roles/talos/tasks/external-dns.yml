@@ -158,10 +158,11 @@
     update_repo_cache: true
     values:
       logLevel: debug
+      policy: sync
+      txtOwnerId: k8s
       interval: 30s
       sources:
         - ingress
-      txtOwnerId: k8s
       domainFilters:
         - '{{ cluster_name }}.{{ cluster_domain }}'
       provider: pdns
