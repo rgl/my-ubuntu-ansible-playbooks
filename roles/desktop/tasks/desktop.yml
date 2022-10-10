@@ -19,6 +19,13 @@
 
 - name: Install gnome-shell-extension-manager
   # see https://github.com/mjakeman/extension-manager
+  # NB from firefox, its not possible to install a GNOME extension directly from
+  #    https://extensions.gnome.org. This happens because Firefox is installed
+  #    as a snap, and it does not have access to chrome-gnome-shell as described
+  #    at:
+  #     https://wiki.gnome.org/action/show/Projects/GnomeShellIntegration/Installation
+  #    as such we have to use gnome-shell-extension-manager to manage the GNOME
+  #    extensions.
   ansible.builtin.apt:
     name: gnome-shell-extension-manager
 
