@@ -34,6 +34,15 @@
         name: selfsigned
       spec:
         selfSigned: {}
+  register: result
+  # NB we have to retry until the cert-manager-webhook endpoint is
+  #    available. while its starting, it will fail with:
+  #       Internal error occurred: failed calling webhook "webhook.cert-manager.io":
+  #       failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s":
+  #       dial tcp 10.96.84.9:443: connect: connection refused","reason":"InternalError
+  until: result is succeeded
+  retries: 10
+  delay: 5
 
 - name: Create Kubernetes Ingress CA Certificate
   kubernetes.core.k8s:
