@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Android Studio
+Terminal=false
+Exec=/usr/local/bin/android-studio
+Icon=/opt/android-studio/bin/studio.svg
+Categories=Development;IDE;

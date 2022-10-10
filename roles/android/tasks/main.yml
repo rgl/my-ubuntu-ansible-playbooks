@@ -1,0 +1,26 @@
+- name: Install Android Studio
+  block:
+    - name: Install Android Studio
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: "{{ lookup('file', 'install-android-studio.sh') }}"
+      environment:
+        ANDROID_STUDIO_VERSION: "{{ android_studio_version }}"
+      register: result
+      changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+    - name: Install android-studio symlink
+      ansible.builtin.file:
+        src: /opt/android-studio/bin/studio.sh
+        dest: /usr/local/bin/android-studio
+        force: true
+        state: link
+    - name: Create system local applications directory
+      ansible.builtin.file:
+        name: /usr/local/share/applications
+        state: directory
+        mode: 0755
+    - name: Install Android Studio desktop file
+      ansible.builtin.copy:
+        src: android-studio.desktop
+        dest: /usr/local/share/applications
+        mode: 0444
