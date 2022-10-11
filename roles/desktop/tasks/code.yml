@@ -66,6 +66,9 @@
     # see https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml
     # NB be aware of https://github.com/microsoft/vscode/issues/49210
     - samuelcolvin.jinjahtml
+    # Spell checker.
+    # see https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+    - streetsidesoftware.code-spell-checker
 
 - name: Set Visual Studio Code as the text/plain default editor
   become_user: '{{ ansible_user }}'
