@@ -55,8 +55,17 @@ RETURN = '''
 #     # NB InstallRemoteExtension asks the user confirmation.
 #     shell_extensions.InstallRemoteExtension('sensory-perception@HarlemSquirrel.github.io')
 #     ```
-# * this would allow the current session to be aware of the extension, but it does not seem to work:
+# * this would allow the current session to be aware of the extension, but its
+#   not a viable solution, because it would require something, e.g.:
+#     * https://wiki.gnome.org/Projects/GnomeShell/LookingGlass
+#     * an extension like https://github.com/linushdot/unsafe-mode-menu
+#   to set the GNOME shell to the unsafe mode by running something like:
+#     * global.context.unsafe_mode = true
+#   or would require you to start the GNOME shell with the `--unsafe-mode`
+#   argument to allow any code to use `shell.Eval`.
 #     ```python
+#     import dbus
+#     bus = dbus.SessionBus()
 #     shell_proxy = bus.get_object("org.gnome.Shell", "/org/gnome/Shell")
 #     shell = dbus.Interface(shell_proxy, "org.gnome.Shell")
 #     shell.Eval('''
