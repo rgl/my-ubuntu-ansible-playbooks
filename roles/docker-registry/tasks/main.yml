@@ -30,7 +30,7 @@
 - name: Create the registry container
   community.docker.docker_container:
     name: registry
-    image: '{{ docker_registry_image }}'
+    image: 'registry:{{ docker_registry_image_version }}'
     restart_policy: unless-stopped
     ports:
       - 127.0.0.1:5000:5000/tcp

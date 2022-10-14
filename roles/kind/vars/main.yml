@@ -4,11 +4,14 @@ provision_username: '{{ ansible_user }}'
 provision_password: '{{ ansible_password }}'
 
 # see https://github.com/kubernetes-sigs/kind/releases
-# see https://hub.docker.com/r/kindest/node/tags
+# renovate: datasource=github-releases depName=kubernetes-sigs/kind
 kind_version: '0.16.0'
+# see https://hub.docker.com/r/kindest/node/tags
+# renovate: datasource=docker depName=kindest/node
 kind_node_image_version: '1.25.2'
 
 # see https://github.com/databus23/helm-diff/releases
+# renovate: datasource=github-releases depName=databus23/helm-diff
 helm_diff_version: '3.6.0'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
@@ -29,12 +32,14 @@ external_dns_chart_version: '6.10.2' # app version: 0.12.2
 # see https://hub.docker.com/r/powerdns/pdns-auth-46
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
+# renovate: datasource=docker depName=powerdns/pdns-auth-46
 pdns_version: '4.6.3' # app version: 4.6.3
 
 # see https://artifacthub.io/packages/helm/yugabyte/yugabyte
 yugabytedb_chart_version: '2.15.2' # app version: 2.15.2.0-b87
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
-# see https://hub.docker.com/r/dpage/pgadmin4/tags
 pgadmin_chart_version: '1.12.2'
+# see https://hub.docker.com/r/dpage/pgadmin4/tags
+# renovate: datasource=docker depName=dpage/pgadmin4
 pgadmin_chart_app_version: '6.14'

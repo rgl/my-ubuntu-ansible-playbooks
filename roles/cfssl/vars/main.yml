@@ -1,3 +1,4 @@
 # see https://github.com/cloudflare/cfssl/releases
 # see https://github.com/cloudflare/cfssl
+# renovate: datasource=github-releases depName=cloudflare/cfssl
 cfssl_version: '1.6.3'
