@@ -7,7 +7,7 @@ provision_password: '{{ ansible_password }}'
 helm_diff_version: '3.6.0'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
-metallb_chart_version: '4.1.5' # app version: 0.13.5
+metallb_chart_version: '4.1.8' # app version: 0.13.7
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 cert_manager_chart_version: '1.10.0' # app version: 1.10.0
