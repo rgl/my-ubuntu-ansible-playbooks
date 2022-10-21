@@ -1,3 +1,4 @@
 # see https://github.com/hashicorp/packer/releases
 # NB execute apt-cache madison packer to known the available versions.
-packer_version: '1.8.3-1'
+# renovate: datasource=github-releases depName=hashicorp/packer
+packer_version: '1.8.3'

@@ -20,7 +20,7 @@
   block:
     - name: Install packer
       ansible.builtin.apt:
-        name: packer={{ packer_version }}
+        name: packer={{ packer_version }}-*
         allow_change_held_packages: true
     - name: Pin packer
       ansible.builtin.dpkg_selections:
