@@ -2,7 +2,7 @@ set -euo pipefail
 
 # bail when already installed.
 if [ -x /opt/pulumi/pulumi ]; then
-    # e.g. v3.42.0
+    # e.g. v3.43.1
     actual_version="$(/opt/pulumi/pulumi version 2>/dev/null | perl -ne '/^v(.+)/ && print $1')"
     if [ "$actual_version" == "$PULUMI_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'

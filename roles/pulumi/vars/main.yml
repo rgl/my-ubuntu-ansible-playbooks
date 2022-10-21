@@ -1,2 +1,3 @@
 # see https://www.pulumi.com/docs/get-started/install/versions/
-pulumi_version: '3.42.0'
+# renovate: datasource=github-releases depName=pulumi/pulumi
+pulumi_version: '3.43.1'
