@@ -1,23 +1,24 @@
+# wget -qO vagrant-smb-9948.patch https://github.com/hashicorp/vagrant/pull/9948.patch
 # see https://github.com/hashicorp/vagrant/pull/9948
-From ed7139fa1e896d0b84ed32180b72a647bf9f37eb Mon Sep 17 00:00:00 2001
+From b8a414be610d2e6eca4950eb17fd0ee7334ba9fa Mon Sep 17 00:00:00 2001
 From: Rui Lopes <rgl@ruilopes.com>
 Date: Sun, 24 Jun 2018 14:13:52 +0100
 Subject: [PATCH] add smb capability to linux hosts
 
 ---
- .../linux/cap/configured_ip_addresses.rb      | 17 ++++
+ .../linux/cap/configured_ip_addresses.rb      | 19 +++++
  plugins/hosts/linux/cap/smb.rb                | 79 +++++++++++++++++++
  plugins/hosts/linux/plugin.rb                 | 20 +++++
- 3 files changed, 116 insertions(+)
+ 3 files changed, 118 insertions(+)
  create mode 100644 plugins/hosts/linux/cap/configured_ip_addresses.rb
  create mode 100644 plugins/hosts/linux/cap/smb.rb
 
 diff --git a/plugins/hosts/linux/cap/configured_ip_addresses.rb b/plugins/hosts/linux/cap/configured_ip_addresses.rb
 new file mode 100644
-index 00000000000..f96da720490
+index 00000000000..cc39188d8b7
 --- /dev/null
 +++ b/plugins/hosts/linux/cap/configured_ip_addresses.rb
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,19 @@
 +require "socket"
 +
 +module VagrantPlugins
@@ -26,7 +27,9 @@ index 00000000000..f96da720490
 +      class ConfiguredIPAddresses
 +        def self.configured_ip_addresses(env)
 +          Socket.getifaddrs.map do |interface|
-+            if interface.addr.ipv4? && !interface.addr.ipv4_loopback?
++            # NB we must check for nil because some interfaces managed by
++            #    wireguard might not have an address.
++            if interface.addr != nil && interface.addr.ipv4? && !interface.addr.ipv4_loopback?
 +              interface.addr.ip_address
 +            end
 +          end.compact
