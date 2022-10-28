@@ -1,0 +1,36 @@
+# NB to configure netbird, you still need to connect from the ui or
+#    execute sudo netbird up.
+# see https://github.com/netbirdio/netbird
+# see https://app.netbird.io/add-peer
+
+- name: Add the wiretrustee apt key
+  ansible.builtin.apt_key:
+    url: https://pkgs.wiretrustee.com/debian/public.key
+    state: present
+
+- name: Add the wiretrustee repository
+  ansible.builtin.apt_repository:
+    repo: deb https://pkgs.wiretrustee.com/debian stable main
+    state: present
+
+- name: Install netbird
+  block:
+    - name: Install netbird
+      ansible.builtin.apt:
+        name:
+          - netbird={{ netbird_version }}
+          - netbird-ui={{ netbird_version }}
+        allow_change_held_packages: true
+    - name: Pin netbird
+      ansible.builtin.dpkg_selections:
+        name: '{{ item }}'
+        selection: hold
+      loop:
+        - netbird
+        - netbird-ui
+
+- name: Install wireguard tools
+  # NB this is not strictly required, but it allows us to use the wg
+  #    command to further inspect things.
+  ansible.builtin.apt:
+    name: wireguard-tools

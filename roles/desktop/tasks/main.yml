@@ -1,6 +1,9 @@
 - name: Install Desktop
   ansible.builtin.include_tasks: desktop.yml
 
+- name: Install netbird
+  ansible.builtin.include_tasks: netbird.yml
+
 - name: Install Firefox
   ansible.builtin.include_tasks: firefox.yml
 
