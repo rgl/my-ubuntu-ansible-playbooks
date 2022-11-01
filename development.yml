@@ -26,6 +26,7 @@
     - vagrant
     - go
     - rust
+    - wasmer
     - dotnet-sdk
     - nodejs
     - pulumi
