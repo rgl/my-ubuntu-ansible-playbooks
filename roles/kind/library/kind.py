@@ -37,7 +37,7 @@ EXAMPLES = '''
 - name: Create cluster
   kind:
     name: kind
-    node_image_version: 1.25.2
+    node_image_version: 1.25.3
     auto_start: false
 '''
 
@@ -129,7 +129,7 @@ class Kind(AnsibleModule):
       container = self._get_container()
 
   def _set_auto_start(self, container):
-    # see https://github.com/kubernetes-sigs/kind/blob/v0.16.0/pkg/cluster/internal/providers/docker/provision.go#L142-L166
+    # see https://github.com/kubernetes-sigs/kind/blob/v0.17.0/pkg/cluster/internal/providers/docker/provision.go#L142-L166
     actual = container.attrs['HostConfig']['RestartPolicy']
     if self.params['auto_start']:
       expected = {

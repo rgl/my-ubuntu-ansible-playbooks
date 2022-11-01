@@ -2,7 +2,7 @@ set -euo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/kind ]; then
-    # e.g. kind v0.16.0 go1.19.1 linux/amd64
+    # e.g. kind v0.17.0 go1.19.2 linux/amd64
     actual_version="$(/usr/local/bin/kind version | perl -ne '/^kind v(.+?) / && print $1')"
     if [ "$actual_version" == "$KIND_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
