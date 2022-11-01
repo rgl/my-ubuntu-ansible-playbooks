@@ -4,4 +4,4 @@ httptoolkit_version: '1.11.0'
 
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
-netbird_version: '0.10.2'
+netbird_version: '0.10.3'
