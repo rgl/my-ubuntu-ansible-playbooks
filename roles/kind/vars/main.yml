@@ -46,7 +46,9 @@ pdns_version: '4.6.3' # app version: 4.6.3
 yugabytedb_chart_version: '2.15.3' # app version: 2.15.3.0-b231
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
-pgadmin_chart_version: '1.12.2'
+# renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
+pgadmin_chart_version: '1.13.6'
+
 # see https://hub.docker.com/r/dpage/pgadmin4/tags
-# renovate: datasource=docker depName=dpage/pgadmin4
-pgadmin_chart_app_version: '6.14'
+# renovate: datasource=docker depName=dpage/pgadmin4 versioning=semver-coerced
+pgadmin_chart_app_version: '6.15'
