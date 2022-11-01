@@ -8,6 +8,7 @@ provision_password: '{{ ansible_password }}'
 k3d_version: '5.4.6'
 
 # see https://github.com/databus23/helm-diff/releases
+# renovate: datasource=github-releases depName=databus23/helm-diff
 helm_diff_version: '3.6.0'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
@@ -15,6 +16,7 @@ helm_diff_version: '3.6.0'
 metallb_chart_version: '4.1.10' # app version: 0.13.7
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
+# renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
 cert_manager_chart_version: '1.10.0' # app version: 1.10.0
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
@@ -22,6 +24,7 @@ cert_manager_chart_version: '1.10.0' # app version: 1.10.0
 traefik_chart_version: '18.3.0' # app version: 2.9.1
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
+# renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
 kubernetes_dashboard_chart_version: '5.11.0' # app version: 2.7.0
 
 # see https://artifacthub.io/packages/helm/bitnami/external-dns
@@ -31,4 +34,5 @@ external_dns_chart_version: '6.11.2' # app version: 0.13.1
 # see https://hub.docker.com/r/powerdns/pdns-auth-46
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
+# renovate: datasource=docker depName=powerdns/pdns-auth-46
 pdns_version: '4.6.3' # app version: 4.6.3
