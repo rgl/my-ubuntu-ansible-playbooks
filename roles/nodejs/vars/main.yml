@@ -1,2 +1,3 @@
 # see https://nodejs.org/en/
-nodejs_version: '16.17.1'
+# renovate: datasource=node depName=node
+nodejs_version: '16.18.0'
