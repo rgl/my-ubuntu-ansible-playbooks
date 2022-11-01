@@ -25,6 +25,7 @@
     - terraform
     - vagrant
     - go
+    - rust
     - dotnet-sdk
     - nodejs
     - pulumi
