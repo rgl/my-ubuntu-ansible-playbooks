@@ -17,7 +17,8 @@ metallb_chart_version: '4.1.10' # app version: 0.13.7
 cert_manager_chart_version: '1.10.0' # app version: 1.10.0
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
-traefik_chart_version: '16.0.0' # app version: 2.9.1
+# renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
+traefik_chart_version: '18.3.0' # app version: 2.9.1
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 kubernetes_dashboard_chart_version: '5.11.0' # app version: 2.7.0
