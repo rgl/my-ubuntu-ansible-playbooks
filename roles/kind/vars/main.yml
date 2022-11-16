@@ -29,7 +29,7 @@ traefik_chart_version: '19.0.3' # app version: 2.9.1
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 # renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
-kubernetes_dashboard_chart_version: '5.11.0' # app version: 2.7.0
+kubernetes_dashboard_chart_version: '6.0.0' # app version: 2.7.0
 
 # see https://artifacthub.io/packages/helm/bitnami/external-dns
 # renovate: datasource=helm depName=external-dns registryUrl=https://charts.bitnami.com/bitnami
