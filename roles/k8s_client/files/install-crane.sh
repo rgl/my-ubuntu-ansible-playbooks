@@ -2,11 +2,11 @@
 set -euo pipefail
 
 # see https://github.com/google/go-containerregistry/releases
-version="${CRANE_VERSION:-0.12.0}"
+version="${CRANE_VERSION:-0.12.1}"
 
 # bail when already installed.
 if [ -x "/usr/local/bin/crane" ]; then
-  # e.g. 0.12.0
+  # e.g. 0.12.1
   actual_version="$(/usr/local/bin/crane version)"
   if [ "$actual_version" == "$version" ]; then
     echo 'ANSIBLE CHANGED NO'
