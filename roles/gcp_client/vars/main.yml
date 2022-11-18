@@ -2,4 +2,4 @@
 # see https://cloud.google.com/sdk/docs/downloads-versioned-archives
 # NB execute apt-cache madison google-cloud-cli to known the available versions.
 # renovate: datasource=github-tags depName=GoogleCloudPlatform/cloud-sdk-docker
-gcloud_cli_version: '408.0.1'
+gcloud_cli_version: '410.0.0'
