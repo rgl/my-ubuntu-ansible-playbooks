@@ -27,8 +27,8 @@ kubernetes_dashboard_chart_version: '5.11.0' # app version: 2.7.0
 # renovate: datasource=helm depName=external-dns registryUrl=https://charts.bitnami.com/bitnami
 external_dns_chart_version: '6.11.3' # app version: 0.13.1
 
-# see https://hub.docker.com/r/powerdns/pdns-auth-46
+# see https://hub.docker.com/r/powerdns/pdns-auth-47
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
-# renovate: datasource=docker depName=powerdns/pdns-auth-46
-pdns_version: '4.6.3'
+# renovate: datasource=docker depName=powerdns/pdns-auth-47
+pdns_version: '4.7.2'
