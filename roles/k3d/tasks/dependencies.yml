@@ -1,5 +1,5 @@
 - name: Install dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - python3-kubernetes
       - python3-docker

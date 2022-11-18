@@ -1,13 +1,24 @@
-- include_tasks: dependencies.yml
-- block:
-    - include_tasks: helm-diff.yml
-    - include_tasks: cluster.yml
-    - include_tasks: metallb.yml
-    - include_tasks: cert-manager.yml
-    - include_tasks: traefik.yml
-    - include_tasks: external-dns.yml
-    - include_tasks: kubernetes-dashboard.yml
-    - include_tasks: host.yml
+- name: Install dependencies
+  ansible.builtin.include_tasks: dependencies.yml
+- name: Install Kubernetes
   become: true
   become_user: '{{ provision_username }}'
-- include_tasks: dns.yml
+  block:
+    - name: Install helm-diff
+      ansible.builtin.include_tasks: helm-diff.yml
+    - name: Install the k8s cluster
+      ansible.builtin.include_tasks: cluster.yml
+    - name: Install MetalLB
+      ansible.builtin.include_tasks: metallb.yml
+    - name: Install cert-manager
+      ansible.builtin.include_tasks: cert-manager.yml
+    - name: Install Traefik
+      ansible.builtin.include_tasks: traefik.yml
+    - name: Install external-dns
+      ansible.builtin.include_tasks: external-dns.yml
+    - name: Install kubernetes-dashboard
+      ansible.builtin.include_tasks: kubernetes-dashboard.yml
+    - name: Configure the host
+      ansible.builtin.include_tasks: host.yml
+- name: Configure the host DNS
+  ansible.builtin.include_tasks: dns.yml
