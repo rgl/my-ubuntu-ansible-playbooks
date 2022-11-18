@@ -13,21 +13,21 @@
     - role: kvm
       when: "'kvm' in ansible_virtualization_tech_host"
     - docker
-    - docker-registry
+    - docker_registry
     - powershell
     - yq
     - talosctl
-    - k8s-client
-    - azure-client
-    - gcp-client
-    - vmware-client
+    - k8s_client
+    - azure_client
+    - gcp_client
+    - vmware_client
     - packer
     - terraform
     - vagrant
     - go
     - rust
     - wasmer
-    - dotnet-sdk
+    - dotnet_sdk
     - nodejs
     - pulumi
     - cue
