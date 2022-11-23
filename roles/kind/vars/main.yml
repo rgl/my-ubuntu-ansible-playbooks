@@ -25,7 +25,7 @@ cert_manager_chart_version: '1.10.1' # app version: 1.10.1
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
-traefik_chart_version: '20.3.0' # app version: 2.9.4
+traefik_chart_version: '20.5.1' # app version: 2.9.4
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 # renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
