@@ -1,6 +1,6 @@
 # see https://github.com/httptoolkit/httptoolkit-desktop/releases
 # renovate: datasource=github-releases depName=httptoolkit/httptoolkit-desktop
-httptoolkit_version: '1.12.0'
+httptoolkit_version: '1.12.1'
 
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
