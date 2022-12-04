@@ -7,6 +7,9 @@
 - name: Install Firefox
   ansible.builtin.include_tasks: firefox.yml
 
+- name: Install Google Chrome
+  ansible.builtin.include_tasks: google_chrome.yml
+
 - name: Install gsmartcontrol
   ansible.builtin.include_tasks: gsmartcontrol.yml
 
