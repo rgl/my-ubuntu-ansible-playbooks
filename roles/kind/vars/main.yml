@@ -39,7 +39,7 @@ external_dns_chart_version: '6.12.1' # app version: 0.13.1
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
 # renovate: datasource=docker depName=powerdns/pdns-auth-47
-pdns_version: '4.7.2' # app version: 4.7.2
+pdns_version: '4.7.3' # app version: 4.7.3
 
 # see https://artifacthub.io/packages/helm/yugabyte/yugabyte
 # renovate: datasource=helm depName=yugabyte registryUrl=https://charts.yugabyte.com
