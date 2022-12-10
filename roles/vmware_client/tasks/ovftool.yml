@@ -1,30 +1,8 @@
 - name: Install ovftool
-  ansible.builtin.shell:
+  args:
     executable: /bin/bash
-    cmd: |
-      set -euo pipefail
-
-      # see https://github.com/docker/compose/releases
-      ovftool_version='{{ ovftool_version }}'
-
-      # bail when already installed.
-      if [ -f /usr/local/bin/ovftool ]; then
-        # e.g. VMware ovftool 4.4.3 (build-18663434)
-        actual_version="$(/usr/local/bin/ovftool --version | perl -ne '/^VMware ovftool (.+) \(build(-.+)\)/ && print "$1$2"')"
-        if [ "$actual_version" == "$ovftool_version" ]; then
-          echo 'ANSIBLE CHANGED NO'
-          exit 0
-        fi
-      fi
-
-      # download.
-      url="https://github.com/rgl/ovftool-binaries/raw/main/archive/VMware-ovftool-$ovftool_version-lin.x86_64.zip"
-      wget -q -O /tmp/ovftool.zip $url
-
-      # install.
-      unzip -q -d /opt /tmp/ovftool.zip
-      rm /tmp/ovftool.zip
-      ln -fs /etc/ssl/certs/ca-certificates.crt /opt/ovftool/certs/cacert.pem
-      ln -fs /opt/ovftool/ovftool /usr/local/bin/
+  ansible.builtin.shell: "{{ lookup('file', 'install-ovftool.sh') }}"
+  environment:
+    OVFTOOL_VERSION: "{{ ovftool_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
