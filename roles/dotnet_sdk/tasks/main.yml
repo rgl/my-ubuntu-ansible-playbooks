@@ -30,13 +30,7 @@
     update_cache: true
 
 - name: Install dotnet-sdk
-  block:
-    - name: Install dotnet-sdk
-      ansible.builtin.apt:
-        name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}={{ dotnet_sdk_version }}-1 # e.g. dotnet-sdk-6.0=6.0.202-1
-        allow_change_held_packages: true
-        state: present
-    - name: Pin dotnet-sdk
-      ansible.builtin.dpkg_selections:
-        name: dotnet-sdk-{{ (dotnet_sdk_version | split('.'))[:2] | join('.') }}
-        selection: hold
+  ansible.builtin.include_tasks: dotnet_sdk.yml
+  loop:
+    - '{{ dotnet_sdk_lts_version }}'
+    - '{{ dotnet_sdk_sts_version }}'

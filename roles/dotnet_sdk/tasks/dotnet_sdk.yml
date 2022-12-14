@@ -1,0 +1,10 @@
+- name: Install dotnet-sdk
+  ansible.builtin.apt:
+    name: dotnet-sdk-{{ (item | split('.'))[:2] | join('.') }}={{ item }}-1 # e.g. dotnet-sdk-6.0=6.0.202-1
+    allow_change_held_packages: true
+    state: present
+
+- name: Pin dotnet-sdk
+  ansible.builtin.dpkg_selections:
+    name: dotnet-sdk-{{ (item | split('.'))[:2] | join('.') }}
+    selection: hold
