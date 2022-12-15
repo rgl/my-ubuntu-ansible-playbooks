@@ -8,6 +8,16 @@
       ansible.builtin.debug:
         var: helm_releases.stdout
 
+- name: Show Kubernetes Nodes
+  block:
+    - name: Get Kubernetes Nodes
+      ansible.builtin.command: kubectl get nodes
+      register: kubernetes_nodes
+      changed_when: false
+    - name: Show Kubernetes Nodes
+      ansible.builtin.debug:
+        var: kubernetes_nodes.stdout
+
 - name: Show Kubernetes Ingresses
   block:
     - name: Get Kubernetes Ingresses

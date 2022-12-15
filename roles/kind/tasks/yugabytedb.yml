@@ -93,7 +93,7 @@
     namespace: yugabytedb
     definition:
       # see https://kubernetes.io/docs/concepts/services-networking/ingress/
-      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#ingress-v1-networking-k8s-io
+      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#ingress-v1-networking-k8s-io
       apiVersion: networking.k8s.io/v1
       kind: Ingress
       metadata:
@@ -145,7 +145,7 @@
     namespace: yugabytedb
     definition:
       # see https://kubernetes.io/docs/concepts/services-networking/ingress/
-      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#ingress-v1-networking-k8s-io
+      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#ingress-v1-networking-k8s-io
       apiVersion: networking.k8s.io/v1
       kind: Ingress
       metadata:
