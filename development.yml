@@ -18,6 +18,7 @@
     - yq
     - talosctl
     - k8s_client
+    - aws_client
     - azure_client
     - gcp_client
     - vmware_client

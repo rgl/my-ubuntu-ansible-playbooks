@@ -1,0 +1,16 @@
+- name: Install aws
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-aws.sh') }}"
+  environment:
+    AWS_VERSION: "{{ aws_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install aws bash completion
+  ansible.builtin.copy:
+    # see https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
+    content: |
+      complete -C /usr/local/bin/aws_completer aws
+    dest: /usr/share/bash-completion/completions/aws
+    mode: 0444
