@@ -5,3 +5,8 @@ httptoolkit_version: '1.12.2'
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
 netbird_version: '0.11.6'
+
+# see https://github.com/ventoy/Ventoy/releases
+# renovate: datasource=github-releases depName=ventoy/Ventoy
+ventoy_version: '1.0.87'
+

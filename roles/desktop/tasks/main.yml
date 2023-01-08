@@ -34,6 +34,9 @@
 - name: Install Remmina
   ansible.builtin.include_tasks: remmina.yml
 
+- name: Install Ventoy
+  ansible.builtin.include_tasks: ventoy.yml
+
 - name: Install VLC
   ansible.builtin.include_tasks: vlc.yml
 

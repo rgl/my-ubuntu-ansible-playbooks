@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Ventoy
+Terminal=false
+Exec=/opt/ventoy/VentoyGUI.x86_64
+Icon=/opt/ventoy/WebUI/static/img/VentoyLogo.png
+Categories=Utility;HardwareSettings;Filesystem;

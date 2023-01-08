@@ -1,0 +1,20 @@
+- name: Install ventoy
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-ventoy.sh') }}"
+  environment:
+    VENTOY_VERSION: "{{ ventoy_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Create system local applications directory
+  ansible.builtin.file:
+    name: /usr/local/share/applications
+    state: directory
+    mode: 0755
+
+- name: Install ventoy desktop file
+  ansible.builtin.copy:
+    src: ventoy.desktop
+    dest: /usr/local/share/applications
+    mode: 0444
