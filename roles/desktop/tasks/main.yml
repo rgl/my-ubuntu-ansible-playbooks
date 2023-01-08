@@ -37,6 +37,9 @@
 - name: Install Ventoy
   ansible.builtin.include_tasks: ventoy.yml
 
+- name: Install Raspberry Pi Imaging Utility
+  ansible.builtin.include_tasks: rpi_imager.yml
+
 - name: Install VLC
   ansible.builtin.include_tasks: vlc.yml
 

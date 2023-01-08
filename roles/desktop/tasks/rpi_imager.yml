@@ -1,0 +1,5 @@
+# see https://github.com/raspberrypi/rpi-imager/releases
+
+- name: Install rpi-imager
+  ansible.builtin.apt:
+    deb: https://github.com/raspberrypi/rpi-imager/releases/download/v{{ rpi_imager_version }}/rpi-imager_{{ rpi_imager_version }}_amd64.deb
