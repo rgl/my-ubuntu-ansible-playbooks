@@ -114,6 +114,9 @@
       # magic packet to its ethernet card.
       # e.g. etherwake -i eth1 00:e0:4c:01:93:a8
       - etherwake
+      # arp-scan lets us discover machines in the LAN.
+      # e.g. arp-scan --localnet --interface eth0
+      - arp-scan
       # xsltproc tool.
       # NB this is required by the libvirt_domain terraform resource to apply
       #    xslt transformations to the libvirt domain xml.
