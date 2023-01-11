@@ -1,4 +1,4 @@
 # see https://go.dev/dl/
 # see https://go.dev/doc/install
 # renovate: datasource=github-tags depName=golang/go extractVersion=go(?<version>.+)
-go_version: '1.19.4'
+go_version: '1.19.5'
