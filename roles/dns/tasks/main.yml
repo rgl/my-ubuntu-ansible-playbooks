@@ -53,6 +53,16 @@
       ansible.builtin.systemd:
         name: systemd-networkd
         state: restarted
+    - name: Install dnsmasq.service.d directory
+      ansible.builtin.file:
+        name: /etc/systemd/system/dnsmasq.service.d
+        state: directory
+        mode: 0755
+    - name: Install dnsmasq daemon service override
+      ansible.builtin.copy:
+        src: override.conf
+        dest: /etc/systemd/system/dnsmasq.service.d/override.conf
+        mode: 0444
 
 - name: Install dnsmasq
   ansible.builtin.apt:
