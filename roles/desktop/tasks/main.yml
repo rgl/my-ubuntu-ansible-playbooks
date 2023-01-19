@@ -22,6 +22,9 @@
 - name: Install Meld
   ansible.builtin.include_tasks: meld.yml
 
+- name: Install Sublime Merge
+  ansible.builtin.include_tasks: sublime_merge.yml
+
 - name: Install Wireshark
   ansible.builtin.include_tasks: wireshark.yml
 

@@ -1,0 +1,14 @@
+# see https://www.sublimemerge.com/docs/linux_repositories
+
+- name: Add the sublimehq-archive-keyring apt key
+  ansible.builtin.apt_key:
+    url: https://download.sublimetext.com/sublimehq-pub.gpg
+    keyring: /usr/share/keyrings/sublimehq-archive-keyring.gpg
+
+- name: Add the sublimetext repository
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/sublimehq-archive-keyring.gpg] https://download.sublimetext.com/ apt/stable/
+
+- name: Install Sublime Merge
+  ansible.builtin.apt:
+    name: sublime-merge
