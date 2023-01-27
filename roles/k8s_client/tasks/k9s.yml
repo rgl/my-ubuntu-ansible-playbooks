@@ -17,7 +17,7 @@
       fi
 
       # download and install.
-      k9s_url="https://github.com/derailed/k9s/releases/download/$k9s_version/k9s_Linux_x86_64.tar.gz"
+      k9s_url="https://github.com/derailed/k9s/releases/download/$k9s_version/k9s_Linux_amd64.tar.gz"
       t="$(mktemp -q -d --suffix=.k9s)"
       wget -qO- "$k9s_url" | tar xzf - -C "$t" k9s
       install -m 755 "$t/k9s" /usr/local/bin/
