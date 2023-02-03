@@ -23,8 +23,8 @@
     - name: Install docker
       ansible.builtin.apt:
         name:
-          - docker-ce=5:{{ docker_version }}~*
-          - docker-ce-cli=5:{{ docker_version }}~*
+          - docker-ce=5:{{ docker_version }}*
+          - docker-ce-cli=5:{{ docker_version }}*
         allow_change_held_packages: true
         state: present
     - name: Pin docker
@@ -34,6 +34,12 @@
       loop:
         - docker-ce
         - docker-ce-cli
+
+- name: Install docker directory
+  ansible.builtin.file:
+    name: /etc/docker
+    state: directory
+    mode: 0750
 
 - name: Install daemon.json
   ansible.builtin.copy:
