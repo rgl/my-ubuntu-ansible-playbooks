@@ -62,7 +62,7 @@ class Dumper(yaml.Dumper):
 
 class K3d(AnsibleModule):
   def __init__(self):
-    # TODO add support for --config https://k3d.io/v5.4.6/usage/configfile/
+    # TODO add support for --config https://k3d.io/v5.4.7/usage/configfile/
     super(K3d, self).__init__(
       argument_spec=dict(
         name=dict(type='str', required=True),
