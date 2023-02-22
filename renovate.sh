@@ -15,7 +15,7 @@ gitea_container_name="$(basename "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")
 
 # see https://hub.docker.com/r/gitea/gitea/tags
 # renovate: datasource=docker depName=gitea/gitea
-gitea_version='1.18.4'
+gitea_version='1.18.5'
 
 # see https://hub.docker.com/r/renovate/renovate/tags
 # renovate: datasource=docker depName=renovate/renovate
