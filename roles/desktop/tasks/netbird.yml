@@ -3,19 +3,19 @@
 # see https://github.com/netbirdio/netbird
 # see https://app.netbird.io/add-peer
 
-- name: Add the wiretrustee apt key
+- name: Add the Wiretrustee apt key
   ansible.builtin.apt_key:
     url: https://pkgs.wiretrustee.com/debian/public.key
     state: present
 
-- name: Add the wiretrustee repository
+- name: Add the Wiretrustee repository
   ansible.builtin.apt_repository:
     repo: deb https://pkgs.wiretrustee.com/debian stable main
     state: present
 
-- name: Install netbird
+- name: Install NetBird
   block:
-    - name: Install netbird
+    - name: Install NetBird
       ansible.builtin.apt:
         name:
           - netbird={{ netbird_version }}
@@ -29,7 +29,12 @@
         - netbird
         - netbird-ui
 
-- name: Install wireguard tools
+- name: Configure NetBird
+  netbird_config:
+    iface_black_list_include:
+      - dns0
+
+- name: Install the WireGuard tools
   # NB this is not strictly required, but it allows us to use the wg
   #    command to further inspect things.
   ansible.builtin.apt:
