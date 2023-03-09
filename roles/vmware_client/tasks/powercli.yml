@@ -1,6 +1,4 @@
 - name: Install powercli
-  # noqa risky-shell-pipe
-  # see https://github.com/ansible/ansible-lint/issues/3161
   ansible.builtin.shell:
     executable: /bin/pwsh
     cmd: |
