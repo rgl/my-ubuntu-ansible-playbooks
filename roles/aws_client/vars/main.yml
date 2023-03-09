@@ -1,4 +1,4 @@
 # see https://github.com/aws/aws-cli/tags
 # see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#cliv2-linux-install
 # renovate: datasource=github-tags depName=aws/aws-cli
-aws_version: '2.11.0'
+aws_version: '2.11.1'
