@@ -2,4 +2,4 @@
 # see https://go.dev/doc/install
 # see https://github.com/golang/go/tags
 # renovate: datasource=github-tags depName=golang/go extractVersion=go(?<version>.+)
-go_version: '1.20.1'
+go_version: '1.20.2'
