@@ -185,3 +185,18 @@
             basedir: '{{ item }}'
             strip: 1
           loop: '{{ vagrant_scp_plugin_directories.stdout_lines }}'
+
+    - name: Patch vagrant-vsphere plugin
+      become: true
+      become_user: '{{ provision_username }}'
+      block:
+        - name: Find vagrant-vsphere plugin directories
+          ansible.builtin.shell: find ~/.vagrant.d/gems -type d -wholename '*/gems/vagrant-vsphere-{{ vagrant_vsphere_plugin_version }}'
+          changed_when: false
+          register: vagrant_vsphere_plugin_directories
+        - name: Patch vagrant-vsphere plugin
+          ansible.posix.patch:
+            src: vagrant-vsphere-ip-wait.patch
+            basedir: '{{ item }}'
+            strip: 1
+          loop: '{{ vagrant_vsphere_plugin_directories.stdout_lines }}'

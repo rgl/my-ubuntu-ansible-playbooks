@@ -1,0 +1,28 @@
+--- a/lib/vSphere/action/get_ssh_info.rb	2023-03-22 12:32:54.844164238 +0000
++++ b/lib/vSphere/action/get_ssh_info.rb	2023-03-22 12:51:01.308117533 +0000
+@@ -21,16 +21,15 @@
+         private
+ 
+         def filter_guest_nic(vm, machine)
+-          return vm.guest.ipAddress unless machine.provider_config.real_nic_ip
+-
+-          interfaces = vm.guest.net.select { |g| g.deviceConfigId.positive? }
+-          ip_addresses = interfaces.map { |i| i.ipConfig.ipAddress.select { |a| a.state == 'preferred' } }.flatten
+-
+-          return (vm.guest.ipAddress || nil) if ip_addresses.empty?
+-
+-          raise Errors::VSphereError.new, :'multiple_interface_with_real_nic_ip_set' if ip_addresses.size > 1
+-
+-          ip_addresses.first.ipAddress
++          # return the ip address of the first nic (the management interface).
++          # TODO it would probably be nice to implement ip_wait_address=0.0.0.0/0
++          #      to return the first IP address that matches the given network,
++          #      just like the vsphere-iso packer builder. or/and an interface
++          #      filter like ip_wait_address_interface=0 too.
++          interface = vm.guest.net.first
++          return nil unless interface
++          ip_addresses = interface.ipConfig.ipAddress.select { |a| a.state == 'preferred' }.flatten
++          return ip_addresses.first.ipAddress
+         end
+ 
+         def get_ssh_info(connection, machine)
