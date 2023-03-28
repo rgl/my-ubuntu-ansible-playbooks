@@ -8,7 +8,7 @@ netbird_version: '0.14.5'
 
 # see https://github.com/ventoy/Ventoy/releases
 # renovate: datasource=github-releases depName=ventoy/Ventoy
-ventoy_version: '1.0.89'
+ventoy_version: '1.0.90'
 
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
