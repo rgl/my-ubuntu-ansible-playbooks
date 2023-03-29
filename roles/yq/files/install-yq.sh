@@ -2,7 +2,7 @@ set -euo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/yq ]; then
-    # e.g. yq (https://github.com/mikefarah/yq/) version v4.32.2
+    # e.g. yq (https://github.com/mikefarah/yq/) version v4.33.1
     actual_version="$(/usr/local/bin/yq --version | perl -ne '/version v?(.+)$/ && print $1')"
     if [ "$actual_version" == "$YQ_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
