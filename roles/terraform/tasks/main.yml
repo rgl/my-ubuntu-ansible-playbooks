@@ -20,7 +20,7 @@
   block:
     - name: Install terraform
       ansible.builtin.apt:
-        name: terraform={{ terraform_version }}
+        name: terraform={{ terraform_version }}-*
         allow_change_held_packages: true
     - name: Pin terraform
       ansible.builtin.dpkg_selections:
