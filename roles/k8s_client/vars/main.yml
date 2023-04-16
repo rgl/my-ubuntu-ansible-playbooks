@@ -17,7 +17,7 @@ crane_version: '0.14.0'
 
 # see https://github.com/regclient/regclient/releases
 # renovate: datasource=github-releases depName=regclient/regclient
-regclient_version: '0.4.7'
+regclient_version: '0.4.8'
 
 # see https://github.com/cert-manager/cert-manager/releases
 # renovate: datasource=github-releases depName=cert-manager/cert-manager
