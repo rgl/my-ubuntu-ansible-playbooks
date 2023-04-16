@@ -48,3 +48,10 @@ List this repository dependencies (and which have newer versions):
 export GITHUB_COM_TOKEN='YOUR_GITHUB_PERSONAL_TOKEN'
 ./renovate.sh
 ```
+
+At the machine where the playbook is provisioned, you can use the
+applications described in the next sections.
+
+## Kubernetes
+
+See [roles/kind](roles/kind/README.md).
