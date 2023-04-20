@@ -7,11 +7,12 @@
 - name: Add the hashicorp apt key
   ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
+    keyring: /etc/apt/keyrings/apt.releases.hashicorp.com.gpg
 
 # see https://www.vagrantup.com/downloads
 - name: Add the hashicorp repository
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+    repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/apt.releases.hashicorp.com.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
 
 # pin the hashicorp repository above the distro ones.
 # see apt-cache policy

@@ -1,11 +1,11 @@
 - name: Add the nodesource apt key
   ansible.builtin.apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-    state: present
+    keyring: /etc/apt/keyrings/deb.nodesource.com.gpg
 
 - name: Add the nodesource apt repository
   ansible.builtin.apt_repository:
-    repo: deb https://deb.nodesource.com/node_{{ nodejs_version.split('.')[0] }}.x {{ ansible_distribution_release }} main
+    repo: deb [signed-by=/etc/apt/keyrings/deb.nodesource.com.gpg] https://deb.nodesource.com/node_{{ nodejs_version.split('.')[0] }}.x {{ ansible_distribution_release }} main
     state: present
 
 # see https://github.com/nodesource/distributions/blob/master/README.md#debmanual

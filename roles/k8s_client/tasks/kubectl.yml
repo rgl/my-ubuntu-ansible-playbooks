@@ -1,12 +1,12 @@
-- name: Add the kubernetes-archive-keyring apt key
+- name: Add the gcp apt key
   ansible.builtin.apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+    keyring: /etc/apt/keyrings/packages.cloud.google.com.gpg
 
 # see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 - name: Add the kubernetes repository
   ansible.builtin.apt_repository:
-    repo: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+    repo: deb [signed-by=/etc/apt/keyrings/packages.cloud.google.com.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
 
 # NB execute apt-cache madison kubectl to known the available versions.
 - name: Install kubectl

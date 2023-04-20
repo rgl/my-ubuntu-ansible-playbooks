@@ -8,12 +8,12 @@
 - name: Add the gcp apt key
   ansible.builtin.apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+    keyring: /etc/apt/keyrings/packages.cloud.google.com.gpg
 
 # see https://cloud.google.com/sdk/docs/install#deb
 - name: Add the gcp repository
   ansible.builtin.apt_repository:
-    repo: deb https://packages.cloud.google.com/apt cloud-sdk main
+    repo: deb [signed-by=/etc/apt/keyrings/packages.cloud.google.com.gpg] https://packages.cloud.google.com/apt cloud-sdk main
     state: present
 
 # NB execute apt-cache madison google-cloud-cli to known the available versions.

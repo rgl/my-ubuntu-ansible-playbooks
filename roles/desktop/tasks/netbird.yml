@@ -6,11 +6,11 @@
 - name: Add the Wiretrustee apt key
   ansible.builtin.apt_key:
     url: https://pkgs.wiretrustee.com/debian/public.key
-    state: present
+    keyring: /etc/apt/keyrings/pkgs.wiretrustee.com.gpg
 
 - name: Add the Wiretrustee repository
   ansible.builtin.apt_repository:
-    repo: deb https://pkgs.wiretrustee.com/debian stable main
+    repo: deb [signed-by=/etc/apt/keyrings/pkgs.wiretrustee.com.gpg] https://pkgs.wiretrustee.com/debian stable main
     state: present
 
 - name: Install NetBird
