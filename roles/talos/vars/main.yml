@@ -31,4 +31,4 @@ external_dns_chart_version: '6.18.0' # app version: 0.13.4
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
 # renovate: datasource=docker depName=powerdns/pdns-auth-47
-pdns_version: '4.7.3'
+pdns_version: '4.7.4'
