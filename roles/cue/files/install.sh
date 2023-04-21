@@ -3,7 +3,7 @@ set -euo pipefail
 # bail when already installed.
 if [ -x /usr/local/bin/cue ]; then
     # e.g. cue version v0.4.1 linux/amd64
-    actual_version="$(/usr/local/bin/cue version | perl -ne '/^cue version v(.+?) / && print $1')"
+    actual_version="$(/usr/local/bin/cue version | perl -ne '/^cue version v([^ ]+)/ && print $1')"
     if [ "$actual_version" == "$CUE_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
         exit 0
