@@ -7,7 +7,11 @@
 
 - name: Add the sublimetext repository
   ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/download.sublimetext.com.gpg] https://download.sublimetext.com/ apt/stable/
+    repo: >
+      deb
+      [signed-by=/etc/apt/keyrings/download.sublimetext.com.gpg]
+      https://download.sublimetext.com/
+      apt/stable/
 
 - name: Install Sublime Merge
   ansible.builtin.apt:

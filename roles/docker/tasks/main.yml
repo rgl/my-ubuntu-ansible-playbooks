@@ -13,7 +13,12 @@
 # see https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
 - name: Add the docker repository
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/download.docker.com.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/download.docker.com.gpg]
+      https://download.docker.com/linux/ubuntu
+      {{ ansible_distribution_release }}
+      stable
     state: present
 
 # see https://github.com/moby/moby/releases

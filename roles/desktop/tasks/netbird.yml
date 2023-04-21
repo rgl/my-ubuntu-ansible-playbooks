@@ -10,8 +10,12 @@
 
 - name: Add the Wiretrustee repository
   ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/pkgs.wiretrustee.com.gpg] https://pkgs.wiretrustee.com/debian stable main
-    state: present
+    repo: >
+      deb
+      [signed-by=/etc/apt/keyrings/pkgs.wiretrustee.com.gpg]
+      https://pkgs.wiretrustee.com/debian
+      stable
+      main
 
 - name: Install NetBird
   block:

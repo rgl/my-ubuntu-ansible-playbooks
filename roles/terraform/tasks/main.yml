@@ -12,7 +12,12 @@
 # see https://www.terraform.io/downloads
 - name: Add the hashicorp repository
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/apt.releases.hashicorp.com.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/apt.releases.hashicorp.com.gpg]
+      https://apt.releases.hashicorp.com
+      {{ ansible_distribution_release }}
+      main
 
 # see https://www.terraform.io/downloads
 # see https://github.com/hashicorp/terraform/releases

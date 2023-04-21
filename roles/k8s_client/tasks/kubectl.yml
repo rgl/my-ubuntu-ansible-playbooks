@@ -6,7 +6,12 @@
 # see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 - name: Add the kubernetes repository
   ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/packages.cloud.google.com.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+    repo: >
+      deb
+      [signed-by=/etc/apt/keyrings/packages.cloud.google.com.gpg]
+      https://apt.kubernetes.io/
+      kubernetes-xenial
+      main
 
 # NB execute apt-cache madison kubectl to known the available versions.
 - name: Install kubectl
