@@ -5,7 +5,7 @@ vagrant_version: '2.3.4'
 # see https://rubygems.org/gems/vagrant-libvirt
 # see https://github.com/vagrant-libvirt/vagrant-libvirt
 # renovate: datasource=rubygems depName=vagrant-libvirt
-vagrant_libvirt_plugin_version: '0.11.2'
+vagrant_libvirt_plugin_version: '0.12.0'
 
 # see https://rubygems.org/gems/vagrant-reload
 # see https://github.com/aidanns/vagrant-reload
