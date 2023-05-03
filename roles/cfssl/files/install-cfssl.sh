@@ -1,4 +1,4 @@
-set -euo pipefail
+set -euxo pipefail
 
 changed='false'
 

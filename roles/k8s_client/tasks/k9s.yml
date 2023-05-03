@@ -2,7 +2,7 @@
   ansible.builtin.shell:
     executable: /bin/bash
     cmd: |
-      set -euo pipefail
+      set -euxo pipefail
 
       # see https://github.com/derailed/k9s/releases
       k9s_version='v{{ k9s_version }}'

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 # TODO add support for upgrading the plugin to the latest version.
 

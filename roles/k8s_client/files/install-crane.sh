@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 # see https://github.com/google/go-containerregistry/releases
 version="${CRANE_VERSION:-0.14.0}"

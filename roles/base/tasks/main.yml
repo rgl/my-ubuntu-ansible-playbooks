@@ -22,7 +22,7 @@
   ansible.builtin.shell:
     executable: /bin/bash
     cmd: |
-      set -euo pipefail
+      set -euxo pipefail
       before="$(localectl status | perl -n -e '/ ([A-Z_]+=.+)/ && print "$1\n"')"
       localectl set-locale \
         LANG=en_US.UTF-8 \

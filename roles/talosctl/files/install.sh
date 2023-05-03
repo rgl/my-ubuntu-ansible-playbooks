@@ -1,4 +1,4 @@
-set -euo pipefail
+set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/talosctl ]; then

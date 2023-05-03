@@ -1,4 +1,4 @@
-set -euo pipefail
+set -euxo pipefail
 
 ANDROID_STUDIO_PATH='/opt/android-studio'
 ANDROID_STUDIO_COOKIE_PATH="$ANDROID_STUDIO_PATH/.ansible-android-studio.cookie"

@@ -1,4 +1,4 @@
-set -euo pipefail
+set -euxo pipefail
 
 wasmer="$HOME/.wasmer/bin/wasmer"
 changed='0'

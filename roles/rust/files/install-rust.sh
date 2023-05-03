@@ -1,4 +1,4 @@
-set -euo pipefail
+set -euxo pipefail
 
 cargo_bin="$HOME/.cargo/bin"
 rustc="$cargo_bin/rustc"

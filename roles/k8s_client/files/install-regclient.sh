@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 # see https://github.com/regclient/regclient/releases
 name="${REGCLIENT_NAME:-regctl}"

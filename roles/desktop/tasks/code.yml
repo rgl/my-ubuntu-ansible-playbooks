@@ -21,7 +21,7 @@
       ansible.builtin.shell:
         executable: /bin/bash
         cmd: |
-          set -euo pipefail
+          set -euxo pipefail
           f=~/.config/Code/User/settings.json
           ([ -f "$f" ] && cat "$f" || echo '{}') | yq \
             --output-format json \
@@ -80,7 +80,7 @@
   ansible.builtin.shell:
     executable: /bin/bash
     cmd: |
-      set -euo pipefail
+      set -euxo pipefail
       expected='code.desktop'
       actual="$(xdg-mime query default text/plain)"
       if [ "$actual" == "$expected" ]; then

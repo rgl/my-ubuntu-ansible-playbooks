@@ -1,4 +1,4 @@
-set -euo pipefail
+set -euxo pipefail
 
 # bail when already installed.
 if [ -x /opt/pulumi/pulumi ]; then

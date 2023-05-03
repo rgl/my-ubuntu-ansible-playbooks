@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 # e.g. vagrant-windows-sysprep (0.0.10, global)
 actual_version="$(vagrant plugin list | perl -ne '
