@@ -13,7 +13,7 @@ helm_version: '3.11.3'
 
 # see https://github.com/google/go-containerregistry/releases
 # renovate: datasource=github-releases depName=google/go-containerregistry
-crane_version: '0.14.0'
+crane_version: '0.15.1'
 
 # see https://github.com/regclient/regclient/releases
 # renovate: datasource=github-releases depName=regclient/regclient
