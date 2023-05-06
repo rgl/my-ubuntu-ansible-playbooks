@@ -165,6 +165,12 @@ function show-title {
     echo
 }
 
+# show errors.
+if [ "$(jq --slurp length tmp/renovate-errors.json)" -ne '0' ]; then
+    show-title errors
+    jq . tmp/renovate-errors.json
+fi
+
 # show dependencies.
 function show-dependencies {
     show-title "$1"
@@ -187,12 +193,6 @@ function show-dependencies {
 }
 show-dependencies 'Dependencies' tmp/renovate-dependencies.json
 show-dependencies 'Dependencies Updates' tmp/renovate-dependencies-updates.json
-
-# show errors.
-if [ "$(jq --slurp length tmp/renovate-errors.json)" -ne '0' ]; then
-    show-title errors
-    jq . tmp/renovate-errors.json
-fi
 
 # show the gitea project.
 show-title "See PRs at http://localhost:3000/$RENOVATE_USERNAME/test/pulls (you can login as $RENOVATE_USERNAME:$RENOVATE_PASSWORD)"
