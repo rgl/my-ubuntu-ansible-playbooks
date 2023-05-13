@@ -4,7 +4,7 @@ collections:
     version: 1.5.2
   # see https://galaxy.ansible.com/ansible/utils
   - name: ansible.utils
-    version: 2.9.0
+    version: 2.10.1
   # see https://galaxy.ansible.com/community/general
   - name: community.general
     version: 7.0.0
