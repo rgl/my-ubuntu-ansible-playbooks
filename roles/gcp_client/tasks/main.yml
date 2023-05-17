@@ -13,6 +13,9 @@
 # see https://cloud.google.com/sdk/docs/install#deb
 - name: Add the gcp repository
   ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see https://packages.cloud.google.com/apt/dists/cloud-sdk/Release
+    # see https://packages.cloud.google.com/apt/dists/cloud-sdk/main/binary-amd64/Packages
     repo: >
       deb
       [signed-by=/etc/apt/keyrings/packages.cloud.google.com.gpg]

@@ -13,6 +13,9 @@
 # see https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
 - name: Add the azure-cli repository
   ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see Ubuntu Jammy 22.04: https://packages.microsoft.com/repos/azure-cli/dists/jammy/Release
+    # see Ubuntu Jammy 22.04: https://packages.microsoft.com/repos/azure-cli/dists/jammy/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.gpg]

@@ -7,6 +7,9 @@
 
 - name: Add the sublimetext repository
   ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see https://download.sublimetext.com/apt/stable/Release
+    # see https://download.sublimetext.com/apt/stable/Packages
     repo: >
       deb
       [signed-by=/etc/apt/keyrings/download.sublimetext.com.gpg]

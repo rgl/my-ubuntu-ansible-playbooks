@@ -7,6 +7,9 @@
 
 - name: Add the Visual Studio Code repository
   ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see https://packages.microsoft.com/repos/code/dists/stable/Release
+    # see https://packages.microsoft.com/repos/code/dists/stable/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.gpg]

@@ -13,6 +13,9 @@
 # see https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
 - name: Add the docker repository
   ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see Ubuntu Jammy 22.04: https://download.docker.com/linux/ubuntu/dists/jammy/Release
+    # see Ubuntu Jammy 22.04: https://download.docker.com/linux/ubuntu/dists/jammy/stable/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/download.docker.com.gpg]
