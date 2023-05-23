@@ -3,3 +3,21 @@
     name:
       - remmina
       - remmina-plugin-vnc
+
+- name: Configure remmina
+  become_user: '{{ ansible_user }}'
+  block:
+    - name: Disable tabs grouping
+      community.general.ini_file:
+        path: ~/.config/remmina/remmina.pref
+        section: remmina_pref
+        option: tab_mode  # Tabs grouping.
+        value: '3'        # 0=By group; 1=By protocol; 2=Per connection; 3=None.
+        no_extra_spaces: true
+    - name: Hide tabs
+      community.general.ini_file:
+        path: ~/.config/remmina/remmina.pref
+        section: remmina_pref
+        option: always_show_tab # Always show tabs.
+        value: 'false'
+        no_extra_spaces: true
