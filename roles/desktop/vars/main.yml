@@ -12,4 +12,4 @@ ventoy_version: '1.0.91'
 
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
-rpi_imager_version: '1.7.4'
+rpi_imager_version: '1.7.5'
