@@ -1,3 +1,26 @@
+- name: Add the Google Chrome apt key
+  ansible.builtin.apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+    keyring: /etc/apt/keyrings/dl.google.com.chrome.gpg
+
+- name: Add the Google Chrome repository
+  ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see Ubuntu Jammy 22.04: http://dl.google.com/linux/chrome/deb/dists/stable/Release
+    # see Ubuntu Jammy 22.04: http://dl.google.com/linux/chrome/deb/dists/stable/main/binary-amd64/Packages
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/dl.google.com.chrome.gpg]
+      http://dl.google.com/linux/chrome/deb/
+      stable
+      main
+    state: present
+
+# NB if you are having problems with google chrome, try executing it from the
+#    command line with the --v=1 argument.
+# NB if the log shows skia errors, try to delete your profile GPU cache
+#    directory, which is normally at ~/.config/google-chrome/Default/GPUCache.
 - name: Install Google Chrome
   ansible.builtin.apt:
-    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    name: google-chrome-stable
+    state: latest
