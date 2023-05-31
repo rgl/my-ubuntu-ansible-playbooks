@@ -14,6 +14,7 @@
         option: tab_mode  # Tabs grouping.
         value: '3'        # 0=By group; 1=By protocol; 2=Per connection; 3=None.
         no_extra_spaces: true
+        mode: 0644
     - name: Hide tabs
       community.general.ini_file:
         path: ~/.config/remmina/remmina.pref
@@ -21,3 +22,4 @@
         option: always_show_tab # Always show tabs.
         value: 'false'
         no_extra_spaces: true
+        mode: 0644
