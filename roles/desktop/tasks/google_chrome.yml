@@ -23,4 +23,6 @@
 - name: Install Google Chrome
   ansible.builtin.apt:
     name: google-chrome-stable
-    state: latest
+    # NB we have to use latest because there is only one version available
+    #    at the repository.
+    state: latest # noqa package-latest
