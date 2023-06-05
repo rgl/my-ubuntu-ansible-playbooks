@@ -3,6 +3,13 @@
     # TODO see why the qemu-kvm virtual package stopped installing.
     name: qemu-system-x86
 
+- name: Load the kvm kernel module
+  community.general.modprobe:
+    name: kvm
+    persistent: present
+    params: >
+      ignore_msrs=Y
+
 - name: Install libvirt
   ansible.builtin.apt:
     name: libvirt-daemon-system
