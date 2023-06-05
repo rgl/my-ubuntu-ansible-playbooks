@@ -126,14 +126,10 @@
 - name: Install lm-sensors
   when: ansible_virtualization_role == 'host'
   block:
-    - name: Load the drivetemp kernel module on boot
-      ansible.builtin.copy:
-        dest: /etc/modules-load.d/drivetemp.conf
-        content: drivetemp
-        mode: 0444
     - name: Load the drivetemp kernel module
       community.general.modprobe:
         name: drivetemp
+        persistent: present
     - name: Install lm-sensors
       ansible.builtin.apt:
         name: lm-sensors
