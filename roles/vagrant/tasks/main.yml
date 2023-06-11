@@ -54,6 +54,8 @@
     #    the plugins and install them again later.
     - name: Uninstall all the plugins
       when: vagrant.changed
+      become_user: '{{ provision_username }}'
+      become: true
       ansible.builtin.command: vagrant plugin expunge --force
       changed_when: true
 
