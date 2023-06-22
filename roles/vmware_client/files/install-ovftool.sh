@@ -1,5 +1,8 @@
 set -euxo pipefail
 
+# transform version from <major>.<minor>.<patch>.<build> to <major>.<minor>.<patch>-<build>.
+OVFTOOL_VERSION="$(echo "$OVFTOOL_VERSION" | perl -ne '/^(.+)\.(.+?)$/ && print "$1-$2"')"
+
 # bail when already installed.
 if [ -f /usr/local/bin/ovftool ]; then
     # e.g. VMware ovftool 4.5.0 (build-20459872)
