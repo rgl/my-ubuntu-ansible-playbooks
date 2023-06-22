@@ -3,8 +3,10 @@
 govc_version: '0.30.4'
 
 # see https://github.com/rgl/ovftool-binaries
+# renovate: datasource=github-tags depName=rgl/ovftool-binaries versioning=loose
 ovftool_version: '4.5.0-20459872'
 
 # see https://www.powershellgallery.com/packages/VMware.PowerCLI
 # see https://developer.vmware.com/web/tool/13.0.0/vmware-powercli
+# renovate: datasource=nuget:powershellgallery depName=VMware.PowerCLI
 powercli_version: '13.0.0.20829139'
