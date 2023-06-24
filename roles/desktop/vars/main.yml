@@ -4,7 +4,7 @@ httptoolkit_version: '1.12.7'
 
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
-netbird_version: '0.21.5'
+netbird_version: '0.21.7'
 
 # see https://github.com/ventoy/Ventoy/releases
 # renovate: datasource=github-releases depName=ventoy/Ventoy
