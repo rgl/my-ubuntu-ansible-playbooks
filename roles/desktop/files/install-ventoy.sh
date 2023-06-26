@@ -2,7 +2,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -r /opt/ventoy/ventoy/version ]; then
-    # e.g. 1.0.91
+    # e.g. 1.0.93
     actual_version="$(cat /opt/ventoy/ventoy/version)"
     if [ "$actual_version" == "$VENTOY_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
