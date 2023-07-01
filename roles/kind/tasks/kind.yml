@@ -1,3 +1,20 @@
+- name: Bump the inotify resource limits
+  # NB this prevents the "too many open files" errors.
+  # see https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files
+  block:
+    - name: Configure the inotify resource limits
+      ansible.builtin.copy:
+        content: |
+          fs.inotify.max_user_watches = 524288
+          fs.inotify.max_user_instances = 512
+        dest: /etc/sysctl.d/20-inotify.conf
+        mode: 0644
+      register: result
+    - name: Set the inotify resource limits
+      ansible.builtin.command: sysctl -p /etc/sysctl.d/20-inotify.conf
+      when: result.changed
+      changed_when: result.changed
+
 - name: Install kind
   args:
     executable: /bin/bash
