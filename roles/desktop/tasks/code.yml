@@ -22,6 +22,14 @@
   ansible.builtin.apt:
     name: code
 
+# NB the code debian package has some code to create this extraneous
+#    vscode.list file, but it conflicts with the microsoft apt repository
+#    that was created above, so it must be removed.
+- name: Remove vscode.list
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/vscode.list
+    state: absent
+
 - name: Configure Visual Studio Code
   become_user: '{{ ansible_user }}'
   block:
