@@ -62,13 +62,13 @@
         content: '{{ settings.stdout }}'
         mode: 0644
 
-- name: Install code plugin
+- name: Install code extension
   become_user: '{{ ansible_user }}'
   args:
     executable: /bin/bash
-  ansible.builtin.shell: "{{ lookup('file', 'install-code-plugin.sh') }}"
+  ansible.builtin.shell: "{{ lookup('file', 'install-code-extension.sh') }}"
   environment:
-    CODE_PLUGIN_NAME: "{{ item }}"
+    CODE_EXTENSION_NAME: "{{ item }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
   loop:
