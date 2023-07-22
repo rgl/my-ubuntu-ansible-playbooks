@@ -99,6 +99,9 @@
     # Svelte language support.
     # see https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode
     - svelte.svelte-vscode
+    # GitHub Actions.
+    # see https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
+    - github.vscode-github-actions
 
 - name: Set Visual Studio Code as the text/plain default editor
   become_user: '{{ ansible_user }}'
