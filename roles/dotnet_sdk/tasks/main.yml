@@ -5,10 +5,23 @@
     dest: /etc/profile.d/opt-out-dotnet-cli-telemetry.sh
     mode: 0444
 
-- name: Install Microsoft APT repository
-  ansible.builtin.apt:
-    deb: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb
-  register: repository
+- name: Add the Microsoft APT repository key
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    keyring: /etc/apt/keyrings/packages.microsoft.com.gpg
+
+- name: Add the dotnet-sdk repository
+  ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see https://packages.microsoft.com/ubuntu/22.04/prod/dists/jammy/Release
+    # see https://packages.microsoft.com/ubuntu/22.04/prod/dists/jammy/main/binary-amd64/Packages
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.gpg]
+      https://packages.microsoft.com/ubuntu/{{ ansible_distribution_version }}/prod
+      {{ ansible_distribution_release }}
+      main
+    state: present
 
 # pin the microsoft apt repository packages above the distro ones.
 # see apt-cache policy
@@ -23,11 +36,6 @@
       Pin: origin "packages.microsoft.com"
       Pin-Priority: 999
     mode: 0444
-
-- name: Update APT cache
-  when: repository.changed # noqa no-handler
-  ansible.builtin.apt:
-    update_cache: true
 
 - name: Install dotnet-sdk
   ansible.builtin.include_tasks: dotnet_sdk.yml
