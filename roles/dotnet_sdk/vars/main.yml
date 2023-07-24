@@ -1,7 +1,7 @@
 # see https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 # see https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 # renovate: datasource=dotnet depName=dotnet-sdk extractVersion=^(?<version>6\..+)
-dotnet_sdk_lts_version: '6.0.411' # dotnet 6.0.19
+dotnet_sdk_lts_version: '6.0.412' # dotnet 6.0.20
 
 # see https://dotnet.microsoft.com/en-us/download/dotnet/7.0
 # see https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
