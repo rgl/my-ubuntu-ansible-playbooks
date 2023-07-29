@@ -6,6 +6,12 @@
         name: ~/Projects
         state: directory
         mode: 0755
+    - name: Clone debian-vagrant
+      ansible.builtin.git:
+        repo: https://github.com/rgl/debian-vagrant.git
+        dest: ~/Projects/debian-vagrant
+        version: master
+        update: false
     - name: Clone ubuntu-vagrant
       ansible.builtin.git:
         repo: https://github.com/rgl/ubuntu-vagrant.git
