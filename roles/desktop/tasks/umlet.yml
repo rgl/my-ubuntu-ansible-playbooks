@@ -1,0 +1,30 @@
+- name: Install Java 17
+  ansible.builtin.apt:
+    name: openjdk-17-jre
+
+- name: Install umlet
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-umlet.sh') }}"
+  environment:
+    UMLET_VERSION: "{{ umlet_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install umlet cli
+  ansible.builtin.copy:
+    src: umlet.sh
+    dest: /usr/local/bin/umlet
+    mode: 0755
+
+- name: Create system local applications directory
+  ansible.builtin.file:
+    name: /usr/local/share/applications
+    state: directory
+    mode: 0755
+
+- name: Install umlet desktop file
+  ansible.builtin.copy:
+    src: umlet.desktop
+    dest: /usr/local/share/applications
+    mode: 0444

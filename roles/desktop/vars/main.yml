@@ -13,3 +13,8 @@ ventoy_version: '1.0.94'
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
 rpi_imager_version: '1.7.5'
+
+# see https://umlet.com
+# see https://github.com/umlet/umlet/tags
+# renovate: datasource=github-tags depName=umlet/umlet extractVersion=.+_UMLet_v(?<version>.+)
+umlet_version: '15.1'

@@ -58,5 +58,8 @@
 - name: Install Transmission
   ansible.builtin.include_tasks: transmission.yml
 
+- name: Install UMLet
+  ansible.builtin.include_tasks: umlet.yml
+
 - name: Install favorites
   ansible.builtin.include_tasks: favorites.yml
