@@ -16,6 +16,14 @@
   ansible.builtin.apt:
     upgrade: dist
 
+# NB ensure the vscode.list file is absent as it messes with the one that we
+#    set in the code role. which in turn, will mess with apt-get update that
+#    is run by the Update cache task bellow.
+- name: Remove vscode.list
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/vscode.list
+    state: absent
+
 - name: Check reboot required
   ansible.builtin.stat:
     path: /var/run/reboot-required
