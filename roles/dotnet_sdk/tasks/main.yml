@@ -27,12 +27,15 @@
 # see apt-cache policy
 # see apt-cache policy dotnet-sdk-6.0
 # see apt-cache showpkg dotnet-sdk-6.0
+# see when there is a mixup between the distribution packages and the microsoft
+#     ones, before installing again, remove all the installed packages with:
+#       sudo apt-get remove --purge 'dotnet*' 'aspnet*' 'netstandard*'
 # see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
 - name: Pin the microsoft apt repository
   ansible.builtin.copy:
     dest: /etc/apt/preferences.d/packages.microsoft.com.pref
     content: |
-      Package: *
+      Package: dotnet* aspnet* netstandard*
       Pin: origin "packages.microsoft.com"
       Pin-Priority: 999
     mode: 0444
