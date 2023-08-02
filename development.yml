@@ -16,6 +16,7 @@
     - docker_registry
     - powershell
     - yq
+    - static_web_server
     - talosctl
     - k8s_client
     - aws_client
