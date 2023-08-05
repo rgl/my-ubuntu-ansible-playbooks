@@ -23,9 +23,12 @@
   block:
     - name: Install NetBird
       ansible.builtin.apt:
-        name:
-          - netbird={{ netbird_version }}
-          - netbird-ui={{ netbird_version }}
+        name: netbird={{ netbird_version }}
+        allow_change_held_packages: true
+      notify: restart netbird
+    - name: Install NetBird UI
+      ansible.builtin.apt:
+        name: netbird-ui={{ netbird_version }}
         allow_change_held_packages: true
     - name: Pin netbird
       ansible.builtin.dpkg_selections:
