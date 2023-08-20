@@ -1,3 +1,12 @@
+# opt-out of telemetry.
+# see https://developer.hashicorp.com/packer/docs/configure#checkpoint_disable
+- name: Opt-out of telemetry
+  ansible.builtin.copy:
+    content: |
+      export CHECKPOINT_DISABLE=1
+    dest: /etc/profile.d/opt-out-hashicorp-telemetry.sh
+    mode: 0444
+
 - name: Ensure apt-get can use https repositories
   ansible.builtin.apt:
     name:
