@@ -1,3 +1,13 @@
+# opt-out of telemetry.
+# see https://www.pulumi.com/docs/cli/environment-variables/#pulumi-cli-environment-variables
+# see https://github.com/beatcracker/toptout/blob/master/data/pulumi.json
+- name: Opt-out of telemetry
+  ansible.builtin.copy:
+    content: |
+      export PULUMI_AUTOMATION_API_SKIP_VERSION_CHECK=true
+    dest: /etc/profile.d/opt-out-pulumi-telemetry.sh
+    mode: 0444
+
 - name: Install pulumi
   args:
     executable: /bin/bash
