@@ -31,7 +31,9 @@
   block:
     - name: Install xrdp
       ansible.builtin.apt:
-        name: xrdp
+        name:
+          - xrdp
+          - xorgxrdp
     - name: Allow the xrdp user to read the machine ssl certificate keys
       ansible.builtin.user:
         name: xrdp
