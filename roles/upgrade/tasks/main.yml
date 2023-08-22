@@ -1,10 +1,13 @@
-# NB ensure the vscode.list file is absent as it messes with the one that we
-#    set in the code role. which in turn, will mess with apt-get update that
-#    is run by the Update cache task bellow.
-- name: Remove vscode.list
+# NB ensure the apt source .list files that are installed by some packages are
+#    removed. they mess with the ones that we set in our roles. which in turn,
+#    will mess with apt-get update that is run by the Update cache task bellow.
+- name: Remove apt source .list
   ansible.builtin.file:
-    path: /etc/apt/sources.list.d/vscode.list
+    path: "/etc/apt/sources.list.d/{{ item }}"
     state: absent
+  with_items:
+    - vscode.list
+    - google-chrome.list
 
 - name: Update cache
   ansible.builtin.apt:
@@ -16,13 +19,16 @@
   ansible.builtin.apt:
     upgrade: dist
 
-# NB ensure the vscode.list file is absent as it messes with the one that we
-#    set in the code role. which in turn, will mess with apt-get update that
-#    is run by the Update cache task bellow.
-- name: Remove vscode.list
+# NB ensure the apt source .list files that are installed by some packages are
+#    removed. they mess with the ones that we set in our roles. which in turn,
+#    will mess with apt-get update that is run by the Update cache task bellow.
+- name: Remove apt source .list
   ansible.builtin.file:
-    path: /etc/apt/sources.list.d/vscode.list
+    path: "/etc/apt/sources.list.d/{{ item }}"
     state: absent
+  with_items:
+    - vscode.list
+    - google-chrome.list
 
 - name: Check reboot required
   ansible.builtin.stat:
