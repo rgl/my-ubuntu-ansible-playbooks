@@ -9,7 +9,7 @@ helm_diff_version: '3.8.1'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
 # renovate: datasource=helm depName=metallb registryUrl=https://charts.bitnami.com/bitnami
-metallb_chart_version: '4.6.5' # app version: 0.13.10
+metallb_chart_version: '4.7.0' # app version: 0.13.10
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 # renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
