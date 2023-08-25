@@ -1,7 +1,7 @@
 # see https://github.com/kubernetes/kubernetes/releases
 # see https://kubernetes.io/releases/
 # renovate: datasource=github-releases depName=kubernetes/kubernetes extractVersion=(?<version>1\.26\..+)
-kubectl_version: '1.26.7'
+kubectl_version: '1.26.8'
 
 # see https://github.com/derailed/k9s/releases
 # renovate: datasource=github-releases depName=derailed/k9s
