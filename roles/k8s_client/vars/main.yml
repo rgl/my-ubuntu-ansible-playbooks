@@ -11,6 +11,10 @@ k9s_version: '0.27.4'
 # renovate: datasource=github-releases depName=helm/helm
 helm_version: '3.12.3'
 
+# see https://github.com/oras-project/oras/releases
+# renovate: datasource=github-releases depName=oras-project/oras
+oras_version: '1.1.0'
+
 # see https://github.com/google/go-containerregistry/releases
 # renovate: datasource=github-releases depName=google/go-containerregistry
 crane_version: '0.16.1'

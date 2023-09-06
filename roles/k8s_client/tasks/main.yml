@@ -7,6 +7,9 @@
 - name: Install Helm
   ansible.builtin.include_tasks: helm.yml
 
+- name: Install ORAS
+  ansible.builtin.include_tasks: oras.yml
+
 - name: Install Skopeo
   ansible.builtin.include_tasks: skopeo.yml
 
