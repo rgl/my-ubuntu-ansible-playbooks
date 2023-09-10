@@ -84,6 +84,9 @@
     # Makefile Tools.
     # see https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools
     - ms-vscode.makefile-tools
+    # see https://bun.sh/guides/runtime/vscode-debugger
+    # see https://marketplace.visualstudio.com/items?itemName=oven.bun-vscode
+    - oven.bun-vscode
     # Jinja Template Highlighting.
     # see https://github.com/samuelcolvin/jinjahtml-vscode
     # see https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml

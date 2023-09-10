@@ -31,6 +31,7 @@
     - wasmer
     - dotnet_sdk
     - nodejs
+    - bun
     - pulumi
     - cue
     - dagger
