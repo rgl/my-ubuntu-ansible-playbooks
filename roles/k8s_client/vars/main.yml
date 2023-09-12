@@ -25,4 +25,4 @@ regclient_version: '0.5.1'
 
 # see https://github.com/cert-manager/cert-manager/releases
 # renovate: datasource=github-releases depName=cert-manager/cert-manager
-cmctl_version: '1.12.4'
+cmctl_version: '1.13.0'
