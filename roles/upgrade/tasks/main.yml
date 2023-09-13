@@ -1,3 +1,9 @@
+- name: Disable automatic upgrades
+  ansible.builtin.apt:
+    name: unattended-upgrades
+    purge: true
+    state: absent
+
 # NB ensure the apt source .list files that are installed by some packages are
 #    removed. they mess with the ones that we set in our roles. which in turn,
 #    will mess with apt-get update that is run by the Update cache task bellow.
