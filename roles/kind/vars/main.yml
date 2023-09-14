@@ -35,11 +35,11 @@ kubernetes_dashboard_chart_version: '6.0.8' # app version: 2.7.0
 # renovate: datasource=helm depName=external-dns registryUrl=https://charts.bitnami.com/bitnami
 external_dns_chart_version: '6.25.0' # app version: 0.13.6
 
-# see https://hub.docker.com/r/powerdns/pdns-auth-47
+# see https://hub.docker.com/r/powerdns/pdns-auth-48
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
-# renovate: datasource=docker depName=powerdns/pdns-auth-47
-pdns_version: '4.7.4' # app version: 4.7.4
+# renovate: datasource=docker depName=powerdns/pdns-auth-48
+pdns_version: '4.8.2' # app version: 4.8.2
 
 # see https://artifacthub.io/packages/helm/yugabyte/yugabyte
 # renovate: datasource=helm depName=yugabyte registryUrl=https://charts.yugabyte.com

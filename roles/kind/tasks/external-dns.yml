@@ -2,7 +2,7 @@
   block:
     - name: Set the pdns_image fact value
       ansible.builtin.set_fact:
-        # e.g. powerdns/pdns-auth-47:4.7.4
+        # e.g. powerdns/pdns-auth-48:4.8.2
         pdns_image: powerdns/pdns-auth-{{ ''.join(pdns_version.split('.')[0:2]) }}:{{ pdns_version }}
     - name: Create the kube-external-dns Namespace
       kubernetes.core.k8s:
@@ -25,7 +25,7 @@
     - name: Install pdns
       # see https://github.com/PowerDNS/pdns/blob/master/Docker-README.md
       # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
-      # see https://hub.docker.com/r/powerdns/pdns-auth-47
+      # see https://hub.docker.com/r/powerdns/pdns-auth-48
       kubernetes.core.k8s:
         namespace: kube-external-dns
         definition:
