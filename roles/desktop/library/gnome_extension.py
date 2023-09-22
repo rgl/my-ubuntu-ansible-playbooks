@@ -111,6 +111,8 @@ class GnomeExtension(AnsibleModule):
         'shell_version': shell_version,
         'search': name,
       })
+      if response.status_code != 200:
+        raise Exception(f'failed to get the extension uuid. status_code={response.status_code} text={response.text}')
       metadata = response.json()['extensions'][0]
       uuid = metadata['uuid']
     # get the extension latest metadata.
@@ -119,6 +121,8 @@ class GnomeExtension(AnsibleModule):
       'uuid': uuid,
       'shell_version': shell_version,
     })
+    if response.status_code != 200:
+      raise Exception(f'failed to get the extension metadata. status_code={response.status_code} text={response.text}')
     metadata = response.json()
     version = str(metadata['version'])
     # install.
@@ -199,7 +203,7 @@ class GnomeExtension(AnsibleModule):
     result = subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     m = re.search(r'\s*(?P<major>\d+(\.\d+)+)\s*', result.stdout)
     if not m:
-      raise 'failed to get the gnome version'
+      raise Exception('failed to get the gnome version')
     return m.group('major')
 
 
