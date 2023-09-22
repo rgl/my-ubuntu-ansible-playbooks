@@ -13,7 +13,7 @@
       }
 
       # see https://www.powershellgallery.com/packages/VMware.PowerCLI
-      # see https://developer.vmware.com/web/tool/12.6/vmware-powercli
+      # see https://developer.vmware.com/web/tool/13.1/vmware-powercli
       $powercliVersion = '{{ powercli_version }}'
 
       # bail when already installed.
