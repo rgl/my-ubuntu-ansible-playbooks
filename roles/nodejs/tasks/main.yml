@@ -1,22 +1,22 @@
 - name: Add the nodesource apt key
   ansible.builtin.apt_key:
-    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
     keyring: /etc/apt/keyrings/deb.nodesource.com.gpg
 
 - name: Add the nodesource apt repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see node 18.x in Ubuntu Jammy 22.04: https://deb.nodesource.com/node_18.x/dists/jammy/Release
-    # see node 18.x in Ubuntu Jammy 22.04: https://deb.nodesource.com/node_18.x/dists/jammy/main/binary-amd64/Packages
+    # see node 18.x: https://deb.nodesource.com/node_18.x/dists/nodistro/Release
+    # see node 18.x: https://deb.nodesource.com/node_18.x/dists/nodistro/main/binary-amd64/Packages
     repo: >
       deb
       [signed-by=/etc/apt/keyrings/deb.nodesource.com.gpg]
       https://deb.nodesource.com/node_{{ nodejs_version.split('.')[0] }}.x
-      {{ ansible_distribution_release }}
+      nodistro
       main
     state: present
 
-# see https://github.com/nodesource/distributions/blob/master/README.md#debmanual
+# see https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
 # NB execute apt-cache madison nodejs to known the available versions.
 - name: Install nodejs
   block:
