@@ -1,6 +1,0 @@
-- name: Install dependencies
-  ansible.builtin.apt:
-    name:
-      - python3-kubernetes
-      - python3-docker
-      - libnss3-tools

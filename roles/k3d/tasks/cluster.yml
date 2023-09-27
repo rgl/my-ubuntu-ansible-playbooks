@@ -1,6 +1,0 @@
-- name: Create cluster
-  k3d:
-    name: '{{ cluster_name }}'
-    k3s_args:
-      - --disable=traefik # NB instead, it will be created in traefik.yml.
-  register: cluster
