@@ -3,6 +3,7 @@
 * [Kubernetes](#kubernetes)
 * [Kubernetes Dashboard](#kubernetes-dashboard)
 * [pgAdmin](#pgadmin)
+* [PostgreSQL](#postgresql)
 
 ## Kubernetes
 
@@ -28,3 +29,9 @@ Use the pgAdmin application with the `admin@example.com` user and
 `password` password at:
 
 https://pgadmin.kind.test
+
+This has access to the [PostgreSQL instance](#postgresql).
+
+## PostgreSQL
+
+See [PostgreSQL](postgresql.md).

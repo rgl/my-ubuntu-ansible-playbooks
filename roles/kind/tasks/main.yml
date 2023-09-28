@@ -31,6 +31,8 @@
   become: true
   become_user: '{{ provision_username }}'
   block:
+    - name: Install PostgreSQL
+      ansible.builtin.include_tasks: postgresql.yml
     - name: Install pgAdmin
       ansible.builtin.include_tasks: pgadmin.yml
     - name: Show information

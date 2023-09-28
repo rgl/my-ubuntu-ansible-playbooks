@@ -26,6 +26,17 @@
             value: '1'
       persistentVolume:
         size: 1Gi
+      serverDefinitions:
+        enabled: true
+        servers:
+          postgresql:
+            Name: PostgreSQL
+            Group: Servers
+            Host: postgresql.postgresql
+            Port: 5432
+            SSLMode: disable
+            MaintenanceDB: postgres
+            Username: postgres
       ingress:
         enabled: true
         hosts:
