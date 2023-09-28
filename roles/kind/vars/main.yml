@@ -41,10 +41,6 @@ external_dns_chart_version: '6.26.1' # app version: 0.13.6
 # renovate: datasource=docker depName=powerdns/pdns-auth-48
 pdns_version: '4.8.2' # app version: 4.8.2
 
-# see https://artifacthub.io/packages/helm/yugabyte/yugabyte
-# renovate: datasource=helm depName=yugabyte registryUrl=https://charts.yugabyte.com
-yugabytedb_chart_version: '2.19.0' # app version: 2.19.0.0-b190
-
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
 # renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
 pgadmin_chart_version: '1.17.3'

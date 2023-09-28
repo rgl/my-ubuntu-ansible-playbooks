@@ -31,8 +31,6 @@
   become: true
   become_user: '{{ provision_username }}'
   block:
-    - name: Install yugabytedb
-      ansible.builtin.include_tasks: yugabytedb.yml
     - name: Install pgAdmin
       ansible.builtin.include_tasks: pgadmin.yml
     - name: Show information

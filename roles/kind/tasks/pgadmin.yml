@@ -26,17 +26,6 @@
             value: '1'
       persistentVolume:
         size: 1Gi
-      serverDefinitions:
-        enabled: true
-        servers:
-          yugabytedb:
-            Name: YugabyteDB
-            Group: Servers
-            Host: yb-tservers.yugabytedb
-            Port: 5433
-            SSLMode: disable
-            MaintenanceDB: yugabyte
-            Username: yugabyte
       ingress:
         enabled: true
         hosts:

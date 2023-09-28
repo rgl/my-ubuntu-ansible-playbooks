@@ -3,7 +3,6 @@
 * [Kubernetes](#kubernetes)
 * [Kubernetes Dashboard](#kubernetes-dashboard)
 * [pgAdmin](#pgadmin)
-* [YugabyteDB](#yugabytedb)
 
 ## Kubernetes
 
@@ -29,9 +28,3 @@ Use the pgAdmin application with the `admin@example.com` user and
 `password` password at:
 
 https://pgadmin.kind.test
-
-This has access to the [YugabyteDB instance](#yugabytedb).
-
-## YugabyteDB
-
-See [YugabyteDB](yugabytedb.md).
