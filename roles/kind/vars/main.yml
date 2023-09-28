@@ -21,7 +21,7 @@ metallb_chart_version: '4.7.3' # app version: 0.13.11
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 # renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
-cert_manager_chart_version: '1.13.0' # app version: 1.13.0
+cert_manager_chart_version: '1.13.1' # app version: 1.13.1
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
