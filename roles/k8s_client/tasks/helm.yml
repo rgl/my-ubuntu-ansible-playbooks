@@ -5,7 +5,7 @@
       set -euxo pipefail
 
       # see https://github.com/helm/helm/releases
-      helm_version='v{{ helm_version }}'
+      helm_version='v{{ k8s_client_helm_version }}'
 
       # bail when already installed.
       if [ -x /usr/local/bin/helm ]; then

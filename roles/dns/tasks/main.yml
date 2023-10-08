@@ -9,16 +9,16 @@
       ansible.builtin.copy:
         content: |
           [Service]
-          Environment=SYSTEMD_LOG_LEVEL={{ system_networkd_log_level }}
+          Environment=SYSTEMD_LOG_LEVEL={{ dns_system_networkd_log_level }}
         dest: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
         mode: 0444
-      when: system_networkd_log_level
+      when: dns_system_networkd_log_level
       register: state_set
     - name: Unset the system-networkd log level
       ansible.builtin.file:
         path: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
         state: absent
-      when: not system_networkd_log_level
+      when: not dns_system_networkd_log_level
       register: state_unset
     - name: Restart systemd-networkd
       ansible.builtin.systemd:
@@ -43,7 +43,7 @@
           [Match]
           Name=dns0
           [Network]
-          Address={{ local_dns_server }}/24
+          Address={{ dns_local_dns_server }}/24
           ConfigureWithoutCarrier=true
         dest: /etc/systemd/network/dns0.network
         mode: 0444
@@ -91,6 +91,6 @@
     - name: Configure resolv.conf
       ansible.builtin.copy:
         content: |
-          nameserver {{ local_dns_server }}
+          nameserver {{ dns_local_dns_server }}
         dest: /etc/resolv.conf
         mode: 0444

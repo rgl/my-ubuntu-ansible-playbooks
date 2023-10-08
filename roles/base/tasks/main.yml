@@ -45,7 +45,7 @@
 # see timedatectl status
 - name: Set the timezone
   community.general.timezone:
-    name: "{{ timezone }}"
+    name: "{{ base_timezone }}"
   notify:
     - Restart cron
 

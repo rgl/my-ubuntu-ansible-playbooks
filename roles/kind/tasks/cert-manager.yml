@@ -15,7 +15,7 @@
   kubernetes.core.helm:
     name: cert-manager
     chart_ref: jetstack/cert-manager
-    chart_version: '{{ cert_manager_chart_version }}'
+    chart_version: '{{ kind_cert_manager_chart_version }}'
     release_namespace: cert-manager
     create_namespace: true
     update_repo_cache: true
@@ -57,7 +57,7 @@
         isCA: true
         subject:
           organizations:
-            - '{{ cluster_name }}.{{ cluster_domain }}'
+            - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
           organizationalUnits:
             - Kubernetes
         commonName: Kubernetes Ingress

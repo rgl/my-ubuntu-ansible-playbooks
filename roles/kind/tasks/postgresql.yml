@@ -18,7 +18,7 @@
     release_namespace: postgresql
     name: postgresql
     chart_ref: bitnami/postgresql
-    chart_version: '{{ postgresql_chart_version }}'
+    chart_version: '{{ kind_postgresql_chart_version }}'
     create_namespace: true
     update_repo_cache: true
     values:

@@ -12,7 +12,7 @@
   kubernetes.core.helm:
     name: kube-metallb
     chart_ref: bitnami/metallb
-    chart_version: '{{ metallb_chart_version }}'
+    chart_version: '{{ kind_metallb_chart_version }}'
     release_namespace: kube-metallb
     create_namespace: true
     update_repo_cache: true

@@ -3,7 +3,7 @@
     - name: Set the pdns_image fact value
       ansible.builtin.set_fact:
         # e.g. powerdns/pdns-auth-48:4.8.3
-        pdns_image: powerdns/pdns-auth-{{ ''.join(pdns_version.split('.')[0:2]) }}:{{ pdns_version }}
+        pdns_image: powerdns/pdns-auth-{{ ''.join(kind_pdns_version.split('.')[0:2]) }}:{{ kind_pdns_version }}
     - name: Create the kube-external-dns Namespace
       kubernetes.core.k8s:
         definition:
@@ -62,7 +62,7 @@
                         t="$(mktemp)"
                         cat >"$t" <<'EOF'
                         $TTL 1m
-                        $ORIGIN {{ cluster_name }}.{{ cluster_domain }}. ; base domain-name
+                        $ORIGIN {{ kind_cluster_name }}.{{ kind_cluster_domain }}. ; base domain-name
                         @               IN      SOA     a.ns    hostmaster (
                             2019090800 ; serial number (this number should be increased each time this zone file is changed)
                             1m         ; refresh (the polling interval that slave DNS server will query the master for zone changes)
@@ -73,7 +73,7 @@
                         )
                         IN NS a.ns
                         EOF
-                        pdnsutil load-zone {{ cluster_name }}.{{ cluster_domain }} "$t"
+                        pdnsutil load-zone {{ kind_cluster_name }}.{{ kind_cluster_domain }} "$t"
                         pdnsutil list-all-zones
                     volumeMounts:
                       - name: data
@@ -152,7 +152,7 @@
   kubernetes.core.helm:
     name: kube-external-dns
     chart_ref: bitnami/external-dns
-    chart_version: '{{ external_dns_chart_version }}'
+    chart_version: '{{ kind_external_dns_chart_version }}'
     release_namespace: kube-external-dns
     create_namespace: true
     update_repo_cache: true
@@ -164,7 +164,7 @@
       sources:
         - ingress
       domainFilters:
-        - '{{ cluster_name }}.{{ cluster_domain }}'
+        - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
       provider: pdns
       pdns:
         apiUrl: http://pdns-api

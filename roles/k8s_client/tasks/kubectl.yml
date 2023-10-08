@@ -21,7 +21,7 @@
   block:
     - name: Install kubectl
       ansible.builtin.apt:
-        name: kubectl={{ kubectl_version }}-*
+        name: kubectl={{ k8s_client_kubectl_version }}-*
         allow_change_held_packages: true
     - name: Pin kubectl
       ansible.builtin.dpkg_selections:

@@ -14,7 +14,7 @@
     release_namespace: pgadmin
     name: pgadmin
     chart_ref: runix/pgadmin4
-    chart_version: '{{ pgadmin_chart_version }}'
+    chart_version: '{{ kind_pgadmin_chart_version }}'
     create_namespace: true
     update_repo_cache: true
     values:
@@ -40,14 +40,14 @@
       ingress:
         enabled: true
         hosts:
-          - host: pgadmin.{{ cluster_name }}.{{ cluster_domain }}
+          - host: pgadmin.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: pgadmin-tls
       image:
-        tag: '{{ pgadmin_chart_app_version }}'
+        tag: '{{ kind_pgadmin_chart_app_version }}'
 
 - name: Create pgadmin Ingress Certificate
   kubernetes.core.k8s:
@@ -61,12 +61,12 @@
       spec:
         subject:
           organizations:
-            - '{{ cluster_name }}.{{ cluster_domain }}'
+            - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
           organizationalUnits:
             - Kubernetes
         commonName: pgAdmin
         dnsNames:
-          - pgadmin.{{ cluster_name }}.{{ cluster_domain }}
+          - pgadmin.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
         duration: 1h # NB this is so low for testing purposes.
         privateKey:
           algorithm: ECDSA # NB Ed25519 is not yet supported by chrome 93 or firefox 91.

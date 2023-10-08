@@ -28,7 +28,7 @@
   block:
     - name: Install google-cloud-cli
       ansible.builtin.apt:
-        name: google-cloud-cli={{ gcloud_cli_version }}-*
+        name: google-cloud-cli={{ gcp_client_gcloud_cli_version }}-*
         allow_change_held_packages: true
         state: present
     - name: Pin google-cloud-cli

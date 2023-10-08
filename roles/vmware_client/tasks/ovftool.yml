@@ -3,6 +3,6 @@
     executable: /bin/bash
   ansible.builtin.shell: "{{ lookup('file', 'install-ovftool.sh') }}"
   environment:
-    OVFTOOL_VERSION: "{{ ovftool_version }}"
+    OVFTOOL_VERSION: "{{ vmware_client_ovftool_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"

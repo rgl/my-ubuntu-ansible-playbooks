@@ -2,9 +2,9 @@
 # NB this address will be assigned to the created dns0 bridge.
 # NB this address should be used by the local virtual machines and
 #    containers.
-local_dns_server: 10.53.53.53
+dns_local_dns_server: 10.53.53.53
 
-dns_servers:
+dns_dns_servers:
   # delegate to the Cloudflare/APNIC Public DNS IP addresses.
   # see https://1.1.1.1
   - 1.1.1.1
@@ -20,4 +20,4 @@ dns_servers:
 # NB to see the status execute: networkctl status dns0 #--json=short
 # see https://wiki.ubuntu.com/DebuggingSystemd
 # see https://wiki.archlinux.org/title/systemd-networkd
-system_networkd_log_level: null
+dns_system_networkd_log_level: null

@@ -54,7 +54,7 @@
     #    the plugins and install them again later.
     - name: Uninstall all the plugins
       when: vagrant.changed
-      become_user: '{{ provision_username }}'
+      become_user: '{{ vagrant_provision_username }}'
       become: true
       ansible.builtin.command: vagrant plugin expunge --force
       changed_when: true
@@ -117,9 +117,9 @@
       args:
         executable: /bin/bash
       ansible.builtin.shell: |
-        smbpasswd -a -s '{{ provision_username }}' <<'EOF'
-        {{ provision_password }}
-        {{ provision_password }}
+        smbpasswd -a -s '{{ vagrant_provision_username }}' <<'EOF'
+        {{ vagrant_provision_password }}
+        {{ vagrant_provision_password }}
         EOF
       changed_when: false
     - name: Allow user to manage samba shares
@@ -128,7 +128,7 @@
         groups: sambashare
         append: true
       loop:
-        - '{{ provision_username }}'
+        - '{{ vagrant_provision_username }}'
 
 - name: Install vagrant plugins
   block:
@@ -150,7 +150,7 @@
       environment:
         VAGRANT_PLUGIN_NAME: "{{ item }}"
         VAGRANT_PLUGIN_VERSION: "{{ lookup('vars', (item | replace('-', '_')) + '_plugin_version') }}"
-      become_user: '{{ provision_username }}'
+      become_user: '{{ vagrant_provision_username }}'
       become: true
       register: result
       changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
@@ -177,14 +177,14 @@
             VAGRANT_PLUGIN_NAME: vagrant-libvirt
             VAGRANT_PLUGIN_VERSION: "{{ vagrant_libvirt_plugin_version }}"
             CONFIGURE_ARGS: with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib
-          become_user: '{{ provision_username }}'
+          become_user: '{{ vagrant_provision_username }}'
           become: true
           register: result
           changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 
     - name: Patch vagrant-scp plugin
       become: true
-      become_user: '{{ provision_username }}'
+      become_user: '{{ vagrant_provision_username }}'
       block:
         - name: Find vagrant-scp plugin directories
           ansible.builtin.shell: find ~/.vagrant.d/gems -type d -wholename '*/gems/vagrant-scp-{{ vagrant_scp_plugin_version }}'
@@ -199,7 +199,7 @@
 
     - name: Patch vagrant-vsphere plugin
       become: true
-      become_user: '{{ provision_username }}'
+      become_user: '{{ vagrant_provision_username }}'
       block:
         - name: Find vagrant-vsphere plugin directories
           ansible.builtin.shell: find ~/.vagrant.d/gems -type d -wholename '*/gems/vagrant-vsphere-{{ vagrant_vsphere_plugin_version }}'

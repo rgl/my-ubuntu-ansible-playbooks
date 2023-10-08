@@ -7,7 +7,7 @@
     executable: /bin/bash
   ansible.builtin.shell: "{{ lookup('file', 'install-umlet.sh') }}"
   environment:
-    UMLET_VERSION: "{{ umlet_version }}"
+    UMLET_VERSION: "{{ desktop_umlet_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 

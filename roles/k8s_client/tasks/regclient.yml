@@ -4,7 +4,7 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-regclient.sh') }}"
   environment:
     REGCLIENT_NAME: "{{ item }}"
-    REGCLIENT_VERSION: "{{ regclient_version }}"
+    REGCLIENT_VERSION: "{{ k8s_client_regclient_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 

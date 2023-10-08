@@ -5,7 +5,7 @@
   ansible.builtin.include_tasks: dependencies.yml
 - name: Install Kubernetes
   become: true
-  become_user: '{{ provision_username }}'
+  become_user: '{{ kind_provision_username }}'
   block:
     - name: Install helm-diff
       ansible.builtin.include_tasks: helm-diff.yml
@@ -29,7 +29,7 @@
 # install applications.
 - name: Install Applications
   become: true
-  become_user: '{{ provision_username }}'
+  become_user: '{{ kind_provision_username }}'
   block:
     - name: Install PostgreSQL
       ansible.builtin.include_tasks: postgresql.yml

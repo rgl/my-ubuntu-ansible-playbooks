@@ -1,7 +1,7 @@
 no-resolv
 bind-interfaces
 interface=dns0
-listen-address={{ local_dns_server }}
-{% for ip_address in dns_servers %}
+listen-address={{ dns_local_dns_server }}
+{% for ip_address in dns_dns_servers %}
 server={{ ip_address }}
 {% endfor %}

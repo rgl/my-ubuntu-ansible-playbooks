@@ -14,7 +14,7 @@
 
       # see https://www.powershellgallery.com/packages/VMware.PowerCLI
       # see https://developer.vmware.com/web/tool/13.1/vmware-powercli
-      $powercliVersion = '{{ powercli_version }}'
+      $powercliVersion = '{{ vmware_client_powercli_version }}'
 
       # bail when already installed.
       $module = Get-InstalledModule -ErrorAction SilentlyContinue VMware.PowerCLI

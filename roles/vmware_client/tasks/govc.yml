@@ -5,7 +5,7 @@
       set -euxo pipefail
 
       # see https://github.com/docker/compose/releases
-      govc_version='{{ govc_version }}'
+      govc_version='{{ vmware_client_govc_version }}'
 
       # bail when already installed.
       if [ -f /usr/local/bin/govc ]; then

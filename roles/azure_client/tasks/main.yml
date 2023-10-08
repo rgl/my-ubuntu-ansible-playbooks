@@ -30,7 +30,7 @@
   block:
     - name: Install azure-cli
       ansible.builtin.apt:
-        name: azure-cli={{ azure_cli_version }}-*
+        name: azure-cli={{ azure_client_azure_cli_version }}-*
         allow_change_held_packages: true
         state: present
     - name: Pin azure-cli

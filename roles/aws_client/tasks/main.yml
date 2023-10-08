@@ -3,7 +3,7 @@
     executable: /bin/bash
   ansible.builtin.shell: "{{ lookup('file', 'install-aws.sh') }}"
   environment:
-    AWS_VERSION: "{{ aws_version }}"
+    AWS_VERSION: "{{ aws_client_aws_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 

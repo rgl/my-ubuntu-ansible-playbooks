@@ -1,7 +1,7 @@
-cluster_name: kind
-cluster_domain: test
-provision_username: '{{ ansible_user }}'
-provision_password: '{{ ansible_password }}'
+kind_cluster_name: kind
+kind_cluster_domain: test
+kind_provision_username: '{{ ansible_user }}'
+kind_provision_password: '{{ ansible_password }}'
 
 # see https://github.com/kubernetes-sigs/kind/releases
 # renovate: datasource=github-releases depName=kubernetes-sigs/kind
@@ -13,42 +13,42 @@ kind_node_image_version: '1.26.6'
 
 # see https://github.com/databus23/helm-diff/releases
 # renovate: datasource=github-releases depName=databus23/helm-diff
-helm_diff_version: '3.8.1'
+kind_helm_diff_version: '3.8.1'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
 # renovate: datasource=helm depName=metallb registryUrl=https://charts.bitnami.com/bitnami
-metallb_chart_version: '4.7.6' # app version: 0.13.11
+kind_metallb_chart_version: '4.7.6' # app version: 0.13.11
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 # renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
-cert_manager_chart_version: '1.13.1' # app version: 1.13.1
+kind_cert_manager_chart_version: '1.13.1' # app version: 1.13.1
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
-traefik_chart_version: '24.0.0' # app version: 2.10.4
+kind_traefik_chart_version: '24.0.0' # app version: 2.10.4
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 # renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
-kubernetes_dashboard_chart_version: '6.0.8' # app version: 2.7.0
+kind_kubernetes_dashboard_chart_version: '6.0.8' # app version: 2.7.0
 
 # see https://artifacthub.io/packages/helm/bitnami/external-dns
 # renovate: datasource=helm depName=external-dns registryUrl=https://charts.bitnami.com/bitnami
-external_dns_chart_version: '6.26.3' # app version: 0.13.6
+kind_external_dns_chart_version: '6.26.3' # app version: 0.13.6
 
 # see https://hub.docker.com/r/powerdns/pdns-auth-48
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
 # renovate: datasource=docker depName=powerdns/pdns-auth-48
-pdns_version: '4.8.3' # app version: 4.8.3
+kind_pdns_version: '4.8.3' # app version: 4.8.3
 
 # see https://artifacthub.io/packages/helm/bitnami/postgresql
 # renovate: datasource=helm depName=postgresql registryUrl=https://charts.bitnami.com/bitnami
-postgresql_chart_version: '13.1.0' # app version: 16.0.0
+kind_postgresql_chart_version: '13.1.0' # app version: 16.0.0
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
 # renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
-pgadmin_chart_version: '1.17.3'
+kind_pgadmin_chart_version: '1.17.3'
 
 # see https://hub.docker.com/r/dpage/pgadmin4/tags
 # renovate: datasource=docker depName=dpage/pgadmin4 versioning=semver-coerced
-pgadmin_chart_app_version: '7.7'
+kind_pgadmin_chart_app_version: '7.7'

@@ -27,5 +27,5 @@ vagrant_vsphere_plugin_version: '1.14.0'
 # renovate: datasource=rubygems depName=vagrant-windows-sysprep
 vagrant_windows_sysprep_plugin_version: '0.0.10'
 
-provision_username: '{{ ansible_user }}'
-provision_password: '{{ ansible_password }}'
+vagrant_provision_username: '{{ ansible_user }}'
+vagrant_provision_password: '{{ ansible_password }}'

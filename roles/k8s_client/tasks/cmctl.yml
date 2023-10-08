@@ -3,7 +3,7 @@
     executable: /bin/bash
   ansible.builtin.shell: "{{ lookup('file', 'install-cmctl.sh') }}"
   environment:
-    CMCTL_VERSION: "{{ cmctl_version }}"
+    CMCTL_VERSION: "{{ k8s_client_cmctl_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
 

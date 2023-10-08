@@ -10,7 +10,7 @@
   kubernetes.core.helm:
     name: kube-dashboard
     chart_ref: kubernetes-dashboard/kubernetes-dashboard
-    chart_version: '{{ kubernetes_dashboard_chart_version }}'
+    chart_version: '{{ kind_kubernetes_dashboard_chart_version }}'
     release_namespace: kube-dashboard
     create_namespace: true
     update_repo_cache: true
@@ -18,7 +18,7 @@
       ingress:
         enabled: true
         hosts:
-          - kubernetes-dashboard.{{ cluster_name }}.{{ cluster_domain }}
+          - kubernetes-dashboard.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
         tls:
           - secretName: kubernetes-dashboard-tls
       service:
@@ -39,12 +39,12 @@
       spec:
         subject:
           organizations:
-            - '{{ cluster_name }}.{{ cluster_domain }}'
+            - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
           organizationalUnits:
             - Kubernetes
         commonName: Kubernetes Dashboard
         dnsNames:
-          - kubernetes-dashboard.{{ cluster_name }}.{{ cluster_domain }}
+          - kubernetes-dashboard.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
         duration: 1h # NB this is so low for testing purposes.
         privateKey:
           algorithm: ECDSA # NB Ed25519 is not yet supported by chrome 93 or firefox 91.
