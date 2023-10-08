@@ -5,6 +5,7 @@
       - remmina-plugin-vnc
 
 - name: Configure remmina
+  become: true
   become_user: '{{ ansible_user }}'
   block:
     - name: Disable tabs grouping

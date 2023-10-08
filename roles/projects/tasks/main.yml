@@ -1,4 +1,5 @@
 - name: Install Projects
+  become: true
   become_user: '{{ ansible_user }}'
   block:
     - name: Create the Projects directory

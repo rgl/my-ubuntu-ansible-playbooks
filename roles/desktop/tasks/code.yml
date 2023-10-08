@@ -31,6 +31,7 @@
     state: absent
 
 - name: Configure Visual Studio Code
+  become: true
   become_user: '{{ ansible_user }}'
   block:
     - name: Create the Settings Directory
@@ -63,6 +64,7 @@
         mode: 0644
 
 - name: Install code extension
+  become: true
   become_user: '{{ ansible_user }}'
   args:
     executable: /bin/bash
@@ -112,6 +114,7 @@
     - ms-playwright.playwright
 
 - name: Set Visual Studio Code as the text/plain default editor
+  become: true
   become_user: '{{ ansible_user }}'
   ansible.builtin.shell:
     executable: /bin/bash
