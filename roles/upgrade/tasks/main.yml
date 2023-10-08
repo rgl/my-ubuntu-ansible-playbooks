@@ -1,19 +1,26 @@
+# NB ensure the apt source .list files that are installed by some packages are
+#    removed. they mess with the ones that we set in our roles. which in turn,
+#    will mess with apt-get update that is run by the Update cache task bellow.
+# NB this is used because I was not able to configure the
+#    APT::Update::Pre-Invoke apt hook.
+- name: Divert apt command
+  block:
+    - name: Copy .local.apt-wrapper
+      ansible.builtin.copy:
+        src: apt-wrapper
+        dest: /usr/bin/.local.apt-wrapper
+        mode: 0555
+    - name: Divert apt command
+      ansible.builtin.include_tasks: apt-divert.yml
+      loop:
+        - apt-get
+        - apt-mark
+
 - name: Disable automatic upgrades
   ansible.builtin.apt:
     name: unattended-upgrades
     purge: true
     state: absent
-
-# NB ensure the apt source .list files that are installed by some packages are
-#    removed. they mess with the ones that we set in our roles. which in turn,
-#    will mess with apt-get update that is run by the Update cache task bellow.
-- name: Remove apt source .list
-  ansible.builtin.file:
-    path: "/etc/apt/sources.list.d/{{ item }}"
-    state: absent
-  with_items:
-    - vscode.list
-    - google-chrome.list
 
 - name: Update cache
   ansible.builtin.apt:
@@ -24,17 +31,6 @@
 - name: Upgrade the system
   ansible.builtin.apt:
     upgrade: dist
-
-# NB ensure the apt source .list files that are installed by some packages are
-#    removed. they mess with the ones that we set in our roles. which in turn,
-#    will mess with apt-get update that is run by the Update cache task bellow.
-- name: Remove apt source .list
-  ansible.builtin.file:
-    path: "/etc/apt/sources.list.d/{{ item }}"
-    state: absent
-  with_items:
-    - vscode.list
-    - google-chrome.list
 
 - name: Check reboot required
   ansible.builtin.stat:

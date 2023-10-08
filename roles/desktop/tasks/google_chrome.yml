@@ -26,11 +26,3 @@
     # NB we have to use latest because there is only one version available
     #    at the repository.
     state: latest # noqa package-latest
-
-# NB the google-chrome-stable debian package has some code to create this
-#    extraneous google-chrome.list file, but it conflicts with the apt
-#    repository that was created above, so it must be removed.
-- name: Remove google-chrome.list
-  ansible.builtin.file:
-    path: /etc/apt/sources.list.d/google-chrome.list
-    state: absent

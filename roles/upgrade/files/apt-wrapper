@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eu
+rm -f /etc/apt/sources.list.d/google-chrome.list
+rm -f /etc/apt/sources.list.d/vscode.list
+exec "/usr/bin/.dist.$(basename "$0")" "$@"

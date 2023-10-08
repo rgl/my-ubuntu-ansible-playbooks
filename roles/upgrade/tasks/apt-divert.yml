@@ -1,0 +1,17 @@
+- name: Divert apt command
+  ansible.builtin.shell:
+    executable: /bin/bash
+    cmd: |
+      set -euxo pipefail
+      if [ ! -f /usr/bin/.dist.{{ item }} ]; then
+        echo 'ANSIBLE CHANGED YES'
+        dpkg-divert --divert /usr/bin/.dist.{{ item }} --rename /usr/bin/{{ item }}
+      fi
+  register: result
+  changed_when: "'ANSIBLE CHANGED YES' in result.stdout_lines"
+
+- name: Symlink apt command
+  ansible.builtin.file:
+    src: /usr/bin/.local.apt-wrapper
+    dest: /usr/bin/{{ item }}
+    state: link
