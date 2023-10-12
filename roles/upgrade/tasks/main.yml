@@ -15,6 +15,13 @@
       loop:
         - apt-get
         - apt-mark
+    - name: Tidy
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: |
+          set -euxo pipefail
+          apt-get --version || true
+      changed_when: false
 
 - name: Disable automatic upgrades
   ansible.builtin.apt:
