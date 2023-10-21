@@ -15,3 +15,8 @@
   ansible.builtin.systemd:
     name: netbird
     state: restarted
+
+- name: Restart dnsmasq
+  ansible.builtin.systemd:
+    name: dnsmasq
+    state: restarted

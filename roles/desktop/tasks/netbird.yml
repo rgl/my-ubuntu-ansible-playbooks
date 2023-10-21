@@ -43,6 +43,16 @@
     iface_black_list_include:
       - dns0
 
+- name: Delegate the netbird.cloud DNS domain to the local NetBird dns server
+  ansible.builtin.copy:
+    # set the dns server to the local netbird peer ip address.
+    content: |
+      server=/netbird.cloud/{{ ansible_wt0.ipv4.address }}#53
+    dest: /etc/dnsmasq.d/netbird.cloud.conf
+    mode: 0444
+  when: ansible_wt0 is defined and ansible_wt0.ipv4.address
+  notify: Restart dnsmasq
+
 - name: Install the WireGuard tools
   # NB this is not strictly required, but it allows us to use the wg
   #    command to further inspect things.
