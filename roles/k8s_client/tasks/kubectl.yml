@@ -1,20 +1,22 @@
-- name: Add the gcp apt key
+# see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
+- name: Add the kubernetes apt repository key
   ansible.builtin.apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    keyring: /etc/apt/keyrings/packages.cloud.google.com.gpg
+    # e.g. https://pkgs.k8s.io/core:/stable:/v1.26/deb/Release.key
+    url: https://pkgs.k8s.io/core:/stable:/v{{ (k8s_client_kubectl_version | split('.'))[:2] | join('.') }}/deb/Release.key
+    keyring: /etc/apt/keyrings/pkgs.k8s.io.gpg
 
 # see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 - name: Add the kubernetes repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see https://apt.kubernetes.io/dists/kubernetes-xenial/Release
-    # see https://apt.kubernetes.io/dists/kubernetes-xenial/main/binary-amd64/Packages
+    # see https://pkgs.k8s.io/core:/stable:/v1.26/deb/InRelease
+    # see https://pkgs.k8s.io/core:/stable:/v1.26/deb/Packages
+    # e.g. https://pkgs.k8s.io/core:/stable:/v1.26/deb/
     repo: >
       deb
-      [signed-by=/etc/apt/keyrings/packages.cloud.google.com.gpg]
-      https://apt.kubernetes.io/
-      kubernetes-xenial
-      main
+      [signed-by=/etc/apt/keyrings/pkgs.k8s.io.gpg]
+      https://pkgs.k8s.io/core:/stable:/v{{ (k8s_client_kubectl_version | split('.'))[:2] | join('.') }}/deb/
+      /
 
 # NB execute apt-cache madison kubectl to known the available versions.
 - name: Install kubectl
