@@ -24,3 +24,6 @@
 
 - name: Install cmctl
   ansible.builtin.include_tasks: cmctl.yml
+
+- name: Install cilium
+  ansible.builtin.include_tasks: cilium.yml
