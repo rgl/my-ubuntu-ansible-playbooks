@@ -27,3 +27,6 @@
 
 - name: Install cilium
   ansible.builtin.include_tasks: cilium.yml
+
+- name: Install hubble
+  ansible.builtin.include_tasks: hubble.yml
