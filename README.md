@@ -39,7 +39,7 @@ Lint the `development.yml` playbook:
 Run the `development.yml` playbook against the `dm1` machine:
 
 ```bash
-./ansible-playbook.sh --limit=dm1 development.yml
+./ansible-playbook.sh --limit=dm1 development.yml | tee ansible.log
 ```
 
 List this repository dependencies (and which have newer versions):
