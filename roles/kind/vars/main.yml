@@ -22,7 +22,7 @@ kind_metallb_chart_version: '4.7.11' # app version: 0.13.12
 
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 # renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
-kind_cert_manager_chart_version: '1.13.1' # app version: 1.13.1
+kind_cert_manager_chart_version: '1.13.2' # app version: 1.13.2
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
