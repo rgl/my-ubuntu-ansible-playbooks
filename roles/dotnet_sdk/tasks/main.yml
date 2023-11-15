@@ -42,6 +42,4 @@
 
 - name: Install dotnet-sdk
   ansible.builtin.include_tasks: dotnet_sdk.yml
-  loop:
-    - '{{ dotnet_sdk_lts_version }}'
-    - '{{ dotnet_sdk_sts_version }}'
+  loop: '{{ dotnet_sdk_versions }}'
