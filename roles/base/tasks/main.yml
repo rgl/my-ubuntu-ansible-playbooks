@@ -93,6 +93,7 @@
 - name: Install useful tools
   ansible.builtin.apt:
     name:
+      - expect
       - tcpdump
       - unzip
       - httpie
