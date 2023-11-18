@@ -7,6 +7,9 @@
 - name: Install Helm
   ansible.builtin.include_tasks: helm.yml
 
+- name: Install Timoni
+  ansible.builtin.include_tasks: timoni.yml
+
 - name: Install ORAS
   ansible.builtin.include_tasks: oras.yml
 
