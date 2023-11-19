@@ -28,6 +28,7 @@
     - vagrant
     - go
     - rust
+    - zig
     - wasmer
     - dotnet_sdk
     - nodejs

@@ -55,6 +55,11 @@
         content: '{{ settings.stdout }}'
         mode: 0644
 
+- name: Install Zig Extensions dependencies
+  ansible.builtin.apt:
+    name:
+      - gdb
+
 - name: Install code extension
   become: true
   become_user: '{{ ansible_user }}'
@@ -95,6 +100,14 @@
     # see https://github.com/rust-lang/rust-analyzer
     # see https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
     - rust-lang.rust-analyzer
+    # Zig Language support.
+    # see https://github.com/ziglang/vscode-zig
+    # see https://marketplace.visualstudio.com/items?itemName=ziglang.vscode-zig
+    - ziglang.vscode-zig
+    # Zig Language Debugging/Testing support.
+    # see https://github.com/ianic/zig-language-extras
+    # see https://marketplace.visualstudio.com/items?itemName=ianic.zig-language-extras
+    - ianic.zig-language-extras
     # Svelte language support.
     # see https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode
     - svelte.svelte-vscode
