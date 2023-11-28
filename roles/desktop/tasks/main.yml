@@ -28,6 +28,9 @@
 - name: Install Wireshark
   ansible.builtin.include_tasks: wireshark.yml
 
+- name: Install mitmproxy
+  ansible.builtin.include_tasks: mitmproxy.yml
+
 - name: Install httptoolkit
   ansible.builtin.include_tasks: httptoolkit.yml
 

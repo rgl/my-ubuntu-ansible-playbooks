@@ -1,0 +1,8 @@
+- name: Install mitmproxy
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-mitmproxy.sh') }}"
+  environment:
+    MITMPROXY_VERSION: "{{ desktop_mitmproxy_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
