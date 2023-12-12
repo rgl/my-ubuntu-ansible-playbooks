@@ -71,14 +71,41 @@
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
   loop:
+    # XML.
+    # see https://github.com/DotJoshJohnson/vscode-xml
+    # see https://marketplace.visualstudio.com/items?itemName=dotjoshjohnson.xml
     - dotjoshjohnson.xml
+    # Go language.
+    # see https://github.com/golang/vscode-go
+    # see https://marketplace.visualstudio.com/items?itemName=golang.Go
     - golang.go
+    # HCL.
+    # see https://github.com/hashicorp/vscode-hcl
+    # see https://marketplace.visualstudio.com/items?itemName=hashicorp.hcl
     - hashicorp.hcl
+    # Terraform.
+    # see https://github.com/hashicorp/vscode-terraform
+    # see https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform
     - hashicorp.terraform
+    # Docker.
+    # see https://github.com/microsoft/vscode-docker
+    # see https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
     - ms-azuretools.vscode-docker
+    # C# language.
+    # see https://github.com/dotnet/vscode-csharp
+    # see https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
     - ms-dotnettools.csharp
+    # Python language.
+    # see https://github.com/Microsoft/vscode-python
+    # see https://marketplace.visualstudio.com/items?itemName=ms-python.python
     - ms-python.python
+    # Remote SSH.
+    # see https://github.com/Microsoft/vscode-remote-release
+    # see https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
     - ms-vscode-remote.remote-ssh
+    # PowerShell language.
+    # see https://github.com/PowerShell/vscode-powershell
+    # see https://marketplace.visualstudio.com/items?itemName=ms-vscode.powershell
     - ms-vscode.powershell
     # Makefile Tools.
     # see https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools
