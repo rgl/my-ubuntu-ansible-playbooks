@@ -6,8 +6,8 @@
 - name: Add the nodesource apt repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see node 18.x: https://deb.nodesource.com/node_18.x/dists/nodistro/Release
-    # see node 18.x: https://deb.nodesource.com/node_18.x/dists/nodistro/main/binary-amd64/Packages
+    # see node 20.x: https://deb.nodesource.com/node_20.x/dists/nodistro/Release
+    # see node 20.x: https://deb.nodesource.com/node_20.x/dists/nodistro/main/binary-amd64/Packages
     repo: >
       deb
       [signed-by=/etc/apt/keyrings/deb.nodesource.com.gpg]
