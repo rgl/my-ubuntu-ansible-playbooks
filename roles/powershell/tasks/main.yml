@@ -1,5 +1,5 @@
 # opt-out of telemetry.
-# see https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_telemetry?view=powershell-7.2
+# see https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_telemetry?view=powershell-7.4
 - name: Opt-out of telemetry
   ansible.builtin.copy:
     content: |
@@ -26,7 +26,7 @@
     state: present
 
 # see https://github.com/PowerShell/PowerShell/releases
-# see https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2#installation-via-package-repository
+# see https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.4#installation-via-package-repository
 - name: Install PowerShell
   block:
     - name: Install powershell
