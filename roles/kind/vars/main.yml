@@ -39,8 +39,9 @@ kind_external_dns_chart_version: '6.28.6' # app version: 0.14.0
 # see https://hub.docker.com/r/powerdns/pdns-auth-48
 # see https://hub.docker.com/search?q=pdns-auth-
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
+# see https://doc.powerdns.com/authoritative/changelog/
 # renovate: datasource=docker depName=powerdns/pdns-auth-48
-kind_pdns_version: '4.8.3' # app version: 4.8.3
+kind_pdns_version: '4.8.4' # app version: 4.8.4
 
 # see https://artifacthub.io/packages/helm/bitnami/postgresql
 # renovate: datasource=helm depName=postgresql registryUrl=https://charts.bitnami.com/bitnami
