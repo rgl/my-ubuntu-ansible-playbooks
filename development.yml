@@ -30,6 +30,7 @@
     - rust
     - zig
     - wasmer
+    - wasmtime
     - dotnet_sdk
     - nodejs
     - bun
