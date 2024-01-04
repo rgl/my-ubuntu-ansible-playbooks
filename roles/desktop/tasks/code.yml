@@ -148,6 +148,10 @@
     # see https://github.com/tomoki1207/vscode-pdfviewer
     # see https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf
     - tomoki1207.pdf
+    # ANSI support.
+    # see https://github.com/iliazeus/vscode-ansi
+    # see https://marketplace.visualstudio.com/items?itemName=iliazeus.vscode-ansi
+    - iliazeus.vscode-ansi
 
 - name: Set Visual Studio Code as the text/plain default editor
   become: true
