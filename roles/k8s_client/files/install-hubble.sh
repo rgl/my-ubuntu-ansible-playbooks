@@ -2,7 +2,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/hubble ]; then
-    # e.g. hubble 0.12.3 compiled with go1.20.10 on linux/amd64
+    # e.g. hubble 0.13.0 compiled with go1.20.10 on linux/amd64
     actual_version="$(/usr/local/bin/hubble version | perl -ne '/^hubble:? v?(.+?) / && print $1')"
     if [ "$actual_version" == "$HUBBLE_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
