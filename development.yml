@@ -27,6 +27,7 @@
     - terraform
     - vagrant
     - go
+    - tinygo
     - rust
     - zig
     - wasmer

@@ -3,6 +3,7 @@
         "bytecodealliance",
         "javy",
         "timoni",
+        "tinygo",
         "wasmtime"
     ]
 }

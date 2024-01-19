@@ -1,0 +1,4 @@
+# see https://tinygo.org
+# see https://github.com/tinygo-org/tinygo
+# renovate: datasource=github-tags depName=tinygo-org/tinygo
+tinygo_version: '0.30.0'
