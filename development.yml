@@ -33,6 +33,7 @@
     - wasmer
     - wasmtime
     - javy
+    - spin
     - dotnet_sdk
     - nodejs
     - bun

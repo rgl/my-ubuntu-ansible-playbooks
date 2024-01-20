@@ -1,0 +1,55 @@
+- name: Install spin
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-spin.sh') }}"
+  environment:
+    SPIN_VERSION: "{{ spin_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install spin plugin
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-spin-plugin.sh') }}"
+  environment:
+    SPIN_PLUGIN_NAME: "{{ item.name }}"
+    SPIN_PLUGIN_GITHUB: "{{ item.github }}"
+    SPIN_PLUGIN_VERSION: "{{ item.version }}"
+  become: false
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  loop:
+    - # https://github.com/fermyon/cloud-plugin
+      name: cloud
+      github: fermyon/cloud-plugin
+      version: "{{ spin_cloud_plugin_version }}"
+    - # https://github.com/fermyon/spin-js-sdk
+      name: js2wasm
+      github: fermyon/spin-js-sdk
+      version: "{{ spin_js_plugin_version }}"
+    - # https://github.com/fermyon/spin-python-sdk
+      name: py2wasm
+      github: fermyon/spin-python-sdk
+      version: "{{ spin_python_plugin_version }}"
+
+- name: Install spin template
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-spin-template.sh') }}"
+  environment:
+    SPIN_TEMPLATE_NAME: "{{ item.name }}"
+    SPIN_TEMPLATE_GITHUB: "{{ item.github }}"
+    SPIN_TEMPLATE_VERSION: "{{ item.version }}"
+  become: false
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  loop:
+    - # https://github.com/fermyon/spin-js-sdk/tree/main/templates/http-js
+      # NB this also installs the http-ts template.
+      name: http-js
+      github: fermyon/spin-js-sdk
+      version: "{{ spin_js_plugin_version }}"
+    - # https://github.com/fermyon/spin-python-sdk/tree/main/templates/http-py
+      name: http-py
+      github: fermyon/spin-python-sdk
+      version: "{{ spin_python_plugin_version }}"
