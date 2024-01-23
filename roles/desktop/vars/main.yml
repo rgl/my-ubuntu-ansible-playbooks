@@ -16,7 +16,7 @@ desktop_ventoy_version: '1.0.96'
 
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
-desktop_rpi_imager_version: '1.8.4'
+desktop_rpi_imager_version: '1.8.5'
 
 # see https://umlet.com
 # see https://github.com/umlet/umlet/tags
