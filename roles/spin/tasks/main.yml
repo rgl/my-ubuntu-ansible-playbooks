@@ -53,3 +53,8 @@
       name: http-py
       github: fermyon/spin-python-sdk
       version: "{{ spin_python_plugin_version }}"
+    - # https://github.com/fermyon/spin/tree/main/templates/http-go
+      # NB this also installs a lot more templates.
+      name: http-go
+      github: fermyon/spin
+      version: "{{ spin_version }}"
