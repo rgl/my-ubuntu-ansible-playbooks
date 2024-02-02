@@ -33,7 +33,7 @@ k8s_client_cmctl_version: '1.13.3'
 
 # see https://github.com/cilium/cilium-cli/releases
 # renovate: datasource=github-releases depName=cilium/cilium-cli
-k8s_client_cilium_version: '0.15.20'
+k8s_client_cilium_version: '0.15.22'
 
 # see https://github.com/cilium/hubble/releases
 # renovate: datasource=github-releases depName=cilium/hubble
