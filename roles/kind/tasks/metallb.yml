@@ -37,6 +37,9 @@
         kind: L2Advertisement
         metadata:
           name: default
+        spec:
+          ipAddressPools:
+            - default
   register: result
   # NB we have to retry until the metallb-webhook-service endpoint is
   #    available. while its starting, it will fail with:
