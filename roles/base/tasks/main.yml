@@ -118,6 +118,10 @@
       # arp-scan lets us discover machines in the LAN.
       # e.g. arp-scan --localnet --interface eth0
       - arp-scan
+      # arping lets us troubleshoot the arp.
+      # e.g. arping -i br-79b5297fbb48 172.18.255.200
+      # e.g. tcpdump -n -i br-79b5297fbb48 arp src host 172.18.255.200
+      - arping
       # xsltproc tool.
       # NB this is required by the libvirt_domain terraform resource to apply
       #    xslt transformations to the libvirt domain xml.
