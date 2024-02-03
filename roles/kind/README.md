@@ -11,6 +11,9 @@ Show information about the local Kubernetes instance:
 
 ```bash
 kubectl get nodes -o wide
+kubectl get l2advertisement,ipaddresspool -A
+ip neighbor
+sudo ip neighbor flush all
 kubectl get sc,pvc,pv -A
 kubectl get pods -A
 kubectl get ingress -A
