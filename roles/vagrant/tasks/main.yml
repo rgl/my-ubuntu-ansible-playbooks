@@ -43,7 +43,7 @@
   block:
     - name: Install vagrant
       ansible.builtin.apt:
-        name: vagrant={{ vagrant_version }}
+        name: vagrant={{ vagrant_version }}-*
         allow_change_held_packages: true
       register: vagrant
     - name: Pin vagrant
@@ -68,7 +68,7 @@
 
 - name: Install vagrant bash completion
   ansible.builtin.file:
-    src: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}/contrib/bash/completion.sh
+    src: /opt/vagrant/embedded/gems/gems/vagrant-{{ vagrant_version }}/contrib/bash/completion.sh
     dest: /etc/bash_completion.d/vagrant
     force: true
     state: link
@@ -91,7 +91,7 @@
     - name: Patch vagrant to support SMB shared folders
       ansible.posix.patch:
         src: vagrant-smb-9948.patch
-        basedir: /opt/vagrant/embedded/gems/{{ vagrant_version }}/gems/vagrant-{{ vagrant_version }}
+        basedir: /opt/vagrant/embedded/gems/gems/vagrant-{{ vagrant_version }}
         strip: 1
     - name: Install Samba
       ansible.builtin.apt:
