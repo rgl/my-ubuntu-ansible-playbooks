@@ -1,3 +1,4 @@
+#!/bin/bash
 set -euxo pipefail
 
 ANDROID_STUDIO_PATH='/opt/android-studio'

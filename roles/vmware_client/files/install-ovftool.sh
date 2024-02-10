@@ -1,3 +1,4 @@
+#!/bin/bash
 set -euxo pipefail
 
 # transform version from <major>.<minor>.<patch>.<build> to <major>.<minor>.<patch>-<build>.

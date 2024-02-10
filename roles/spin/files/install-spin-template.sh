@@ -1,3 +1,4 @@
+#!/bin/bash
 set -euxo pipefail
 
 # e.g. https://github.com/fermyon/spin-js-sdk/releases/download/v0.6.1/js2wasm.json

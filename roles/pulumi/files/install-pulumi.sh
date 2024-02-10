@@ -1,3 +1,4 @@
+#!/bin/bash
 set -euxo pipefail
 
 # bail when already installed.
