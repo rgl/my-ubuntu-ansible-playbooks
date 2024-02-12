@@ -62,21 +62,7 @@
         mode: 0444
 
 - name: Install git
-  block:
-    - name: Install git
-      ansible.builtin.apt:
-        name: git
-        install_recommends: false
-    - name: Install gitconfig
-      ansible.builtin.copy:
-        src: gitconfig
-        dest: /etc/gitconfig
-        mode: 0444
-    - name: Create gitconfig.d directory
-      ansible.builtin.file:
-        name: /etc/gitconfig.d
-        state: directory
-        mode: 0755
+  ansible.builtin.include_tasks: git.yml
 
 - name: Install login profile
   ansible.builtin.copy:
