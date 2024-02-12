@@ -10,3 +10,4 @@ autocrlf = false
 
 [include]
 path = /etc/gitconfig.d/meld.gitconfig
+path = /etc/gitconfig.d/git-credential-manager.gitconfig

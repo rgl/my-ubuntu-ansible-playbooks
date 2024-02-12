@@ -14,3 +14,20 @@
         name: /etc/gitconfig.d
         state: directory
         mode: 0755
+
+- name: Install git-credential-manager
+  block:
+    - name: Install git-credential-manager
+      args:
+        executable: /bin/bash
+      ansible.builtin.shell: "{{ lookup('file', 'install-git-credential-manager.sh') }}"
+      environment:
+        GIT_CREDENTIAL_MANAGER_VERSION: "{{ base_git_credential_manager_version }}"
+      register: result
+      changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+    - name: Configure git to use git-credential-manager
+      ansible.builtin.copy:
+        src: git-credential-manager.gitconfig
+        # NB you must include this file from the roles/base/files/gitconfig file.
+        dest: /etc/gitconfig.d/git-credential-manager.gitconfig
+        mode: 0444
