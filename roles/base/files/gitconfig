@@ -7,3 +7,6 @@ default = simple
 
 [core]
 autocrlf = false
+
+[include]
+path = /etc/gitconfig.d/meld.gitconfig

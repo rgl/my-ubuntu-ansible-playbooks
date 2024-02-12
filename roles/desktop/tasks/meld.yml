@@ -4,9 +4,9 @@
       ansible.builtin.apt:
         name: meld
         install_recommends: false
-    # NB you must also edit the base role files/gitconfig file to include this one.
     - name: Configure git to use meld
       ansible.builtin.copy:
         src: meld.gitconfig
+        # NB you must include this file from the roles/base/files/gitconfig file.
         dest: /etc/gitconfig.d/meld.gitconfig
         mode: 0444
