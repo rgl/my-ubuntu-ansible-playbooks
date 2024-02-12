@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/static-web-server ]; then
-    # e.g. static-web-server 2.25.0
+    # e.g. static-web-server 2.26.0
     actual_version="$(/usr/local/bin/static-web-server --version | perl -ne '/^static-web-server (.+)/ && print $1')"
     if [ "$actual_version" == "$STATIC_WEB_SERVER_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
