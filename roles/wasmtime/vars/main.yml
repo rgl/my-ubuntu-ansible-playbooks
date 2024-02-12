@@ -4,4 +4,4 @@ wasmtime_version: '17.0.1'
 
 # see https://github.com/bytecodealliance/wasm-tools/releases
 # renovate: datasource=github-releases depName=bytecodealliance/wasm-tools extractVersion=wasm-tools-(?<version>.+)
-wasmtime_wasm_tools_version: '1.0.58'
+wasmtime_wasm_tools_version: '1.0.59'
