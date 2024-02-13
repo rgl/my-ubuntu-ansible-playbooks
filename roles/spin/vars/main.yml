@@ -4,7 +4,7 @@ spin_version: '2.2.0'
 
 # see https://github.com/fermyon/cloud-plugin
 # renovate: datasource=github-releases depName=fermyon/cloud-plugin
-spin_cloud_plugin_version: '0.6.1'
+spin_cloud_plugin_version: '0.7.0'
 
 # see https://github.com/fermyon/spin-js-sdk
 # renovate: datasource=github-releases depName=fermyon/spin-js-sdk
