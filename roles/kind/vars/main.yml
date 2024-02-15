@@ -5,7 +5,7 @@ kind_provision_password: '{{ ansible_password }}'
 
 # see https://github.com/kubernetes-sigs/kind/releases
 # renovate: datasource=github-releases depName=kubernetes-sigs/kind
-kind_version: '0.21.0'
+kind_version: '0.22.0'
 
 # see https://hub.docker.com/r/kindest/node/tags
 # renovate: datasource=docker depName=kindest/node extractVersion=(?<version>1\.27\..+)
