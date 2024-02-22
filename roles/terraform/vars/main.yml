@@ -1,6 +1,6 @@
 # see https://github.com/hashicorp/terraform/releases
 # renovate: datasource=github-releases depName=hashicorp/terraform
-terraform_version: '1.7.3'
+terraform_version: '1.7.4'
 
 # see https://github.com/nbering/terraform-inventory/releases
 # renovate: datasource=github-releases depName=nbering/terraform-inventory
