@@ -1,0 +1,37 @@
+- name: Ensure apt-get can use https repositories
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - gnupg
+
+- name: Add the clickhouse apt key
+  ansible.builtin.apt_key:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x8919f6bd2b48d754
+    keyring: /etc/apt/keyrings/packages.clickhouse.com.gpg
+
+# see https://clickhouse.com/docs/en/install#install-from-deb-packages
+- name: Add the clickhouse repository
+  ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see https://packages.clickhouse.com/deb/dists/stable/Release
+    # see https://packages.clickhouse.com/deb/dists/stable/main/binary-amd64/Packages
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/packages.clickhouse.com.gpg]
+      https://packages.clickhouse.com/deb
+      stable
+      main
+
+# see https://clickhouse.com/docs/en/install#install-from-deb-packages
+# see https://github.com/ClickHouse/ClickHouse/releases
+# NB execute apt-cache madison clickhouse to known the available versions.
+- name: Install clickhouse-client
+  block:
+    - name: Install clickhouse-client
+      ansible.builtin.apt:
+        name: clickhouse-client={{ clickhouse_client_version }}
+        allow_change_held_packages: true
+    - name: Pin clickhouse-client
+      ansible.builtin.dpkg_selections:
+        name: clickhouse-client
+        selection: hold

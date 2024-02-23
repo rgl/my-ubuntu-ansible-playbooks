@@ -17,6 +17,7 @@
     - powershell
     - yq
     - static_web_server
+    - clickhouse_client
     - talosctl
     - k8s_client
     - aws_client

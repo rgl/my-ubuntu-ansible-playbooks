@@ -1,9 +1,21 @@
 {
     "cSpell.words": [
         "bytecodealliance",
+        "cfssl",
+        "clickhouse",
+        "dpkg",
+        "grype",
         "javy",
+        "keyrings",
+        "keyserver",
+        "pulumi",
+        "syft",
+        "talosctl",
         "timoni",
         "tinygo",
+        "vetu",
+        "wasmedge",
+        "wasmer",
         "wasmtime"
     ]
 }
