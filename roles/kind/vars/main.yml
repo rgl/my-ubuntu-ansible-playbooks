@@ -13,7 +13,7 @@ kind_node_image_version: '1.29.2'
 
 # see https://github.com/databus23/helm-diff/releases
 # renovate: datasource=github-releases depName=databus23/helm-diff
-kind_helm_diff_version: '3.9.4'
+kind_helm_diff_version: '3.9.5'
 
 # see https://artifacthub.io/packages/helm/bitnami/metallb
 # see https://github.com/metallb/metallb
