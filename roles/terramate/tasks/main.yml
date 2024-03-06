@@ -1,0 +1,15 @@
+- name: Install terramate
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-terramate.sh') }}"
+  environment:
+    TERRAMATE_VERSION: "{{ terramate_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install terramate bash completion
+  ansible.builtin.copy:
+    content: |
+      complete -C /usr/local/bin/terramate terramate
+    dest: /usr/share/bash-completion/completions/terramate
+    mode: 0444

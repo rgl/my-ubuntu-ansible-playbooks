@@ -27,6 +27,7 @@
     - vmware_client
     - packer
     - terraform
+    - terramate
     - vagrant
     - go
     - tinygo

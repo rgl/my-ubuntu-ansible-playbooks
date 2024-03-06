@@ -34,6 +34,7 @@
     - name: Read Settings
       ansible.builtin.shell:
         executable: /bin/bash
+        # see https://code.visualstudio.com/docs/getstarted/settings#_settingsjson
         cmd: |
           set -euxo pipefail
           f=~/.config/Code/User/settings.json
@@ -46,6 +47,7 @@
                 ."telemetry.telemetryLevel" = "off"
               | ."redhat.telemetry.enabled" = false
               | ."[svelte]" = {"editor.defaultFormatter":"svelte.svelte-vscode"}
+              | ."files.associations"."*.tm.hcl" = "terramate"
               '
       register: settings
       changed_when: false
@@ -87,6 +89,10 @@
     # see https://github.com/hashicorp/vscode-terraform
     # see https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform
     - hashicorp.terraform
+    # Terramate.
+    # see https://github.com/terramate-io/vscode-terramate
+    # see https://marketplace.visualstudio.com/items?itemName=mineiros.terramate
+    - mineiros.terramate
     # Docker.
     # see https://github.com/microsoft/vscode-docker
     # see https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
