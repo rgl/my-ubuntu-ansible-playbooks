@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/timoni ]; then
-    # e.g. timoni version 0.19.0
+    # e.g. timoni version 0.20.0
     actual_version="$(/usr/local/bin/timoni --version | perl -ne '/^timoni version (.+)/ && print $1')"
     if [ "$actual_version" == "$TIMONI_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
