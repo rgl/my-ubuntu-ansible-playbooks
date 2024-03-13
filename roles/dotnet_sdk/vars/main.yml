@@ -6,7 +6,7 @@ dotnet_sdk_6_version: '6.0.420' # dotnet 6.0.28
 # see https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 # see https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 # renovate: datasource=dotnet depName=dotnet-sdk
-dotnet_sdk_8_version: '8.0.200' # dotnet 8.0.2
+dotnet_sdk_8_version: '8.0.202' # dotnet 8.0.3
 
 dotnet_sdk_versions:
   - '{{ dotnet_sdk_6_version }}'
