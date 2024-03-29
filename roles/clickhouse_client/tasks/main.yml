@@ -29,9 +29,14 @@
   block:
     - name: Install clickhouse-client
       ansible.builtin.apt:
-        name: clickhouse-client={{ clickhouse_client_version }}
+        name:
+          - clickhouse-client={{ clickhouse_client_version }}
+          - clickhouse-common-static={{ clickhouse_client_version }}
         allow_change_held_packages: true
     - name: Pin clickhouse-client
       ansible.builtin.dpkg_selections:
-        name: clickhouse-client
+        name: "{{ item }}"
         selection: hold
+      loop:
+        - clickhouse-client
+        - clickhouse-common-static
