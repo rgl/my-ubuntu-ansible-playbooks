@@ -1,8 +1,8 @@
 # see https://github.com/rgl/lms-binaries/releases
 # renovate: datasource=github-releases depName=rgl/lms-binaries
-lms_binaries_version: 'v0.0.20231222'
+lms_binaries_version: 'v0.0.20240328'
 
 # NB this must exist in https://github.com/rgl/lms-binaries/releases.
 # see https://github.com/intel/lms/releases
 # renovate: datasource=github-releases depName=intel/lms
-lms_version: '2348.0.0'
+lms_version: '2406.0.0'
