@@ -1,11 +1,14 @@
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
-# see https://github.com/kubernetes/dashboard/blob/master/aio/deploy/helm-chart/kubernetes-dashboard/values.yaml
+# see https://github.com/kubernetes/dashboard/blob/master/charts/kubernetes-dashboard
+# see https://github.com/kubernetes/dashboard/blob/master/charts/kubernetes-dashboard/values.yaml
+# see https://github.com/kubernetes/dashboard/blob/master/charts/kubernetes-dashboard/Chart.yaml
 
 - name: Add kubernetes-dashboard repository
   kubernetes.core.helm_repository:
     name: kubernetes-dashboard
     repo_url: https://kubernetes.github.io/dashboard
 
+# NB since this is a development installation, we lift all the resource limits.
 - name: Install kubernetes-dashboard
   kubernetes.core.helm:
     name: kube-dashboard
@@ -15,17 +18,90 @@
     create_namespace: true
     update_repo_cache: true
     values:
-      ingress:
-        enabled: true
-        hosts:
-          - kubernetes-dashboard.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
+      kong:
+        proxy:
+          http:
+            enabled: true
+      app:
+        settings:
+          global:
+            logsAutoRefreshTimeInterval: 0
+            # NB this cannot be set to 0.
+            #    see https://github.com/kubernetes/dashboard/issues/8834
+            resourceAutoRefreshTimeInterval: 900
+      api:
+        scaling:
+          replicas: 1
+        containers:
+          args:
+            # prevent showing the metrics.
+            # NB without this, the dashboard ui is too slow.
+            #    see https://github.com/kubernetes/dashboard/issues/8835
+            # NB bellow, we also disable the metricsScraper container.
+            - --metrics-provider=none
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
+            limits:
+              cpu: 0
+              memory: 0
+      auth:
+        containers:
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
+            limits:
+              cpu: 0
+              memory: 0
+      web:
+        containers:
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
+            limits:
+              cpu: 0
+              memory: 0
+      metricsScraper:
+        # NB this is disabled because in the api configuration above, we have
+        #    disabled showing the metrics, so this is not required. we also
+        #    do not have a metrics-server, so this is would not work either.
+        enabled: false
+        containers:
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
+            limits:
+              cpu: 0
+              memory: 0
+
+- name: Create the Kubernetes Dashboard Ingress
+  kubernetes.core.k8s:
+    namespace: kube-dashboard
+    definition:
+      # see https://kubernetes.io/docs/concepts/services-networking/ingress/
+      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#ingress-v1-networking-k8s-io
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: kubernetes-dashboard
+      spec:
+        rules:
+          - host: kubernetes-dashboard.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: kube-dashboard-kong-proxy
+                      port:
+                        name: kong-proxy
         tls:
           - secretName: kubernetes-dashboard-tls
-      service:
-        externalPort: 80
-      protocolHttp: true
-      extraArgs:
-        - --enable-insecure-login
 
 - name: Create Kubernetes Dashboard Certificate
   kubernetes.core.k8s:
