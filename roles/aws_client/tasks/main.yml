@@ -14,3 +14,12 @@
       complete -C /usr/local/bin/aws_completer aws
     dest: /usr/share/bash-completion/completions/aws
     mode: 0444
+
+- name: Uninstall old aws versions
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'uninstall-aws.sh') }}"
+  environment:
+    AWS_VERSION: "{{ aws_client_aws_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
