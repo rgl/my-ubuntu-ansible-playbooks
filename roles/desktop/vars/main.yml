@@ -4,7 +4,7 @@ desktop_mitmproxy_version: '10.3.0'
 
 # see https://github.com/httptoolkit/httptoolkit-desktop/releases
 # renovate: datasource=github-releases depName=httptoolkit/httptoolkit-desktop
-desktop_httptoolkit_version: '1.14.11'
+desktop_httptoolkit_version: '1.15.0'
 
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
