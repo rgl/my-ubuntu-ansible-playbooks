@@ -12,7 +12,7 @@ if [ -x /usr/local/bin/cmctl ]; then
 fi
 
 # download and install.
-cmctl_url="https://github.com/cert-manager/cert-manager/releases/download/v${CMCTL_VERSION}/cmctl-linux-amd64.tar.gz"
+cmctl_url="https://github.com/cert-manager/cert-manager/releases/download/v${CMCTL_VERSION}/cert-manager-cmctl-linux-amd64.tar.gz"
 t="$(mktemp -q -d --suffix=.cmctl)"
 wget -qO- "$cmctl_url" | tar xzf - -C "$t" cmctl
 install "$t/cmctl" /usr/local/bin/
