@@ -3,6 +3,7 @@
   ansible.builtin.copy:
     content: |
       export POWERSHELL_TELEMETRY_OPTOUT=1
+      export POWERSHELL_UPDATECHECK=Off
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
     mode: 0444
 
