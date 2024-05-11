@@ -3,19 +3,19 @@
 # see https://github.com/netbirdio/netbird
 # see https://app.netbird.io/add-peer
 
-- name: Add the Wiretrustee apt key
+- name: Add the NetBird apt key
   ansible.builtin.apt_key:
-    url: https://pkgs.wiretrustee.com/debian/public.key
-    keyring: /etc/apt/keyrings/pkgs.wiretrustee.com.gpg
+    url: https://pkgs.netbird.io/debian/public.key
+    keyring: /etc/apt/keyrings/pkgs.netbird.io.gpg
 
-- name: Add the Wiretrustee repository
+- name: Add the NetBird repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see https://pkgs.wiretrustee.com/debian/dists/stable/InRelease
+    # see https://pkgs.netbird.io/debian/dists/stable/InRelease
     repo: >
       deb
-      [signed-by=/etc/apt/keyrings/pkgs.wiretrustee.com.gpg]
-      https://pkgs.wiretrustee.com/debian
+      [signed-by=/etc/apt/keyrings/pkgs.netbird.io.gpg]
+      https://pkgs.netbird.io/debian
       stable
       main
 

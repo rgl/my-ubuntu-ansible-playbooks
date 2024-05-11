@@ -10,6 +10,7 @@
         "javy",
         "keyrings",
         "keyserver",
+        "netbird",
         "pulumi",
         "syft",
         "talosctl",
