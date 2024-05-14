@@ -25,7 +25,7 @@ k8s_client_crane_version: '0.19.1'
 
 # see https://github.com/regclient/regclient/releases
 # renovate: datasource=github-releases depName=regclient/regclient
-k8s_client_regclient_version: '0.6.0'
+k8s_client_regclient_version: '0.6.1'
 
 # see https://github.com/cert-manager/cert-manager/releases
 # renovate: datasource=github-releases depName=cert-manager/cert-manager
