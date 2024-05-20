@@ -37,7 +37,7 @@ EXAMPLES = '''
 - name: Create cluster
   kind:
     name: kind
-    node_image_version: 1.29.4
+    node_image_version: 1.30.0
     auto_start: false
 '''
 
