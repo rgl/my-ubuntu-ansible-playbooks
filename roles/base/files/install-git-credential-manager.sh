@@ -3,8 +3,8 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/git-credential-manager ]; then
-    # e.g. 2.5.0
-    actual_version="$(/usr/local/bin/git-credential-manager --version)"
+    # e.g. 2.5.0+d34930736e131ad80e5690e5634ced1808aff3e2
+    actual_version="$(/usr/local/bin/git-credential-manager --version | perl -ne '/^([^ +]+)/ && print $1')"
     if [ "$actual_version" == "$GIT_CREDENTIAL_MANAGER_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
         exit 0
