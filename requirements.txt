@@ -1,2 +1,2 @@
 ansible-core==2.17.0    # see https://pypi.org/project/ansible-core/
-ansible-lint==24.5.0    # see https://pypi.org/project/ansible-lint/
+ansible-lint==24.6.0    # see https://pypi.org/project/ansible-lint/
