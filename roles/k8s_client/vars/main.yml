@@ -17,7 +17,7 @@ k8s_client_timoni_version: '0.21.0'
 
 # see https://github.com/oras-project/oras/releases
 # renovate: datasource=github-releases depName=oras-project/oras
-k8s_client_oras_version: '1.1.0'
+k8s_client_oras_version: '1.2.0'
 
 # see https://github.com/google/go-containerregistry/releases
 # renovate: datasource=github-releases depName=google/go-containerregistry
