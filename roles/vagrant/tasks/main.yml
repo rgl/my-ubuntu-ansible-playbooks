@@ -84,6 +84,12 @@
         src: vagrant-nfs-synced-folders
         dest: /etc/sudoers.d/vagrant-nfs-synced-folders
         mode: 0400
+    # see https://github.com/hashicorp/vagrant/pull/13409
+    - name: Patch vagrant to support OpenWRT NFS Synced Folders
+      ansible.posix.patch:
+        src: vagrant-nfs-synced-folders-13409.patch
+        basedir: /opt/vagrant/embedded/gems/gems/vagrant-{{ vagrant_version }}
+        strip: 1
 
 # see https://github.com/hashicorp/vagrant/pull/9948
 - name: Add support for SMB shared folders

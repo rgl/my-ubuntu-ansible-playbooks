@@ -1,0 +1,27 @@
+# wget -qO vagrant-nfs-synced-folders-13409.patch https://github.com/hashicorp/vagrant/pull/13409.patch
+# see https://github.com/hashicorp/vagrant/pull/13409
+From 7dacc4b711904d2ac94b63a32cbd83bc2a35e2b0 Mon Sep 17 00:00:00 2001
+From: Rui Lopes <rgl@ruilopes.com>
+Date: Mon, 10 Jun 2024 10:44:38 +0100
+Subject: [PATCH] fix openwrt nfs synched folders
+
+in openwrt, /sbin/init --version does not print the version, instead it calls init, which breaks the running system
+
+this was already fixed in https://github.com/hashicorp/vagrant/pull/7813 but somehow was lost in later code changes
+---
+ plugins/synced_folders/unix_mount_helpers.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/synced_folders/unix_mount_helpers.rb b/plugins/synced_folders/unix_mount_helpers.rb
+index 6008cac3f6b..88269ec4afa 100644
+--- a/plugins/synced_folders/unix_mount_helpers.rb
++++ b/plugins/synced_folders/unix_mount_helpers.rb
+@@ -97,7 +97,7 @@ def find_mount_options_id(id_name, mount_options)
+       def emit_upstart_notification(machine, guest_path)
+         # Emit an upstart event if we can
+         machine.communicate.sudo <<-EOH.gsub(/^ {12}/, "")
+-            if command -v /sbin/init && /sbin/init 2>/dev/null --version | grep upstart; then
++            if test -x /sbin/initctl && command -v /sbin/init && /sbin/init 2>/dev/null --version | grep upstart; then
+               /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=#{guest_path}
+             fi
+           EOH
