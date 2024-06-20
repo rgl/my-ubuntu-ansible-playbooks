@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /opt/tinygo/bin/tinygo ]; then
-    # e.g. tinygo version 0.31.2 linux/amd64 (using go version go1.21.6 and LLVM version 16.0.1)
+    # e.g. tinygo version 0.32.0 linux/amd64 (using go version go1.21.6 and LLVM version 16.0.1)
     actual_version="$(/opt/tinygo/bin/tinygo version | perl -ne '/^tinygo version (.+?) / && print $1')"
     if [ "$actual_version" == "$TINYGO_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
