@@ -6,7 +6,7 @@
 
 - name: Add the clickhouse apt key
   ansible.builtin.apt_key:
-    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x8919f6bd2b48d754
+    url: https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key
     keyring: /etc/apt/keyrings/packages.clickhouse.com.gpg
 
 # see https://clickhouse.com/docs/en/install#install-from-deb-packages
