@@ -20,9 +20,15 @@ kind_helm_diff_version: '3.9.9'
 # renovate: datasource=helm depName=metallb registryUrl=https://charts.bitnami.com/bitnami
 kind_metallb_chart_version: '6.3.6' # app version: 0.14.5
 
+# see https://github.com/cert-manager/cert-manager
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 # renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
 kind_cert_manager_chart_version: '1.15.1' # app version: 1.15.1
+
+# see https://github.com/cert-manager/trust-manager
+# see https://artifacthub.io/packages/helm/cert-manager/trust-manager
+# renovate: datasource=helm depName=trust-manager registryUrl=https://charts.jetstack.io
+kind_trust_manager_chart_version: '0.11.0' # app version: 0.11.0
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik

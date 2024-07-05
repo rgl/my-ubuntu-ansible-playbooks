@@ -8,6 +8,7 @@
         "dpkg",
         "grype",
         "javy",
+        "jetstack",
         "keyrings",
         "keyserver",
         "netbird",

@@ -15,6 +15,8 @@
       ansible.builtin.include_tasks: metallb.yml
     - name: Install cert-manager
       ansible.builtin.include_tasks: cert-manager.yml
+    - name: Install trust-manager
+      ansible.builtin.include_tasks: trust-manager.yml
     - name: Install Traefik
       ansible.builtin.include_tasks: traefik.yml
     - name: Install external-dns

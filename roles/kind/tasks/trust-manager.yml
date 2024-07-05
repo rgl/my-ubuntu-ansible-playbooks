@@ -1,0 +1,16 @@
+# see https://cert-manager.io/docs/tutorials/getting-started-with-trust-manager/
+# see https://github.com/cert-manager/trust-manager
+# see https://github.com/golang/go/blob/go1.22.3/src/crypto/x509/root_linux.go
+# see https://artifacthub.io/packages/helm/cert-manager/trust-manager
+- name: Install trust-manager
+  kubernetes.core.helm:
+    name: trust-manager
+    chart_ref: jetstack/trust-manager
+    chart_version: '{{ kind_trust_manager_chart_version }}'
+    release_namespace: cert-manager
+    create_namespace: false
+    update_repo_cache: true
+    values:
+      secretTargets:
+        enabled: true
+        authorizedSecretsAll: true
