@@ -30,6 +30,11 @@ kind_cert_manager_chart_version: '1.15.1' # app version: 1.15.1
 # renovate: datasource=helm depName=trust-manager registryUrl=https://charts.jetstack.io
 kind_trust_manager_chart_version: '0.11.0' # app version: 0.11.0
 
+# see https://github.com/stakater/reloader
+# see https://artifacthub.io/packages/helm/stakater/reloader
+# renovate: datasource=helm depName=reloader registryUrl=https://stakater.github.io/stakater-charts
+kind_reloader_chart_version: '1.0.115' # app version: 1.0.115
+
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
 kind_traefik_chart_version: '28.3.0' # app version: 3.0.2

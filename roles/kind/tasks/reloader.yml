@@ -1,0 +1,23 @@
+- name: Add stakater repository
+  kubernetes.core.helm_repository:
+    name: stakater
+    repo_url: https://stakater.github.io/stakater-charts
+
+# NB tls libraries typically load the certificates from ca-certificates.crt
+#    file once, when they are started, and they never reload the file again.
+#    reloader will automatically restart them when their configmap/secret
+#    changes.
+# see https://cert-manager.io/docs/tutorials/getting-started-with-trust-manager/
+# see https://github.com/stakater/reloader
+# see https://artifacthub.io/packages/helm/stakater/reloader
+- name: Install reloader
+  kubernetes.core.helm:
+    name: reloader
+    chart_ref: stakater/reloader
+    chart_version: '{{ kind_reloader_chart_version }}'
+    release_namespace: kube-system
+    create_namespace: false
+    update_repo_cache: true
+    values:
+      reloader:
+        autoReloadAll: false

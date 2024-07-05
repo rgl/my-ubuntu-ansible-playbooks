@@ -17,6 +17,8 @@
       ansible.builtin.include_tasks: cert-manager.yml
     - name: Install trust-manager
       ansible.builtin.include_tasks: trust-manager.yml
+    - name: Install reloader
+      ansible.builtin.include_tasks: reloader.yml
     - name: Install Traefik
       ansible.builtin.include_tasks: traefik.yml
     - name: Install external-dns
