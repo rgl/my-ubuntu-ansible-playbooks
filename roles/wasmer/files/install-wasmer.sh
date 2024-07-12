@@ -7,7 +7,7 @@ changed='0'
 # install wasmer.
 # see https://github.com/wasmerio/wasmer-install
 # see https://github.com/wasmerio/wasmer-install/blob/master/install.sh
-# e.g. wasmer 4.3.3
+# e.g. wasmer 4.3.4
 actual_version="$("$wasmer" --version 2>/dev/null | perl -ne '/^wasmer (.+)$/ && print $1' || true)"
 if [ "$actual_version" != "$WASMER_VERSION" ]; then
     rm -rf ~/.wasmer
