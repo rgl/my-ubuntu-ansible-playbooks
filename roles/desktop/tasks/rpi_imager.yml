@@ -3,3 +3,9 @@
 - name: Install rpi-imager
   ansible.builtin.apt:
     deb: https://github.com/raspberrypi/rpi-imager/releases/download/v{{ desktop_rpi_imager_version }}/rpi-imager_{{ desktop_rpi_imager_version }}_amd64.deb
+    allow_change_held_packages: true
+
+- name: Pin rpi-imager
+  ansible.builtin.dpkg_selections:
+    name: rpi-imager
+    selection: hold
