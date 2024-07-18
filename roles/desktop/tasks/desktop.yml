@@ -140,6 +140,10 @@
       community.general.dconf:
         key: /org/gnome/shell/extensions/dash-to-panel/group-apps-underline-unfocused
         value: 'false'
+    - name: Configure the panel to only show the applications showing on their monitor
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/dash-to-panel/isolate-monitors
+        value: 'true'
 
 - name: Install Sensory Perception
   become: false
