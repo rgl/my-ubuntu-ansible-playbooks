@@ -1,6 +1,6 @@
 # see https://github.com/mitmproxy/mitmproxy/releases
 # renovate: datasource=github-releases depName=mitmproxy/mitmproxy
-desktop_mitmproxy_version: '10.4.0'
+desktop_mitmproxy_version: '10.4.1'
 
 # see https://github.com/httptoolkit/httptoolkit-desktop/releases
 # renovate: datasource=github-releases depName=httptoolkit/httptoolkit-desktop
