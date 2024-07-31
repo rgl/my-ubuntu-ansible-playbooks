@@ -23,7 +23,7 @@ kind_metallb_chart_version: '6.3.9' # app version: 0.14.5
 # see https://github.com/cert-manager/cert-manager
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
 # renovate: datasource=helm depName=cert-manager registryUrl=https://charts.jetstack.io
-kind_cert_manager_chart_version: '1.15.1' # app version: 1.15.1
+kind_cert_manager_chart_version: '1.15.2' # app version: 1.15.2
 
 # see https://github.com/cert-manager/trust-manager
 # see https://artifacthub.io/packages/helm/cert-manager/trust-manager
