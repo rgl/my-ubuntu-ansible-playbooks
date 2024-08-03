@@ -54,6 +54,10 @@ kind_external_dns_chart_version: '8.3.3' # app version: 0.14.2
 # renovate: datasource=docker depName=powerdns/pdns-auth-48
 kind_pdns_version: '4.8.4' # app version: 4.8.4
 
+# see https://artifacthub.io/packages/helm/gitea/gitea
+# renovate: datasource=helm depName=gitea registryUrl=https://dl.gitea.com/charts
+kind_gitea_chart_version: '10.4.0' # app version: 1.22.1
+
 # see https://artifacthub.io/packages/helm/bitnami/postgresql
 # renovate: datasource=helm depName=postgresql registryUrl=https://charts.bitnami.com/bitnami
 kind_postgresql_chart_version: '15.5.20' # app version: 16.3.0

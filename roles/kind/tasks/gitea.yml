@@ -1,0 +1,98 @@
+- name: Generate the gitea password
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'password.sh') }}"
+  environment:
+    PASSWORD_PATH: '{{ "~/.kube/" + kind_cluster_name + "-gitea-password.txt" }}'
+  register: kind_gitea_password_result
+  changed_when: "'ANSIBLE CHANGED YES' in kind_gitea_password_result.stdout_lines"
+
+- name: Add the gitea repository
+  kubernetes.core.helm_repository:
+    name: gitea
+    repo_url: https://dl.gitea.com/charts
+
+# set the configuration.
+# NB the default values are described at:
+#       https://gitea.com/gitea/helm-chart/src/tag/v10.4.0/values.yaml
+#    NB make sure you are seeing the same version of the chart that you are installing.
+- name: Install Gitea
+  kubernetes.core.helm:
+    name: gitea
+    chart_ref: gitea/gitea
+    chart_version: '{{ kind_gitea_chart_version }}'
+    release_namespace: gitea
+    create_namespace: true
+    update_repo_cache: true
+    values:
+      redis-cluster:
+        enabled: false
+      redis:
+        enabled: false
+      postgresql:
+        enabled: false
+      postgresql-ha:
+        enabled: false
+      persistence:
+        enabled: true
+        claimName: gitea
+      gitea:
+        config:
+          database:
+            DB_TYPE: sqlite3
+          session:
+            PROVIDER: memory
+          cache:
+            ADAPTER: memory
+          queue:
+            TYPE: level
+        admin:
+          username: gitea
+          password: '{{ kind_gitea_password_result.stdout_lines[-1] }}'
+      service:
+        http:
+          type: ClusterIP
+          port: 3000
+          clusterIP: null
+        ssh:
+          type: ClusterIP
+          port: 22
+          clusterIP: null
+      ingress:
+        enabled: true
+        hosts:
+          - host: gitea.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: gitea-tls
+            hosts:
+              - gitea.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
+
+- name: Create the gitea Certificate
+  kubernetes.core.k8s:
+    namespace: gitea
+    definition:
+      # see https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.Certificate
+      apiVersion: cert-manager.io/v1
+      kind: Certificate
+      metadata:
+        name: gitea
+      spec:
+        subject:
+          organizations:
+            - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
+          organizationalUnits:
+            - Kubernetes
+        commonName: Gitea
+        dnsNames:
+          - gitea.{{ kind_cluster_name }}.{{ kind_cluster_domain }}
+        duration: 1h # NB this is so low for testing purposes.
+        privateKey:
+          algorithm: ECDSA # NB Ed25519 is not yet supported by chrome 93 or firefox 91.
+          size: 256
+        secretName: gitea-tls
+        issuerRef:
+          kind: ClusterIssuer
+          name: ingress

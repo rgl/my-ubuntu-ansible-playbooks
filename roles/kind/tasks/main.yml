@@ -23,6 +23,8 @@
       ansible.builtin.include_tasks: traefik.yml
     - name: Install external-dns
       ansible.builtin.include_tasks: external-dns.yml
+    - name: Install Gitea
+      ansible.builtin.include_tasks: gitea.yml
     - name: Install kubernetes-dashboard
       ansible.builtin.include_tasks: kubernetes-dashboard.yml
     - name: Configure the host
