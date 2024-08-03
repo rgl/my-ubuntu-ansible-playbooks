@@ -58,6 +58,10 @@ kind_pdns_version: '4.8.4' # app version: 4.8.4
 # renovate: datasource=helm depName=gitea registryUrl=https://dl.gitea.com/charts
 kind_gitea_chart_version: '10.4.0' # app version: 1.22.1
 
+# see https://artifacthub.io/packages/helm/argo/argo-cd
+# renovate: datasource=helm depName=argo-cd registryUrl=https://argoproj.github.io/argo-helm
+kind_argocd_chart_version: '7.3.11' # app version: 2.11.7
+
 # see https://artifacthub.io/packages/helm/bitnami/postgresql
 # renovate: datasource=helm depName=postgresql registryUrl=https://charts.bitnami.com/bitnami
 kind_postgresql_chart_version: '15.5.20' # app version: 16.3.0

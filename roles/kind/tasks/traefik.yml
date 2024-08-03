@@ -20,9 +20,6 @@
         type: LoadBalancer
       # configure the ports.
       ports:
-        web:
-          redirectTo:
-            port: websecure
         websecure:
           tls:
             enabled: true

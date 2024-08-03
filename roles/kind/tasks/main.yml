@@ -25,6 +25,8 @@
       ansible.builtin.include_tasks: external-dns.yml
     - name: Install Gitea
       ansible.builtin.include_tasks: gitea.yml
+    - name: Install Argo CD
+      ansible.builtin.include_tasks: argocd.yml
     - name: Install kubernetes-dashboard
       ansible.builtin.include_tasks: kubernetes-dashboard.yml
     - name: Configure the host
