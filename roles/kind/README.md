@@ -84,14 +84,15 @@ Create the `example-argocd` repository:
 ```bash
 gitea_fqdn="$(kubectl get -n gitea ingress/gitea -o json | jq -r .spec.rules[0].host)"
 gitea_url="https://$gitea_fqdn"
+gitea_password="$(cat ~/.kube/kind-gitea-password.txt)"
 echo "gitea_url: $argocd_server_url"
 echo "gitea_username: gitea"
-echo "gitea_password: gitea"
+echo "gitea_password: $gitea_password"
 curl \
   --silent \
   --show-error \
   --fail-with-body \
-  -u gitea:gitea \
+  -u "gitea:$gitea_password" \
   -X POST \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
@@ -135,7 +136,7 @@ argocd repo add \
   http://gitea-http.gitea.svc:3000/gitea/example-argocd.git \
   --grpc-web \
   --username gitea \
-  --password gitea
+  --password "$gitea_password"
 argocd app create \
   example \
   --dest-name in-cluster \
@@ -190,7 +191,7 @@ curl \
   --silent \
   --show-error \
   --fail-with-body \
-  -u gitea:gitea \
+  -u "gitea:$gitea_password" \
   -X DELETE \
   -H 'Accept: application/json' \
   "$gitea_url/api/v1/repos/gitea/example-argocd" \
