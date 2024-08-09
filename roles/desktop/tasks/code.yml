@@ -105,6 +105,9 @@
     # see https://github.com/Microsoft/vscode-python
     # see https://marketplace.visualstudio.com/items?itemName=ms-python.python
     - ms-python.python
+    # Python code formatter.
+    # see https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter
+    - ms-python.black-formatter
     # Remote SSH.
     # see https://github.com/Microsoft/vscode-remote-release
     # see https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
