@@ -1,6 +1,6 @@
 # see https://github.com/moby/moby/releases
 # renovate: datasource=github-releases depName=moby/moby
-docker_version: '27.2.0'
+docker_version: '27.2.1'
 
 # see https://github.com/docker/compose/releases
 # renovate: datasource=github-releases depName=docker/compose
