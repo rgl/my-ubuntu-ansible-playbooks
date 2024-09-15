@@ -9,7 +9,7 @@ k8s_client_k9s_version: '0.32.5'
 
 # see https://github.com/helm/helm/releases
 # renovate: datasource=github-releases depName=helm/helm
-k8s_client_helm_version: '3.15.4'
+k8s_client_helm_version: '3.16.1'
 
 # see https://github.com/stefanprodan/timoni/releases
 # renovate: datasource=github-releases depName=stefanprodan/timoni
