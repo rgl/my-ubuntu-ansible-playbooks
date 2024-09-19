@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /opt/zig/zig ]; then
-    # e.g. 0.13.0
+    # e.g. 0.13.1
     actual_version="$(/opt/zig/zig version | perl -ne '/^(.+)/ && print $1')"
     if [ "$actual_version" == "$ZIG_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
