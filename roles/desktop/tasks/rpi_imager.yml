@@ -1,11 +1,17 @@
 # see https://github.com/raspberrypi/rpi-imager/releases
 
-- name: Install rpi-imager
+- name: Uninstall rpi-imager apt package
   ansible.builtin.apt:
-    deb: https://github.com/raspberrypi/rpi-imager/releases/download/v{{ desktop_rpi_imager_version }}/rpi-imager_{{ desktop_rpi_imager_version }}_amd64.deb
+    name: rpi-imager
+    state: absent
+    purge: true
     allow_change_held_packages: true
 
-- name: Pin rpi-imager
-  ansible.builtin.dpkg_selections:
-    name: rpi-imager
-    selection: hold
+- name: Install rpi-imager
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-rpi-imager.sh') }}"
+  environment:
+    RPI_IMAGER_VERSION: "{{ desktop_rpi_imager_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
