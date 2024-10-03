@@ -2,4 +2,4 @@ base_timezone: 'Europe/Lisbon'
 
 # see https://github.com/git-ecosystem/git-credential-manager/releases
 # renovate: datasource=github-releases depName=git-ecosystem/git-credential-manager
-base_git_credential_manager_version: '2.5.1'
+base_git_credential_manager_version: '2.6.0'
