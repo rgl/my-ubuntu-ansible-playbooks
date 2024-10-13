@@ -101,6 +101,9 @@
     # see https://github.com/dotnet/vscode-csharp
     # see https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
     - ms-dotnettools.csharp
+    # C# Dev Kit.
+    # see https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit
+    - ms-dotnettools.csdevkit
     # Python language.
     # see https://github.com/Microsoft/vscode-python
     # see https://marketplace.visualstudio.com/items?itemName=ms-python.python
