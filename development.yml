@@ -40,6 +40,7 @@
     - dotnet_sdk
     - nodejs
     - bun
+    - deno
     - pulumi
     - cue
     - dagger

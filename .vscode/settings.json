@@ -5,6 +5,7 @@
         "bytecodealliance",
         "cfssl",
         "clickhouse",
+        "deno",
         "dpkg",
         "grype",
         "javy",

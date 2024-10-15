@@ -1,0 +1,20 @@
+- name: Install deno
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-deno.sh') }}"
+  environment:
+    DENO_VERSION: "{{ deno_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install deno bash completion
+  block:
+    - name: Get deno bash completion
+      ansible.builtin.command: deno completions bash
+      register: bash_completion
+      changed_when: false
+    - name: Install deno bash completion
+      ansible.builtin.copy:
+        content: "{{ bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/deno
+        mode: 0444
