@@ -14,7 +14,7 @@
 
 # set the configuration.
 # NB the default values are described at:
-#       https://gitea.com/gitea/helm-chart/src/tag/v10.4.1/values.yaml
+#       https://gitea.com/gitea/helm-chart/src/tag/v10.5.0/values.yaml
 #    NB make sure you are seeing the same version of the chart that you are installing.
 - name: Install Gitea
   kubernetes.core.helm:
