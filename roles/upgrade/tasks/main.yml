@@ -35,6 +35,10 @@
     cache_valid_time: 10800 # 3h
   changed_when: false
 
+- name: Install the HWE kernel
+  ansible.builtin.apt:
+    name: linux-generic-hwe-{{ ansible_distribution_version }}
+
 - name: Upgrade the system
   ansible.builtin.apt:
     upgrade: dist
