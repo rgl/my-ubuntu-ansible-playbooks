@@ -13,7 +13,7 @@ k8s_client_helm_version: '3.16.2'
 
 # see https://github.com/stefanprodan/timoni/releases
 # renovate: datasource=github-releases depName=stefanprodan/timoni
-k8s_client_timoni_version: '0.22.0'
+k8s_client_timoni_version: '0.22.1'
 
 # see https://github.com/oras-project/oras/releases
 # renovate: datasource=github-releases depName=oras-project/oras
