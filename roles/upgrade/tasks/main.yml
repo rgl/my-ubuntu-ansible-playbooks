@@ -30,10 +30,35 @@
     state: absent
 
 - name: Update cache
-  ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 10800 # 3h
-  changed_when: false
+  vars:
+    upgrade_apt_update_cache_params:
+      cache_valid_time: 10800 # 3h
+    upgrade_apt_update_cache_apt_lists_directories:
+      - /etc/apt/sources.list.d
+      - /var/lib/apt/lists
+  block:
+    - name: Update cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: "{{ upgrade_apt_update_cache_params.cache_valid_time }}"
+      changed_when: false
+  rescue:
+    - name: Remove apt lists directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop: "{{ upgrade_apt_update_cache_apt_lists_directories }}"
+    - name: Create apt lists directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0755
+      loop: "{{ upgrade_apt_update_cache_apt_lists_directories }}"
+    - name: Update cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: "{{ upgrade_apt_update_cache_params.cache_valid_time }}"
+      changed_when: false
 
 - name: Install the HWE kernel
   ansible.builtin.apt:
