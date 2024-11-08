@@ -3,11 +3,11 @@ set -euxo pipefail
 
 # see https://github.com/regclient/regclient/releases
 name="${REGCLIENT_NAME:-regctl}"
-version="${REGCLIENT_VERSION:-0.7.1}"
+version="${REGCLIENT_VERSION:-0.7.2}"
 
 # bail when already installed.
 if [ -x "/usr/local/bin/$name" ]; then
-  # e.g. v0.7.1
+  # e.g. v0.7.2
   actual_version="$("/usr/local/bin/$name" version --format '{{.VCSTag}}' | perl -ne '/^v(.+)/ && print $1')"
   if [ "$actual_version" == "$version" ]; then
     echo 'ANSIBLE CHANGED NO'
