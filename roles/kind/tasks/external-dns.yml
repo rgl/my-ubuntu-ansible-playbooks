@@ -103,8 +103,8 @@
         namespace: kube-external-dns
         definition:
           # see https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
-          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#service-v1-core
-          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#serviceport-v1-core
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#service-v1-core
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#serviceport-v1-core
           apiVersion: v1
           kind: Service
           metadata:
@@ -123,8 +123,8 @@
         namespace: kube-external-dns
         definition:
           # see https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
-          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#service-v1-core
-          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#serviceport-v1-core
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#service-v1-core
+          # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#serviceport-v1-core
           apiVersion: v1
           kind: Service
           metadata:
