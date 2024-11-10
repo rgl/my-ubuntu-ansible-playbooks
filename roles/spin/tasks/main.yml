@@ -23,10 +23,6 @@
       name: cloud
       github: fermyon/cloud-plugin
       version: "{{ spin_cloud_plugin_version }}"
-    - # https://github.com/fermyon/spin-js-sdk
-      name: js2wasm
-      github: fermyon/spin-js-sdk
-      version: "{{ spin_js_plugin_version }}"
     - # https://github.com/fermyon/spin-python-sdk
       name: py2wasm
       github: fermyon/spin-python-sdk
@@ -48,7 +44,7 @@
       # NB this also installs the http-ts template.
       name: http-js
       github: fermyon/spin-js-sdk
-      version: "{{ spin_js_plugin_version }}"
+      version: "{{ spin_js_sdk_version }}"
     - # https://github.com/fermyon/spin-python-sdk/tree/main/templates/http-py
       name: http-py
       github: fermyon/spin-python-sdk
