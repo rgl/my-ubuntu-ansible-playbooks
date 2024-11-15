@@ -10,7 +10,7 @@
     url: https://packages.microsoft.com/keys/microsoft.asc
     keyring: /etc/apt/keyrings/packages.microsoft.com.gpg
 
-# see https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
+# see https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
 - name: Add the azure-cli repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format

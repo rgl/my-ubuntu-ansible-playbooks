@@ -1,5 +1,5 @@
 # see https://dotnet.microsoft.com/en-us/download/dotnet/8.0
-# see https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
+# see https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 # renovate: datasource=dotnet depName=dotnet-sdk
 dotnet_sdk_8_version: '8.0.404' # dotnet 8.0.11
 
