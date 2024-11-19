@@ -5,41 +5,9 @@
     dest: /etc/profile.d/opt-out-dotnet-cli-telemetry.sh
     mode: 0444
 
-- name: Add the Microsoft APT repository key
-  ansible.builtin.apt_key:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/keyrings/packages.microsoft.com.gpg
-
-- name: Add the dotnet-sdk repository
-  ansible.builtin.apt_repository:
-    # see https://wiki.debian.org/DebianRepository/Format
-    # see https://packages.microsoft.com/ubuntu/22.04/prod/dists/jammy/Release
-    # see https://packages.microsoft.com/ubuntu/22.04/prod/dists/jammy/main/binary-amd64/Packages
-    repo: >
-      deb
-      [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.gpg]
-      https://packages.microsoft.com/ubuntu/{{ ansible_distribution_version }}/prod
-      {{ ansible_distribution_release }}
-      main
-    state: present
-
-# pin the microsoft apt repository packages above the distro ones.
-# see apt-cache policy
-# see apt-cache policy dotnet-sdk-6.0
-# see apt-cache showpkg dotnet-sdk-6.0
-# see when there is a mixup between the distribution packages and the microsoft
-#     ones, before installing again, remove all the installed packages with:
-#       sudo apt-get remove --purge 'dotnet*' 'aspnet*' 'netstandard*'
-# see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
-- name: Pin the microsoft apt repository
-  ansible.builtin.copy:
-    dest: /etc/apt/preferences.d/packages.microsoft.com.pref
-    content: |
-      Package: dotnet* aspnet* netstandard*
-      Pin: origin "packages.microsoft.com"
-      Pin-Priority: 999
-    mode: 0444
-
-- name: Install dotnet-sdk
-  ansible.builtin.include_tasks: dotnet_sdk.yml
-  loop: '{{ dotnet_sdk_versions }}'
+# see https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+# see https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
+# see https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#supported-distributions
+- name: Install dotnet-sdk 8.0
+  ansible.builtin.apt:
+    name: dotnet-sdk-8.0
