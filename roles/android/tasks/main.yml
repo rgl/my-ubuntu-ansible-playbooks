@@ -10,7 +10,7 @@
       changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
     - name: Install android-studio symlink
       ansible.builtin.file:
-        src: /opt/android-studio/bin/studio.sh
+        src: /opt/android-studio/bin/studio
         dest: /usr/local/bin/android-studio
         force: true
         state: link
