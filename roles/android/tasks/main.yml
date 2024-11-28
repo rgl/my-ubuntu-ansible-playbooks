@@ -1,3 +1,25 @@
+- name: Install Android SDK
+  block:
+    - name: Install Android SDK
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: "{{ lookup('file', 'install-android-sdk.sh') }}"
+      environment:
+        ANDROID_SDK_CMDLINE_TOOLS_BUILD: "{{ android_sdk_cmdline_tools_build }}"
+        ANDROID_SDK_CMDLINE_TOOLS_VERSION: "{{ android_sdk_cmdline_tools_version }}"
+        ANDROID_SDK_PACKAGES: "{{ android_sdk_packages | join('\n') }}"
+      register: result
+      changed_when: "'ANSIBLE CHANGED YES' in result.stdout_lines"
+    # see https://developer.android.com/tools/variables#set
+    - name: Configure Android SDK environment variables
+      ansible.builtin.copy:
+        content: |
+          export ANDROID_HOME=/opt/android-sdk
+          export PATH="$PATH:$ANDROID_HOME/cmdline-tools/{{ android_sdk_cmdline_tools_version }}/bin:$ANDROID_HOME/platform-tools"
+        dest: /etc/profile.d/android-sdk.sh
+        mode: 0444
+
+# NB javac is bundled with android studio at /opt/android-studio/jbr/bin.
 - name: Install Android Studio
   block:
     - name: Install Android Studio
