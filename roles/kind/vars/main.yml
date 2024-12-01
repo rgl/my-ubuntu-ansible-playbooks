@@ -33,7 +33,7 @@ kind_trust_manager_chart_version: '0.13.0' # app version: 0.13.0
 # see https://github.com/stakater/reloader
 # see https://artifacthub.io/packages/helm/stakater/reloader
 # renovate: datasource=helm depName=reloader registryUrl=https://stakater.github.io/stakater-charts
-kind_reloader_chart_version: '1.1.0' # app version: 1.1.0
+kind_reloader_chart_version: '1.2.0' # app version: 1.2.0
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
