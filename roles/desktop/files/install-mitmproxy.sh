@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -r /usr/local/bin/mitmproxy ]; then
-    # e.g. Mitmproxy: 11.0.1 binary
+    # e.g. Mitmproxy: 11.0.2 binary
     actual_version="$(/usr/local/bin/mitmproxy --version | perl -ne '/^Mitmproxy: (.+?) / && print $1')"
     if [ "$actual_version" == "$MITMPROXY_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
