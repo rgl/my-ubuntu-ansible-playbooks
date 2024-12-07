@@ -2,11 +2,11 @@
 set -euxo pipefail
 
 # see https://github.com/oras-project/oras/releases
-version="${ORAS_VERSION:-1.2.0}"
+version="${ORAS_VERSION:-1.2.1}"
 
 # bail when already installed.
 if [ -x "/usr/local/bin/oras" ]; then
-  # e.g. Version:        1.2.0
+  # e.g. Version:        1.2.1
   actual_version="$(/usr/local/bin/oras version | perl -ne '/^Version:\s+(.+)/ && print $1')"
   if [ "$actual_version" == "$version" ]; then
     echo 'ANSIBLE CHANGED NO'
