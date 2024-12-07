@@ -28,7 +28,7 @@ kind_cert_manager_chart_version: '1.16.2' # app version: 1.16.2
 # see https://github.com/cert-manager/trust-manager
 # see https://artifacthub.io/packages/helm/cert-manager/trust-manager
 # renovate: datasource=helm depName=trust-manager registryUrl=https://charts.jetstack.io
-kind_trust_manager_chart_version: '0.13.0' # app version: 0.13.0
+kind_trust_manager_chart_version: '0.14.0' # app version: 0.14.0
 
 # see https://github.com/stakater/reloader
 # see https://artifacthub.io/packages/helm/stakater/reloader
