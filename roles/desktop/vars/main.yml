@@ -8,7 +8,7 @@ desktop_httptoolkit_version: '1.19.3'
 
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
-desktop_netbird_version: '0.35.0'
+desktop_netbird_version: '0.35.1'
 
 # see https://github.com/ventoy/Ventoy/releases
 # renovate: datasource=github-releases depName=ventoy/Ventoy
