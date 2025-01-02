@@ -48,6 +48,7 @@
     - grype
     - kind
     - solo2
+    - esptool
     - desktop
     - android
     - projects

@@ -1,0 +1,17 @@
+# uninstall brltty because it will take over the Wemos D1 mini ESP8266
+# ttyUSB0 device, as seen in the system journal:
+#     ch341-uart ttyUSB0: ch341-uart converter now disconnected from ttyUSB0
+- name: Uninstall brltty
+  ansible.builtin.apt:
+    name: brltty
+    state: absent
+    purge: true
+
+- name: Install esptool
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-esptool.sh') }}"
+  environment:
+    ESPTOOL_VERSION: "{{ esptool_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
