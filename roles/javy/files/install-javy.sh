@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/javy ]; then
-    # e.g. javy 4.0.0
+    # e.g. javy 5.0.0
     actual_version="$(/usr/local/bin/javy --version | perl -ne '/^javy (.+)$/ && print $1')"
     if [ "$actual_version" == "$JAVY_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
