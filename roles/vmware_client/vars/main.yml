@@ -4,7 +4,7 @@ vmware_client_govc_version: '0.48.0'
 
 # see https://github.com/rgl/ovftool-binaries
 # renovate: datasource=github-tags depName=rgl/ovftool-binaries versioning=loose
-vmware_client_ovftool_version: '4.6.0.21452615'
+vmware_client_ovftool_version: '4.6.3.24031167'
 
 # see https://www.powershellgallery.com/packages/VMware.PowerCLI
 # see https://developer.vmware.com/web/tool/13.2.0/vmware-powercli
