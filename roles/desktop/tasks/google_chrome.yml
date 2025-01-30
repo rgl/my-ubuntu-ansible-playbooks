@@ -19,6 +19,13 @@
       main
     state: present
 
+# e.g. prevent it from creating the /etc/apt/trusted.gpg.d/google-chrome.gpg file et al.
+- name: Prevent the Google Chrome package from installing the Google repository
+  ansible.builtin.copy:
+    content: ''
+    dest: /etc/default/google-chrome
+    mode: 0444
+
 # NB if you are having problems with google chrome, try executing it from the
 #    command line with the --v=1 argument.
 # NB if the log shows skia errors, try to delete your profile GPU cache
