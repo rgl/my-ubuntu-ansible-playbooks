@@ -19,6 +19,7 @@
     - static_web_server
     - clickhouse_client
     - talosctl
+    - github_client
     - k8s_client
     - aws_client
     - azure_client

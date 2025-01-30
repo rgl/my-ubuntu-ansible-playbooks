@@ -1,0 +1,39 @@
+- name: Ensure apt-get can use https repositories
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - gnupg
+
+- name: Download the github cli apt key
+  ansible.builtin.get_url:
+    url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    dest: /etc/apt/keyrings/cli.github.com.gpg
+    mode: 0444
+    force: true
+
+# see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+- name: Add the github cli repository
+  ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see https://cli.github.com/packages/dists/stable/Release
+    # see https://cli.github.com/packages/dists/stable/main/binary-amd64/Packages
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/cli.github.com.gpg]
+      https://cli.github.com/packages
+      stable
+      main
+
+# see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+# see https://github.com/ClickHouse/ClickHouse/releases
+# NB execute apt-cache madison gh to known the available versions.
+- name: Install github cli
+  block:
+    - name: Install github cli
+      ansible.builtin.apt:
+        name: gh={{ github_client_version }}
+        allow_change_held_packages: true
+    - name: Pin github cli
+      ansible.builtin.dpkg_selections:
+        name: gh
+        selection: hold
