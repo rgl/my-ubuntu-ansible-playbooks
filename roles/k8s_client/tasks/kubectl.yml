@@ -1,9 +1,11 @@
 # see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
-- name: Add the kubernetes apt repository key
-  ansible.builtin.apt_key:
+- name: Download the kubernetes apt repository key
+  ansible.builtin.get_url:
     # e.g. https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key
     url: https://pkgs.k8s.io/core:/stable:/v{{ (k8s_client_kubectl_version | split('.'))[:2] | join('.') }}/deb/Release.key
-    keyring: /etc/apt/keyrings/pkgs.k8s.io.gpg
+    dest: /etc/apt/keyrings/pkgs.k8s.io.asc
+    mode: 0444
+    force: true
 
 # see https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 - name: Add the kubernetes repository
@@ -14,7 +16,7 @@
     # e.g. https://pkgs.k8s.io/core:/stable:/v1.31/deb/
     repo: >
       deb
-      [signed-by=/etc/apt/keyrings/pkgs.k8s.io.gpg]
+      [signed-by=/etc/apt/keyrings/pkgs.k8s.io.asc]
       https://pkgs.k8s.io/core:/stable:/v{{ (k8s_client_kubectl_version | split('.'))[:2] | join('.') }}/deb/
       /
 

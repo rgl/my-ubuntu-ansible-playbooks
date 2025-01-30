@@ -5,10 +5,12 @@
       - gnupg
     state: present
 
-- name: Add the docker apt key
-  ansible.builtin.apt_key:
+- name: Download the docker apt key
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
-    keyring: /etc/apt/keyrings/download.docker.com.gpg
+    dest: /etc/apt/keyrings/download.docker.com.asc
+    mode: 0444
+    force: true
 
 # see https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
 - name: Add the docker repository
@@ -18,7 +20,7 @@
     # see Ubuntu Jammy 22.04: https://download.docker.com/linux/ubuntu/dists/jammy/stable/binary-amd64/Packages
     repo: >
       deb
-      [arch=amd64 signed-by=/etc/apt/keyrings/download.docker.com.gpg]
+      [arch=amd64 signed-by=/etc/apt/keyrings/download.docker.com.asc]
       https://download.docker.com/linux/ubuntu
       {{ ansible_distribution_release }}
       stable

@@ -1,7 +1,9 @@
-- name: Add the nodesource apt key
-  ansible.builtin.apt_key:
+- name: Download the nodesource apt key
+  ansible.builtin.get_url:
     url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
-    keyring: /etc/apt/keyrings/deb.nodesource.com.gpg
+    dest: /etc/apt/keyrings/deb.nodesource.com.asc
+    mode: 0444
+    force: true
 
 - name: Add the nodesource apt repository
   ansible.builtin.apt_repository:
@@ -10,7 +12,7 @@
     # see node 20.x: https://deb.nodesource.com/node_20.x/dists/nodistro/main/binary-amd64/Packages
     repo: >
       deb
-      [signed-by=/etc/apt/keyrings/deb.nodesource.com.gpg]
+      [signed-by=/etc/apt/keyrings/deb.nodesource.com.asc]
       https://deb.nodesource.com/node_{{ nodejs_version.split('.')[0] }}.x
       nodistro
       main

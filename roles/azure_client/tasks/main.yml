@@ -5,10 +5,12 @@
       - gnupg
     state: present
 
-- name: Add the microsoft apt key
-  ansible.builtin.apt_key:
+- name: Download the microsoft apt key
+  ansible.builtin.get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/keyrings/packages.microsoft.com.gpg
+    dest: /etc/apt/keyrings/packages.microsoft.com.asc
+    mode: 0444
+    force: true
 
 # see https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
 - name: Add the azure-cli repository
@@ -18,7 +20,7 @@
     # see Ubuntu Jammy 22.04: https://packages.microsoft.com/repos/azure-cli/dists/jammy/main/binary-amd64/Packages
     repo: >
       deb
-      [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.gpg]
+      [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.asc]
       https://packages.microsoft.com/repos/azure-cli/
       {{ ansible_distribution_release }}
       main

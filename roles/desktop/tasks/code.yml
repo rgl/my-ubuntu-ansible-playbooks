@@ -1,9 +1,11 @@
 # see https://code.visualstudio.com/docs/setup/linux
 
-- name: Add the microsoft apt key
-  ansible.builtin.apt_key:
+- name: Download the microsoft apt key
+  ansible.builtin.get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
-    keyring: /etc/apt/keyrings/packages.microsoft.com.gpg
+    dest: /etc/apt/keyrings/packages.microsoft.com.asc
+    mode: 0444
+    force: true
 
 - name: Add the Visual Studio Code repository
   ansible.builtin.apt_repository:
@@ -12,7 +14,7 @@
     # see https://packages.microsoft.com/repos/code/dists/stable/main/binary-amd64/Packages
     repo: >
       deb
-      [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.gpg]
+      [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.asc]
       https://packages.microsoft.com/repos/code
       stable
       main

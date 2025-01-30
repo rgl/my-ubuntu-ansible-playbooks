@@ -4,10 +4,12 @@
       - apt-transport-https
       - gnupg
 
-- name: Add the clickhouse apt key
-  ansible.builtin.apt_key:
+- name: Download the clickhouse apt key
+  ansible.builtin.get_url:
     url: https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key
-    keyring: /etc/apt/keyrings/packages.clickhouse.com.gpg
+    dest: /etc/apt/keyrings/packages.clickhouse.com.asc
+    mode: 0444
+    force: true
 
 # see https://clickhouse.com/docs/en/install#install-from-deb-packages
 - name: Add the clickhouse repository
@@ -17,7 +19,7 @@
     # see https://packages.clickhouse.com/deb/dists/stable/main/binary-amd64/Packages
     repo: >
       deb
-      [arch=amd64 signed-by=/etc/apt/keyrings/packages.clickhouse.com.gpg]
+      [arch=amd64 signed-by=/etc/apt/keyrings/packages.clickhouse.com.asc]
       https://packages.clickhouse.com/deb
       stable
       main
