@@ -1,4 +1,4 @@
 # see https://github.com/cli/cli/releases
 # NB execute apt-cache madison gh to known the available versions.
 # renovate: datasource=github-releases depName=cli/cli
-github_client_version: '2.65.0'
+github_client_version: '2.66.0'
