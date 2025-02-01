@@ -1,0 +1,47 @@
+- name: Ensure apt-get can use https repositories
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - gnupg
+
+- name: Download the OpenTofu apt key
+  ansible.builtin.get_url:
+    url: https://get.opentofu.org/opentofu.gpg
+    dest: /etc/apt/keyrings/get.opentofu.org.gpg
+    mode: 0444
+    force: true
+
+- name: Download the OpenTofu apt key
+  ansible.builtin.get_url:
+    url: https://packages.opentofu.org/opentofu/tofu/gpgkey
+    dest: /etc/apt/keyrings/packages.opentofu.org.asc
+    mode: 0444
+    force: true
+
+# see https://opentofu.org/docs/intro/install/deb/
+- name: Add the OpenTofu repository
+  ansible.builtin.apt_repository:
+    # see https://wiki.debian.org/DebianRepository/Format
+    # see Ubuntu Jammy 22.04: https://packages.opentofu.org/opentofu/tofu/any/dists/any/Release
+    # see Ubuntu Jammy 22.04: https://packages.opentofu.org/opentofu/tofu/any/dists/any/main/binary-amd64/Packages
+    repo: >
+      deb
+      [arch=amd64 signed-by=/etc/apt/keyrings/get.opentofu.org.gpg,/etc/apt/keyrings/packages.opentofu.org.asc]
+      https://packages.opentofu.org/opentofu/tofu/any/
+      any
+      main
+
+# see https://opentofu.org/docs/intro/install/deb/
+# see https://github.com/opentofu/opentofu/releases
+# NB execute apt-cache madison tofu to known the available versions.
+- name: Install tofu
+  block:
+    - name: Install tofu
+      ansible.builtin.apt:
+        name: tofu={{ opentofu_version }}
+        allow_change_held_packages: true
+    - name: Pin tofu
+      ansible.builtin.dpkg_selections:
+        name: tofu
+        selection: hold
+    # TODO tofu -install-autocomplete

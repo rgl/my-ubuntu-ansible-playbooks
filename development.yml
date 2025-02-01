@@ -27,6 +27,7 @@
     - argocd_client
     - vmware_client
     - packer
+    - opentofu
     - terraform
     - terramate
     - vagrant
