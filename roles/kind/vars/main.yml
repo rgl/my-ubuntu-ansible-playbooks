@@ -64,7 +64,7 @@ kind_argocd_chart_version: '7.8.0' # app version: 2.14.1
 
 # see https://artifacthub.io/packages/helm/bitnami/postgresql
 # renovate: datasource=helm depName=postgresql registryUrl=https://charts.bitnami.com/bitnami
-kind_postgresql_chart_version: '16.4.6' # app version: 17.2.0
+kind_postgresql_chart_version: '16.4.8' # app version: 17.3.0
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
 # renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
