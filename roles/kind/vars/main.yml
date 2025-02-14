@@ -52,7 +52,7 @@ kind_external_dns_chart_version: '8.7.4' # app version: 0.15.1
 # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth
 # see https://doc.powerdns.com/authoritative/changelog/
 # renovate: datasource=docker depName=powerdns/pdns-auth-48
-kind_pdns_version: '4.8.4' # app version: 4.8.4
+kind_pdns_version: '4.8.5' # app version: 4.8.5
 
 # see https://artifacthub.io/packages/helm/gitea/gitea
 # renovate: datasource=helm depName=gitea registryUrl=https://dl.gitea.com/charts
