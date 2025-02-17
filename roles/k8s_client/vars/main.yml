@@ -37,4 +37,4 @@ k8s_client_cilium_version: '0.16.24'
 
 # see https://github.com/cilium/hubble/releases
 # renovate: datasource=github-releases depName=cilium/hubble
-k8s_client_hubble_version: '1.16.6'
+k8s_client_hubble_version: '1.17.1'
