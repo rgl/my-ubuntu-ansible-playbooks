@@ -8,7 +8,7 @@ spin_cloud_plugin_version: '0.10.0'
 
 # see https://github.com/fermyon/spin-js-sdk
 # renovate: datasource=github-releases depName=fermyon/spin-js-sdk
-spin_js_sdk_version: '3.0.0'
+spin_js_sdk_version: '3.1.0'
 
 # see https://github.com/fermyon/spin-python-sdk
 # renovate: datasource=github-releases depName=fermyon/spin-python-sdk
