@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/terramate ]; then
-    # e.g. 0.12.0
+    # e.g. 0.12.1
     actual_version="$(/usr/local/bin/terramate version)"
     if [ "$actual_version" == "$TERRAMATE_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
