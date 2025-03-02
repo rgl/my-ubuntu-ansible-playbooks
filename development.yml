@@ -50,6 +50,7 @@
     - grype
     - kind
     - solo2
+    - fido2
     - esptool
     - desktop
     - android

@@ -1,0 +1,12 @@
+# see https://developers.yubico.com/libfido2/
+# see https://github.com/Yubico/libfido2
+# NB execute apt-cache madison fido2-tools to known the available versions.
+- name: Install fido2-tools
+  ansible.builtin.apt:
+    name: fido2-tools
+    state: present
+
+- name: Install libfido2-dev
+  ansible.builtin.apt:
+    name: libfido2-dev
+    state: present

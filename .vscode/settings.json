@@ -13,6 +13,7 @@
         "jetstack",
         "keyrings",
         "keyserver",
+        "libfido",
         "netbird",
         "opentofu",
         "posix",
