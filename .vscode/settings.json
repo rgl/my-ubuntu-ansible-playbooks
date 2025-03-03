@@ -9,6 +9,7 @@
         "deno",
         "dpkg",
         "grype",
+        "httptoolkit",
         "javy",
         "jetstack",
         "keyrings",
