@@ -23,3 +23,20 @@
     AWS_VERSION: "{{ aws_client_aws_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install aws session manager plugin
+  block:
+    - name: Check aws session manager plugin installed version
+      ansible.builtin.command: dpkg-query -W -f='${Version}' session-manager-plugin
+      register: aws_client_session_manager_plugin_info
+      failed_when: false
+      changed_when: false
+    - name: Install aws ssm plugin
+      ansible.builtin.apt:
+        deb: https://s3.amazonaws.com/session-manager-downloads/plugin/{{ aws_client_session_manager_plugin_version }}/ubuntu_64bit/session-manager-plugin.deb
+      when: >
+        (aws_client_session_manager_plugin_info.stdout
+          | regex_replace('^[0-9]+:', '')
+          | regex_replace('~.*$', '')
+          | regex_replace('-[^-]+$', ''))
+        != aws_client_session_manager_plugin_version
