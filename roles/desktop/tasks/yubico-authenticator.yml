@@ -1,0 +1,24 @@
+- name: Install pcscd
+  ansible.builtin.apt:
+    name: pcscd
+
+- name: Install Yubico Authenticator
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-yubico-authenticator.sh') }}"
+  environment:
+    YUBICO_AUTHENTICATOR_VERSION: "{{ desktop_yubico_authenticator_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Create system local applications directory
+  ansible.builtin.file:
+    name: /usr/local/share/applications
+    state: directory
+    mode: 0755
+
+- name: Install Yubico Authenticator desktop file
+  ansible.builtin.copy:
+    src: com.yubico.authenticator.desktop
+    dest: /usr/local/share/applications
+    mode: 0444

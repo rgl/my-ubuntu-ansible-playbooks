@@ -13,6 +13,9 @@
 - name: Install gsmartcontrol
   ansible.builtin.include_tasks: gsmartcontrol.yml
 
+- name: Install Yubico Authenticator
+  ansible.builtin.include_tasks: yubico-authenticator.yml
+
 - name: Install KeePassXC
   ansible.builtin.include_tasks: keepassxc.yml
 

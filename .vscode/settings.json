@@ -29,6 +29,7 @@
         "vetu",
         "wasmedge",
         "wasmer",
-        "wasmtime"
+        "wasmtime",
+        "yubico"
     ]
 }

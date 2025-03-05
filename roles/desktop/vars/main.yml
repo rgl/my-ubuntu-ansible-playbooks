@@ -14,6 +14,10 @@ desktop_netbird_version: '0.37.1'
 # renovate: datasource=github-releases depName=ventoy/Ventoy
 desktop_ventoy_version: '1.0.99'
 
+# see https://github.com/Yubico/yubioath-flutter/releases
+# renovate: datasource=github-releases depName=Yubico/yubioath-flutter
+desktop_yubico_authenticator_version: '7.1.1'
+
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
 desktop_rpi_imager_version: '1.9.0'
