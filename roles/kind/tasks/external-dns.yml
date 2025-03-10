@@ -21,7 +21,7 @@
           metadata:
             name: pdns-api
           stringData:
-            pdns_api_key: abracadabra # TODO create a random and rotatable secret.
+            pdns_api_key: opensesame # TODO create a random and rotatable secret.
     - name: Install pdns
       # see https://github.com/PowerDNS/pdns/blob/master/Docker-README.md
       # see https://github.com/PowerDNS/pdns/blob/master/Dockerfile-auth

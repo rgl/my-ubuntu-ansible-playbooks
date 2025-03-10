@@ -18,7 +18,7 @@
     update_repo_cache: true
     values:
       speaker:
-        secretValue: abracadabra # TODO use a proper secret.
+        secretValue: opensesame # TODO use a proper secret.
 
 - name: Configure metallb
   kubernetes.core.k8s:
