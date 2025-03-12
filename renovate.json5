@@ -8,8 +8,8 @@
     // default datasources.
     {
       "fileMatch": [
-        "^(roles|.github)/.+\\.yml$",
-        "renovate\\.sh"
+        "\\.ya?ml$",
+        "\\.sh$",
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[^:]+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?( extractVersion=(?<extractVersion>.+?))?( registryUrl=(?<registryUrl>.+?))?\\s.+?[:=]\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
