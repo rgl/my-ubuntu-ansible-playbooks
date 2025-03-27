@@ -40,3 +40,9 @@
     GIT_FILTER_REPO_VERSION: "{{ base_git_filter_repo_version }}"
   register: result
   changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+
+- name: Install git-amend-date
+  ansible.builtin.copy:
+    src: git-amend-date
+    dest: /usr/local/bin/git-amend-date
+    mode: 0755

@@ -1,0 +1,60 @@
+#!/bin/bash
+set -euo pipefail
+
+NEW_DATE="2025-01-01 00:00:00 +0000"
+NEW_DATE_TIMESTAMP="$(date -d "$NEW_DATE" +%s) +0000"
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if ! git rev-parse --verify "origin/$CURRENT_BRANCH" >/dev/null 2>&1; then
+    echo "Error: origin/$CURRENT_BRANCH does not exist"
+    exit 1
+fi
+START_COMMIT=$(git rev-parse "origin/$CURRENT_BRANCH")
+REFS="${START_COMMIT}.."
+
+function process_commits {
+    local dry_run=$1
+    local dry_run_flag=""
+    local py_dry_run="False"
+
+    [[ "$dry_run" == "true" ]] && dry_run_flag="--dry-run"
+    [[ "$dry_run" == "true" ]] && py_dry_run="True"
+
+    git filter-repo \
+        --refs "$REFS" \
+        --commit-callback "
+            from datetime import datetime
+
+            def format_date(ts):
+                timestamp, tz = ts.split()
+                return datetime.utcfromtimestamp(int(timestamp)).strftime('%Y-%m-%d %H:%M:%S +0000')
+
+            commit_id = commit.original_id.decode()
+            old_date = format_date(commit.committer_date.decode())
+            msg = commit.message.decode().split('\n')[0]
+
+            if commit.committer_date != b'$NEW_DATE_TIMESTAMP':
+                print(f'{commit_id} {old_date} -> $NEW_DATE {msg}')
+                if not $py_dry_run:
+                    commit.author_date = b'$NEW_DATE_TIMESTAMP'
+                    commit.committer_date = b'$NEW_DATE_TIMESTAMP'
+            else:
+                print(f'{commit_id} {old_date} (unchanged) {msg}')
+        " \
+        $dry_run_flag \
+        --no-gc \
+        --force
+}
+
+echo "DRY RUN: Showing what would change"
+process_commits true
+
+read -p "Proceed with actual modification? (y/N) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "APPLYING DATE CHANGES"
+    process_commits false
+    echo "MODIFICATION COMPLETE"
+else
+    echo "Operation cancelled"
+fi
