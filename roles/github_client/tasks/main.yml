@@ -25,7 +25,7 @@
       main
 
 # see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-# see https://github.com/ClickHouse/ClickHouse/releases
+# see https://github.com/cli/cli/releases
 # NB execute apt-cache madison gh to known the available versions.
 - name: Install github cli
   block:
