@@ -1,6 +1,6 @@
 # see https://github.com/fermyon/spin
 # renovate: datasource=github-releases depName=fermyon/spin
-spin_version: '3.1.2'
+spin_version: '3.2.0'
 
 # see https://github.com/fermyon/cloud-plugin
 # renovate: datasource=github-releases depName=fermyon/cloud-plugin
