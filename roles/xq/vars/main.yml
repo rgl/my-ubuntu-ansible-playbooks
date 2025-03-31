@@ -1,0 +1,3 @@
+# see https://github.com/sibprogrammer/xq/releases
+# renovate: datasource=github-releases depName=sibprogrammer/xq
+xq_version: '1.3.0'

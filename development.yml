@@ -16,6 +16,7 @@
     - docker_registry
     - powershell
     - yq
+    - xq
     - static_web_server
     - clickhouse_client
     - talosctl
