@@ -61,6 +61,9 @@
 - name: Install OBS Studio
   ansible.builtin.include_tasks: obs-studio.yml
 
+- name: Install YTDownloader
+  ansible.builtin.include_tasks: ytdownloader.yml
+
 - name: Install Transmission
   ansible.builtin.include_tasks: transmission.yml
 

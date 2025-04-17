@@ -1,0 +1,10 @@
+# see https://github.com/aandrew-me/ytDownloader/releases
+
+- name: Install YTDownloader
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-ytdownloader.sh') }}"
+  environment:
+    YTDOWNLOADER_VERSION: "{{ desktop_ytdownloader_version }}"
+  register: result
+  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"

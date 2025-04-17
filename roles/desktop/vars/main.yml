@@ -26,3 +26,7 @@ desktop_rpi_imager_version: '1.9.0'
 # see https://github.com/umlet/umlet/tags
 # renovate: datasource=github-tags depName=umlet/umlet extractVersion=.+_UMLet_v(?<version>.+)
 desktop_umlet_version: '15.1'
+
+# see https://github.com/aandrew-me/ytDownloader/releases
+# renovate: datasource=github-releases depName=aandrew-me/ytDownloader
+desktop_ytdownloader_version: '3.19.0'
