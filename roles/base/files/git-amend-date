@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-NEW_DATE="2025-01-01 00:00:00 +0000"
+NEW_DATE="$(date -u +"%Y-%m-%d %H:%M:%S +0000")" # e.g. 2025-04-19 15:16:17 +0000
 NEW_DATE_TIMESTAMP="$(date -d "$NEW_DATE" +%s) +0000"
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
