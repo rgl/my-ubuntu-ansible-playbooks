@@ -31,3 +31,15 @@
       ansible.builtin.dpkg_selections:
         name: nodejs
         selection: hold
+
+- name: Install node bash completion
+  block:
+    - name: Get node bash completion
+      ansible.builtin.command: node --completion-bash
+      register: nodejs_node_bash_completion
+      changed_when: false
+    - name: Install node bash completion
+      ansible.builtin.copy:
+        content: "{{ nodejs_node_bash_completion.stdout }}"
+        dest: /usr/share/bash-completion/completions/node
+        mode: 0444
