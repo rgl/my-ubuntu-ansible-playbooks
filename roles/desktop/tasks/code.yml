@@ -107,6 +107,8 @@
     # see https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit
     - ms-dotnettools.csdevkit
     # Python language.
+    # NB this depends on the pylance extension (which includes pyright).
+    # NB this depends on the python debugger extension.
     # see https://github.com/Microsoft/vscode-python
     # see https://marketplace.visualstudio.com/items?itemName=ms-python.python
     - ms-python.python
