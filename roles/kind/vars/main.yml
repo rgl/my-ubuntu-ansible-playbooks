@@ -68,7 +68,7 @@ kind_postgresql_chart_version: '16.6.6' # app version: 17.4.0
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
 # renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
-kind_pgadmin_chart_version: '1.38.0'
+kind_pgadmin_chart_version: '1.39.2'
 
 # see https://hub.docker.com/r/dpage/pgadmin4/tags
 # renovate: datasource=docker depName=dpage/pgadmin4 versioning=semver-coerced
