@@ -83,7 +83,7 @@
     namespace: kube-dashboard
     definition:
       # see https://kubernetes.io/docs/concepts/services-networking/ingress/
-      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#ingress-v1-networking-k8s-io
+      # see https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/#ingress-v1-networking-k8s-io
       apiVersion: networking.k8s.io/v1
       kind: Ingress
       metadata:

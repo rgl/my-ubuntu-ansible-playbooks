@@ -8,8 +8,8 @@ kind_provision_password: '{{ ansible_password }}'
 kind_version: '0.27.0'
 
 # see https://hub.docker.com/r/kindest/node/tags
-# renovate: datasource=docker depName=kindest/node extractVersion=(?<version>1\.31\..+)
-kind_node_image_version: '1.31.6'
+# renovate: datasource=docker depName=kindest/node extractVersion=(?<version>1\.32\..+)
+kind_node_image_version: '1.32.3'
 
 # see https://github.com/databus23/helm-diff/releases
 # renovate: datasource=github-releases depName=databus23/helm-diff
