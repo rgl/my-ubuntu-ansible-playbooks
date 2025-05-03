@@ -60,6 +60,28 @@
         cache_valid_time: "{{ upgrade_apt_update_cache_params.cache_valid_time }}"
       changed_when: false
 
+- name: Configure ubuntu apt sources
+  block:
+    - name: Nutter default sources.list
+      ansible.builtin.copy:
+        content: |
+          # see /etc/apt/sources.list.d/ubuntu.sources instead.
+        dest: /etc/apt/sources.list
+        mode: 0444
+      register: upgrade_default_ubuntu_apt_sources
+    - name: Configure ubuntu apt sources
+      ansible.builtin.template:
+        src: ubuntu.sources.j2
+        dest: /etc/apt/sources.list.d/ubuntu.sources
+        mode: 0444
+      register: upgrade_ubuntu_apt_sources
+    - name: Update cache
+      ansible.builtin.apt:
+        update_cache: true
+      when: >
+        upgrade_default_ubuntu_apt_sources.changed
+        or upgrade_ubuntu_apt_sources.changed
+
 - name: Install the HWE kernel
   ansible.builtin.apt:
     name: linux-generic-hwe-{{ ansible_distribution_version }}

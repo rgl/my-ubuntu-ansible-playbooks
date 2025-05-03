@@ -1,0 +1,3 @@
+# see https://launchpad.net/ubuntu/+archivemirrors
+# see https://launchpad.net/ubuntu/+mirror/mirrors.up.pt-archive
+upgrade_ubuntu_apt_sources_url: http://mirrors.up.pt/ubuntu
