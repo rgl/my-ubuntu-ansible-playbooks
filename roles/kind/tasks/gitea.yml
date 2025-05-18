@@ -14,7 +14,7 @@
 
 # set the configuration.
 # NB the default values are described at:
-#       https://gitea.com/gitea/helm-chart/src/tag/v11.0.1/values.yaml
+#       https://gitea.com/gitea/helm-chart/src/tag/v12.0.0/values.yaml
 #    NB make sure you are seeing the same version of the chart that you are installing.
 - name: Install Gitea
   kubernetes.core.helm:
@@ -25,9 +25,9 @@
     create_namespace: true
     update_repo_cache: true
     values:
-      redis-cluster:
+      valkey-cluster:
         enabled: false
-      redis:
+      valkey:
         enabled: false
       postgresql:
         enabled: false
