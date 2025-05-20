@@ -176,16 +176,6 @@
 - name: Set Visual Studio Code as the text/plain default editor
   become: true
   become_user: '{{ ansible_user }}'
-  ansible.builtin.shell:
-    executable: /bin/bash
-    cmd: |
-      set -euxo pipefail
-      expected='code.desktop'
-      actual="$(xdg-mime query default text/plain)"
-      if [ "$actual" == "$expected" ]; then
-        echo 'ANSIBLE CHANGED NO'
-      else
-        xdg-mime default "$expected" text/plain
-      fi
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  community.general.xdg_mime:
+    mime_types: text/plain
+    handler: code.desktop
