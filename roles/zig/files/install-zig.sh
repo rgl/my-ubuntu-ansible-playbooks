@@ -15,5 +15,5 @@ fi
 # see https://ziglang.org/download/
 rm -rf /opt/zig
 install -d /opt/zig
-wget -qO- https://ziglang.org/download/$ZIG_VERSION/zig-linux-x86_64-$ZIG_VERSION.tar.xz \
+wget -qO- https://ziglang.org/download/$ZIG_VERSION/zig-x86_64-linux-$ZIG_VERSION.tar.xz \
     | tar xJ -C /opt/zig --strip-components 1

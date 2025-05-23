@@ -1,4 +1,4 @@
 # see https://ziglang.org/download/
 # see https://github.com/ziglang/zig/releases
 # renovate: datasource=github-releases depName=ziglang/zig
-zig_version: '0.14.0'
+zig_version: '0.14.1'
