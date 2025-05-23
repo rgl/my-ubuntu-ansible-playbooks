@@ -1,6 +1,6 @@
 # see https://github.com/bytecodealliance/wasmtime/releases
 # renovate: datasource=github-releases depName=bytecodealliance/wasmtime
-wasmtime_version: '32.0.0'
+wasmtime_version: '33.0.0'
 
 # see https://github.com/bytecodealliance/wasm-tools/releases
 # renovate: datasource=github-releases depName=bytecodealliance/wasm-tools extractVersion=wasm-tools-(?<version>.+)
