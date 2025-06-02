@@ -196,7 +196,7 @@ class Kind(AnsibleModule):
     #      subprocess.CalledProcessError exception does not include
     #      stdout/stderr, which makes this impossible to troubleshoot, so we
     #      need to include that in the exception/log.
-    subprocess.run(args, check=True, text=True, input=config, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.run(args, check=True, text=True, input=config, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
     self._wait_for_kubernetes(25*60)
     # document the local registry.
     # see https://github.com/kubernetes/enhancements/tree/master/keps/sig-cluster-lifecycle/generic/1755-communicating-a-local-registry

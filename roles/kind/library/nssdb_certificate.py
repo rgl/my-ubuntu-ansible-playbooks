@@ -144,7 +144,7 @@ class NssdbCertificate(AnsibleModule):
     #      subprocess.CalledProcessError exception does not include
     #      stdout/stderr, which makes this impossible to troubleshoot, so we
     #      need to include that in the exception/log.
-    return subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
 
 
 def main():

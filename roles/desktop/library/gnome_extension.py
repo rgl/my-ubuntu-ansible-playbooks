@@ -151,7 +151,7 @@ class GnomeExtension(AnsibleModule):
         '--force',
         tmpf.name
       ]
-      subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
       os.unlink(tmpf.name)
       changed = True
     # enable the extension.
@@ -190,7 +190,7 @@ class GnomeExtension(AnsibleModule):
       'enable',
       uuid
     ]
-    subprocess.run(args, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.run(args, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
     return True
 
   def _extension_info(self, uuid):
@@ -199,7 +199,7 @@ class GnomeExtension(AnsibleModule):
       'info',
       uuid
     ]
-    result = subprocess.run(args, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(args, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
     return result.stdout
 
   def _get_shell_version(self):
@@ -210,7 +210,7 @@ class GnomeExtension(AnsibleModule):
     #      subprocess.CalledProcessError exception does not include
     #      stdout/stderr, which makes this impossible to troubleshoot, so we
     #      need to include that in the exception/log.
-    result = subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(args, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
     m = re.search(r'\s*(?P<major>\d+(\.\d+)+)\s*', result.stdout)
     if not m:
       raise Exception('failed to get the gnome version')
