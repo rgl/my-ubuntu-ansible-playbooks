@@ -10,7 +10,7 @@
     - name: Install helm-diff
       ansible.builtin.include_tasks: helm-diff.yml
     - name: Install the k8s cluster
-      ansible.builtin.include_tasks: cluster.yml
+      ansible.builtin.include_tasks: cluster-tasks.yml
     - name: Install MetalLB
       ansible.builtin.include_tasks: metallb.yml
     - name: Install cert-manager
