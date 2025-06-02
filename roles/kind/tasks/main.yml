@@ -20,7 +20,7 @@
     - name: Install reloader
       ansible.builtin.include_tasks: reloader.yml
     - name: Install Traefik
-      ansible.builtin.include_tasks: traefik.yml
+      ansible.builtin.include_tasks: traefik-tasks.yml
     - name: Install external-dns
       ansible.builtin.include_tasks: external-dns.yml
     - name: Install Gitea
