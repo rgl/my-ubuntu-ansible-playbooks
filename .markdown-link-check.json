@@ -1,0 +1,10 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https?://[^/]+\\.kind\\.test"
+    },
+    {
+      "pattern": "^https?://[^/]+\\.svc"
+    }
+  ]
+}
