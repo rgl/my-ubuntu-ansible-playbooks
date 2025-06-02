@@ -79,15 +79,16 @@ RETURN = '''
 #     ```
 
 
-from ansible.module_utils.basic import AnsibleModule
 import json
 import os
 import os.path
 import re
-import requests
 import subprocess
 import tempfile
 from urllib.parse import urljoin
+
+import requests
+from ansible.module_utils.basic import AnsibleModule
 
 
 class GnomeExtension(AnsibleModule):

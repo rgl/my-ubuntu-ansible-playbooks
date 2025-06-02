@@ -55,13 +55,14 @@ network_cidr:
 '''
 
 
-from ansible.module_utils.basic import AnsibleModule
-import docker
-import kubernetes
 import subprocess
 import textwrap
 import time
+
+import docker
+import kubernetes
 import yaml
+from ansible.module_utils.basic import AnsibleModule
 
 
 # see https://github.com/yaml/pyyaml/issues/234#issuecomment-765894586

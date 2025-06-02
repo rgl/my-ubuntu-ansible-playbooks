@@ -28,11 +28,12 @@ RETURN = '''
 '''
 
 
-from ansible.module_utils.basic import AnsibleModule
 import json
 import os
 import os.path
 import tempfile
+
+from ansible.module_utils.basic import AnsibleModule
 
 
 class NetBirdConfig(AnsibleModule):

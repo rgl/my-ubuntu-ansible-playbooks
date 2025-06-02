@@ -41,11 +41,12 @@ RETURN = '''
 '''
 
 
-from ansible.module_utils.basic import AnsibleModule
 import glob
 import os
 import os.path
 import subprocess
+
+from ansible.module_utils.basic import AnsibleModule
 
 
 class NssdbCertificate(AnsibleModule):
