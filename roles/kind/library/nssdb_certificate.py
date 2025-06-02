@@ -4,6 +4,9 @@
 # ignore E111 indentation is not a multiple of 4.
 # flake8: noqa: E111
 
+# ignore E402 module level import not at top of file.
+# flake8: noqa: E402
+
 DOCUMENTATION = '''
 ---
 module: nssdb_certificate
