@@ -26,26 +26,26 @@ kubectl get ingress -A
 Use the Kubernetes Dashboard application with the Token from the
 `~/.kube/kind-admin-token.txt` file at:
 
-https://kubernetes-dashboard.kind.test
+<https://kubernetes-dashboard.kind.test>
 
 ## Gitea
 
 To use the Gitea application, login with the `gitea` username and the
 password inside the `~/.kube/kind-gitea-password.txt` file, at:
 
-https://gitea.kind.test
+<https://gitea.kind.test>
 
 To use Gitea inside the Kubernetes cluster, use must use the `gitea` service
 endpoint at:
 
-http://gitea-http.gitea.svc:3000
+<http://gitea-http.gitea.svc:3000>
 
 ## Argo CD
 
 To use the Argo CD application, login with the `admin` username and the
 password inside the `~/.kube/kind-argocd-admin-password.txt` file, at:
 
-https://argocd.kind.test
+<https://argocd.kind.test>
 
 If the Argo CD UI is showing these kind of errors:
 
@@ -203,7 +203,7 @@ curl \
 Use the pgAdmin application with the `admin@example.com` user and
 `password` password at:
 
-https://pgadmin.kind.test
+<https://pgadmin.kind.test>
 
 This has access to the [PostgreSQL instance](#postgresql).
 

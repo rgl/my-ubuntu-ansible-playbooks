@@ -37,9 +37,9 @@ select case when ssl then concat('YES (', version, ')') else 'NO' end as ssl fro
 Use the pgAdmin application with the `admin@example.com` user and
 `password` password at:
 
-https://pgadmin.kind.test
+<https://pgadmin.kind.test>
 
 ## Reference
 
-* https://artifacthub.io/packages/helm/bitnami/postgresql
-* https://github.com/bitnami/charts/tree/main/bitnami/postgresql
+* <https://artifacthub.io/packages/helm/bitnami/postgresql>
+* <https://github.com/bitnami/charts/tree/main/bitnami/postgresql>
