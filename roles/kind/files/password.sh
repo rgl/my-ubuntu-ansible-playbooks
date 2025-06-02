@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+# shellcheck disable=SC2088
 if [[ "$PASSWORD_PATH" == '~/'* ]]; then
   PASSWORD_PATH="${PASSWORD_PATH/#~/$HOME}"
 fi
