@@ -24,7 +24,7 @@ if [ "$actual_version" != "$RUST_VERSION" ]; then
 fi
 
 # install the wasm32-wasip1 target.
-if [ -z "$("$rustup" target list --installed | grep -E '^wasm32-wasip1$')" ]; then
+if ! "$rustup" target list --installed | grep -qE '^wasm32-wasip1$'; then
     "$rustup" target add wasm32-wasip1
     changed='1'
 fi
