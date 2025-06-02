@@ -6,13 +6,13 @@ This is My Ubuntu Ansible Playbooks Playground.
 
 This targets Ubuntu 22.04 (Jammy Jellyfish).
 
-# Disclaimer
+## Disclaimer
 
 * These playbooks might work only when you start from scratch, in a machine that only has a minimal installation.
   * They might seem to work in other scenarios, but that is by pure luck.
   * There is no support for upgrades, downgrades, or un-installations.
 
-# Usage
+## Usage
 
 Add your machines into the Ansible [`inventory.yml` file](inventory.yml).
 
