@@ -7,6 +7,9 @@
 # ignore E402 module level import not at top of file.
 # flake8: noqa: E402
 
+# ignore E501 line too long (96 > 88 characters).
+# flake8: noqa: E501
+
 DOCUMENTATION = '''
 ---
 module: nssdb_certificate
