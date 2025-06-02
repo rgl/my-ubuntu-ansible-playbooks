@@ -53,7 +53,7 @@ RETURN = '''
 import glob
 import os
 import os.path
-import subprocess
+import subprocess  # nosec B404
 
 from ansible.module_utils.basic import AnsibleModule
 

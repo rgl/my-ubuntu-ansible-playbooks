@@ -64,7 +64,7 @@ network_cidr:
 '''
 
 
-import subprocess
+import subprocess  # nosec B404
 import textwrap
 import time
 

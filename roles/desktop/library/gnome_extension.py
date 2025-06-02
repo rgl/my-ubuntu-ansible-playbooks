@@ -92,7 +92,7 @@ import json
 import os
 import os.path
 import re
-import subprocess
+import subprocess  # nosec B404
 import tempfile
 from urllib.parse import urljoin
 
