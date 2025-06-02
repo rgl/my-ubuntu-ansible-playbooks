@@ -17,7 +17,7 @@ fi
 # download.
 url="https://github.com/rgl/ovftool-binaries/raw/main/archive/VMware-ovftool-$OVFTOOL_VERSION-lin.x86_64.zip"
 rm -f /tmp/ovftool.zip
-wget -q -O /tmp/ovftool.zip $url
+wget -q -O /tmp/ovftool.zip "$url"
 
 # install.
 rm -rf /opt/ovftool

@@ -12,7 +12,7 @@ if [ -r /opt/umlet/umlet.jar ]; then
 fi
 
 # download and install.
-umlet_url="https://umlet.com/download/umlet_$(echo $UMLET_VERSION | perl -pe 's/\./_/g')/umlet-standalone-${UMLET_VERSION}.zip"
+umlet_url="https://umlet.com/download/umlet_$(echo "$UMLET_VERSION" | perl -pe 's/\./_/g')/umlet-standalone-${UMLET_VERSION}.zip"
 t="$(mktemp -q -d --suffix=.umlet)"
 wget -qO "$t/umlet.zip" "$umlet_url"
 unzip "$t/umlet.zip" -d "$t"
