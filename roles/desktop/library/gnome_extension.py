@@ -120,7 +120,7 @@ class GnomeExtension(AnsibleModule):
         'sort': 'uuid',
         'shell_version': shell_version,
         'search': name,
-      })
+      }, timeout=30)
       if response.status_code != 200:
         raise Exception(f'failed to get the extension uuid. status_code={response.status_code} text={response.text}')
       metadata = response.json()['extensions'][0]
@@ -130,7 +130,7 @@ class GnomeExtension(AnsibleModule):
     response = requests.get('https://extensions.gnome.org/extension-info/', {
       'uuid': uuid,
       'shell_version': shell_version,
-    })
+    }, timeout=30)
     if response.status_code != 200:
       raise Exception(f'failed to get the extension metadata. status_code={response.status_code} text={response.text}')
     metadata = response.json()
@@ -140,7 +140,7 @@ class GnomeExtension(AnsibleModule):
     if installed_version != version:
       # download.
       download_url = urljoin(response.request.url, metadata['download_url'])
-      response = requests.get(download_url)
+      response = requests.get(download_url, timeout=30)
       tmpf = tempfile.NamedTemporaryFile(delete=False)
       tmpf.write(response.content)
       tmpf.close()
