@@ -1,8 +1,12 @@
 version: 0.1
 log:
+  level: info
+  formatter: text
   fields:
     service: registry
 storage:
+  delete:
+    enabled: true
   cache:
     blobdescriptor: inmemory
   filesystem:

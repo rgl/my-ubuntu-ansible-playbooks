@@ -1,6 +1,7 @@
 # see https://kind.sigs.k8s.io/docs/user/local-registry/
 # see https://github.com/rgl/k0s-vagrant/blob/main/provision-registry.sh
-# see https://docs.docker.com/registry/deploying/
+# see https://distribution.github.io/distribution/about/deploying/
+# see https://distribution.github.io/distribution/about/configuration/
 # see https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_module.html
 
 - name: Install the community.docker collection dependencies
@@ -36,4 +37,10 @@
       - 127.0.0.1:5000:5000/tcp
     volumes:
       - /opt/registry/data:/var/lib/registry
-      - /opt/registry/etc:/etc/docker/registry:ro
+      - /opt/registry/etc:/etc/distribution:ro
+    env:
+      # see https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/
+      OTEL_SDK_DISABLED: 'true'
+      OTEL_TRACES_EXPORTER: 'none'
+      OTEL_METRICS_EXPORTER: 'none'
+      OTEL_LOGS_EXPORTER: 'none'
