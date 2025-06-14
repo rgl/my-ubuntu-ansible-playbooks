@@ -21,6 +21,7 @@
     chart_version: '{{ kind_postgresql_chart_version }}'
     create_namespace: true
     update_repo_cache: true
+    wait: true
     values:
       auth:
         postgresPassword: postgres

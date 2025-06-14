@@ -1,0 +1,29 @@
+- name: Save the admin user token to {{ "~/.kube/" + kind_cluster_name + "-admin-token.txt" }}
+  block:
+    - name: Get the admin user Secret
+      kubernetes.core.k8s_info:
+        namespace: kube-dashboard
+        api_version: v1
+        kind: Secret
+        name: admin
+      register: admin_token
+    - name: Save the admin user token to {{ "~/.kube/" + kind_cluster_name + "-admin-token.txt" }}
+      ansible.builtin.copy:
+        mode: 0400
+        dest: ~/.kube/{{ kind_cluster_name }}-admin-token.txt
+        content: '{{ admin_token.resources[0].data.token | b64decode }}'
+
+- name: Save the argocd admin user password to {{ "~/.kube/" + kind_cluster_name + "-argocd-admin-password.txt" }}
+  block:
+    - name: Get the argocd admin user Secret
+      kubernetes.core.k8s_info:
+        namespace: argocd
+        api_version: v1
+        kind: Secret
+        name: argocd-initial-admin-secret
+      register: argocd_admin_password
+    - name: Save the argocd admin user password to {{ "~/.kube/" + kind_cluster_name + "-argocd-admin-password.txt" }}
+      ansible.builtin.copy:
+        mode: 0400
+        dest: ~/.kube/{{ kind_cluster_name }}-argocd-admin-password.txt
+        content: '{{ argocd_admin_password.resources[0].data.password | b64decode }}'

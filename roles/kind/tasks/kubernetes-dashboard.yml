@@ -17,6 +17,7 @@
     release_namespace: kube-dashboard
     create_namespace: true
     update_repo_cache: true
+    wait: true
     values:
       kong:
         proxy:
@@ -171,3 +172,13 @@
         - kind: ServiceAccount
           name: admin
           namespace: kube-dashboard
+
+- name: Wait for Kubernetes Dashboard to be reachable
+  ansible.builtin.uri:
+    url: "https://kubernetes-dashboard.{{ kind_cluster_name }}.{{ kind_cluster_domain }}"
+    validate_certs: false
+    status_code: 200
+  register: this
+  until: this.status == 200
+  delay: 5
+  retries: 40 # 40 * 5 == 200s

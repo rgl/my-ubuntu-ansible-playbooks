@@ -23,12 +23,6 @@
       ansible.builtin.include_tasks: traefik-tasks.yml
     - name: Install external-dns
       ansible.builtin.include_tasks: external-dns.yml
-    - name: Install Gitea
-      ansible.builtin.include_tasks: gitea.yml
-    - name: Install Argo CD
-      ansible.builtin.include_tasks: argocd.yml
-    - name: Install kubernetes-dashboard
-      ansible.builtin.include_tasks: kubernetes-dashboard.yml
     - name: Configure the host
       ansible.builtin.include_tasks: host.yml
 - name: Configure the host DNS
@@ -39,9 +33,17 @@
   become: true
   become_user: '{{ kind_provision_username }}'
   block:
+    - name: Install Gitea
+      ansible.builtin.include_tasks: gitea.yml
+    - name: Install Argo CD
+      ansible.builtin.include_tasks: argocd.yml
+    - name: Install kubernetes-dashboard
+      ansible.builtin.include_tasks: kubernetes-dashboard.yml
     - name: Install PostgreSQL
       ansible.builtin.include_tasks: postgresql.yml
     - name: Install pgAdmin
       ansible.builtin.include_tasks: pgadmin.yml
+    - name: Configure the host
+      ansible.builtin.include_tasks: host-apps.yml
     - name: Show information
       ansible.builtin.include_tasks: info.yml

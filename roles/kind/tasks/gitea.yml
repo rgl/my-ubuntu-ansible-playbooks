@@ -24,6 +24,7 @@
     release_namespace: gitea
     create_namespace: true
     update_repo_cache: true
+    wait: true
     values:
       valkey-cluster:
         enabled: false
@@ -96,3 +97,13 @@
         issuerRef:
           kind: ClusterIssuer
           name: ingress
+
+- name: Wait for gitea to be reachable
+  ansible.builtin.uri:
+    url: "https://gitea.{{ kind_cluster_name }}.{{ kind_cluster_domain }}/api/v1/version"
+    validate_certs: false
+    status_code: 200
+  register: this
+  until: this.status == 200
+  delay: 5
+  retries: 40 # 40 * 5 == 200s

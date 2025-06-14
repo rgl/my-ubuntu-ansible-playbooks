@@ -17,6 +17,7 @@
     chart_version: '{{ kind_pgadmin_chart_version }}'
     create_namespace: true
     update_repo_cache: true
+    wait: true
     values:
       env:
         email: admin@example.com
@@ -75,3 +76,13 @@
         issuerRef:
           kind: ClusterIssuer
           name: ingress
+
+- name: Wait for pgadmin to be reachable
+  ansible.builtin.uri:
+    url: "https://pgadmin.{{ kind_cluster_name }}.{{ kind_cluster_domain }}/login"
+    validate_certs: false
+    status_code: 200
+  register: this
+  until: this.status == 200
+  delay: 5
+  retries: 40 # 40 * 5 == 200s
