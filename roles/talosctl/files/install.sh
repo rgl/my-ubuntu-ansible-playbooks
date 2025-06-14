@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/talosctl ]; then
-    # e.g. Talos v1.10.3
+    # e.g. Talos v1.10.4
     actual_version="$(/usr/local/bin/talosctl version --client --short | perl -ne '/^Talos v(.+)/ && print $1')"
     if [ "$actual_version" == "$TALOSCTL_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
