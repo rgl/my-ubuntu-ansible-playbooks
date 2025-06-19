@@ -42,6 +42,12 @@ Run the `development.yml` playbook against the `dm1` machine:
 ./ansible-playbook.sh --limit=dm1 development.yml | tee ansible.log
 ```
 
+Lint the code:
+
+```bash
+./mega-linter.sh
+```
+
 List this repository dependencies (and which have newer versions):
 
 ```bash
