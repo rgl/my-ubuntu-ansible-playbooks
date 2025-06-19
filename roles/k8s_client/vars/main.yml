@@ -21,7 +21,7 @@ k8s_client_oras_version: '1.2.3'
 
 # see https://github.com/google/go-containerregistry/releases
 # renovate: datasource=github-releases depName=google/go-containerregistry
-k8s_client_crane_version: '0.20.5'
+k8s_client_crane_version: '0.20.6'
 
 # see https://github.com/regclient/regclient/releases
 # renovate: datasource=github-releases depName=regclient/regclient
