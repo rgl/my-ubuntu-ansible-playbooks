@@ -4,8 +4,8 @@ set -euxo pipefail
 # bail when already installed.
 if [ -x /usr/local/bin/esptool ]; then
     # e.g.:
-    #   esptool.py v4.9.0
-    #   4.9.0
+    #   esptool.py v5.0.0
+    #   5.0.0
     actual_version="$(/usr/local/bin/esptool version | tail -1)"
     if [ "$actual_version" == "$ESPTOOL_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
