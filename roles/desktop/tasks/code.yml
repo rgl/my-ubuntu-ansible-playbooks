@@ -172,6 +172,10 @@
     # see https://github.com/iliazeus/vscode-ansi
     # see https://marketplace.visualstudio.com/items?itemName=iliazeus.vscode-ansi
     - iliazeus.vscode-ansi
+    # Mermaid support.
+    # see https://github.com/Mermaid-Chart/vscode-mermaid-preview
+    # see https://marketplace.visualstudio.com/items?itemName=vstirbu.vscode-mermaid-preview
+    - vstirbu.vscode-mermaid-preview
 
 - name: Set Visual Studio Code as the text/plain default editor
   become: true
