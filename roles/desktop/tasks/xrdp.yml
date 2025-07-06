@@ -1,5 +1,27 @@
+- name: Use the Wayland backend
+  when: desktop_use_wayland
+  block:
+    - name: Enable Wayland
+      community.general.ini_file:
+        path: /etc/gdm3/custom.conf
+        section: daemon
+        option: WaylandEnable
+        value: 'true'
+        no_extra_spaces: true
+        mode: 0444
+    - name: Set the Default Session to Wayland
+      # see /usr/share/xsessions/*.desktop
+      community.general.ini_file:
+        path: /etc/gdm3/custom.conf
+        section: daemon
+        option: DefaultSession
+        value: ubuntu.desktop
+        no_extra_spaces: true
+        mode: 0444
+
 # use the xorg backend because not all apps (e.g. xrdp) are ready for wayland.
 - name: Use the Xorg backend
+  when: not desktop_use_wayland
   block:
     - name: Disable Wayland
       community.general.ini_file:
