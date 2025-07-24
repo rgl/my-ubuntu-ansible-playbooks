@@ -52,7 +52,7 @@
       server=/netbird.cloud/{{ ansible_wt0.ipv4.address }}#53
     dest: /etc/dnsmasq.d/netbird.cloud.conf
     mode: 0444
-  when: ansible_wt0 is defined and ansible_wt0.ipv4.address
+  when: ansible_wt0 is defined and ansible_wt0.ipv4.address is defined
   notify: Restart dnsmasq
 
 - name: Install the WireGuard tools

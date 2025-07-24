@@ -12,13 +12,13 @@
           Environment=SYSTEMD_LOG_LEVEL={{ dns_system_networkd_log_level }}
         dest: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
         mode: 0444
-      when: dns_system_networkd_log_level
+      when: dns_system_networkd_log_level != None
       register: state_set
     - name: Unset the system-networkd log level
       ansible.builtin.file:
         path: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
         state: absent
-      when: not dns_system_networkd_log_level
+      when: dns_system_networkd_log_level == None
       register: state_unset
     - name: Restart systemd-networkd
       ansible.builtin.systemd:
