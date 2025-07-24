@@ -45,7 +45,7 @@ kind_kubernetes_dashboard_chart_version: '7.13.0' # app version: 7.13.0
 
 # see https://artifacthub.io/packages/helm/bitnami/external-dns
 # renovate: datasource=helm depName=external-dns registryUrl=https://charts.bitnami.com/bitnami
-kind_external_dns_chart_version: '8.9.2' # app version: 0.18.0
+kind_external_dns_chart_version: '9.0.0' # app version: 0.18.0
 
 # see https://hub.docker.com/r/powerdns/pdns-auth-48
 # see https://hub.docker.com/search?q=pdns-auth-
