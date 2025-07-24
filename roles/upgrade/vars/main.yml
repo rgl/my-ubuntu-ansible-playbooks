@@ -1,3 +1,4 @@
+# Netherlands Macarne mirror.
 # see https://launchpad.net/ubuntu/+archivemirrors
-# see https://launchpad.net/ubuntu/+mirror/mirrors.up.pt-archive
-upgrade_ubuntu_apt_sources_url: http://mirrors.up.pt/ubuntu
+# see https://launchpad.net/ubuntu/+mirror/mirror.ams.macarne.com-archive
+upgrade_ubuntu_apt_sources_url: https://mirror.ams.macarne.com/ubuntu
