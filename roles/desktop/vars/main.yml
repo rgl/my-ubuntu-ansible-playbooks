@@ -10,6 +10,11 @@ desktop_httptoolkit_version: '1.20.1'
 # renovate: datasource=github-releases depName=netbirdio/netbird
 desktop_netbird_version: '0.51.2'
 
+# see https://github.com/ghostty-org/ghostty
+# see https://github.com/mkasberg/ghostty-ubuntu/releases
+# renovate: datasource=github-releases depName=mkasberg/ghostty-ubuntu extractVersion=(?<version>.+)-.+
+desktop_ghostty_version: '1.1.3'
+
 # see https://github.com/ventoy/Ventoy/releases
 # renovate: datasource=github-releases depName=ventoy/Ventoy
 desktop_ventoy_version: '1.0.99'

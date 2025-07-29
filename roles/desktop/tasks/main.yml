@@ -4,6 +4,9 @@
 - name: Install netbird
   ansible.builtin.include_tasks: netbird.yml
 
+- name: Install Ghostty
+  ansible.builtin.include_tasks: ghostty.yml
+
 - name: Install Firefox
   ansible.builtin.include_tasks: firefox.yml
 
