@@ -89,6 +89,7 @@
       - p7zip-full
       - patch
       - ncdu
+      - tree
       - screen
       # iso creation tools.
       # NB xorriso is compatible with genisoimage and mkisofs and is also available in msys2 (windows).
