@@ -115,6 +115,9 @@
       - xsltproc
     install_recommends: false
 
+- name: Install uv
+  ansible.builtin.include_tasks: uv.yml
+
 - name: Install lm-sensors
   when: ansible_virtualization_role == 'host'
   block:
