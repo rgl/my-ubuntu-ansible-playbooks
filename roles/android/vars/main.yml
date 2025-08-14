@@ -17,4 +17,4 @@ android_sdk_packages:
   - build-tools;34.0.0
 
 # see https://developer.android.com/studio/archive
-android_studio_version: '2024.2.1.11'
+android_studio_version: '2025.1.2.11'
