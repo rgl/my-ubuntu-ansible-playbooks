@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-tinygo.sh') }}"
   environment:
     TINYGO_VERSION: "{{ tinygo_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: tinygo_result
+  changed_when: "'ANSIBLE CHANGED NO' not in tinygo_result.stdout_lines"
 
 - name: Add tinygo to PATH
   ansible.builtin.copy:

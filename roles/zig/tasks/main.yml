@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-zig.sh') }}"
   environment:
     ZIG_VERSION: "{{ zig_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: zig_result
+  changed_when: "'ANSIBLE CHANGED NO' not in zig_result.stdout_lines"
 
 - name: Add zig to PATH
   ansible.builtin.copy:

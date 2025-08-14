@@ -63,9 +63,9 @@
         mode: 0555
       diff: false
       check_mode: true
-      register: check
+      register: terraform_check
     - name: Install terraform inventory
-      when: check.changed
+      when: terraform_check.changed
       block:
         - name: Install terraform inventory
           ansible.builtin.get_url:

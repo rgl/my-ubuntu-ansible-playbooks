@@ -22,5 +22,5 @@
       wget -qO- "$k9s_url" | tar xzf - -C "$t" k9s
       install -m 755 "$t/k9s" /usr/local/bin/
       rm -rf "$t"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: k8s_client_result
+  changed_when: "'ANSIBLE CHANGED NO' not in k8s_client_result.stdout_lines"

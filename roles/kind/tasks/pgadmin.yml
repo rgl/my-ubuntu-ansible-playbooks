@@ -82,7 +82,7 @@
     url: "https://pgadmin.{{ kind_cluster_name }}.{{ kind_cluster_domain }}/login"
     validate_certs: false
     status_code: 200
-  register: this
-  until: this.status == 200
+  register: kind_wait
+  until: kind_wait.status == 200
   delay: 5
   retries: 40 # 40 * 5 == 200s

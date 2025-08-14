@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-ovftool.sh') }}"
   environment:
     OVFTOOL_VERSION: "{{ vmware_client_ovftool_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: vmware_client_result
+  changed_when: "'ANSIBLE CHANGED NO' not in vmware_client_result.stdout_lines"

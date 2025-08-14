@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-spin.sh') }}"
   environment:
     SPIN_VERSION: "{{ spin_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: spin_result
+  changed_when: "'ANSIBLE CHANGED NO' not in spin_result.stdout_lines"
 
 - name: Install spin plugin
   args:
@@ -16,8 +16,8 @@
     SPIN_PLUGIN_GITHUB: "{{ item.github }}"
     SPIN_PLUGIN_VERSION: "{{ item.version }}"
   become: false
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: spin_result
+  changed_when: "'ANSIBLE CHANGED NO' not in spin_result.stdout_lines"
   loop:
     - # https://github.com/fermyon/cloud-plugin
       name: cloud
@@ -37,8 +37,8 @@
     SPIN_TEMPLATE_GITHUB: "{{ item.github }}"
     SPIN_TEMPLATE_VERSION: "{{ item.version }}"
   become: false
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: spin_result
+  changed_when: "'ANSIBLE CHANGED NO' not in spin_result.stdout_lines"
   loop:
     - # https://github.com/fermyon/spin-js-sdk/tree/main/templates/http-js
       # NB this also installs the http-ts template.

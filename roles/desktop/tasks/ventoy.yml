@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-ventoy.sh') }}"
   environment:
     VENTOY_VERSION: "{{ desktop_ventoy_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"
 
 - name: Create system local applications directory
   ansible.builtin.file:

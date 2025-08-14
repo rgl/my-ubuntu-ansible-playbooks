@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-wasmtime.sh') }}"
   environment:
     WASMTIME_VERSION: "{{ wasmtime_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: wasmtime_result
+  changed_when: "'ANSIBLE CHANGED NO' not in wasmtime_result.stdout_lines"
 
 - name: Install wasm-tools
   args:
@@ -13,5 +13,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-wasm-tools.sh') }}"
   environment:
     WASM_TOOLS_VERSION: "{{ wasmtime_wasm_tools_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: wasmtime_result
+  changed_when: "'ANSIBLE CHANGED NO' not in wasmtime_result.stdout_lines"

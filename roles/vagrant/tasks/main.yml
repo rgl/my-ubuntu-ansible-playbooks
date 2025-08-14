@@ -47,7 +47,7 @@
       ansible.builtin.apt:
         name: vagrant={{ vagrant_version }}-*
         allow_change_held_packages: true
-      register: vagrant
+      register: vagrant_apt
     - name: Pin vagrant
       ansible.builtin.dpkg_selections:
         name: vagrant
@@ -55,7 +55,7 @@
     # NB after a vagrant upgrade its more reliable to just uninstall all
     #    the plugins and install them again later.
     - name: Uninstall all the plugins
-      when: vagrant.changed
+      when: vagrant_apt.changed
       become_user: '{{ vagrant_provision_username }}'
       become: true
       ansible.builtin.command: vagrant plugin expunge --force
@@ -160,8 +160,8 @@
         VAGRANT_PLUGIN_VERSION: "{{ lookup('vars', (item | replace('-', '_')) + '_plugin_version') }}"
       become_user: '{{ vagrant_provision_username }}'
       become: true
-      register: result
-      changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+      register: vagrant_result
+      changed_when: "'ANSIBLE CHANGED NO' not in vagrant_result.stdout_lines"
       loop:
         - vagrant-reload
         - vagrant-scp
@@ -187,8 +187,8 @@
             CONFIGURE_ARGS: with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib
           become_user: '{{ vagrant_provision_username }}'
           become: true
-          register: result
-          changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+          register: vagrant_result
+          changed_when: "'ANSIBLE CHANGED NO' not in vagrant_result.stdout_lines"
 
     - name: Patch vagrant-scp plugin
       become: true

@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-static-web-server.sh') }}"
   environment:
     STATIC_WEB_SERVER_VERSION: "{{ static_web_server_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: static_web_server_result
+  changed_when: "'ANSIBLE CHANGED NO' not in static_web_server_result.stdout_lines"

@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-cfssl.sh') }}"
   environment:
     CFSSL_VERSION: "{{ cfssl_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: cfssl_result
+  changed_when: "'ANSIBLE CHANGED NO' not in cfssl_result.stdout_lines"

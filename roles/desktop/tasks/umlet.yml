@@ -8,8 +8,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-umlet.sh') }}"
   environment:
     UMLET_VERSION: "{{ desktop_umlet_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"
 
 - name: Install umlet cli
   ansible.builtin.copy:

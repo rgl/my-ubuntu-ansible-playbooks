@@ -51,12 +51,12 @@
               | ."[svelte]" = {"editor.defaultFormatter":"svelte.svelte-vscode"}
               | ."files.associations"."*.tm.hcl" = "terramate"
               '
-      register: settings
+      register: desktop_settings
       changed_when: false
     - name: Write Settings
       ansible.builtin.copy:
         dest: ~/.config/Code/User/settings.json
-        content: '{{ settings.stdout }}'
+        content: '{{ desktop_settings.stdout }}'
         mode: 0644
 
 - name: Install Zig Extensions dependencies
@@ -72,8 +72,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-code-extension.sh') }}"
   environment:
     CODE_EXTENSION_NAME: "{{ item }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"
   loop:
     # XML.
     # see https://github.com/DotJoshJohnson/vscode-xml

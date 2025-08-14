@@ -39,8 +39,8 @@
       if [ "$before" == "$after" ]; then
         echo 'ANSIBLE CHANGED NO'
       fi
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: base_result
+  changed_when: "'ANSIBLE CHANGED NO' not in base_result.stdout_lines"
 
 # see timedatectl status
 - name: Set the timezone

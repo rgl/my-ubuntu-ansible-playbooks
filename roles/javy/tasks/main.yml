@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-javy.sh') }}"
   environment:
     JAVY_VERSION: "{{ javy_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: javy_result
+  changed_when: "'ANSIBLE CHANGED NO' not in javy_result.stdout_lines"

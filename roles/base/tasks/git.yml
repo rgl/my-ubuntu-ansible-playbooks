@@ -23,8 +23,8 @@
       ansible.builtin.shell: "{{ lookup('file', 'install-git-credential-manager.sh') }}"
       environment:
         GIT_CREDENTIAL_MANAGER_VERSION: "{{ base_git_credential_manager_version }}"
-      register: result
-      changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+      register: base_result
+      changed_when: "'ANSIBLE CHANGED NO' not in base_result.stdout_lines"
     - name: Configure git to use git-credential-manager
       ansible.builtin.copy:
         src: git-credential-manager.gitconfig
@@ -38,8 +38,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-git-filter-repo.sh') }}"
   environment:
     GIT_FILTER_REPO_VERSION: "{{ base_git_filter_repo_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: base_result
+  changed_when: "'ANSIBLE CHANGED NO' not in base_result.stdout_lines"
 
 - name: Install git-amend-date
   ansible.builtin.copy:

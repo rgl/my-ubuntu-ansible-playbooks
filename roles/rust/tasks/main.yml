@@ -6,5 +6,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-rust.sh') }}"
   environment:
     RUST_VERSION: "{{ rust_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: rust_result
+  changed_when: "'ANSIBLE CHANGED NO' not in rust_result.stdout_lines"

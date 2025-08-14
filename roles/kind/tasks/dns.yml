@@ -2,7 +2,7 @@
   ansible.builtin.copy:
     # set the dns server to the cluster control plane ip address.
     content: |
-      server=/{{ kind_cluster_name }}.{{ kind_cluster_domain }}/{{ cluster.ip_address }}#30053
+      server=/{{ kind_cluster_name }}.{{ kind_cluster_domain }}/{{ kind_cluster.ip_address }}#30053
     dest: /etc/dnsmasq.d/{{ kind_cluster_name }}.{{ kind_cluster_domain }}.conf
     mode: 0444
   notify: Restart dnsmasq

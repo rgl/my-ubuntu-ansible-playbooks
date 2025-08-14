@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-mitmproxy.sh') }}"
   environment:
     MITMPROXY_VERSION: "{{ desktop_mitmproxy_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"

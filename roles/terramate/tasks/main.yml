@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-terramate.sh') }}"
   environment:
     TERRAMATE_VERSION: "{{ terramate_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: terramate_result
+  changed_when: "'ANSIBLE CHANGED NO' not in terramate_result.stdout_lines"
 
 - name: Install terramate bash completion
   ansible.builtin.copy:

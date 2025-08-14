@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-yq.sh') }}"
   environment:
     YQ_VERSION: "{{ yq_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: yq_result
+  changed_when: "'ANSIBLE CHANGED NO' not in yq_result.stdout_lines"

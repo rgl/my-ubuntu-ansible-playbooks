@@ -1,9 +1,9 @@
 - name: Install pdns
   block:
-    - name: Set the pdns_image fact value
+    - name: Set the kind_pdns_image fact value
       ansible.builtin.set_fact:
         # e.g. powerdns/pdns-auth-48:4.8.5
-        pdns_image: powerdns/pdns-auth-{{ ''.join(kind_pdns_version.split('.')[0:2]) }}:{{ kind_pdns_version }}
+        kind_pdns_image: powerdns/pdns-auth-{{ ''.join(kind_pdns_version.split('.')[0:2]) }}:{{ kind_pdns_version }}
     - name: Create the kube-external-dns Namespace
       kubernetes.core.k8s:
         definition:
@@ -49,7 +49,7 @@
                   # NB in the future it might be possible to initialize pdns without an init container.
                   #    see https://github.com/PowerDNS/pdns/issues/10065
                   - name: init
-                    image: '{{ pdns_image }}'
+                    image: '{{ kind_pdns_image }}'
                     command:
                       - bash
                       - -c
@@ -80,7 +80,7 @@
                         mountPath: /var/lib/powerdns
                 containers:
                   - name: pdns
-                    image: '{{ pdns_image }}'
+                    image: '{{ kind_pdns_image }}'
                     args:
                       - --local-port=5353
                     env:

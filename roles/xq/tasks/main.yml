@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-xq.sh') }}"
   environment:
     XQ_VERSION: "{{ xq_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: xq_result
+  changed_when: "'ANSIBLE CHANGED NO' not in xq_result.stdout_lines"

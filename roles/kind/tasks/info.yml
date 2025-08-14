@@ -2,28 +2,28 @@
   block:
     - name: Get Helm Releases
       ansible.builtin.command: helm ls -A
-      register: helm_releases
+      register: kind_helm_releases
       changed_when: false
     - name: Show Helm Releases
       ansible.builtin.debug:
-        var: helm_releases.stdout
+        var: kind_helm_releases.stdout
 
 - name: Show Kubernetes Nodes
   block:
     - name: Get Kubernetes Nodes
       ansible.builtin.command: kubectl get nodes
-      register: kubernetes_nodes
+      register: kind_kubernetes_nodes
       changed_when: false
     - name: Show Kubernetes Nodes
       ansible.builtin.debug:
-        var: kubernetes_nodes.stdout
+        var: kind_kubernetes_nodes.stdout
 
 - name: Show Kubernetes Ingresses
   block:
     - name: Get Kubernetes Ingresses
       ansible.builtin.command: kubectl get -A ingress
-      register: kubernetes_ingresses
+      register: kind_kubernetes_ingresses
       changed_when: false
     - name: Show Kubernetes Ingresses
       ansible.builtin.debug:
-        var: kubernetes_ingresses.stdout
+        var: kind_kubernetes_ingresses.stdout

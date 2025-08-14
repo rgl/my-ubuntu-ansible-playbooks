@@ -6,13 +6,13 @@
         api_version: v1
         kind: Secret
         name: ingress-tls
-      register: ingress_tls
+      register: kind_ingress_tls
     - name: Save Kubernetes Ingress CA Certificate to {{ "~/.kube/" + kind_cluster_name + "-ingress-ca-crt.pem" }}
       # see openssl x509 -text -noout -in ~/.kube/talos-ca-crt.pem
       ansible.builtin.copy:
         mode: 0444
         dest: ~/.kube/{{ kind_cluster_name }}-ingress-ca-crt.pem
-        content: '{{ ingress_tls.resources[0].data["tls.crt"] | b64decode }}'
+        content: '{{ kind_ingress_tls.resources[0].data["tls.crt"] | b64decode }}'
     - name: Trust the Kubernetes Ingress CA
       # noqa fqcn[action]
       nssdb_certificate:

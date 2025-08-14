@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-solo2.sh') }}"
   environment:
     SOLO2_VERSION: "{{ solo2_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: solo2_result
+  changed_when: "'ANSIBLE CHANGED NO' not in solo2_result.stdout_lines"

@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-go.sh') }}"
   environment:
     GO_VERSION: "{{ go_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: go_result
+  changed_when: "'ANSIBLE CHANGED NO' not in go_result.stdout_lines"
 
 - name: Add go to PATH
   ansible.builtin.copy:

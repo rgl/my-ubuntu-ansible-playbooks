@@ -13,5 +13,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-rpi-imager.sh') }}"
   environment:
     RPI_IMAGER_VERSION: "{{ desktop_rpi_imager_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"

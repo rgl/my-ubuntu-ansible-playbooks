@@ -13,19 +13,19 @@
         dest: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
         mode: 0444
       when: dns_system_networkd_log_level != None
-      register: state_set
+      register: dns_state_set
     - name: Unset the system-networkd log level
       ansible.builtin.file:
         path: /etc/systemd/system/systemd-networkd.service.d/10-log-level.conf
         state: absent
       when: dns_system_networkd_log_level == None
-      register: state_unset
+      register: dns_state_unset
     - name: Restart systemd-networkd
       ansible.builtin.systemd:
         name: systemd-networkd
         state: restarted
         daemon_reload: true
-      when: state_set.changed or state_unset.changed
+      when: dns_state_set.changed or dns_state_unset.changed
 
 - name: Create the dns0 bridge
   block:
@@ -47,9 +47,9 @@
           ConfigureWithoutCarrier=true
         dest: /etc/systemd/network/dns0.network
         mode: 0444
-      register: assign_address
+      register: dns_assign_address
     - name: Restart systemd-networkd
-      when: assign_address.changed
+      when: dns_assign_address.changed
       ansible.builtin.systemd:
         name: systemd-networkd
         state: restarted
@@ -82,9 +82,9 @@
         src: dnsmasq.conf.j2
         dest: /etc/dnsmasq.d/local.conf
         mode: 0444
-      register: configure
+      register: dns_configure
     - name: Restart dnsmasq
-      when: configure.changed
+      when: dns_configure.changed
       ansible.builtin.systemd:
         name: dnsmasq
         state: restarted

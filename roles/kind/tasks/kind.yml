@@ -9,11 +9,11 @@
           fs.inotify.max_user_instances = 512
         dest: /etc/sysctl.d/20-inotify.conf
         mode: 0644
-      register: result
+      register: kind_result
     - name: Set the inotify resource limits
       ansible.builtin.command: sysctl -p /etc/sysctl.d/20-inotify.conf
-      when: result.changed
-      changed_when: result.changed
+      when: kind_result.changed
+      changed_when: kind_result.changed
 
 - name: Install kind
   args:
@@ -21,17 +21,17 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-kind.sh') }}"
   environment:
     KIND_VERSION: "{{ kind_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: kind_result
+  changed_when: "'ANSIBLE CHANGED NO' not in kind_result.stdout_lines"
 
 - name: Install kind bash completion
   block:
     - name: Get kind bash completion
       ansible.builtin.command: kind completion bash
-      register: bash_completion
+      register: kind_bash_completion
       changed_when: false
     - name: Install kind bash completion
       ansible.builtin.copy:
-        content: "{{ bash_completion.stdout }}"
+        content: "{{ kind_bash_completion.stdout }}"
         dest: /usr/share/bash-completion/completions/kind
         mode: 0444

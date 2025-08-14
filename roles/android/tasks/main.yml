@@ -8,8 +8,8 @@
         ANDROID_SDK_CMDLINE_TOOLS_BUILD: "{{ android_sdk_cmdline_tools_build }}"
         ANDROID_SDK_CMDLINE_TOOLS_VERSION: "{{ android_sdk_cmdline_tools_version }}"
         ANDROID_SDK_PACKAGES: "{{ android_sdk_packages | join('\n') }}"
-      register: result
-      changed_when: "'ANSIBLE CHANGED YES' in result.stdout_lines"
+      register: android_result
+      changed_when: "'ANSIBLE CHANGED YES' in android_result.stdout_lines"
     # see https://developer.android.com/tools/variables#set
     - name: Configure Android SDK environment variables
       ansible.builtin.copy:
@@ -28,8 +28,8 @@
         cmd: "{{ lookup('file', 'install-android-studio.sh') }}"
       environment:
         ANDROID_STUDIO_VERSION: "{{ android_studio_version }}"
-      register: result
-      changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+      register: android_result
+      changed_when: "'ANSIBLE CHANGED NO' not in android_result.stdout_lines"
     - name: Install android-studio symlink
       ansible.builtin.file:
         src: /opt/android-studio/bin/studio

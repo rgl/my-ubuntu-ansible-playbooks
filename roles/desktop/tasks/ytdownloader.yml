@@ -6,5 +6,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-ytdownloader.sh') }}"
   environment:
     YTDOWNLOADER_VERSION: "{{ desktop_ytdownloader_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"

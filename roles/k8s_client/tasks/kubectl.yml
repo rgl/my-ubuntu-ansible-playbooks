@@ -36,10 +36,10 @@
   block:
     - name: Get kubectl bash completion
       ansible.builtin.command: kubectl completion bash
-      register: bash_completion
+      register: k8s_client_bash_completion
       changed_when: false
     - name: Install kubectl bash completion
       ansible.builtin.copy:
-        content: "{{ bash_completion.stdout }}"
+        content: "{{ k8s_client_bash_completion.stdout }}"
         dest: /usr/share/bash-completion/completions/kubectl
         mode: 0444

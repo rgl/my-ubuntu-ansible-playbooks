@@ -32,7 +32,7 @@
           addresses:
             # use the last 54 addresses from the assigned network. e.g. with
             # a network of 172.18/16 use 172.18.255.200-172.18.255.254.
-            - '{{ cluster.network_cidr | ansible.utils.nthhost(-(54+2)) }}-{{ cluster.network_cidr | ansible.utils.nthhost(-2) }}'
+            - '{{ kind_cluster.network_cidr | ansible.utils.nthhost(-(54+2)) }}-{{ kind_cluster.network_cidr | ansible.utils.nthhost(-2) }}'
       - apiVersion: metallb.io/v1beta1
         kind: L2Advertisement
         metadata:
@@ -40,13 +40,13 @@
         spec:
           ipAddressPools:
             - default
-  register: result
+  register: kind_result
   # NB we have to retry until the metallb-webhook-service endpoint is
   #    available. while its starting, it will fail with:
   #       Internal error occurred: failed calling webhook "ipaddresspoolvalidationwebhook.metallb.io": failed to call webhook: Post
   #       "https://metallb-webhook-service.kube-metallb.svc:443/validate-metallb-io-v1beta1-ipaddresspool?timeout=10s": dial tcp
   #       10.96.9.119:443: connect: connection refused
   #    see https://github.com/metallb/metallb/issues/1597
-  until: result is succeeded
+  until: kind_result is succeeded
   retries: 10
   delay: 20

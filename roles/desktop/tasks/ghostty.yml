@@ -4,5 +4,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-ghostty.sh') }}"
   environment:
     GHOSTTY_VERSION: "{{ desktop_ghostty_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"

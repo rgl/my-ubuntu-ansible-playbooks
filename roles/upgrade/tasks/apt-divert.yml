@@ -7,8 +7,8 @@
         echo 'ANSIBLE CHANGED YES'
         dpkg-divert --divert /usr/bin/.dist.{{ item }} --rename /usr/bin/{{ item }}
       fi
-  register: result
-  changed_when: "'ANSIBLE CHANGED YES' in result.stdout_lines"
+  register: upgrade_result
+  changed_when: "'ANSIBLE CHANGED YES' in upgrade_result.stdout_lines"
 
 - name: Symlink apt command
   ansible.builtin.file:

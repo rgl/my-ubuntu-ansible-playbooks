@@ -13,5 +13,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-esptool.sh') }}"
   environment:
     ESPTOOL_VERSION: "{{ esptool_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: esptool_result
+  changed_when: "'ANSIBLE CHANGED NO' not in esptool_result.stdout_lines"

@@ -10,5 +10,5 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-wasmer.sh') }}"
   environment:
     WASMER_VERSION: "{{ wasmer_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: wasmer_result
+  changed_when: "'ANSIBLE CHANGED NO' not in wasmer_result.stdout_lines"

@@ -4,8 +4,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'install-aws.sh') }}"
   environment:
     AWS_VERSION: "{{ aws_client_aws_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: aws_client_result
+  changed_when: "'ANSIBLE CHANGED NO' not in aws_client_result.stdout_lines"
 
 - name: Install aws bash completion
   ansible.builtin.copy:
@@ -21,8 +21,8 @@
   ansible.builtin.shell: "{{ lookup('file', 'uninstall-aws.sh') }}"
   environment:
     AWS_VERSION: "{{ aws_client_aws_version }}"
-  register: result
-  changed_when: "'ANSIBLE CHANGED NO' not in result.stdout_lines"
+  register: aws_client_result
+  changed_when: "'ANSIBLE CHANGED NO' not in aws_client_result.stdout_lines"
 
 - name: Install aws session manager plugin
   block:
