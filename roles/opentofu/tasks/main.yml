@@ -44,4 +44,11 @@
       ansible.builtin.dpkg_selections:
         name: tofu
         selection: hold
-    # TODO tofu -install-autocomplete
+
+- name: Install tofu bash completion
+  ansible.builtin.copy:
+    # see tofu -install-autocomplete
+    content: |
+      complete -C /usr/bin/tofu tofu
+    dest: /usr/share/bash-completion/completions/tofu
+    mode: 0444
