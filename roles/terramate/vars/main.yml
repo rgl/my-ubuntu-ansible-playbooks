@@ -1,3 +1,3 @@
 # see https://github.com/terramate-io/terramate/releases
 # renovate: datasource=github-releases depName=terramate-io/terramate
-terramate_version: '0.14.3'
+terramate_version: '0.14.4'
