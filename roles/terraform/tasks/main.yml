@@ -46,3 +46,11 @@
       ansible.builtin.dpkg_selections:
         name: terraform
         selection: hold
+
+- name: Install terraform bash completion
+  ansible.builtin.copy:
+    # see terraform -install-autocomplete
+    content: |
+      complete -C /usr/bin/terraform terraform
+    dest: /usr/share/bash-completion/completions/terraform
+    mode: 0444
