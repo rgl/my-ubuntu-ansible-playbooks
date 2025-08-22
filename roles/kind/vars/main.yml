@@ -72,4 +72,4 @@ kind_pgadmin_chart_version: '1.48.0'
 
 # see https://hub.docker.com/r/dpage/pgadmin4/tags
 # renovate: datasource=docker depName=dpage/pgadmin4 versioning=semver-coerced
-kind_pgadmin_chart_app_version: '9.6.0'
+kind_pgadmin_chart_app_version: '9.7.0'
