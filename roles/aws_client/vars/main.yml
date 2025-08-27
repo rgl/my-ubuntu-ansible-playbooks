@@ -1,7 +1,7 @@
 # see https://github.com/aws/aws-cli/tags
 # see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#cliv2-linux-install
 # renovate: datasource=github-tags depName=aws/aws-cli
-aws_client_aws_version: '2.28.13'
+aws_client_aws_version: '2.28.18'
 
 # see https://github.com/aws/session-manager-plugin/releases
 # see https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html
