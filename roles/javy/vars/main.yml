@@ -1,3 +1,3 @@
 # see https://github.com/bytecodealliance/javy/releases
 # renovate: datasource=github-releases depName=bytecodealliance/javy/releases
-javy_version: '5.0.4'
+javy_version: '6.0.0'
