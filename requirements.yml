@@ -7,7 +7,7 @@ collections:
     version: 6.0.0
   # see https://galaxy.ansible.com/community/general
   - name: community.general
-    version: 11.2.1
+    version: 11.3.0
   # see https://galaxy.ansible.com/community/docker
   - name: community.docker
     version: 4.7.0
