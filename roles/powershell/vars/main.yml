@@ -1,4 +1,4 @@
 # see apt-cache madison powershell
 # see https://github.com/PowerShell/PowerShell/releases
 # renovate: datasource=deb:microsoft depName=powershell extractVersion=^(?<version>7\.4\..+)-1\.deb$
-powershell_version: '7.4.11'
+powershell_version: '7.4.12'
