@@ -1,4 +1,4 @@
 # see https://github.com/dagger/dagger/releases
 # see https://dagger.io
 # renovate: datasource=github-releases depName=dagger/dagger
-dagger_version: '0.18.16'
+dagger_version: '0.18.17'
