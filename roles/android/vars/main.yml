@@ -1,4 +1,4 @@
-# see https://androidsdkoffline.blogspot.com/p/all-android-sdk-latest-stable-versions.html
+# see https://developer.android.com/studio#command-line-tools-only
 # see /opt/android-sdk/cmdline-tools/19.0/bin/sdkmanager --list
 # see /opt/android-sdk/cmdline-tools/19.0/bin/sdkmanager --list_installed
 android_sdk_cmdline_tools_build: '13114758'
@@ -17,4 +17,4 @@ android_sdk_packages:
   - system-images;android-36;google_apis;x86_64
 
 # see https://developer.android.com/studio/archive
-android_studio_version: '2025.1.2.11'
+android_studio_version: '2025.1.3.7'
