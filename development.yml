@@ -20,6 +20,7 @@
     - static_web_server
     - clickhouse_client
     - talosctl
+    - incus_client
     - github_client
     - k8s_client
     - aws_client
