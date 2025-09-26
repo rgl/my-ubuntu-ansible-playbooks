@@ -1,4 +1,4 @@
 # see https://github.com/siderolabs/talos/releases
 # see https://talos.dev/
 # renovate: datasource=github-releases depName=siderolabs/talos
-talosctl_version: '1.11.1'
+talosctl_version: '1.11.2'
