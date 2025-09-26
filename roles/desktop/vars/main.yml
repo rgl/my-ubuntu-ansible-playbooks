@@ -8,7 +8,7 @@ desktop_httptoolkit_version: '1.22.1'
 
 # see https://github.com/netbirdio/netbird/releases
 # renovate: datasource=github-releases depName=netbirdio/netbird
-desktop_netbird_version: '0.58.0'
+desktop_netbird_version: '0.58.2'
 
 # see https://github.com/ghostty-org/ghostty
 # see https://github.com/mkasberg/ghostty-ubuntu/releases
