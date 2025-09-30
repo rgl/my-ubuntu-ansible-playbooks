@@ -21,7 +21,7 @@ desktop_ventoy_version: '1.0.99'
 
 # see https://github.com/Yubico/yubioath-flutter/releases
 # renovate: datasource=github-releases depName=Yubico/yubioath-flutter
-desktop_yubico_authenticator_version: '7.2.3'
+desktop_yubico_authenticator_version: '7.3.0'
 
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
