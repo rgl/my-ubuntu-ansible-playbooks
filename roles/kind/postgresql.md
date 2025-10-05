@@ -1,10 +1,10 @@
 # PostgreSQL
 
-Test the access from the `postgres-0` pod using `psql`:
+Test the access from the `postgresql-cluster-1` pod using `psql`:
 
 ```bash
-kubectl exec -n postgresql -it postgresql-0 -- \
-    env PGPASSWORD=postgres psql --host=postgresql --port=5432 --username=postgres
+kubectl exec -n postgresql -it postgresql-cluster-1 -- \
+    env PGPASSWORD=postgres psql --host=postgresql-cluster-rw --port=5432 --username=postgres
 ```
 
 And execute some queries:
@@ -21,7 +21,7 @@ Test the access from the pgadmin deployment using `psql`:
 
 ```bash
 kubectl exec -n pgadmin -it deployments/pgadmin-pgadmin4 -- \
-    env PGPASSWORD=postgres /usr/local/pgsql-11/psql --host=postgresql.postgresql --port=5432 --username=postgres
+    env PGPASSWORD=postgres /usr/local/pgsql-17/psql --host=postgresql-cluster-rw.postgresql --port=5432 --username=postgres
 ```
 
 And execute some queries:
@@ -39,7 +39,12 @@ Use the pgAdmin application with the `admin@example.com` user and
 
 <https://pgadmin.kind.test>
 
+Then, login as `postgres` with the `postgres` password into the `PostgreSQL` server.
+
 ## Reference
 
-* <https://artifacthub.io/packages/helm/bitnami/postgresql>
-* <https://github.com/bitnami/charts/tree/main/bitnami/postgresql>
+* <https://cloudnative-pg.io/docs/>
+* <https://cloudnative-pg.io/documentation/current/supported_releases>
+* <https://artifacthub.io/packages/helm/cloudnative-pg/cloudnative-pg>
+* <https://github.com/cloudnative-pg/charts/tree/main/charts/cloudnative-pg>
+* <https://github.com/cloudnative-pg/charts/tree/main/charts/cluster>

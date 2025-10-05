@@ -33,7 +33,7 @@
           postgresql:
             Name: PostgreSQL
             Group: Servers
-            Host: postgresql.postgresql
+            Host: postgresql-cluster-rw.postgresql
             Port: 5432
             SSLMode: disable
             MaintenanceDB: postgres

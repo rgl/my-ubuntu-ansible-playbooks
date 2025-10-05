@@ -1,27 +1,56 @@
-# see https://artifacthub.io/packages/helm/bitnami/postgresql
-# see https://github.com/bitnami/charts/tree/main/bitnami/postgresql
+# see https://artifacthub.io/packages/helm/cloudnative-pg/cloudnative-pg
+# see https://github.com/cloudnative-pg/charts/tree/main/charts/cloudnative-pg
+# see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
+# see https://cloudnative-pg.io/documentation/current/supported_releases/
 # try helm status -n postgresql postgresql
 # try kubectl -n postgresql get events
-# try kubectl exec -n postgresql -it postgresql-0 -- bash
-# try kubectl exec -n postgresql -it postgresql-0 -- env PGPASSWORD=postgres psql --host=postgresql --username=postgres --port=5432
+# try kubectl exec -n postgresql -it postgresql-cluster-1 -- bash
+# try kubectl exec -n postgresql -it postgresql-cluster-1 -- env PGPASSWORD=postgres psql --host=postgresql-cluster-rw --username=postgres --port=5432
 # NB to completely delete postgresql execute:
 #     helm uninstall -n postgresql postgresql
 #     kubectl delete namespace postgresql # this will also delete the persistent volumes.
 
-- name: Add bitnami repository
+- name: Add cnpg repository
   kubernetes.core.helm_repository:
-    name: bitnami
-    repo_url: https://charts.bitnami.com/bitnami
+    name: cnpg
+    repo_url: https://cloudnative-pg.github.io/charts
+
+- name: Install cloudnative-pg
+  kubernetes.core.helm:
+    release_namespace: kube-cnpg
+    name: cnpg
+    chart_ref: cnpg/cloudnative-pg
+    chart_version: '{{ kind_cnpg_operator_chart_version }}'
+    create_namespace: true
+    update_repo_cache: true
+    wait: true
 
 - name: Install postgresql
   kubernetes.core.helm:
     release_namespace: postgresql
     name: postgresql
-    chart_ref: bitnami/postgresql
-    chart_version: '{{ kind_postgresql_chart_version }}'
+    chart_ref: cnpg/cluster
+    chart_version: '{{ kind_cnpg_cluster_chart_version }}'
     create_namespace: true
     update_repo_cache: true
     wait: true
     values:
-      auth:
-        postgresPassword: postgres
+      version:
+        postgresql: '{{ kind_cnpg_cluster_postgresql_major_version }}'
+      cluster:
+        enableSuperuserAccess: true
+        superuserSecret: postgres
+        instances: 1
+
+- name: Create the postgres Secret
+  kubernetes.core.k8s:
+    namespace: postgresql
+    definition:
+      apiVersion: v1
+      kind: Secret
+      type: kubernetes.io/basic-auth
+      metadata:
+        name: postgres
+      stringData:
+        username: postgres
+        password: postgres

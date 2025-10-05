@@ -63,9 +63,19 @@ kind_gitea_chart_version: '12.3.0' # app version: 1.24.6
 # renovate: datasource=helm depName=argo-cd registryUrl=https://argoproj.github.io/argo-helm
 kind_argocd_chart_version: '8.5.8' # app version: 3.1.8
 
-# see https://artifacthub.io/packages/helm/bitnami/postgresql
-# renovate: datasource=helm depName=postgresql registryUrl=https://charts.bitnami.com/bitnami
-kind_postgresql_chart_version: '16.7.27' # app version: 17.6.0
+# see https://artifacthub.io/packages/helm/cloudnative-pg/cloudnative-pg
+# see https://github.com/cloudnative-pg/charts/tree/main/charts/cloudnative-pg
+# renovate: datasource=helm depName=cloudnative-pg registryUrl=https://cloudnative-pg.github.io/charts
+kind_cnpg_operator_chart_version: '0.26.0' # app version: 1.27.0
+
+# see https://artifacthub.io/packages/helm/cloudnative-pg/cluster
+# see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
+# renovate: datasource=helm depName=cluster registryUrl=https://cloudnative-pg.github.io/charts
+kind_cnpg_cluster_chart_version: '0.3.1'
+
+# see https://cloudnative-pg.io/documentation/current/supported_releases/
+# see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
+kind_cnpg_cluster_postgresql_major_version: '17'
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
 # renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
