@@ -1,24 +1,22 @@
-# see https://artifacthub.io/packages/helm/bitnami/metallb
+# see https://artifacthub.io/packages/helm/metallb/metallb
+# see https://github.com/metallb/metallb/tree/main/charts/metallb
+# see https://github.com/metallb/metallb
 # see https://metallb.universe.tf/configuration/#layer-2-configuration
-# see https://github.com/bitnami/charts/tree/master/bitnami/metallb
 # see https://kind.sigs.k8s.io/docs/user/loadbalancer/
 
-- name: Add bitnami repository
+- name: Add metallb repository
   kubernetes.core.helm_repository:
-    name: bitnami
-    repo_url: https://charts.bitnami.com/bitnami
+    name: metallb
+    repo_url: https://metallb.github.io/metallb
 
 - name: Install metallb
   kubernetes.core.helm:
     name: kube-metallb
-    chart_ref: bitnami/metallb
+    chart_ref: metallb/metallb
     chart_version: '{{ kind_metallb_chart_version }}'
     release_namespace: kube-metallb
     create_namespace: true
     update_repo_cache: true
-    values:
-      speaker:
-        secretValue: opensesame # TODO use a proper secret.
 
 - name: Configure metallb
   kubernetes.core.k8s:

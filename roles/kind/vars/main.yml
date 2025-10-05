@@ -15,10 +15,11 @@ kind_node_image_version: '1.33.4'
 # renovate: datasource=github-releases depName=databus23/helm-diff
 kind_helm_diff_version: '3.13.0'
 
-# see https://artifacthub.io/packages/helm/bitnami/metallb
+# see https://artifacthub.io/packages/helm/metallb/metallb
+# see https://github.com/metallb/metallb/tree/main/charts/metallb
 # see https://github.com/metallb/metallb
-# renovate: datasource=helm depName=metallb registryUrl=https://charts.bitnami.com/bitnami
-kind_metallb_chart_version: '6.4.22' # app version: 0.15.2
+# renovate: datasource=helm depName=metallb registryUrl=https://metallb.github.io/metallb
+kind_metallb_chart_version: '0.15.2' # app version: 0.15.2
 
 # see https://github.com/cert-manager/cert-manager
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
