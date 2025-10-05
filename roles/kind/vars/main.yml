@@ -44,9 +44,9 @@ kind_traefik_chart_version: '37.1.1' # app version: 3.5.2
 # renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
 kind_kubernetes_dashboard_chart_version: '7.13.0' # app version: 7.13.0
 
-# see https://artifacthub.io/packages/helm/bitnami/external-dns
-# renovate: datasource=helm depName=external-dns registryUrl=https://charts.bitnami.com/bitnami
-kind_external_dns_chart_version: '9.0.3' # app version: 0.18.0
+# see https://artifacthub.io/packages/helm/external-dns/external-dns
+# renovate: datasource=helm depName=external-dns registryUrl=https://kubernetes-sigs.github.io/external-dns
+kind_external_dns_chart_version: '1.19.0' # app version: 0.19.0
 
 # see https://hub.docker.com/r/powerdns/pdns-auth-48
 # see https://hub.docker.com/search?q=pdns-auth-

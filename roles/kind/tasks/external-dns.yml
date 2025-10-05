@@ -145,13 +145,18 @@
                 protocol: TCP
                 targetPort: 5353
 
+- name: Add external-dns repository
+  kubernetes.core.helm_repository:
+    name: external-dns
+    repo_url: https://kubernetes-sigs.github.io/external-dns
+
 - name: Install external-dns
-  # see https://artifacthub.io/packages/helm/bitnami/external-dns
+  # see https://artifacthub.io/packages/helm/external-dns/external-dns
   # see https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/pdns.md
   # see https://github.com/kubernetes-sigs/external-dns/blob/master/docs/initial-design.md
   kubernetes.core.helm:
     name: kube-external-dns
-    chart_ref: bitnami/external-dns
+    chart_ref: external-dns/external-dns
     chart_version: '{{ kind_external_dns_chart_version }}'
     release_namespace: kube-external-dns
     create_namespace: true
@@ -166,7 +171,11 @@
       domainFilters:
         - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
       provider: pdns
-      pdns:
-        apiUrl: http://pdns-api
-        apiPort: 8081
-        secretName: pdns-api
+      env:
+        - name: EXTERNAL_DNS_PDNS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pdns-api
+              key: pdns_api_key
+      extraArgs:
+        pdns-server: http://pdns-api:8081
