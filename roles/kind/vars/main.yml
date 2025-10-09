@@ -57,7 +57,7 @@ kind_pdns_version: '4.8.5' # app version: 4.8.5
 
 # see https://artifacthub.io/packages/helm/gitea/gitea
 # renovate: datasource=helm depName=gitea registryUrl=https://dl.gitea.com/charts
-kind_gitea_chart_version: '12.3.0' # app version: 1.24.6
+kind_gitea_chart_version: '12.4.0' # app version: 1.24.6
 
 # see https://artifacthub.io/packages/helm/argo/argo-cd
 # renovate: datasource=helm depName=argo-cd registryUrl=https://argoproj.github.io/argo-helm
