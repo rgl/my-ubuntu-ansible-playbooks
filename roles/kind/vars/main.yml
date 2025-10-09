@@ -38,7 +38,7 @@ kind_reloader_chart_version: '2.2.3' # app version: 1.4.8
 
 # see https://artifacthub.io/packages/helm/traefik/traefik
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
-kind_traefik_chart_version: '37.1.1' # app version: 3.5.2
+kind_traefik_chart_version: '37.1.2' # app version: 3.5.3
 
 # see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
 # renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
