@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/uv ]; then
-    # e.g.: uv 0.9.3
+    # e.g.: uv 0.9.4
     actual_version="$(/usr/local/bin/uv --version | perl -ne '/^uv (.+)/ && print $1')"
     if [ "$actual_version" == "$UV_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
