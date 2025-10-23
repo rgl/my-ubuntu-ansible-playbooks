@@ -176,6 +176,10 @@
     # see https://github.com/Mermaid-Chart/vscode-mermaid-preview
     # see https://marketplace.visualstudio.com/items?itemName=vstirbu.vscode-mermaid-preview
     - vstirbu.vscode-mermaid-preview
+    # TOML support.
+    # see https://github.com/tamasfe/taplo
+    # see https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
+    - tamasfe.even-better-toml
 
 - name: Set Visual Studio Code as the text/plain default editor
   become: true
