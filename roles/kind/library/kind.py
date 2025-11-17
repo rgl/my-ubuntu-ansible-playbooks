@@ -102,7 +102,8 @@ class Kind(AnsibleModule):
       changed = True
     ip_address = self._get_ip_address(container)
     network = self.docker_client.networks.get(name)
-    network_cidr = network.attrs['IPAM']['Config'][0]['Subnet']
+    # choose the first ipv4 network.
+    network_cidr = [n['Subnet'] for n in network.attrs['IPAM']['Config'] if '.' in n['Subnet']][0]
     # connect the registry container to the kind network.
     # NB this is equivalent to: docker network connect kind registry
     registry_connected_to_network = False
