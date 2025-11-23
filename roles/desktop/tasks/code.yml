@@ -83,6 +83,10 @@
     # see https://github.com/golang/vscode-go
     # see https://marketplace.visualstudio.com/items?itemName=golang.Go
     - golang.go
+    # CUE.
+    # see https://github.com/cue-lang/vscode-cue
+    # see https://marketplace.visualstudio.com/items?itemName=cuelangorg.vscode-cue
+    - cuelangorg.vscode-cue
     # HCL.
     # see https://github.com/hashicorp/vscode-hcl
     # see https://marketplace.visualstudio.com/items?itemName=hashicorp.hcl
