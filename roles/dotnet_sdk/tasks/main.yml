@@ -5,9 +5,44 @@
     dest: /etc/profile.d/opt-out-dotnet-cli-telemetry.sh
     mode: 0444
 
-# see https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+- name: Add the dotnet/backports ppa apt repository
+  # see https://launchpad.net/%7Edotnet/+archive/ubuntu/backports
+  vars:
+    dotnet_sdk_ppa_key_id: 45A3F127159BE9E5017811C62125B164E8E5D3FA
+    dotnet_sdk_ppa_name: ppa.launchpadcontent.net_dotnet_backports
+  block:
+    - name: Download the dotnet/backports ppa apt repository key
+      ansible.builtin.get_url:
+        url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x{{ dotnet_sdk_ppa_key_id }}"
+        dest: "/etc/apt/keyrings/{{ dotnet_sdk_ppa_name }}.asc"
+        mode: 0444
+        force: true
+    - name: Add the dotnet/backports ppa apt repository
+      ansible.builtin.apt_repository:
+        # see https://wiki.debian.org/DebianRepository/Format
+        # see Ubuntu Jammy 22.04: https://ppa.launchpadcontent.net/dotnet/backports/ubuntu/dists/jammy/Release
+        # see Ubuntu Jammy 22.04: https://ppa.launchpadcontent.net/dotnet/backports/ubuntu/dists/jammy/main/binary-amd64/Packages.gz
+        repo: >
+          deb
+          [arch=amd64 signed-by=/etc/apt/keyrings/{{ dotnet_sdk_ppa_name }}.asc]
+          https://ppa.launchpadcontent.net/dotnet/backports/ubuntu
+          {{ ansible_distribution_release }}
+          main
+        state: present
+
+# see https://dotnet.microsoft.com/en-us/download/dotnet/10.0
 # see https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-# see https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#supported-distributions
-- name: Install dotnet-sdk 8.0
+# see https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install?tabs=dotnet10&pivots=os-linux-ubuntu-2204#supported-distributions
+# see https://launchpad.net/%7Edotnet/+archive/ubuntu/backports
+# see apt-cache policy
+# see apt-cache policy dotnet-sdk-10.0
+# see apt-cache showpkg dotnet-sdk-10.0
+# see when there is a mixup between the distribution packages and the microsoft
+#     ones, before installing again, remove all the installed packages with:
+#       sudo apt-get remove --purge 'dotnet*' 'aspnet*' 'netstandard*'
+# see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
+- name: Install dotnet-sdk 10.0
   ansible.builtin.apt:
-    name: dotnet-sdk-8.0
+    name: dotnet-sdk-10.0
+    allow_change_held_packages: true
+    state: latest # noqa package-latest
