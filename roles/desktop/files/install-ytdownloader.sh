@@ -6,7 +6,7 @@ if [ -r /usr/local/bin/ytdownloader ]; then
     # NB ytdownloader.AppImage --version does not work from an ssh session, so
     #    we have to work around that, by extracting the ytdownloader.desktop
     #    file from the AppImage, then the X-AppImage-Version property value.
-    # e.g. X-AppImage-Version=3.19.3
+    # e.g. X-AppImage-Version=3.20.0
     actual_version="$(7z x -so /usr/local/bin/ytdownloader '*.desktop' | perl -ne '/^X-AppImage-Version=(.+)/ && print $1')"
     if [ "$actual_version" == "$YTDOWNLOADER_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
