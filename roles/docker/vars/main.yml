@@ -4,4 +4,4 @@ docker_version: '29.0.1'
 
 # see https://github.com/docker/compose/releases
 # renovate: datasource=github-releases depName=docker/compose
-docker_compose_version: '2.40.3'
+docker_compose_version: '5.0.0'
