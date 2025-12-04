@@ -61,7 +61,7 @@ kind_gitea_chart_version: '12.4.0' # app version: 1.24.6
 
 # see https://artifacthub.io/packages/helm/argo/argo-cd
 # renovate: datasource=helm depName=argo-cd registryUrl=https://argoproj.github.io/argo-helm
-kind_argocd_chart_version: '9.1.5' # app version: 3.2.1
+kind_argocd_chart_version: '9.1.6' # app version: 3.2.1
 
 # see https://artifacthub.io/packages/helm/cloudnative-pg/cloudnative-pg
 # see https://github.com/cloudnative-pg/charts/tree/main/charts/cloudnative-pg
