@@ -29,7 +29,7 @@ k8s_client_regclient_version: '0.11.0'
 
 # see https://github.com/cert-manager/cmctl/releases
 # renovate: datasource=github-releases depName=cert-manager/cmctl
-k8s_client_cmctl_version: '2.3.0'
+k8s_client_cmctl_version: '2.4.0'
 
 # see https://github.com/cilium/cilium-cli/releases
 # renovate: datasource=github-releases depName=cilium/cilium-cli
