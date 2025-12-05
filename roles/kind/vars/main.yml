@@ -71,7 +71,7 @@ kind_cnpg_operator_chart_version: '0.26.1' # app version: 1.27.1
 # see https://artifacthub.io/packages/helm/cloudnative-pg/cluster
 # see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
 # renovate: datasource=helm depName=cluster registryUrl=https://cloudnative-pg.github.io/charts
-kind_cnpg_cluster_chart_version: '0.3.1'
+kind_cnpg_cluster_chart_version: '0.4.0'
 
 # see https://cloudnative-pg.io/documentation/current/supported_releases/
 # see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
