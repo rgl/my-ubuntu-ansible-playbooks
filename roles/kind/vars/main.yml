@@ -19,7 +19,7 @@ kind_helm_diff_version: '3.14.1'
 # see https://github.com/metallb/metallb/tree/main/charts/metallb
 # see https://github.com/metallb/metallb
 # renovate: datasource=helm depName=metallb registryUrl=https://metallb.github.io/metallb
-kind_metallb_chart_version: '0.15.2' # app version: 0.15.2
+kind_metallb_chart_version: '0.15.3' # app version: 0.15.3
 
 # see https://github.com/cert-manager/cert-manager
 # see https://artifacthub.io/packages/helm/cert-manager/cert-manager
