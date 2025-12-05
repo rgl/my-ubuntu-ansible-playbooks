@@ -17,6 +17,10 @@
     release_namespace: kube-metallb
     create_namespace: true
     update_repo_cache: true
+    values:
+      speaker:
+        frr:
+          enabled: false
 
 - name: Configure metallb
   kubernetes.core.k8s:
