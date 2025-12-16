@@ -193,11 +193,9 @@ class Kind(AnsibleModule):
       'cluster',
       f'--name={name}',
       '--config=-']
-    # TODO with check=True and when there is a non-zero exit code, the raised
-    #      subprocess.CalledProcessError exception does not include
-    #      stdout/stderr, which makes this impossible to troubleshoot, so we
-    #      need to include that in the exception/log.
-    subprocess.run(args, check=True, text=True, input=config, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
+    result = subprocess.run(args, check=False, text=True, input=config, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # nosec B603
+    if result.returncode:
+      raise Exception(f"failed to create the kind cluster with exit code {result.returncode}.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}")
     self._wait_for_kubernetes(25*60)
     # document the local registry.
     # see https://github.com/kubernetes/enhancements/tree/master/keps/sig-cluster-lifecycle/generic/1755-communicating-a-local-registry
