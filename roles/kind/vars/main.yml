@@ -73,9 +73,9 @@ kind_cnpg_operator_chart_version: '0.27.0' # app version: 1.28.0
 # renovate: datasource=helm depName=cluster registryUrl=https://cloudnative-pg.github.io/charts
 kind_cnpg_cluster_chart_version: '0.5.0'
 
-# see https://cloudnative-pg.io/documentation/current/supported_releases/
+# see https://cloudnative-pg.io/docs/1.28/supported_releases
 # see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
-kind_cnpg_cluster_postgresql_major_version: '17'
+kind_cnpg_cluster_postgresql_major_version: '18'
 
 # see https://artifacthub.io/packages/helm/runix/pgadmin4
 # renovate: datasource=helm depName=pgadmin4 registryUrl=https://helm.runix.net
