@@ -57,7 +57,8 @@ class NetBirdConfig(AnsibleModule):
     changed = False
     config_path = '/etc/netbird/config.json'
     if not os.path.exists(config_path):
-      return None
+      self.exit_json(changed=changed)
+      return
     with open(config_path, 'r') as f:
       config = json.load(f)
     iface_black_list = config.get('IFaceBlackList', [])
