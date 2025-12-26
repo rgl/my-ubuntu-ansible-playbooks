@@ -25,7 +25,7 @@ desktop_yubico_authenticator_version: '7.3.0'
 
 # see https://github.com/raspberrypi/rpi-imager/releases
 # renovate: datasource=github-releases depName=raspberrypi/rpi-imager
-desktop_rpi_imager_version: '1.9.6'
+desktop_rpi_imager_version: '2.0.3'
 
 # see https://umlet.com
 # see https://github.com/umlet/umlet/tags
