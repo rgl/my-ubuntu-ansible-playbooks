@@ -1,6 +1,6 @@
 - name: Install powercli
   ansible.builtin.shell:
-    executable: /bin/pwsh
+    executable: /usr/bin/pwsh
     cmd: "{{ lookup('file', 'install-powercli.ps1') }}"
   environment:
     POWERCLI_VERSION: "{{ vmware_client_powercli_version }}"
