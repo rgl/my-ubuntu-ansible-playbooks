@@ -6,3 +6,10 @@
     dest: /etc/dnsmasq.d/{{ kind_cluster_name }}.{{ kind_cluster_domain }}.conf
     mode: 0444
   notify: Restart dnsmasq
+
+- name: Flush Ansible handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Start cluster
+  kind_start:
+    name: '{{ kind_cluster_name }}'
