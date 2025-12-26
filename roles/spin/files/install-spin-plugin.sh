@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-# e.g. https://github.com/fermyon/spin-js-sdk/releases/download/v0.6.1/js2wasm.json
+# e.g. https://github.com/spinframework/spin-python-sdk/releases/download/v0.3.2/py2wasm.json
 SPIN_PLUGIN_URL="https://github.com/${SPIN_PLUGIN_GITHUB}/releases/download/v${SPIN_PLUGIN_VERSION}/${SPIN_PLUGIN_NAME}.json"
 
 # bail when already installed.
@@ -19,6 +19,6 @@ if [ "$actual_version" == "$SPIN_PLUGIN_VERSION" ]; then
 fi
 
 # download and install.
-# see https://developer.fermyon.com/spin/v2/managing-plugins
+# see https://spinframework.dev/v2/managing-plugins
 # see ~/.local/share/spin/plugins/
 spin plugins install --yes --url "$SPIN_PLUGIN_URL"

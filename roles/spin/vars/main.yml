@@ -1,15 +1,15 @@
-# see https://github.com/fermyon/spin
-# renovate: datasource=github-releases depName=fermyon/spin
+# see https://github.com/spinframework/spin
+# renovate: datasource=github-releases depName=spinframework/spin
 spin_version: '3.5.1'
 
 # see https://github.com/fermyon/cloud-plugin
 # renovate: datasource=github-releases depName=fermyon/cloud-plugin
 spin_cloud_plugin_version: '0.11.0'
 
-# see https://github.com/fermyon/spin-js-sdk
-# renovate: datasource=github-releases depName=fermyon/spin-js-sdk
+# see https://github.com/spinframework/spin-js-sdk
+# renovate: datasource=github-releases depName=spinframework/spin-js-sdk
 spin_js_sdk_version: '3.2.0'
 
-# see https://github.com/fermyon/spin-python-sdk
-# renovate: datasource=github-releases depName=fermyon/spin-python-sdk
+# see https://github.com/spinframework/spin-python-sdk
+# renovate: datasource=github-releases depName=spinframework/spin-python-sdk
 spin_python_plugin_version: '0.3.2'

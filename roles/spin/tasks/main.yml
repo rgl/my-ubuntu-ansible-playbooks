@@ -23,9 +23,9 @@
       name: cloud
       github: fermyon/cloud-plugin
       version: "{{ spin_cloud_plugin_version }}"
-    - # https://github.com/fermyon/spin-python-sdk
+    - # https://github.com/spinframework/spin-python-sdk
       name: py2wasm
-      github: fermyon/spin-python-sdk
+      github: spinframework/spin-python-sdk
       version: "{{ spin_python_plugin_version }}"
 
 - name: Install spin template
@@ -40,17 +40,17 @@
   register: spin_result
   changed_when: "'ANSIBLE CHANGED NO' not in spin_result.stdout_lines"
   loop:
-    - # https://github.com/fermyon/spin-js-sdk/tree/main/templates/http-js
+    - # https://github.com/spinframework/spin-js-sdk/tree/main/templates/http-js
       # NB this also installs the http-ts template.
       name: http-js
-      github: fermyon/spin-js-sdk
+      github: spinframework/spin-js-sdk
       version: "{{ spin_js_sdk_version }}"
-    - # https://github.com/fermyon/spin-python-sdk/tree/main/templates/http-py
+    - # https://github.com/spinframework/spin-python-sdk/tree/main/templates/http-py
       name: http-py
-      github: fermyon/spin-python-sdk
+      github: spinframework/spin-python-sdk
       version: "{{ spin_python_plugin_version }}"
-    - # https://github.com/fermyon/spin/tree/main/templates/http-go
+    - # https://github.com/spinframework/spin/tree/main/templates/http-go
       # NB this also installs a lot more templates.
       name: http-go
-      github: fermyon/spin
+      github: spinframework/spin
       version: "{{ spin_version }}"

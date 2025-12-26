@@ -12,7 +12,7 @@ if [ -x /usr/local/bin/spin ]; then
 fi
 
 # download and install.
-spin_url="https://github.com/fermyon/spin/releases/download/v${SPIN_VERSION}/spin-v${SPIN_VERSION}-linux-amd64.tar.gz"
+spin_url="https://github.com/spinframework/spin/releases/download/v${SPIN_VERSION}/spin-v${SPIN_VERSION}-linux-amd64.tar.gz"
 t="$(mktemp -q -d --suffix=.spin)"
 wget -qO- "$spin_url" | tar xzf - -C "$t"
 install -m 755 "$t/spin" /usr/local/bin/
