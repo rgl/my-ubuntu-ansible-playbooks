@@ -9,7 +9,7 @@ kind_version: '0.31.0'
 
 # see https://hub.docker.com/r/kindest/node/tags
 # renovate: datasource=docker depName=kindest/node extractVersion=(?<version>1\.34\..+)
-kind_node_image_version: '1.34.0'
+kind_node_image_version: '1.34.3'
 
 # see https://github.com/databus23/helm-diff/releases
 # renovate: datasource=github-releases depName=databus23/helm-diff
