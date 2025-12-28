@@ -21,6 +21,21 @@ kubectl get pods -A
 kubectl get ingress -A
 ```
 
+Run an image from the local registry:
+
+```bash
+crane copy \
+  --platform linux/amd64 \
+  docker.io/library/hello-world:latest \
+  localhost:5000/hello-world:latest
+crane manifest localhost:5000/hello-world:latest
+kubectl run hello-world \
+  --rm -it \
+  --restart=Never \
+  --image=localhost:5000/hello-world:latest
+crane delete localhost:5000/hello-world:latest
+```
+
 ## Kubernetes Dashboard
 
 Use the Kubernetes Dashboard application with the Token from the

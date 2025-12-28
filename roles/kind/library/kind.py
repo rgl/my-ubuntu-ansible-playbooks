@@ -170,11 +170,29 @@ class Kind(AnsibleModule):
     # create the cluster configuration.
     # see https://kind.sigs.k8s.io/docs/user/configuration/
     # see https://kind.sigs.k8s.io/docs/user/local-registry/
+    # see https://github.com/containerd/containerd/blob/main/docs/hosts.md
     # try wget -qSO- http://localhost:5000/v2/
     # try wget -qSO- http://localhost:5000/v2/_catalog
+    # try wget -qSO- http://localhost:5000/v2/hello-world/tags/list
+    # try wget -qSO- \
+    #       --header="Accept: \
+    #         application/vnd.oci.image.manifest.v1+json, \
+    #         application/vnd.oci.image.index.v1+json, \
+    #         application/vnd.docker.distribution.manifest.v2+json, \
+    #         application/vnd.docker.distribution.manifest.list.v2+json" \
+    #       http://localhost:5000/v2/hello-world/manifests/latest
     # try docker exec -it kind-control-plane cat /etc/containerd/config.toml
+    # try docker exec -it kind-control-plane cat /etc/containerd/hosts/localhost_5000_/hosts.toml
     # try docker exec -it kind-control-plane curl -v http://registry:5000/v2/
     # try docker exec -it kind-control-plane curl -v http://registry:5000/v2/_catalog
+    # try docker exec -it kind-control-plane curl -v http://registry:5000/v2/hello-world/tags/list
+    # try docker exec -it kind-control-plane curl -v \
+    #       -H "Accept: \
+    #         application/vnd.oci.image.manifest.v1+json, \
+    #         application/vnd.oci.image.index.v1+json, \
+    #         application/vnd.docker.distribution.manifest.v2+json, \
+    #         application/vnd.docker.distribution.manifest.list.v2+json" \
+    #       http://registry:5000/v2/hello-world/manifests/latest
     config = textwrap.dedent(f'''\
     apiVersion: kind.x-k8s.io/v1alpha4
     kind: Cluster
@@ -183,8 +201,8 @@ class Kind(AnsibleModule):
         image: kindest/node:v{node_image_version}
     containerdConfigPatches:
       - |
-        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:5000"]
-          endpoint = ["http://registry:5000"]
+        [plugins.'io.containerd.cri.v1.images'.registry]
+          config_path = '/etc/containerd/hosts'
     ''')
     # create the cluster.
     args = [
@@ -197,6 +215,20 @@ class Kind(AnsibleModule):
     if result.returncode:
       raise Exception(f"failed to create the kind cluster with exit code {result.returncode}.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}")
     self._wait_for_kubernetes(25*60)
+    # configure containerd to use the local registry.
+    container = self._get_container()
+    if not container:
+      raise Exception(f"failed to get the kind cluster container")
+    (exit_code, output) = container.exec_run(['bash', '-euc', textwrap.dedent(f'''\
+    d='/etc/containerd/hosts/localhost_5000_'
+    install -d "$d"
+    cat >"$d/hosts.toml" <<'EOF'
+    [host.'http://registry:5000']
+    capabilities = ['pull', 'resolve']
+    EOF
+    ''')])
+    if exit_code:
+      raise Exception(f"failed to configure containerd to use the local registry with exit code {exit_code}.\noutput:\n{output}")
     # document the local registry.
     # see https://github.com/kubernetes/enhancements/tree/master/keps/sig-cluster-lifecycle/generic/1755-communicating-a-local-registry
     kubernetes_client = kubernetes.client.CoreV1Api(self._create_kubernetes_api_client())
