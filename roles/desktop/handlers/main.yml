@@ -1,13 +1,10 @@
 - name: Reboot
   ansible.builtin.reboot:
 
-- name: Restart xrdp
-  ansible.builtin.systemd:
-    name: '{{ item }}'
+- name: Restart gnome-remote-desktop
+  ansible.builtin.systemd_service:
+    name: gnome-remote-desktop
     state: restarted
-  loop:
-    - xrdp
-    - xrdp-sesman
 
 - name: Restart netbird
   async: "{{ '15m' | community.general.to_seconds | int }}"

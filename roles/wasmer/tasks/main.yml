@@ -1,6 +1,6 @@
 - name: Install wasmer dependencies
   ansible.builtin.apt:
-    name: libtinfo5
+    name: libtinfo6
 
 - name: Install wasmer
   become_user: '{{ ansible_user }}'

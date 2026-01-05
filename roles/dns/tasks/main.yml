@@ -1,4 +1,17 @@
-- name: Configure the system-networkd log level
+- name: Configure systemd-networkd-wait-online for eth0
+  block:
+    - name: Enable systemd-networkd-wait-online@eth0
+      ansible.builtin.systemd_service:
+        name: systemd-networkd-wait-online@eth0
+        enabled: true
+        state: started
+    - name: Disable systemd-networkd-wait-online
+      ansible.builtin.systemd_service:
+        name: systemd-networkd-wait-online
+        enabled: false
+        state: stopped
+
+- name: Configure system-networkd
   block:
     - name: Create the systemd-networkd.service.d directory
       ansible.builtin.file:
@@ -27,25 +40,29 @@
         daemon_reload: true
       when: dns_state_set.changed or dns_state_unset.changed
 
-- name: Create the dns0 bridge
+- name: Create the dns0 network interface
   block:
-    - name: Create the dns0 bridge device
+    - name: Create the dns0 network interface device
       ansible.builtin.copy:
         content: |
           [NetDev]
           Name=dns0
-          Kind=bridge
-        dest: /etc/systemd/network/dns0.netdev
+          Kind=tap
+        dest: /etc/systemd/network/10-dns0.netdev
         mode: 0444
-    - name: Assign the dns0 bridge device IP address
+    - name: Assign the dns0 network interface device IP address
       ansible.builtin.copy:
         content: |
           [Match]
           Name=dns0
+
           [Network]
           Address={{ dns_local_dns_server }}/24
           ConfigureWithoutCarrier=true
-        dest: /etc/systemd/network/dns0.network
+
+          [Link]
+          RequiredForOnline=routable
+        dest: /etc/systemd/network/10-dns0.network
         mode: 0444
       register: dns_assign_address
     - name: Restart systemd-networkd
@@ -68,13 +85,6 @@
   ansible.builtin.apt:
     name: dnsmasq
 
-- name: Disable the systemd-resolved host dns resolver
-  ansible.builtin.systemd:
-    name: systemd-resolved
-    masked: true
-    enabled: false
-    state: stopped
-
 - name: Configure dnsmasq as the host dns resolver
   block:
     - name: Configure dnsmasq
@@ -94,3 +104,30 @@
           nameserver {{ dns_local_dns_server }}
         dest: /etc/resolv.conf
         mode: 0444
+      register: dns_resolv_conf
+    - name: Install resolved.conf.d directory
+      ansible.builtin.file:
+        name: /etc/systemd/resolved.conf.d
+        state: directory
+        mode: 0755
+    - name: Configure dnsmasq as the systemd-resolved dns resolver
+      ansible.builtin.copy:
+        content: |
+          [Resolve]
+          DNS={{ dns_local_dns_server }}
+          Domains=~.
+        dest: /etc/systemd/resolved.conf.d/dnsmasq.conf
+        mode: 0444
+      register: dns_resolved_conf
+    - name: Enable the systemd-resolved host dns resolver
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        masked: false
+        enabled: true
+        state: started
+    - name: Restart systemd-resolved
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted
+        daemon_reload: true
+      when: dns_resolv_conf.changed or dns_resolved_conf.changed

@@ -1,4 +1,4 @@
-# Netherlands Macarne mirror.
+# Netherlands datapacket mirror.
 # see https://launchpad.net/ubuntu/+archivemirrors
-# see https://launchpad.net/ubuntu/+mirror/mirror.ams.macarne.com-archive
-upgrade_ubuntu_apt_sources_url: https://mirror.ams.macarne.com/ubuntu
+# see https://launchpad.net/ubuntu/+mirror/mirror.nl.datapacket.com-archive
+upgrade_ubuntu_apt_sources_url: https://mirror.nl.datapacket.com/ubuntu

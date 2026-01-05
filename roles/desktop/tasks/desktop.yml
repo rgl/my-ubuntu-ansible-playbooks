@@ -1,17 +1,17 @@
 - name: Install minimal desktop
   ansible.builtin.apt:
     name: ubuntu-desktop-minimal
-    install_recommends: true
   notify: Reboot
 
-- name: Install xrdp
-  ansible.builtin.include_tasks: xrdp.yml
-
-- name: Disable Gnome Initial Setup
+- name: Uninstall Gnome Initial Setup
   # see https://gitlab.gnome.org/GNOME/gnome-initial-setup
   ansible.builtin.apt:
     name: gnome-initial-setup
+    purge: true
     state: absent
+
+- name: Configure Gnome Remote Desktop Remote Login
+  ansible.builtin.include_tasks: gnome_remote_desktop_remote_login.yml
 
 - name: Install community.general.dconf module dependencies
   ansible.builtin.apt:
@@ -93,7 +93,7 @@
     - name: Set picture-uri-dark
       community.general.dconf:
         key: /org/gnome/desktop/background/picture-uri-dark
-        value: "'file:///usr/share/backgrounds/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg'"
+        value: "'file:///usr/share/backgrounds/Northan_lights_by_mizuno.webp'"
     - name: Set primary-color
       community.general.dconf:
         key: /org/gnome/desktop/background/primary-color
@@ -144,21 +144,25 @@
       community.general.dconf:
         key: /org/gnome/shell/extensions/dash-to-panel/isolate-monitors
         value: 'true'
+    - name: Disable Ubuntu Dock
+      community.general.dconf:
+        key: /org/gnome/shell/disabled-extensions
+        value: "['ubuntu-dock@ubuntu.com']"
 
-- name: Install Sensory Perception
+- name: Install Vitals
   become: false
   when: ansible_virtualization_role == 'host'
   block:
-    - name: Install Sensory Perception
+    - name: Install Vitals
       # noqa fqcn[action]
       gnome_extension:
-        # see https://extensions.gnome.org/extension/1145/sensory-perception/
-        # see https://github.com/HarlemSquirrel/gnome-shell-extension-sensory-perception
-        name: sensory-perception@HarlemSquirrel.github.io
-    - name: Show the maximum temperature
+        # see https://extensions.gnome.org/extension/1460/vitals/
+        # see https://github.com/corecoding/Vitals
+        name: Vitals@CoreCoding.com
+    - name: Configure Vitals
       community.general.dconf:
-        key: /org/gnome/shell/extensions/sensory-perception/main-sensor
-        value: "'Maximum'"
+        key: /org/gnome/shell/extensions/vitals/hot-sensors
+        value: "['_processor_usage_', '_memory_usage_', '__temperature_max__']"
 
 - name: Set the user face picture
   block:

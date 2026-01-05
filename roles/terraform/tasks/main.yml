@@ -24,8 +24,8 @@
 - name: Add the hashicorp repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see Ubuntu Jammy 22.04: https://apt.releases.hashicorp.com/dists/jammy/Release
-    # see Ubuntu Jammy 22.04: https://apt.releases.hashicorp.com/dists/jammy/main/binary-amd64/Packages
+    # see Ubuntu Noble Numbat 24.04: https://apt.releases.hashicorp.com/dists/noble/Release
+    # see Ubuntu Noble Numbat 24.04: https://apt.releases.hashicorp.com/dists/noble/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/apt.releases.hashicorp.com.asc]

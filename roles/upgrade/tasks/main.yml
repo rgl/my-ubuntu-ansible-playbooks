@@ -54,6 +54,22 @@
         state: directory
         mode: 0755
       loop: "{{ upgrade_apt_update_cache_apt_lists_directories }}"
+    - name: Add Ubuntu apt lists
+      ansible.builtin.copy:
+        content: |
+          Types: deb
+          URIs: http://nl.archive.ubuntu.com/ubuntu
+          Suites: {{ ansible_distribution_release }} {{ ansible_distribution_release }}-updates {{ ansible_distribution_release }}-backports
+          Components: main restricted universe multiverse
+          Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+          Types: deb
+          URIs: http://security.ubuntu.com/ubuntu/
+          Suites: {{ ansible_distribution_release }}-security
+          Components: main restricted universe multiverse
+          Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+        dest: /etc/apt/sources.list.d/ubuntu.sources
+        mode: 0444
     - name: Update cache
       ansible.builtin.apt:
         update_cache: true
@@ -81,10 +97,6 @@
       when: >
         upgrade_default_ubuntu_apt_sources.changed
         or upgrade_ubuntu_apt_sources.changed
-
-- name: Install the HWE kernel
-  ansible.builtin.apt:
-    name: linux-generic-hwe-{{ ansible_distribution_version }}
 
 - name: Upgrade the system
   ansible.builtin.apt:

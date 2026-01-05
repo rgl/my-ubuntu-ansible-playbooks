@@ -25,8 +25,8 @@
 - name: Add the PowerShell repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see https://packages.microsoft.com/repos/microsoft-ubuntu-jammy-prod/dists/jammy/Release
-    # see https://packages.microsoft.com/repos/microsoft-ubuntu-jammy-prod/dists/jammy/main/binary-amd64/Packages
+    # see Ubuntu Noble Numbat 24.04: https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod/dists/noble/Release
+    # see Ubuntu Noble Numbat 24.04: https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod/dists/noble/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.com.asc]

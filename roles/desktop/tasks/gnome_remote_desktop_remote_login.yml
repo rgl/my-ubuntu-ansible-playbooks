@@ -1,0 +1,40 @@
+# see https://gitlab.gnome.org/GNOME/gnome-remote-desktop
+# see grdctl --system status --show-credentials
+# see journalctl -u gnome-remote-desktop -f
+
+- name: Configure Gnome Remote Desktop Remote Login
+  become: true
+  become_user: gnome-remote-desktop
+  notify: Restart gnome-remote-desktop
+  block:
+    - name: Create Gnome Remote Desktop Remote Login certificate
+      self_signed_certificate:
+        crt_path: ~/.local/share/gnome-remote-desktop/tls.crt
+        key_path: ~/.local/share/gnome-remote-desktop/tls.key
+        expiration_days: 365
+      register: desktop_gnome_remote_desktop_certificate
+
+    - name: Set Gnome Remote Desktop Remote Login credentials
+      ansible.builtin.copy:
+        content: |
+          [RDP]
+          credentials={'username': <'rdp'>, 'password': <'{{ desktop_rdp_password }}'>}
+        dest: ~/.local/share/gnome-remote-desktop/credentials.ini
+        mode: 0600
+
+    - name: Configure Gnome Remote Desktop Remote Login
+      ansible.builtin.copy:
+        content: |
+          [RDP]
+          tls-key={{ desktop_gnome_remote_desktop_certificate.key_path }}
+          tls-cert={{ desktop_gnome_remote_desktop_certificate.crt_path }}
+          enabled=true
+        dest: ~/.local/share/gnome-remote-desktop/grd.conf
+        mode: 0644
+
+- name: Enable the gnome-remote-desktop service
+  ansible.builtin.systemd_service:
+    name: gnome-remote-desktop
+    daemon_reload: true
+    enabled: true
+  notify: Restart gnome-remote-desktop

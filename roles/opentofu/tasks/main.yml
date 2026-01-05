@@ -22,8 +22,8 @@
 - name: Add the OpenTofu repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see Ubuntu Jammy 22.04: https://packages.opentofu.org/opentofu/tofu/any/dists/any/Release
-    # see Ubuntu Jammy 22.04: https://packages.opentofu.org/opentofu/tofu/any/dists/any/main/binary-amd64/Packages
+    # see Ubuntu Noble Numbat 24.04: https://packages.opentofu.org/opentofu/tofu/any/dists/any/Release
+    # see Ubuntu Noble Numbat 24.04: https://packages.opentofu.org/opentofu/tofu/any/dists/any/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/get.opentofu.org.gpg,/etc/apt/keyrings/packages.opentofu.org.asc]

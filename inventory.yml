@@ -8,3 +8,4 @@ all:
     ansible_user: vagrant
     ansible_password: vagrant
     ansible_sudo_pass: '{{ ansible_password }}'
+    desktop_rdp_password: '{{ ansible_password }}'

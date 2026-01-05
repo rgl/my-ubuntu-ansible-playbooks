@@ -20,8 +20,8 @@
     - name: Add the dotnet/backports ppa apt repository
       ansible.builtin.apt_repository:
         # see https://wiki.debian.org/DebianRepository/Format
-        # see Ubuntu Jammy 22.04: https://ppa.launchpadcontent.net/dotnet/backports/ubuntu/dists/jammy/Release
-        # see Ubuntu Jammy 22.04: https://ppa.launchpadcontent.net/dotnet/backports/ubuntu/dists/jammy/main/binary-amd64/Packages.gz
+        # see Ubuntu Noble Numbat 24.04: https://ppa.launchpadcontent.net/dotnet/backports/ubuntu/dists/noble/Release
+        # see Ubuntu Noble Numbat 24.04: https://ppa.launchpadcontent.net/dotnet/backports/ubuntu/dists/noble/main/binary-amd64/Packages.gz
         repo: >
           deb
           [arch=amd64 signed-by=/etc/apt/keyrings/{{ dotnet_sdk_ppa_name }}.asc]
@@ -40,7 +40,7 @@
 # see when there is a mixup between the distribution packages and the microsoft
 #     ones, before installing again, remove all the installed packages with:
 #       sudo apt-get remove --purge 'dotnet*' 'aspnet*' 'netstandard*'
-# see http://manpages.ubuntu.com/manpages/jammy/en/man5/apt_preferences.5.html
+# see http://manpages.ubuntu.com/manpages/noble/en/man5/apt_preferences.5.html
 - name: Install dotnet-sdk 10.0
   ansible.builtin.apt:
     name: dotnet-sdk-10.0

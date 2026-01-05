@@ -4,7 +4,7 @@
 
 This is My Ubuntu Ansible Playbooks Playground.
 
-This targets Ubuntu 22.04 (Jammy Jellyfish).
+This targets Ubuntu 24.04 (Noble Numbat).
 
 ## Disclaimer
 

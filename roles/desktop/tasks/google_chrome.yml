@@ -9,8 +9,8 @@
 - name: Add the Google Chrome repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see Ubuntu Jammy 22.04: http://dl.google.com/linux/chrome/deb/dists/stable/Release
-    # see Ubuntu Jammy 22.04: http://dl.google.com/linux/chrome/deb/dists/stable/main/binary-amd64/Packages
+    # see Ubuntu Noble Numbat 24.04: http://dl.google.com/linux/chrome/deb/dists/stable/Release
+    # see Ubuntu Noble Numbat 24.04: http://dl.google.com/linux/chrome/deb/dists/stable/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/dl.google.com.chrome.asc]
