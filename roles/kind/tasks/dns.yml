@@ -11,5 +11,7 @@
   ansible.builtin.meta: flush_handlers
 
 - name: Start cluster
+  become: true
+  become_user: '{{ kind_provision_username }}'
   kind_start:
     name: '{{ kind_cluster_name }}'
