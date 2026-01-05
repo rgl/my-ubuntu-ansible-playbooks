@@ -92,36 +92,44 @@ class Kind(AnsibleModule):
 
   def main(self):
     name = self.params['name']
-    container = self._get_container()
+    container_name = f'{name}-control-plane'
+    container = self._get_container(container_name)
     if container:
       changed = self._start_cluster(container)
     else:
       changed = self._create_cluster()
-      container = self._get_container()
+      container = self._get_container(container_name)
     if self._set_auto_start(container):
       changed = True
     ip_address = self._get_ip_address(container)
     network = self.docker_client.networks.get(name)
+    # ensure the container always uses the same ip address when restarted.
+    if self._set_ip_address(network, container, ip_address):
+      changed = True
     # choose the first ipv4 network.
     network_cidr = [n['Subnet'] for n in network.attrs['IPAM']['Config'] if '.' in n['Subnet']][0]
-    # connect the registry container to the kind network.
+    # connect the registry container to the kind network and ensure the
+    # container always uses the same ip address when restarted.
     # NB this is equivalent to: docker network connect kind registry
+    registry_container_name = 'registry'
     registry_connected_to_network = False
     for c in network.containers:
-      if c.name == 'registry':
+      if c.name == registry_container_name:
         registry_connected_to_network = True
         break
     if not registry_connected_to_network:
-      network.connect('registry')
+      network.connect(registry_container_name)
+      changed = True
+    registry_container = self._get_container(registry_container_name)
+    registry_ip_address = self._get_ip_address(registry_container)
+    if self._set_ip_address(network, registry_container, registry_ip_address):
       changed = True
     self.exit_json(
       changed=changed,
       ip_address=ip_address,
       network_cidr=network_cidr)
 
-  def _get_container(self):
-    name = self.params['name']
-    container_name = f'{name}-control-plane'
+  def _get_container(self, container_name):
     containers = self.docker_client.containers.list(all=True, filters={'name':container_name})
     if len(containers) > 1:
       raise Exception(f'found more than one container named {container_name}')
@@ -137,7 +145,15 @@ class Kind(AnsibleModule):
       if ip_address:
         return ip_address
       time.sleep(1)
-      container = self._get_container()
+      container = self._get_container(container.name)
+
+  def _set_ip_address(self, network, container, ip_address):
+    config = container.attrs['NetworkSettings']['Networks'][network.name]
+    if not config.get('IPAMConfig', None) or config['IPAMConfig']['IPv4Address'] != ip_address:
+      network.disconnect(container.name)
+      network.connect(container.name, ipv4_address=ip_address)
+      return True
+    return False
 
   def _set_auto_start(self, container):
     # see https://github.com/kubernetes-sigs/kind/blob/v0.31.0/pkg/cluster/internal/providers/docker/provision.go#L142-L166
@@ -167,6 +183,7 @@ class Kind(AnsibleModule):
   def _create_cluster(self):
     name = self.params['name']
     node_image_version = self.params['node_image_version']
+    container_name = f'{name}-control-plane'
     # create the cluster configuration.
     # see https://kind.sigs.k8s.io/docs/user/configuration/
     # see https://kind.sigs.k8s.io/docs/user/local-registry/
@@ -216,7 +233,7 @@ class Kind(AnsibleModule):
       raise Exception(f"failed to create the kind cluster with exit code {result.returncode}.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}")
     self._wait_for_kubernetes(25*60)
     # configure containerd to use the local registry.
-    container = self._get_container()
+    container = self._get_container(container_name)
     if not container:
       raise Exception(f"failed to get the kind cluster container")
     (exit_code, output) = container.exec_run(['bash', '-euc', textwrap.dedent(f'''\
