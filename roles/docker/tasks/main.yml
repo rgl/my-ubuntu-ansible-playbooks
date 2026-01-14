@@ -27,6 +27,7 @@
     state: present
 
 # see https://github.com/moby/moby/releases
+# see https://github.com/containerd/containerd/releases
 # NB execute apt-cache madison docker-ce to known the available versions.
 - name: Install docker
   block:
@@ -35,6 +36,7 @@
         name:
           - docker-ce=5:{{ docker_version }}*
           - docker-ce-cli=5:{{ docker_version }}*
+          - containerd.io={{ docker_containerd_version }}*
         allow_change_held_packages: true
         state: present
     - name: Pin docker
@@ -44,6 +46,7 @@
       loop:
         - docker-ce
         - docker-ce-cli
+        - containerd.io
 
 - name: Install docker directory
   ansible.builtin.file:
