@@ -7,6 +7,7 @@
   # see https://artifacthub.io/packages/helm/traefik/traefik
   # see https://github.com/traefik/traefik-helm-chart
   # see https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+  # see https://github.com/traefik/traefik-helm-chart/blob/master/traefik/Changelog.md
   kubernetes.core.helm:
     name: kube-traefik
     chart_ref: traefik/traefik
@@ -18,11 +19,6 @@
       # configure the service.
       service:
         type: LoadBalancer
-      # configure the ports.
-      ports:
-        websecure:
-          tls:
-            enabled: true
       # configure the tls options.
       # see https://doc.traefik.io/traefik/https/tls/#tls-options
       # see https://wiki.mozilla.org/Security/Server_Side_TLS
@@ -41,5 +37,8 @@
         kubernetesIngress:
           publishedService:
             enabled: true
-      # disable the telemetry (this is done by setting globalArguments)
-      globalArguments: []
+      # disable the telemetry.
+      # see https://doc.traefik.io/traefik/contributing/data-collection/
+      global:
+        checkNewVersion: false
+        sendAnonymousUsage: false
