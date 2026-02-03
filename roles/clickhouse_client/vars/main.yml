@@ -1,4 +1,4 @@
 # see https://github.com/ClickHouse/ClickHouse/releases
 # NB execute apt-cache madison clickhouse to known the available versions.
 # renovate: datasource=github-releases depName=ClickHouse/ClickHouse versioning=loose extractVersion=v(?<version>.+)-lts
-clickhouse_client_version: '25.8.15.35'
+clickhouse_client_version: '25.8.16.34'
