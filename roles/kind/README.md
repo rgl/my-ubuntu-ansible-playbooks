@@ -1,7 +1,7 @@
 # Applications
 
 * [Kubernetes](#kubernetes)
-* [Kubernetes Dashboard](#kubernetes-dashboard)
+* [Headlamp](#headlamp)
 * [Gitea](#gitea)
 * [Argo CD](#argo-cd)
 * [pgAdmin](#pgadmin)
@@ -36,12 +36,12 @@ kubectl run hello-world \
 crane delete localhost:5000/hello-world:latest
 ```
 
-## Kubernetes Dashboard
+## Headlamp
 
-Use the Kubernetes Dashboard application with the Token from the
+Use the Headlamp application with the ID token from the
 `~/.kube/kind-admin-token.txt` file at:
 
-<https://kubernetes-dashboard.kind.test>
+<https://headlamp.kind.test>
 
 ## Gitea
 

@@ -40,9 +40,9 @@ kind_reloader_chart_version: '2.2.7' # app version: 1.4.12
 # renovate: datasource=helm depName=traefik registryUrl=https://helm.traefik.io/traefik
 kind_traefik_chart_version: '39.0.0' # app version: 3.6.7
 
-# see https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard
-# renovate: datasource=helm depName=kubernetes-dashboard registryUrl=https://kubernetes.github.io/dashboard
-kind_kubernetes_dashboard_chart_version: '7.14.0' # app version: 7.14.0
+# see https://artifacthub.io/packages/helm/headlamp/headlamp
+# renovate: datasource=helm depName=headlamp registryUrl=https://kubernetes-sigs.github.io/headlamp
+kind_headlamp_chart_version: '0.39.0' # app version: 0.39.0
 
 # see https://artifacthub.io/packages/helm/external-dns/external-dns
 # renovate: datasource=helm depName=external-dns registryUrl=https://kubernetes-sigs.github.io/external-dns

@@ -37,8 +37,8 @@
       ansible.builtin.include_tasks: gitea.yml
     - name: Install Argo CD
       ansible.builtin.include_tasks: argocd.yml
-    - name: Install kubernetes-dashboard
-      ansible.builtin.include_tasks: kubernetes-dashboard.yml
+    - name: Install Headlamp
+      ansible.builtin.include_tasks: headlamp.yml
     - name: Install PostgreSQL
       ansible.builtin.include_tasks: postgresql.yml
     - name: Install pgAdmin

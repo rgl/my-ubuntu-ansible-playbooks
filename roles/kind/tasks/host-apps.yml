@@ -2,7 +2,7 @@
   block:
     - name: Get the admin user Secret
       kubernetes.core.k8s_info:
-        namespace: kube-dashboard
+        namespace: kube-headlamp
         api_version: v1
         kind: Secret
         name: admin
