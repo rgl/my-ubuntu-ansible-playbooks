@@ -170,7 +170,8 @@
         - ingress
       domainFilters:
         - '{{ kind_cluster_name }}.{{ kind_cluster_domain }}'
-      provider: pdns
+      provider:
+        name: pdns
       env:
         - name: EXTERNAL_DNS_PDNS_API_KEY
           valueFrom:
