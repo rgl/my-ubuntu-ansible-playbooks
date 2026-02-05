@@ -42,7 +42,7 @@ kind_traefik_chart_version: '39.0.0' # app version: 3.6.7
 
 # see https://artifacthub.io/packages/helm/headlamp/headlamp
 # renovate: datasource=helm depName=headlamp registryUrl=https://kubernetes-sigs.github.io/headlamp
-kind_headlamp_chart_version: '0.39.0' # app version: 0.39.0
+kind_headlamp_chart_version: '0.40.0' # app version: 0.40.0
 
 # see https://artifacthub.io/packages/helm/external-dns/external-dns
 # renovate: datasource=helm depName=external-dns registryUrl=https://kubernetes-sigs.github.io/external-dns
