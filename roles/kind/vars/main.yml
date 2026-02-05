@@ -66,7 +66,7 @@ kind_argocd_chart_version: '9.4.0' # app version: 3.3.0
 # see https://artifacthub.io/packages/helm/cloudnative-pg/cloudnative-pg
 # see https://github.com/cloudnative-pg/charts/tree/main/charts/cloudnative-pg
 # renovate: datasource=helm depName=cloudnative-pg registryUrl=https://cloudnative-pg.github.io/charts
-kind_cnpg_operator_chart_version: '0.27.0' # app version: 1.28.0
+kind_cnpg_operator_chart_version: '0.27.1' # app version: 1.28.1
 
 # see https://artifacthub.io/packages/helm/cloudnative-pg/cluster
 # see https://github.com/cloudnative-pg/charts/tree/main/charts/cluster
