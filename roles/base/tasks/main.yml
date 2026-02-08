@@ -118,6 +118,9 @@
 - name: Install uv
   ansible.builtin.include_tasks: uv.yml
 
+- name: Install upx
+  ansible.builtin.include_tasks: upx.yml
+
 - name: Install lm-sensors
   when: ansible_virtualization_role == 'host'
   block:
