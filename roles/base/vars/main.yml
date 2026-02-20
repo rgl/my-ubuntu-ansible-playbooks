@@ -10,7 +10,7 @@ base_git_filter_repo_version: '2.47.0'
 
 # see https://github.com/astral-sh/uv/releases
 # renovate: datasource=github-releases depName=astral-sh/uv
-base_uv_version: '0.10.2'
+base_uv_version: '0.10.4'
 
 # see https://github.com/upx/upx/releases
 # renovate: datasource=github-releases depName=upx/upx
