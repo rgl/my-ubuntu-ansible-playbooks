@@ -75,6 +75,13 @@
     force: true
     state: link
 
+# see https://github.com/hashicorp/vagrant/pull/13758
+- name: Patch vagrant SSH
+  ansible.posix.patch:
+    src: vagrant-ssh-13758.patch
+    basedir: /opt/vagrant/embedded/gems/gems/vagrant-{{ vagrant_version }}
+    strip: 1
+
 - name: Add support for NFS shared folders
   block:
     - name: Install NFS server

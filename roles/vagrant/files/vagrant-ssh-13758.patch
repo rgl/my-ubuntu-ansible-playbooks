@@ -1,0 +1,31 @@
+# wget -qO vagrant-ssh-13758.patch https://github.com/hashicorp/vagrant/pull/13758.patch
+# see https://github.com/hashicorp/vagrant/pull/13758
+From ee2a1474e81e2f2552e28b16d50e772488816038 Mon Sep 17 00:00:00 2001
+From: Kyrylo Yatsenko <hedrok@gmail.com>
+Date: Tue, 9 Dec 2025 09:44:36 +0200
+Subject: [PATCH] Fix issue with odd number of arguments for Hash
+
+In case `sshd -T | grep key` returns some lines without spaces
+Hash creation in communicator.rb failed with ArgumentError
+"odd number of arguments for Hash".
+
+As only "pubkeyacceptedalgorithms", "pubkeyacceptedkeytypes",
+"hostkeyalgorithms" are needed, change to ignore lines that have
+no space.
+---
+ plugins/communicators/ssh/communicator.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/communicators/ssh/communicator.rb b/plugins/communicators/ssh/communicator.rb
+index 5c9cd1e9eea..cd9e58df612 100644
+--- a/plugins/communicators/ssh/communicator.rb
++++ b/plugins/communicators/ssh/communicator.rb
+@@ -871,7 +871,7 @@ def supported_key_types
+         end
+ 
+         # Convert the options into a Hash for easy access
+-        opts = Hash[*list.split("\n").map{|line| line.split(" ", 2)}.flatten]
++        opts = Hash[*list.split("\n").filter_map{|line| line.split(" ", 2) if line.include? " "}.flatten]
+ 
+         # Define the option names to check for in preferred order
+         # NOTE: pubkeyacceptedkeytypes has been renamed to pubkeyacceptedalgorithms
