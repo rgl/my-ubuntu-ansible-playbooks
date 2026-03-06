@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/upx ]; then
-    # e.g. upx 5.1.0
+    # e.g. upx 5.1.1
     actual_version="$(/usr/local/bin/upx --version | perl -ne '/upx (\d+(\.\d+)+)/ && print $1')"
     if [ "$actual_version" == "$UPX_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
