@@ -91,6 +91,8 @@
       - ncdu
       - tree
       - screen
+      # udf creation tools.
+      - udftools
       # iso creation tools.
       # NB xorriso is compatible with genisoimage and mkisofs and is also available in msys2 (windows).
       - xorriso
