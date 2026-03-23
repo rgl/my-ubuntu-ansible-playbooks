@@ -1,14 +1,13 @@
 - name: Opt-out of telemetry
-  # see https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_telemetry?view=powershell-7.4
+  # see https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_telemetry?view=powershell-7.6
   ansible.builtin.copy:
     content: |
       export POWERSHELL_TELEMETRY_OPTOUT=1
-      export POWERSHELL_UPDATECHECK=Off
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
     mode: 0444
 
 - name: Disable update notifications
-  # see https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.4
+  # see https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.6
   ansible.builtin.copy:
     content: |
       export POWERSHELL_UPDATECHECK='Off'
@@ -36,7 +35,7 @@
     state: present
 
 # see https://github.com/PowerShell/PowerShell/releases
-# see https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.4#installation-via-package-repository
+# see https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.6#installation-via-package-repository
 - name: Install PowerShell
   block:
     - name: Install powershell
