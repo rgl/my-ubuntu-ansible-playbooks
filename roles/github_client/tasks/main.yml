@@ -1,3 +1,11 @@
+# see https://cli.github.com/telemetry
+- name: Opt-out of telemetry
+  ansible.builtin.copy:
+    content: |
+      export DO_NOT_TRACK=1
+    dest: /etc/profile.d/do-not-track.sh
+    mode: 0444
+
 - name: Ensure apt-get can use https repositories
   ansible.builtin.apt:
     name:

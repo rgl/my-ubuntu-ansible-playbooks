@@ -3,7 +3,7 @@
   ansible.builtin.copy:
     content: |
       export DO_NOT_TRACK=1
-    dest: /etc/profile.d/opt-out-bun-telemetry.sh
+    dest: /etc/profile.d/do-not-track.sh
     mode: 0444
 
 - name: Install bun
