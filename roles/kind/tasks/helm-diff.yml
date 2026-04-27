@@ -5,3 +5,4 @@
   kubernetes.core.helm_plugin:
     plugin_path: https://github.com/databus23/helm-diff
     plugin_version: '{{ kind_helm_diff_version }}'
+    verify: false
