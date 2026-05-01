@@ -46,7 +46,7 @@ kind_headlamp_chart_version: '0.41.0' # app version: 0.41.0
 
 # see https://artifacthub.io/packages/helm/external-dns/external-dns
 # renovate: datasource=helm depName=external-dns registryUrl=https://kubernetes-sigs.github.io/external-dns
-kind_external_dns_chart_version: '1.20.0' # app version: 0.20.0
+kind_external_dns_chart_version: '1.21.1' # app version: 0.21.0
 
 # see https://hub.docker.com/r/powerdns/pdns-auth-48
 # see https://hub.docker.com/search?q=pdns-auth-
