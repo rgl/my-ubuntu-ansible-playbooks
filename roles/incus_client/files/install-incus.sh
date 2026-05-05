@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /usr/local/bin/incus ]; then
-    # e.g. 6.16
+    # e.g. 7.0
     # NB incus --version only outputs the major and minor version numbers.
     actual_version="$(/usr/local/bin/incus --version | perl -ne '/^([^ +]+)/ && print $1').0"
     if [ "$actual_version" == "$INCUS_VERSION" ]; then
