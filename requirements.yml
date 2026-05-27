@@ -10,7 +10,7 @@ collections:
     version: 13.0.1
   # see https://galaxy.ansible.com/community/docker
   - name: community.docker
-    version: 5.2.0
+    version: 5.2.1
   # see https://galaxy.ansible.com/kubernetes/core
   - name: kubernetes.core
     version: 6.4.0
