@@ -21,6 +21,8 @@
       speaker:
         frr:
           enabled: false
+      frrk8s:
+        enabled: false
 
 - name: Configure metallb
   kubernetes.core.k8s:
