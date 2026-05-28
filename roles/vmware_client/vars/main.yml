@@ -9,4 +9,4 @@ vmware_client_ovftool_version: '4.6.3.24031167'
 # see https://www.powershellgallery.com/packages/VCF.PowerCLI
 # see https://developer.broadcom.com/powercli
 # renovate: datasource=nuget:powershellgallery depName=VCF.PowerCLI
-vmware_client_powercli_version: '9.0.0.24798382'
+vmware_client_powercli_version: '9.1.0.25380678'
