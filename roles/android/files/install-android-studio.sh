@@ -14,7 +14,7 @@ if [ -f "$ANDROID_STUDIO_COOKIE_PATH" ]; then
 fi
 
 # download and install.
-url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/$ANDROID_STUDIO_VERSION/android-studio-$ANDROID_STUDIO_VERSION-linux.tar.gz"
+url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/$ANDROID_STUDIO_VERSION/android-studio-$ANDROID_STUDIO_VERSION_NAME-linux.tar.gz"
 rm -rf "$ANDROID_STUDIO_PATH"
 install -d "$ANDROID_STUDIO_PATH"
 wget -qO- "$url" | tar xzf - -C "$ANDROID_STUDIO_PATH" --strip-components 1

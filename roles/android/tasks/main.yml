@@ -28,6 +28,7 @@
         cmd: "{{ lookup('file', 'install-android-studio.sh') }}"
       environment:
         ANDROID_STUDIO_VERSION: "{{ android_studio_version }}"
+        ANDROID_STUDIO_VERSION_NAME: "{{ android_studio_version_name }}"
       register: android_result
       changed_when: "'ANSIBLE CHANGED NO' not in android_result.stdout_lines"
     - name: Install android-studio symlink

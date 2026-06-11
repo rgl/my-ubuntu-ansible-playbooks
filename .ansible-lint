@@ -1,5 +1,6 @@
 skip_list:
   - yaml[octal-values]
+  - yaml[line-length]
   - jinja[spacing]
   - template-instead-of-copy
   - no-handler

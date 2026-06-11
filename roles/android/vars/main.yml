@@ -29,4 +29,5 @@ android_sdk_packages:
   - system-images;android-36;google_apis;x86_64
 
 # see https://developer.android.com/studio/archive
-android_studio_version: '2025.1.3.7'
+android_studio_version: '2026.1.1.8'
+android_studio_version_name: 'quail1'
