@@ -1,6 +1,17 @@
 # see https://developer.android.com/studio#command-line-tools-only
+# see https://developer.android.com/studio/run/emulator-acceleration
 # see /opt/android-sdk/cmdline-tools/20.0/bin/sdkmanager --list
 # see /opt/android-sdk/cmdline-tools/20.0/bin/sdkmanager --list_installed
+# see /opt/android-sdk/cmdline-tools/20.0/bin/avdmanager list
+# see /opt/android-sdk/cmdline-tools/20.0/bin/avdmanager --verbose create avd --name Small_Phone --device small_phone --package 'system-images;android-30;google_apis;x86_64' --abi x86_64
+# see /opt/android-sdk/cmdline-tools/20.0/bin/avdmanager --verbose create avd --name Pixel_3a --device pixel_3a --package 'system-images;android-36;google_apis;x86_64' --abi x86_64
+# see /opt/android-sdk/cmdline-tools/20.0/bin/avdmanager list avd
+# see /opt/android-sdk/cmdline-tools/20.0/bin/avdmanager --verbose delete avd --name Small_Phone
+# see /opt/android-sdk/cmdline-tools/20.0/bin/avdmanager --verbose delete avd --name Pixel_3a
+# see /opt/android-sdk/emulator/emulator-check accel
+# see /opt/android-sdk/emulator/emulator -list-avds
+# see /opt/android-sdk/emulator/emulator -avd Small_Phone
+# see /opt/android-sdk/emulator/emulator -avd Pixel_3a
 android_sdk_cmdline_tools_build: '14742923'
 android_sdk_cmdline_tools_version: '20.0'
 android_sdk_packages:
