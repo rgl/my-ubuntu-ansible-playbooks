@@ -10,7 +10,7 @@ ANDROID_SDK_COOKIE_PATH="$ANDROID_SDK_PATH/.ansible-android-sdk.cookie"
 install='1'
 if [ -f "$ANDROID_SDK_COOKIE_PATH" ]; then
     actual_version="$(cat "$ANDROID_SDK_COOKIE_PATH")"
-    if [ "$actual_version" == "$ANDROID_SDK_CMDLINE_TOOLS_BUILD" ]; then
+    if [ "$actual_version" == "$ANDROID_SDK_CMDLINE_TOOLS_BUILD:$ANDROID_SDK_CMDLINE_TOOLS_VERSION" ]; then
         install='0'
     fi
 fi
@@ -27,7 +27,7 @@ if [ "$install" == '1' ]; then
         --sdk_root="$ANDROID_SDK_PATH" \
         --install "cmdline-tools;$ANDROID_SDK_CMDLINE_TOOLS_VERSION"
     rm -rf "$t"
-    echo -n "$ANDROID_SDK_CMDLINE_TOOLS_BUILD" >"$ANDROID_SDK_COOKIE_PATH"
+    echo -n "$ANDROID_SDK_CMDLINE_TOOLS_BUILD:$ANDROID_SDK_CMDLINE_TOOLS_VERSION" >"$ANDROID_SDK_COOKIE_PATH"
     echo 'ANSIBLE CHANGED YES'
 fi
 
