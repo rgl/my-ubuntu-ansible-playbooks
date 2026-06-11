@@ -15,13 +15,13 @@
 - name: Add the clickhouse repository
   ansible.builtin.apt_repository:
     # see https://wiki.debian.org/DebianRepository/Format
-    # see https://packages.clickhouse.com/deb/dists/stable/Release
-    # see https://packages.clickhouse.com/deb/dists/stable/main/binary-amd64/Packages
+    # see https://packages.clickhouse.com/deb/dists/lts/Release
+    # see https://packages.clickhouse.com/deb/dists/lts/main/binary-amd64/Packages
     repo: >
       deb
       [arch=amd64 signed-by=/etc/apt/keyrings/packages.clickhouse.com.asc]
       https://packages.clickhouse.com/deb
-      stable
+      lts
       main
 
 # see https://clickhouse.com/docs/en/install#install-from-deb-packages
