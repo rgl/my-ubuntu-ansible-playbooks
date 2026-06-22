@@ -1,4 +1,7 @@
 # see https://github.com/hashicorp/packer/releases
 # NB execute apt-cache madison packer to known the available versions.
-# renovate: datasource=github-releases depName=hashicorp/packer
-packer_version: '1.15.4'
+# NB before upgrading be aware of:
+#      https://github.com/hashicorp/packer/issues/13483
+#      https://github.com/hashicorp/packer-plugin-qemu/issues/246
+# renovate: datasource=github-releases depName=hashicorp/packer extractVersion=^v?(?<version>1\.14\.1)
+packer_version: '1.14.1'

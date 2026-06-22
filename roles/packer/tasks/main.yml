@@ -42,6 +42,7 @@
       ansible.builtin.apt:
         name: packer={{ packer_version }}-*
         allow_change_held_packages: true
+        allow_downgrade: true
     - name: Pin packer
       ansible.builtin.dpkg_selections:
         name: packer
