@@ -55,5 +55,6 @@
     - fido2
     - esptool
     - desktop
+    - scrcpy
     - android
     - projects
