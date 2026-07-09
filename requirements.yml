@@ -13,4 +13,4 @@ collections:
     version: 5.2.1
   # see https://galaxy.ansible.com/kubernetes/core
   - name: kubernetes.core
-    version: 6.4.0
+    version: 6.5.0
