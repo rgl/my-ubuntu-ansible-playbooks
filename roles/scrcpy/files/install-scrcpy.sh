@@ -3,7 +3,7 @@ set -euxo pipefail
 
 # bail when already installed.
 if [ -x /opt/scrcpy/scrcpy ]; then
-    # e.g. scrcpy 4.0 <https://github.com/Genymobile/scrcpy>
+    # e.g. scrcpy 4.1 <https://github.com/Genymobile/scrcpy>
     actual_version="$(/opt/scrcpy/scrcpy --version | perl -ne '/^scrcpy (.+?) / && print $1')"
     if [ "$actual_version" == "$SCRCPY_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'

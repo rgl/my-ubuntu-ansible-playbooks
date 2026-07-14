@@ -1,4 +1,4 @@
 # see https://github.com/Genymobile/scrcpy
 # see https://github.com/Genymobile/scrcpy/releases
 # renovate: datasource=github-releases depName=Genymobile/scrcpy
-scrcpy_version: '4.0'
+scrcpy_version: '4.1'
