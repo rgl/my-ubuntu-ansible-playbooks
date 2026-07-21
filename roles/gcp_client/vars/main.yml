@@ -1,5 +1,6 @@
-# see https://cloud.google.com/sdk/docs/install
-# see https://cloud.google.com/sdk/docs/downloads-versioned-archives
+# see https://docs.cloud.google.com/sdk/docs/install-sdk
+# see https://docs.cloud.google.com/sdk/docs/downloads-versioned-archives
+# see https://github.com/GoogleCloudPlatform/cloud-sdk-docker
 # NB execute apt-cache madison google-cloud-cli to known the available versions.
 # renovate: datasource=github-tags depName=GoogleCloudPlatform/cloud-sdk-docker
-gcp_client_gcloud_cli_version: '427.0.0'
+gcp_client_gcloud_cli_version: '576.0.0'
