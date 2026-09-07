@@ -1,9 +1,9 @@
 # see https://github.com/moby/moby/releases
-# renovate: datasource=github-releases depName=moby/moby extractVersion=^docker-v(?<version>.+)
+# renovate: datasource=deb:docker depName=docker-ce
 docker_version: '29.8.0'
 
 # see https://github.com/containerd/containerd/releases
-# renovate: datasource=github-releases depName=containerd/containerd
+# renovate: datasource=deb:docker depName=containerd.io
 docker_containerd_version: '2.3.4'
 
 # see https://github.com/docker/compose/releases
