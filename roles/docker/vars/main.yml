@@ -4,7 +4,7 @@ docker_version: '29.8.0'
 
 # see https://github.com/containerd/containerd/releases
 # renovate: datasource=deb:docker depName=containerd.io
-docker_containerd_version: '2.3.4'
+docker_containerd_version: '2.3.5'
 
 # see https://github.com/docker/compose/releases
 # renovate: datasource=github-releases depName=docker/compose
