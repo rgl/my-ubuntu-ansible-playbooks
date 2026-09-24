@@ -56,5 +56,6 @@
     - esptool
     - desktop
     - scrcpy
+    - scrcpy_gui
     - android
     - projects

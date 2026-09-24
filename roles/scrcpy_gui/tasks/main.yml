@@ -1,0 +1,15 @@
+- name: Check Scrcpy GUI installed version
+  ansible.builtin.command: dpkg-query -W -f='${Version}' scrcpy-gui
+  register: scrcpy_gui_info
+  failed_when: false
+  changed_when: false
+
+- name: Install Scrcpy GUI
+  ansible.builtin.apt:
+    deb: https://github.com/SimonAKing/scrcpy-gui/releases/download/v{{ scrcpy_gui_version }}/Scrcpy.GUI-{{ scrcpy_gui_version }}-linux-amd64.deb
+  when: >
+    (scrcpy_gui_info.stdout
+      | regex_replace('^[0-9]+:', '')
+      | regex_replace('~.*$', '')
+      | regex_replace('-[^-]+$', ''))
+    != scrcpy_gui_version

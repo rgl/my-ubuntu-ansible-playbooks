@@ -1,0 +1,3 @@
+# see https://github.com/SimonAKing/scrcpy-gui/releases
+# renovate: datasource=github-releases depName=SimonAKing/scrcpy-gui
+scrcpy_gui_version: '2.4.5'
