@@ -1,6 +1,6 @@
 # see https://github.com/moby/moby/releases
 # renovate: datasource=deb:docker depName=docker-ce
-docker_version: '29.8.1'
+docker_version: '29.8.2'
 
 # see https://github.com/containerd/containerd/releases
 # renovate: datasource=deb:docker depName=containerd.io
