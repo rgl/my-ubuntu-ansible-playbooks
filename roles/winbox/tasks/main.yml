@@ -1,0 +1,8 @@
+- name: Install WinBox
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-winbox.sh') }}"
+  environment:
+    WINBOX_VERSION: "{{ desktop_winbox_version }}"
+  register: desktop_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_result.stdout_lines"
