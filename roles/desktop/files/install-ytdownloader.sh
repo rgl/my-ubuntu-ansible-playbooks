@@ -2,12 +2,9 @@
 set -euxo pipefail
 
 # bail when already installed.
-if [ -r /usr/local/bin/ytdownloader ]; then
-    # NB ytdownloader.AppImage --version does not work from an ssh session, so
-    #    we have to work around that, by extracting the ytdownloader.desktop
-    #    file from the AppImage, then the X-AppImage-Version property value.
-    # e.g. X-AppImage-Version=3.22.0
-    actual_version="$(7z x -so /usr/local/bin/ytdownloader '*.desktop' | perl -ne '/^X-AppImage-Version=(.+)/ && print $1')"
+meta_path='/usr/local/bin/ytdownloader.meta.json'
+if [ -r "$meta_path" ]; then
+    actual_version="$(jq -r .version "$meta_path")"
     if [ "$actual_version" == "$YTDOWNLOADER_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
         exit 0
@@ -15,10 +12,17 @@ if [ -r /usr/local/bin/ytdownloader ]; then
 fi
 
 # download and install.
+# see YTDownloader_Linux.AppImage --appimage-help
 url="https://github.com/aandrew-me/ytDownloader/releases/download/v${YTDOWNLOADER_VERSION}/YTDownloader_Linux.AppImage"
 t="$(mktemp -q -d --suffix=.ytdownloader)"
 wget -qO "$t/ytdownloader" "$url"
-7z x "$t/ytdownloader" "-o$t" usr/share/icons/hicolor/256x256/apps/ytdownloader.png
+pushd "$t"
+chmod +x ytdownloader
+./ytdownloader --appimage-extract usr/share/icons/hicolor/256x256/apps/ytdownloader.png
+install \
+    squashfs-root/usr/share/icons/hicolor/256x256/apps/ytdownloader.png \
+    /usr/share/icons/hicolor/256x256/apps/ytdownloader.png
+popd
 cat >/usr/local/share/applications/ytdownloader.desktop <<'EOF'
 [Desktop Entry]
 Type=Application
@@ -30,6 +34,9 @@ Exec=ytdownloader %F
 Categories=Utility
 StartupNotify=false
 EOF
-cp -r "$t/usr/"* /usr/local
 install -m 755 "$t/ytdownloader" /usr/local/bin
+jq -n \
+    --arg version "$YTDOWNLOADER_VERSION" \
+    '{version: $version}' \
+    >"$meta_path"
 rm -rf "$t"
