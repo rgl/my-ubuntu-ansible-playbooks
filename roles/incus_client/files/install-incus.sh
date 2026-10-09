@@ -4,8 +4,14 @@ set -euxo pipefail
 # bail when already installed.
 if [ -x /usr/local/bin/incus ]; then
     # e.g. 7.0
-    # NB incus --version only outputs the major and minor version numbers.
-    actual_version="$(/usr/local/bin/incus --version | perl -ne '/^([^ +]+)/ && print $1').0"
+    # NB incus --version does not output trailing .0, so we normalize the
+    #    version to be major.minor.path to match the incus repository
+    #    version tag.
+    actual_version="$(/usr/local/bin/incus --version | perl -ne '/^([^ +]+)/ && print $1')"
+    case "$actual_version" in
+        *.*.*) ;;
+        *.*) actual_version="$actual_version.0" ;;
+    esac
     if [ "$actual_version" == "$INCUS_VERSION" ]; then
         echo 'ANSIBLE CHANGED NO'
         exit 0
