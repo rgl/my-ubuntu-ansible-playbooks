@@ -6,14 +6,6 @@
     dest: /etc/profile.d/opt-out-powershell-telemetry.sh
     mode: 0444
 
-- name: Disable update notifications
-  # see https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.6
-  ansible.builtin.copy:
-    content: |
-      export POWERSHELL_UPDATECHECK='Off'
-    dest: /etc/profile.d/disable-powershell-update-notifications.sh
-    mode: 0444
-
 - name: Download the Microsoft APT repository key
   ansible.builtin.get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
