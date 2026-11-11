@@ -16,9 +16,6 @@
     create_namespace: true
     update_repo_cache: true
     values:
-      # configure the service.
-      service:
-        type: LoadBalancer
       # configure the tls options.
       # see https://doc.traefik.io/traefik/https/tls/#tls-options
       # see https://wiki.mozilla.org/Security/Server_Side_TLS
