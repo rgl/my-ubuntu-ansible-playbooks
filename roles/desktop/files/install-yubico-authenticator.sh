@@ -11,7 +11,7 @@ if [ -r /opt/yubico-authenticator/data/flutter_assets/version.json ]; then
 fi
 
 # download and install.
-url="https://github.com/Yubico/yubioath-flutter/releases/download/${YUBICO_AUTHENTICATOR_VERSION}/yubico-authenticator-${YUBICO_AUTHENTICATOR_VERSION}-linux.tar.gz"
+url="https://github.com/Yubico/yubioath-flutter/releases/download/${YUBICO_AUTHENTICATOR_VERSION}/yubico-authenticator-${YUBICO_AUTHENTICATOR_VERSION}-linux-x64.tar.gz"
 rm -rf /opt/yubico-authenticator
 install -d /opt/yubico-authenticator
 wget -qO- "$url" | tar xzf - -C /opt/yubico-authenticator --strip-components 1
