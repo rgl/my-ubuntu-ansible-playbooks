@@ -1,3 +1,11 @@
+- name: Get installed lms version
+  ansible.builtin.command: >
+    dpkg-query -W -f='${Version}' lms
+  register: lms_version_check
+  failed_when: false
+  changed_when: false
+
 - name: Install lms
   ansible.builtin.apt:
     deb: https://github.com/rgl/lms-binaries/releases/download/{{ lms_binaries_version }}/lms-{{ lms_version }}-ubuntu-{{ ansible_distribution_version }}.deb # yamllint disable-line rule:line-length
+  when: lms_version_check.rc != 0 or lms_version not in lms_version_check.stdout_lines
