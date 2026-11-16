@@ -1,0 +1,114 @@
+# NB to reset zed, run:
+#     rm -rf ~/.config/zed ~/.local/share/zed ~/.cache/zed
+- name: Install zed
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: "{{ lookup('file', 'install-zed.sh') }}"
+  environment:
+    ZED_VERSION: "{{ desktop_zed_version }}"
+  register: desktop_zed_result
+  changed_when: "'ANSIBLE CHANGED NO' not in desktop_zed_result.stdout_lines"
+
+- name: Symlink the zed command
+  ansible.builtin.file:
+    src: /opt/zed/bin/zed
+    dest: /usr/local/bin/zed
+    state: link
+
+- name: Symlink the zed icons
+  vars:
+    desktop_zed_icon_sizes:
+      - 512x512
+      - 1024x1024
+  block:
+    - name: Create system local icons directory
+      ansible.builtin.file:
+        name: /usr/local/share/icons/hicolor/{{ item }}/apps
+        state: directory
+        mode: 0755
+      loop: "{{ desktop_zed_icon_sizes }}"
+    - name: Symlink the zed icons
+      ansible.builtin.file:
+        src: /opt/zed/share/icons/hicolor/{{ item }}/apps/zed.png
+        dest: /usr/local/share/icons/hicolor/{{ item }}/apps/zed.png
+        state: link
+      loop: "{{ desktop_zed_icon_sizes }}"
+
+- name: Symlink the zed desktop entry
+  block:
+    - name: Create system local applications directory
+      ansible.builtin.file:
+        name: /usr/local/share/applications
+        state: directory
+        mode: 0755
+    - name: Symlink the zed desktop entry
+      ansible.builtin.file:
+        src: /opt/zed/share/applications/dev.zed.Zed.desktop
+        dest: /usr/local/share/applications/dev.zed.Zed.desktop
+        state: link
+
+# see https://zed.dev/docs/reference/all-settings
+# see https://zed.dev/extensions
+- name: Configure Zed
+  become: true
+  become_user: '{{ ansible_user }}'
+  block:
+    - name: Create the Settings Directory
+      ansible.builtin.file:
+        name: ~/.config/zed
+        state: directory
+        mode: 0750
+    - name: Read Settings
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: |
+          set -euxo pipefail
+          f=~/.config/zed/settings.json
+          ([ -f "$f" ] && cat "$f" || echo '{}') | yq \
+            --output-format json \
+            --prettyPrint \
+            --indent 4 \
+            e \
+              '
+                .telemetry.diagnostics = false
+              | .telemetry.metrics = false
+              | .telemetry.anthropic_retention = false
+              | .title_bar.show_sign_in = false
+              | .project_panel.dock = "left"
+              | .outline_panel.dock = "left"
+              | .collaboration_panel.dock = "left"
+              | .git_panel.dock = "left"
+              | .agent.dock = "right"
+              | .auto_install_extensions.ansible = true
+              | .auto_install_extensions.dockerfile = true
+              | .auto_install_extensions.git-firefly = true
+              | .auto_install_extensions.html = true
+              | .file_types.Dockerfile = ["Dockerfile.*"]
+              | .file_types.Ansible = [
+                  "**.ansible.yml",
+                  "**.ansible.yaml",
+                  "**/defaults/*.yml",
+                  "**/defaults/*.yaml",
+                  "**/meta/*.yml",
+                  "**/meta/*.yaml",
+                  "**/tasks/*.yml",
+                  "**/tasks/*.yaml",
+                  "**/handlers/*.yml",
+                  "**/handlers/*.yaml",
+                  "**/group_vars/*.yml",
+                  "**/group_vars/*.yaml",
+                  "**/playbooks/*.yaml",
+                  "**/playbooks/*.yml",
+                  "**playbook*.yaml",
+                  "**playbook*.yml"
+                ]
+              | .lsp.ansible.settings.validation.enabled = false
+              | .lsp.ansible.settings.validation.lint.enabled = false
+              '
+      register: desktop_zed_settings
+      changed_when: false
+    - name: Write Settings
+      ansible.builtin.copy:
+        dest: ~/.config/zed/settings.json
+        content: '{{ desktop_zed_settings.stdout }}'
+        mode: 0644

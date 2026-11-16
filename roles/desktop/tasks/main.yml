@@ -25,6 +25,9 @@
 - name: Install Visual Studio Code
   ansible.builtin.include_tasks: code.yml
 
+- name: Install Zed
+  ansible.builtin.include_tasks: zed.yml
+
 - name: Install Meld
   ansible.builtin.include_tasks: meld.yml
 
