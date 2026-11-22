@@ -1,6 +1,6 @@
-- name: Install Java 17
+- name: Install Java 25
   ansible.builtin.apt:
-    name: openjdk-17-jre
+    name: openjdk-25-jre
 
 - name: Install umlet
   args:
